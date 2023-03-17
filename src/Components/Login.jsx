@@ -12,7 +12,7 @@ export const Login = (props) => {
     return (
         <div className="auth-form-container">
             <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlfor="usernamame">Username</label>
+                <label htmlfor="username">Username</label>
                 <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="username" id="username" name="username"/>
                 <label htmlfor="password">Password</label>
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" id="password" name="password"/>
@@ -20,6 +20,7 @@ export const Login = (props) => {
 
             </form>
             <button className="link-button" onClick={()=>props.onFormSwitch('register')}>Register</button>
+            <button className="password-button">Forgot Password</button>
 
         </div>
     )
