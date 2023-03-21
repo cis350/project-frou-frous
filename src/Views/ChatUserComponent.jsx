@@ -2,10 +2,9 @@ import './chat.css';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getChatMessages, sendChatMessage } from '../api/chatAPI';
-import { ChatPeopleComponent } from './ChatPeopleComponent';
+import ChatPeopleComponent from './ChatPeopleComponent';
 
-export function ChatUserComponent() { // eslint-disable-line
-
+export default function ChatUserComponent() {
   const user = useParams();
   console.log('User:', user);
 

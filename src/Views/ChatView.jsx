@@ -1,6 +1,6 @@
 import React from 'react';
-import { ChatPeopleComponent } from './ChatPeopleComponent';
-import { ChatUserComponent } from './ChatUserComponent';
+import ChatPeopleComponent from './ChatPeopleComponent';
+import ChatUserComponent from './ChatUserComponent';
 
 export function ChatView() {
   return (

@@ -14,7 +14,7 @@ function convertTimestamp(timestamp) {
   return time;
 }
 
-export function ChatPeopleComponent() { // eslint-disable-line
+export default function ChatPeopleComponent() {
   // add a state to the component
   const [search, setSearch] = useState('');
   const [friends, setFriends] = useState([]);
