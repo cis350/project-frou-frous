@@ -10,20 +10,25 @@ export const Login = (props) => {
 
     const navigate = useNavigate();
 
+
     useEffect(() => {
         sessionStorage.clear();
     }, []);
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(username);
+        console.log("setUsername " + username);
+        console.log("username: " + username)
+        e.preventDefault(); 
         if(validate()){
-            console.log('success');
-            fetch("http://localhost:3000/user"+username).then((res)=>{
+            console.log("validate")
+            console.log(username)
+            fetch("http://localhost:8000/user/" + username).then((res)=>{
                 return res.json();
-            }).then((resp)=>{
-                //console.log(resp)
+            }).then((resp)=> {
+                console.log("resp")
+                console.log(resp)
                 if (Object.keys(resp).length === 0) {
+                    console.log("in here")
                     toast.error("Invalid username");
                 } else {
                     if (resp.password === password) {
@@ -31,22 +36,26 @@ export const Login = (props) => {
                         sessionStorage.setItem('username', username);
                         navigate('/')
                     } else {
+                        console.log(resp.password)
                         toast.error("Invalid password");
                     }
                 }
             }).catch((err)=>{
-                console.log("error due to" + err.message);
+                console.log("error due to " + err.message);
             });
         }
     }
 
     const validate = ()=>{
         let result = true;
+        console.log(username);
         if (username ==='' || username===null) {
             result = false;
+            toast.warning("Please enter username");
         }
         if (password ==='' || password===null) {
             result = false;
+            toast.warning("please enter password");
         }
         return result;
     }

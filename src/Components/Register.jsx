@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 export const Register = (props) => {
-    const [username, setUsername] = useState('');
+    const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -25,7 +25,7 @@ export const Register = (props) => {
             isproceed = false;
             errorMessage = errorMessage + 'email';
         }
-        if (username === null || username === '') {
+        if (id === null || id === '') {
             isproceed = false;
             errorMessage = errorMessage + 'username';
         }
@@ -48,15 +48,16 @@ export const Register = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username);
-        let obj = { username, password, email, firstName };
+        console.log(id);
+        let obj = {id, password, email, firstName, lastName};
         if (isValidate()) {
-            console.log(obj);
-            fetch("http://localhost:3000/user", {
+            console.log(JSON.stringify(obj));
+            fetch("http://localhost:8000/user/", {
                 method: "POST",
                 headers: { 'content-type': 'application/json' },
                 body: JSON.stringify(obj)
             }).then((res) => {
+                console.log("register res: "+ res)
                 toast.success('registered!')
                 navigate('/login');
             }).catch((err) => {
@@ -75,33 +76,32 @@ export const Register = (props) => {
                 <input required
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    id="firstName"
+                    //id="firstName"
                     placeholder="John"
-                    name="firstName"
+                    //name="firstName"
                 />
                 <label htmlfor="lastName">Last Name</label>
                 <input required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    id="lastName"
+                    //id="lastName"
                     placeholder="John"
-                    name="lastName"
+                    //name="lastName"
                 />
                 <label htmlfor="email">Email</label>
                 <input required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    id="email"
+                    //id="email"
                     placeholder="email"
-                    name="email"
+                   // name="email"
                 />
                 <label htmlfor="username">Username</label>
                 <input required
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    type="username"
+                    value={id}
+                    onChange={(e) => setId(e.target.value)}
                     placeholder="username"
-                    id="username" name="username"
+                    //id="username" name="username"
                 />
                 <label htmlfor="password">Password</label>
                 <input required
@@ -109,8 +109,9 @@ export const Register = (props) => {
                     onChange={(e) => setPassword(e.target.value)}
                     type="password"
                     placeholder="password"
-                    id="password"
-                    name="password" />
+                    //id="password"
+                    //name="password"
+                    />
                 <button type="submit">Sign Up</button>
 
             </form>
