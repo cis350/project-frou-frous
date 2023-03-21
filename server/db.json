@@ -1,0 +1,90 @@
+{
+  "classes": [
+    {
+      "id": 0,
+      "day": "Tuesday",
+      "classes": [
+        {
+          "name": "CIS 320",
+          "start": 300,
+          "end": 400
+        },
+        {
+          "name": "CIS 300",
+          "start": 600,
+          "end": 700
+        },
+        {
+          "name": "cis",
+          "location": "d",
+          "start": 1188,
+          "end": 588
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "day": "Tuesday",
+      "classes": [
+        {
+          "name": "CIS 320",
+          "start": 300,
+          "end": 400
+        },
+        {
+          "name": "CIS 300",
+          "start": 600,
+          "end": 700
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "day": "Wednesday",
+      "classes": [
+        {
+          "name": "CIS 320",
+          "start": 915,
+          "end": 1020
+        },
+        {
+          "name": "CIS 300",
+          "start": 600,
+          "end": 700
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "day": "Thursday",
+      "classes": [
+        {
+          "name": "CIS 320",
+          "start": 300,
+          "end": 400
+        },
+        {
+          "name": "CIS 300",
+          "start": 600,
+          "end": 700
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "day": "Friday",
+      "classes": [
+        {
+          "name": "CIS 320",
+          "start": 300,
+          "end": 400
+        },
+        {
+          "name": "CIS 300",
+          "start": 600,
+          "end": 700
+        }
+      ]
+    }
+  ]
+}

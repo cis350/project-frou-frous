@@ -6,7 +6,7 @@ function ScheduleView() {
   return (
     <div>
         <Schedule/>
-        <AddClass/>
+        
     </div>
   )
 }

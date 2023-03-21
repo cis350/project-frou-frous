@@ -1,90 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import AddClass from './AddClass'
 import DaySchedule from './DaySchedule'
+import axios from 'axios'
 
 function Schedule() {
-    const DUMMY_DATA = [
-        {
-            day: "Monday",
-            classes: [
-                {
-                    name: "CIS 320",
-                    start: 915,
-                    end: 1020
-                },
-                {
-                    name: "CIS 300",
-                    start: 600,
-                    end: 700
-                }
-            ]
-        },
-        {
-            day: "Tuesday",
-            classes: [
-                {
-                    name: "CIS 320",
-                    start: 300,
-                    end: 400
-                },
-                {
-                    name: "CIS 300",
-                    start: 600,
-                    end: 700
-                }
-            ]
-        },
-        {
-            day: "Monday",
-            classes: [
-                {
-                    name: "CIS 320",
-                    start: 915,
-                    end: 1020
-                },
-                {
-                    name: "CIS 300",
-                    start: 600,
-                    end: 700
-                }
-            ]
-        },
-        {
-            day: "Tuesday",
-            classes: [
-                {
-                    name: "CIS 320",
-                    start: 300,
-                    end: 400
-                },
-                {
-                    name: "CIS 300",
-                    start: 600,
-                    end: 700
-                }
-            ]
-        },
-        {
-            day: "Tuesday",
-            classes: [
-                {
-                    name: "CIS 320",
-                    start: 300,
-                    end: 400
-                },
-                {
-                    name: "CIS 300",
-                    start: 600,
-                    end: 700
-                }
-            ]
+    const baseURL = "http://localhost:3000"
+    const [classes, setClasses] = useState([])
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                axios.get(`${baseURL}/classes`).then((response) => {
+                    setClasses(response.data)
+                })
+            } catch (error){
+                console.log()
+            }
         }
-    ]
+        fetchData()
+    }, [])
+
+    const [modal, setModal] = useState(false)
+
+    const handleClose = () => {
+        setModal(false)
+    }
     return (
-        <div style={{display: "grid", gridTemplateColumns: "repeat(7, 1fr)"}}>
-            {DUMMY_DATA.map((day) => (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)" }}>
+            {classes.map((day) => (
                 <>
                     <DaySchedule day={day.day} classes={day.classes} />
-
+                    {modal ?
+                        <>
+                            <AddClass handleChild={handleClose} />
+                        </> :
+                        <>
+                            <div className='fixed text-5xl border-4 w-16 h-16 align-center justify-center text-center bottom-16 left-1/2' onClick={() => setModal(true)}>
+                                +
+                            </div>
+                        </>}
                 </>
             ))}
         </div>
