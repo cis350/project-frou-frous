@@ -1,41 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Card, CardContent, CardActions, Grid, Avatar, Button } from '@mui/material';
+import {
+  Card, CardContent, CardActions, Grid, Avatar, Button,
+} from '@mui/material';
+
+import { getReport, getPfp } from '../api/userPageAPI';
 
 function Report(props) {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
   const [photo, setPhoto] = useState('');
+  const { reportId } = props;
+
+  async function fetchData() {
+    try {
+      const reportResponse = await getReport(reportId); // Need to add this to swaggerHub API
+      const { username, picture } = reportResponse.data;
+      setName(username);
+      setPhoto(picture);
+
+      const profilePhotoResponse = await getPfp(username); // Need to add this to swaggerHub API
+      const { pfp } = profilePhotoResponse.data;
+      setProfilePhoto(pfp);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const reportResponse = await axios.get(`/report/${props.reportId}`); //Need to add this to swaggerHub API
-        const username = reportResponse.data.username;
-        const photo = reportResponse.data.photo;
-        setUsername(username);
-        setPhoto(photo);
-
-        const profilePhotoResponse = await axios.get(`/user/${username}.jpg`); //Need to add this to swaggerHub API
-        const profilePhoto = profilePhotoResponse.data.pfp;
-        setProfilePhoto(profilePhoto);
-        
-      } catch (error) {
-        console.error(error);
-      }
-    }
     fetchData();
-  }, [props.reportId]);
+  }, [reportId]);
 
   return (
     <Card variant="outlined" sx={{ borderRadius: 2 }}>
       <CardContent>
         <Grid container spacing={2} alignItems="center">
           <Grid item>
-            <Avatar src={profilePhoto} alt={username} sx={{ width: 60, height: 60 }} />
+            <Avatar src={profilePhoto} alt={name} sx={{ width: 60, height: 60 }} />
           </Grid>
           <Grid item>
-            <div>{username}</div>
+            <div>{name}</div>
           </Grid>
         </Grid>
         <img src={photo} alt="" style={{ width: '100%', marginTop: 10 }} />
