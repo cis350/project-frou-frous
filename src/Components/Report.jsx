@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Card, CardContent, CardActions, Grid, Avatar, Button,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 
 import { getReport, getPfp } from '../api/userPageAPI';
 
@@ -13,13 +14,13 @@ function Report(props) {
 
   async function fetchData() {
     try {
-      const reportResponse = await getReport(reportId); // Need to add this to swaggerHub API
-      const { username, picture } = reportResponse.data;
+      const reportResponse = await getReport(); // Need to add this to swaggerHub API
+      const { username, picture } = reportResponse;
       setName(username);
       setPhoto(picture);
 
-      const profilePhotoResponse = await getPfp(username); // Need to add this to swaggerHub API
-      const { pfp } = profilePhotoResponse.data;
+      const profilePhotoResponse = await getPfp(); // Need to add this to swaggerHub API
+      const { pfp } = profilePhotoResponse;
       setProfilePhoto(pfp);
     } catch (error) {
       console.log(error);
@@ -31,11 +32,11 @@ function Report(props) {
   }, [reportId]);
 
   return (
-    <Card variant="outlined" sx={{ borderRadius: 2 }}>
+    <Card variant="outlined" sx={{ borderRadius: 2, width: '75%', height: '75%' }}>
       <CardContent>
         <Grid container spacing={2} alignItems="center">
           <Grid item>
-            <Avatar src={profilePhoto} alt={name} sx={{ width: 60, height: 60 }} />
+            <Avatar src={profilePhoto} alt={name} sx={{ width: 50, height: 50 }} />
           </Grid>
           <Grid item>
             <div>{name}</div>
@@ -54,5 +55,9 @@ function Report(props) {
     </Card>
   );
 }
+
+Report.propTypes = {
+  reportId: PropTypes.number.isRequired,
+};
 
 export default Report;

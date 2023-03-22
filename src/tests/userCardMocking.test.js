@@ -1,4 +1,7 @@
-import axios from 'axios';
+/**
+* @jest-environment jsdom
+*/
+
 import { getUserHistory } from '../api/userProfileAPI';
 
 jest.mock('../api/userProfileAPI.js');

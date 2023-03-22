@@ -4,31 +4,33 @@ import NavBar from '../Components/NavBar';
 import Timeline from '../Components/Timeline';
 import { getFriendReports } from '../api/userPageAPI';
 
-function UserPageView() { // Need to add userId as a prop, for now just hardcoded
-  const userId = '12345';
+function UserPageView() {
   const [page, setPage] = useState('Profile'); // Either Profile or Timeline
-  const [reportIds, setReportIds] = useState([]);
+  const [reports, setReports] = useState([]);
 
   const getReportIds = async () => {
     try {
-      const response = await getFriendReports(userId);
-      const { friendreports } = response.data;
-      setReportIds(friendreports);
-    } catch {
-      console.log('Error getting friend reports');
+      const response = await getFriendReports();
+      setReports(response.reportIds);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
     getReportIds();
-  }, [userId]);
+  }, []);
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={3}>
-        {page === 'Timeline' && <Timeline reportIds={reportIds} />}
+    <Grid
+      container
+      spacing={2}
+      sx={{ width: '100%', height: '100vh', backgroundColor: '#0D1B1E' }}
+    >
+      <Grid item xs={6}>
+        {page === 'Timeline' && <Timeline reportIds={reports} />}
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={6}>
         <NavBar setPage={setPage} />
       </Grid>
     </Grid>

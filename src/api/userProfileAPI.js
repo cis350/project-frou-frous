@@ -6,7 +6,7 @@ const mock = new MockAdapter(axios);
 
 mock.onGet('/user/userId').reply(200, {
     username: 'MockUsername',
-    pfp: '../assets/ria_laugh.png',
+    pfp: 'https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg',
     skipHistory: [
         { 
             timestamp: 1679326514, // see convertTimestamp in: ChatPeopleComponent.jsx
