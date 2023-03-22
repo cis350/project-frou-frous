@@ -49,11 +49,9 @@ function Register() {
   };
 
   function displayRegister(res) {
-    console.log(res);
     if (res.error) {
       toast.error(`Failed: ${res.err.message}`);
     } else {
-      console.log(`register res: ${res}`);
       toast.success('registered!');
       window.location.href = '/';
     }
@@ -61,12 +59,10 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(id);
     const obj = {
       id, password, email, firstName, lastName,
     };
     if (isValidate()) {
-      console.log(JSON.stringify(obj));
       createUser(obj, displayRegister);
     }
   };
