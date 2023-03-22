@@ -1,6 +1,6 @@
 
 import logo from './logo.svg';
-import './App.css';
+import './Login.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Login } from "./Components/Login";
 import { Register } from "./Components/Register";

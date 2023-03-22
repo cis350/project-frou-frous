@@ -2,10 +2,11 @@
 * @jest-environment jsdom
 */
 import { validateLogin } from "../api/loginRegisterAPI";
+jest.mock('node-fetch');
 
 test('renders userLinks', async () => {
     function callback(resp) {
-        expect(resp.status).toBe(200);
+        expect(resp.firstName).toBe('e');
     }
     validateLogin("e", callback);
 });

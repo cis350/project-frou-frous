@@ -1,3 +1,6 @@
+
+
+
 export async function validateLogin(username, callback) {
     const resp = await fetch("http://localhost:8000/user/" + username)
             .then((res)=>{
