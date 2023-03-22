@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { validateLogin } from "../api/loginRegisterAPI";
 
 export const Login = (props) => {
     const[username, setUsername] = useState('');
@@ -15,30 +16,36 @@ export const Login = (props) => {
         sessionStorage.clear();
     }, []);
 
+    async function test (username, password) {
+        const resp = await validateLogin(username, password);
+        return resp;
+    }
+
+    function displayLogin(resp) {
+        if (resp.error) {
+            console.log("ERROR", resp.error.message);
+        } else {
+            if (Object.keys(resp).length === 0) {
+                console.log("in here")
+                toast.error("Invalid username");
+            } else {
+                if (resp.password === password) {
+                    toast.success("login successful");
+                    sessionStorage.setItem('username', username);
+                    window.location.href = '/';
+                } else {
+                    console.log(resp.password)
+                    toast.error("Invalid password");
+                }
+            }
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault(); 
         if(validate()){
-            fetch("http://localhost:8000/user/" + username).then((res)=>{
-                return res.json();
-            }).then((resp)=> {
-                console.log("resp")
-                console.log(resp)
-                if (Object.keys(resp).length === 0) {
-                    console.log("in here")
-                    toast.error("Invalid username");
-                } else {
-                    if (resp.password === password) {
-                        toast.success("login successful");
-                        sessionStorage.setItem('username', username);
-                        window.location.href = '/';
-                    } else {
-                        console.log(resp.password)
-                        toast.error("Invalid password");
-                    }
-                }
-            }).catch((err)=>{
-                console.log("error due to " + err.message);
-            });
+            validateLogin(username, displayLogin);
+            // console.log("LOGIN RSP", resp);
         }
     }
 

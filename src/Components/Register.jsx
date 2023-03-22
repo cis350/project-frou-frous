@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { createUser } from "../api/loginRegisterAPI";
 export const Register = (props) => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
@@ -46,24 +47,24 @@ export const Register = (props) => {
         return isproceed;
     }
 
+    function displayRegister(res) {
+        console.log(res);
+        if (res.error) {
+            toast.error('Failed: ' + res.err.message);
+        } else {
+            console.log("register res: "+ res)
+            toast.success('registered!')
+            window.location.href = '/login';
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(id);
         let obj = {id, password, email, firstName, lastName};
         if (isValidate()) {
             console.log(JSON.stringify(obj));
-            fetch("http://localhost:8000/user/", {
-                method: "POST",
-                headers: { 'content-type': 'application/json' },
-                body: JSON.stringify(obj)
-            }).then((res) => {
-                console.log("register res: "+ res)
-                toast.success('registered!')
-                navigate('/login');
-            }).catch((err) => {
-                toast.error('Failed: ' + err.message);
-            });
-
+            createUser(obj, displayRegister);
         }
 
     }
