@@ -13,7 +13,7 @@ function AddClass({ handleChild }) {
   AddClass.propTypes = {
     handleChild: PropTypes.func,
   };
-  const baseURL = 'http://localhost:3000';
+  const baseURL = 'http://localhost:8000';
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [start, setStart] = useState('');

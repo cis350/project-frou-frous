@@ -4,7 +4,7 @@ import AddClass from './AddClass';
 import DaySchedule from './DaySchedule';
 
 function Schedule() {
-  const baseURL = 'http://localhost:3000';
+  const baseURL = 'http://localhost:8000';
   const [classes, setClasses] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
