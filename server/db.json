@@ -51,6 +51,12 @@
           "name": "CIS 300",
           "start": 600,
           "end": 700
+        },
+        {
+          "name": "he",
+          "location": "s",
+          "start": 1019,
+          "end": 1024
         }
       ]
     },
