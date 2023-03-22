@@ -1,16 +1,17 @@
-body {
+#chatWrapper {
     background-color: #0D1B1E;
 }
 
-a {
+.chatA {
     color: white; 
 }
 
-a:hover {
+.chatA:hover {
     color: #9EBD6E;
 }
 
 #peopleList {
+    background-color: #0D1B1E;
     border-right: 1px solid gray;
     min-height: 100vh;
     overflow: auto;

@@ -31,7 +31,7 @@ export default function ChatPeopleComponent() {
     for (let i = 0; i < response.length; i += 1) {
       // people.push(<h2>{response.friends[i].message}</h2>);
       people = people.concat(
-        `<a href = '/chat/user/${response[i].friend}'>
+        `<a class='chatA' href = '/chat/user/${response[i].friend}'>
           <div class="person">
             <img alt="friendimg" class="circle-pic" src=${response[i].friendImage} />
             <div class="personInfo">
@@ -85,7 +85,6 @@ export default function ChatPeopleComponent() {
       <br />
 
       <div id="peopleContainers" />
-
     </div>
   );
 }

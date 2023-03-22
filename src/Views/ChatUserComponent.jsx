@@ -6,7 +6,6 @@ import ChatPeopleComponent from './ChatPeopleComponent';
 
 export default function ChatUserComponent() {
   const user = useParams();
-  console.log('User:', user);
 
   function scrollMessages() {
     const messageDiv = document.getElementById('messages');
@@ -33,21 +32,17 @@ export default function ChatUserComponent() {
       document.getElementById('messages').innerHTML = chats;
       scrollMessages();
     } catch (err) {
-      console.error('error', err.message);
+      console.log(err.message);
     }
   };
 
   useEffect(() => {
-    // Fetches data from the openweathermap API and updates the DOM
-    console.log('USING EFFECT');
-
     getChats();
   }, 5000);
 
   async function sendMessage() {
     const chat = document.getElementById('chatSend');
     if (chat) {
-      console.log(chat.value);
       if (chat.value !== '') {
         try {
           await sendChatMessage(chat.value);
@@ -55,7 +50,7 @@ export default function ChatUserComponent() {
           chat.value = '';
           chat.focus();
         } catch (err) {
-          console.log(err.message);
+          alert(err.message);
         }
       }
     }
@@ -70,7 +65,7 @@ export default function ChatUserComponent() {
       <div id="chatWindow">
         <div id="chatBar" className="flex-row">
           <h3>{user.user}</h3>
-          <a href="/user">
+          <a className="chatA" href="/user/1234">
             <p id="homeIcon" className="bi bi-house-fill" />
           </a>
         </div>

@@ -74,6 +74,7 @@ const mes = [
     sent: true,
   },
 ];
+
 const pathRegex = new RegExp('\/chat\/user\/*'); // eslint-disable-line
 mock.onGet(pathRegex).reply(200, { // eslint-disable-line
   messages: mes,
@@ -88,13 +89,11 @@ export const getChatFriends = async () => { // eslint-disable-line
 };
 
 export async function getChatMessages(user) {
-  console.log(user);
   const res = await axios.get(`/chat/user/${user}`);
   return res.data;
 }
 
 export async function sendChatMessage(message) {
-  console.log(message);
   const res = await axios.post(`/chat/send/${message}`);
   mes.push({
     message,
