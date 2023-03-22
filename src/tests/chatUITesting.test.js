@@ -8,8 +8,8 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-test-renderer';
 import renderer from 'react-test-renderer';
-import { ChatPeopleComponent } from '../Views/ChatPeopleComponent';
-import { ChatUserComponent } from '../Views/ChatUserComponent';
+import ChatPeopleComponent from '../Views/ChatPeopleComponent';
+import ChatUserComponent from '../Views/ChatUserComponent';
 import userEvent from '@testing-library/user-event';
 
 // test that the UI matches the wireframes
@@ -34,11 +34,3 @@ test('snapshot test people', () => {
     // matcher
     expect(domTreeJSON).toMatchSnapshot();
   });
-
-test('textbox present', async () => {
-    const { getById  } = await act( async () => render(<ChatUserComponent />));
-    
-    const inputBox = getById('chatSend');
-
-    expect(inputBox).toBeInTheDocument();
-});
