@@ -27,17 +27,16 @@ function Schedule() {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)' }}>
       {classes.map((day) => (
-        <>
-          <DaySchedule day={day.day} classes={day.classes} />
-          {modal
-            ? <AddClass handleChild={handleClose} />
-            : (
-              <button type="button" className="fixed text-5xl border-4 w-16 h-16 align-center justify-center text-center bottom-16 left-1/2" onClick={() => setModal(true)}>
-                +
-              </button>
-            )}
-        </>
+        <DaySchedule day={day.day} classes={day.classes} />
+
       ))}
+      {modal
+        ? <AddClass handleChild={handleClose} />
+        : (
+          <button title="open" type="button" className="fixed text-5xl border-4 w-16 h-16 align-center justify-center text-center bottom-16 left-1/2" onClick={() => setModal(true)}>
+            +
+          </button>
+        )}
     </div>
   );
 }

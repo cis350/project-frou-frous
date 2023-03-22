@@ -8,6 +8,15 @@
         "airbnb"
     ],
     "overrides": [
+        {
+            "files": [
+              "**/*.spec.js",
+              "**/*.spec.jsx"
+            ],
+            "env": {
+              "jest": true
+            }
+          }
     ],
     "parserOptions": {
         "ecmaVersion": "latest",

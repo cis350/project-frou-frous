@@ -13,12 +13,19 @@ function DaySchedule({ day, classes }) {
       PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     )),
   };
+  const colors = ['#cac2ff', '#a3d9fe', '#f9bbad', '#ffd599'];
   return (
-    <div>
+    <div className="text-2xl font-bold">
       {day}
       <div style={{ display: 'grid', gridTemplateRows: 'repeat(1440, 1fr)', height: '100vh' }}>
-        {classes.map((course) => (
-          <ClassBlock name={course.name} start={course.start} end={course.end} />
+        {classes.map((course, index) => (
+          <ClassBlock
+            key={course.name}
+            name={course.name}
+            start={course.start}
+            end={course.end}
+            color={colors[index]}
+          />
         ))}
       </div>
     </div>

@@ -57,51 +57,60 @@ function AddClass({ handleChild }) {
     }
   };
   return (
-    <div className="flex justify-center align-middle items-center absolute top-0 w-screen h-screen z-10 m-0 p-0">
+    <>
       <form>
-        <button type="button" aria-label="close" id="close" className="w-screen h-screen absolute bg-white top-0 opacity-50 m-0 p-0" onClick={handleChild} />
+        <button type="button" title="close" aria-label="close" id="close" className="w-screen h-screen absolute bg-white top-0 opacity-50 m-0 p-0" onClick={handleChild} />
       </form>
+      <div className="flex justify-center align-middle items-center absolute top-0 w-screen h-screen m-0 p-0 pointer-events-none">
 
-      <div className="absolute bg-slate-500 p-8 flex flex-col justify-center items-center ">
-        <form className="m-8 flex justify-between flex-col">
-          <input placeholder="Course Title" value={title} className="" onChange={(e) => setTitle(e.target.value)} />
-          <input placeholder="Course Location" className="m-4" onChange={(e) => setLocation(e.target.value)} />
-          <input type="time" className="m-8" onChange={(e) => handleTime(e, 0)} />
-          <input type="time" className="m-8" onChange={(e) => handleTime(e, 1)} />
-
-          <div className="flex items-center justify-center mb-8">
-
-            <label htmlFor="m">
-              <input type="checkbox" id="m" onChange={(e) => handleDay(e, 0)} />
-              M
+        <div className="absolute bg-slate-200 p-8 flex flex-col justify-center items-center rounded-2xl pointer-events-auto">
+          <form className="m-8 flex justify-between flex-col text-xl">
+            <div className="text-3xl align-middle text-center mb-16">Add Class</div>
+            <input placeholder="Course Title" value={title} className="rounded-md p-2" onChange={(e) => setTitle(e.target.value)} />
+            <input placeholder="Course Location" className="m-4 p-2 rounded-md" onChange={(e) => setLocation(e.target.value)} />
+            <label htmlFor="start">
+              Start
+              <input title="start" id="start" type="time" className="m-8 p-2 rounded-md" onChange={(e) => handleTime(e, 0)} />
             </label>
-
-            <label htmlFor="t">
-              <input type="checkbox" id="t" onChange={(e) => handleDay(e, 1)} />
-              T
+            <label htmlFor="end">
+              End
+              <input title="end" type="time" className="m-8 p-2 rounded-md" onChange={(e) => handleTime(e, 1)} />
             </label>
+            <div className="flex items-center justify-between mb-8">
 
-            <label htmlFor="w">
-              <input type="checkbox" id="w" onChange={(e) => handleDay(e, 2)} />
-              W
-            </label>
+              <label htmlFor="m">
+                <input type="checkbox" id="m" onChange={(e) => handleDay(e, 0)} />
+                M
+              </label>
 
-            <label htmlFor="th">
-              <input type="checkbox" id="th" onChange={(e) => handleDay(e, 4)} />
-              T
-            </label>
+              <label htmlFor="t">
+                <input type="checkbox" id="t" onChange={(e) => handleDay(e, 1)} />
+                T
+              </label>
 
-            <label htmlFor="f">
-              <input type="checkbox" id="f" onChange={(e) => handleDay(e, 5)} />
-              F
-            </label>
-          </div>
+              <label htmlFor="w">
+                <input type="checkbox" id="w" onChange={(e) => handleDay(e, 2)} />
+                W
+              </label>
 
-        </form>
-        <button type="button" className="bg-white" onClick={(e) => submitClass(e)}>Add Class</button>
+              <label htmlFor="th">
+                <input type="checkbox" id="th" onChange={(e) => handleDay(e, 4)} />
+                T
+              </label>
 
+              <label htmlFor="f">
+                <input type="checkbox" id="f" onChange={(e) => handleDay(e, 5)} />
+                F
+              </label>
+            </div>
+
+          </form>
+          <button type="button" title="submit" className="bg-white p-2 rounded-md" onClick={(e) => submitClass(e)}>Add Class</button>
+
+        </div>
       </div>
-    </div>
+
+    </>
   );
 }
 
