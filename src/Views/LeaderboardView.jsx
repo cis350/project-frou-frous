@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 function LeaderboardView() {
   return (
     <div>LeaderboardView</div>
-  )
+  );
 }
 
-export default LeaderboardView
+export default LeaderboardView;
