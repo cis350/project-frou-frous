@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { validateLogin } from '../api/loginRegisterAPI';
+import '../Login.css';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -46,30 +47,32 @@ function Login() {
   };
 
   return (
-    <div className="auth-form-container">
-      <h1 className="app-title">Frou Frous</h1>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="username">
-          <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="username" id="username" name="username" />
-          Username
+    <div className="loginApp">
+      <div className="auth-form-container">
+        <h1 className="app-title">Frou Frous</h1>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <label htmlFor="username">
+            <input className="loginInput" value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="username" id="username" name="username" />
+            Username
 
-        </label>
+          </label>
 
-        <label htmlFor="password">
-          <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" id="password" name="password" />
-          Password
-        </label>
+          <label htmlFor="password">
+            <input className="loginInput" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" id="password" name="password" />
+            Password
+          </label>
 
-        <button type="submit">Login</button>
+          <button className="loginButton" type="submit">Login</button>
 
-      </form>
+        </form>
 
-      <a href="/register">
-        <button type="button" className="link-button">Register</button>
-      </a>
+        <a href="/register">
+          <button type="button" className="loginButton link-button">Register</button>
+        </a>
 
-      <button type="button" className="password-button">Forgot Password</button>
+        <button type="button" className="loginButton password-button">Forgot Password</button>
 
+      </div>
     </div>
   );
 }

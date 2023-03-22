@@ -1,8 +1,11 @@
 import React from 'react';
+import Schedule from '../Components/Schedule';
 
 function ScheduleView() {
   return (
-    <div>ScheduleView</div>
+    <div>
+      <Schedule />
+    </div>
   );
 }
 

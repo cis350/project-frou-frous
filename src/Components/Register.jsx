@@ -68,62 +68,71 @@ function Register() {
   };
 
   return (
-    <div className="auth-form-container">
-      <form className="register-form" onSubmit={handleSubmit}>
-        <label htmlFor="firstName">
-          First Name
-          <input
-            required
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+    <div className="loginApp">
+      <div className="auth-form-container">
+        <form className="register-form" onSubmit={handleSubmit}>
+          <label htmlFor="firstName">
+            First Name
+            <input
+              className="loginInput"
+              required
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
                         // id="firstName"
-            placeholder="John"
-          />
-        </label>
-        <label htmlFor="lastName">
-          Last Name
-          <input
-            required
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+              placeholder="John"
+            />
+          </label>
+          <label htmlFor="lastName">
+            Last Name
+            <input
+              className="loginInput"
+              required
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
                     // id="lastName"
-            placeholder="John"
-          />
-        </label>
-        <label htmlFor="email">
-          Email
-          <input
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+              placeholder="John"
+            />
+          </label>
+          <label htmlFor="email">
+            Email
+            <input
+              className="loginInput"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
                     // id="email"
-            placeholder="email"
-          />
-        </label>
-        <label htmlFor="username">
-          Username
-          <input
-            required
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-            placeholder="username"
-          />
-        </label>
-        <label htmlFor="password">
-          Password
-          <input
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            placeholder="password"
-          />
-        </label>
-        <button type="submit">Sign Up</button>
+              placeholder="email"
+            />
+          </label>
+          <br />
+          <label htmlFor="username">
+            Username
+            <input
+              className="loginInput"
+              required
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              placeholder="username"
+            />
+          </label>
+          <label htmlFor="password">
+            Password
+            <input
+              className="loginInput"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder="password"
+            />
+          </label>
+          <br />
+          <button className="loginButton" type="submit">Sign Up</button>
 
-      </form>
-      <button type="button" className="link-button" onClick={() => navigate('/')}>Already have an Account? Sign in</button>
+        </form>
+        <button type="button" className="loginButton link-button" onClick={() => navigate('/')}>Already have an Account? Sign in</button>
 
+      </div>
     </div>
   );
 }
