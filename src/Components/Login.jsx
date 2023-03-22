@@ -8,7 +8,7 @@ export const Login = (props) => {
     const[password, setPassword] = useState('');
 
 
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -16,12 +16,8 @@ export const Login = (props) => {
     }, []);
 
     const handleSubmit = (e) => {
-        console.log("setUsername " + username);
-        console.log("username: " + username)
         e.preventDefault(); 
         if(validate()){
-            console.log("validate")
-            console.log(username)
             fetch("http://localhost:8000/user/" + username).then((res)=>{
                 return res.json();
             }).then((resp)=> {
@@ -34,7 +30,7 @@ export const Login = (props) => {
                     if (resp.password === password) {
                         toast.success("login successful");
                         sessionStorage.setItem('username', username);
-                        navigate('/')
+                        window.location.href = '/';
                     } else {
                         console.log(resp.password)
                         toast.error("Invalid password");
@@ -64,14 +60,18 @@ export const Login = (props) => {
         <div className="auth-form-container">
             <h1 className="app-title">Frou Frous</h1>
             <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlfor="username">Username</label>
+                <label htmlFor="username">Username</label>
                 <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="username" id="username" name="username"/>
-                <label htmlfor="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" id="password" name="password"/>
                 <button type="submit">Login</button>
 
             </form>
-            <button className="link-button" onClick={()=>navigate('/register')}>Register</button> 
+
+            <a href = '/register'>
+            <button className="link-button">Register</button> 
+            </a>
+            
             
             <button className="password-button">Forgot Password</button>
 
