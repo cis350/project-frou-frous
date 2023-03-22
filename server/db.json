@@ -35,12 +35,6 @@
           "name": "CIS 300",
           "start": 600,
           "end": 700
-        },
-        {
-          "name": "i",
-          "location": "h",
-          "start": 1277,
-          "end": 1218
         }
       ]
     },
@@ -57,12 +51,6 @@
           "name": "CIS 300",
           "start": 600,
           "end": 700
-        },
-        {
-          "name": "axsa",
-          "location": "asd",
-          "start": 602,
-          "end": 722
         }
       ]
     },

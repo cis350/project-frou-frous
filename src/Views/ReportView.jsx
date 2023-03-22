@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 function ReportView() {
   return (
     <div>ReportView</div>
-  );
+  )
 }
 
-export default ReportView;
+export default ReportView

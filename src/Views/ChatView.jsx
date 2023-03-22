@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 function ChatView() {
   return (
     <div>ChatView</div>
-  );
+  )
 }
 
-export default ChatView;
+export default ChatView

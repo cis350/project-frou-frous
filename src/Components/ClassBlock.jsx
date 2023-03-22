@@ -1,25 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
 
-function ClassBlock({ start, end, name }) {
-  ClassBlock.defaultProps = {
-    start: 0,
-    end: 0,
-    name: 'error',
-  };
-  ClassBlock.propTypes = {
-    start: PropTypes.number,
-    end: PropTypes.number,
-    name: PropTypes.string,
-  };
-  return (
-    <div style={{
-      gridRowStart: start, gridRowEnd: end, backgroundColor: 'blue', color: 'white',
-    }}
-    >
-      {name}
-    </div>
-  );
+function ClassBlock(props) {
+    return (
+        <>
+
+            <div style={{ gridRowStart: props.start, gridRowEnd: props.end, backgroundColor: "blue", color: "white" }}>
+                {props.name}
+            </div>
+        </>
+    )
 }
 
-export default ClassBlock;
+export default ClassBlock
