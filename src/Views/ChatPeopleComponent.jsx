@@ -1,6 +1,6 @@
 import './chat.css';
 import React, { useState, useEffect } from 'react';
-import { getChatFriends } from '../api/chatAPI';
+import { getChatFriends } from '../api/userPageAPI';
 
 function convertTimestamp(timestamp) {
   const d = new Date(timestamp * 1000);

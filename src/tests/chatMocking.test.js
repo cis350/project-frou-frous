@@ -1,6 +1,6 @@
-import { getChatFriends, getChatMessages, sendChatMessage } from '../api/chatAPI';
+import { getChatFriends, getChatMessages, sendChatMessage } from '../api/userPageAPI';
 
-jest.mock('../api/chatAPI.js');
+jest.mock('../api/userPageAPI.js');
 
 // We mock getWeather
 getChatFriends.mockResolvedValue({

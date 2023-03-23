@@ -1,7 +1,7 @@
 import './chat.css';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getChatMessages, sendChatMessage } from '../api/chatAPI';
+import { getChatMessages, sendChatMessage } from '../api/userPageAPI';
 import ChatPeopleComponent from './ChatPeopleComponent';
 
 export default function ChatUserComponent() {
