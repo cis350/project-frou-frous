@@ -93,7 +93,7 @@ test('getMessages', async () => {
 });
 
 test('sendMessage', async () => {
-  const res = await sendChatMessage('hello hello');
+  await sendChatMessage('hello hello');
   const newData = await getChatMessages();
   expect(newData.messages.length).toBe(9);
 });

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createUser } from '../api/loginRegisterAPI';
 
@@ -9,8 +8,6 @@ function Register() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-
-
 
   const isValidate = () => {
     let isproceed = true;
@@ -133,7 +130,6 @@ function Register() {
         <a href="/">
           <button data-testid="login" type="button" className="loginButton link-button">Already have an Account? Sign in</button>
         </a>
-
 
       </div>
     </div>

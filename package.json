@@ -30,7 +30,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm install --legacy-peer-deps && react-scripts start",
+    "json-server": " json-server --watch server/db.json --port 8000",
     "build": "react-scripts build",
     "test": "jest --coverage",
     "eject": "react-scripts eject"

@@ -8,8 +8,8 @@ import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import renderer, { act } from 'react-test-renderer';
 
-import ChatPeopleComponent from '../Views/ChatPeopleComponent';
-import ChatUserComponent from '../Views/ChatUserComponent';
+import ChatPeopleComponent from '../Components/ChatPeopleComponent';
+import ChatUserComponent from '../Components/ChatUserComponent';
 
 // test that the UI matches the wireframes
 test('renders userLinks', async () => {

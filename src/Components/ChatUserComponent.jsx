@@ -38,7 +38,7 @@ export default function ChatUserComponent() {
 
   useEffect(() => {
     getChats();
-  }, 5000);
+  }, [5000]);
 
   async function sendMessage() {
     const chat = document.getElementById('chatSend');

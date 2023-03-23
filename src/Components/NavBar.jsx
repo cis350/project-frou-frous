@@ -123,16 +123,18 @@ function NavBar({ setPage }) {
             </Button>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Button
-              fullWidth
-              size="large"
-              variant="contained"
-              sx={{ bgcolor: 'yellow.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
-              startIcon={<Logout />}
-              onClick={() => handleNavigation('logout')}
-            >
-              Log out
-            </Button>
+            <a href="/">
+              <Button
+                fullWidth
+                size="large"
+                variant="contained"
+                sx={{ bgcolor: 'yellow.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
+                startIcon={<Logout />}
+                onClick={() => handleNavigation('logout')}
+              >
+                Log out
+              </Button>
+            </a>
           </Grid>
         </Grid>
       </Grid>
