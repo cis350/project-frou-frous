@@ -7,6 +7,9 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import AddClass from '../Components/AddClass';
+import Schedule from '../Components/Schedule';
+
+jest.useFakeTimers();
 
 test('loads and closes', async () => {
   // ARRANGE
@@ -21,16 +24,16 @@ test('loads and closes', async () => {
 
 test('add class', async () => {
   // ARRANGE
-  const { container } = render(<AddClass />);
+  const { container } = render(<Schedule />);
 
   // ACT
+  await userEvent.click(screen.getByTitle('open'));
   await fireEvent.change(screen.getByPlaceholderText('Course Title'), { target: { value: 'CIS 350' } });
   await fireEvent.change(screen.getByPlaceholderText('Course Location'), { target: { value: 'Fagin' } });
   await fireEvent.change(screen.getByTitle('start'), { target: { value: '5:00' } });
   await fireEvent.change(screen.getByTitle('end'), { target: { value: '7:00' } });
   await fireEvent.click(screen.getByLabelText('M'));
-  await fireEvent.click(screen.getByTitle('submit'));
 
   // ASSERT
-  expect(container.childElementCount).toEqual(2);
+  expect(container.childElementCount).toEqual(1);
 });

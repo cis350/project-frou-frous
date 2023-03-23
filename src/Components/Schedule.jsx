@@ -6,29 +6,30 @@ import DaySchedule from './DaySchedule';
 function Schedule() {
   const baseURL = 'http://localhost:8000';
   const [classes, setClasses] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        fetch(`${baseURL}/classes`)
-          .then((res) => res.json()).then((resp) => {
-            setClasses(resp);
-          }).catch((err) => {
-            console.log(err.message);
-          });
+  const fetchData = async () => {
+    try {
+      fetch(`${baseURL}/classes`)
+        .then((res) => res.json()).then((resp) => {
+          setClasses(resp);
+        }).catch((err) => {
+          console.log(err.message);
+        });
 
-        // axios.get(`${baseURL}/classes`).then((response) => {
-        //   setClasses(response.data);
-        // });
-      } catch (error) {
-        console.log();
-      }
-    };
+      // axios.get(`${baseURL}/classes`).then((response) => {
+      //   setClasses(response.data);
+      // });
+    } catch (error) {
+      console.log();
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, []);
 
   const [modal, setModal] = useState(false);
 
   const handleClose = () => {
+    fetchData();
     setModal(false);
   };
   return (

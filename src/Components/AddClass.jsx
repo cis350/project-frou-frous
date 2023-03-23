@@ -21,6 +21,7 @@ function AddClass({ handleChild }) {
   const [days, setDays] = useState(new Array(5).fill(false));
   const submitClass = () => {
     const addNewClass = async () => {
+      const promises = [];
       for (let i = 0; i < 5; i += 1) {
         if (days[i]) {
           try {
@@ -34,29 +35,33 @@ function AddClass({ handleChild }) {
             //   });
             //   axios.put(`${baseURL}/classes/${i}`, prevObj);
             // });
-            fetch(`${baseURL}/classes/${i}`)
-              .then((res) => res.json()).then((resp) => {
-                const prevObj = resp;
-                prevObj.classes.push({
-                  name: title,
-                  location,
-                  start,
-                  end,
-                });
-                const data = { day: resp.day, classes: resp.classes };
-                fetch(`${baseURL}/classes/${i}`, {
-                  method: 'PUT',
-                  headers: { 'content-type': 'application/json' },
-                  body: JSON.stringify(data),
-                });
+            promises.push(new Promise((resolve) => {
+              fetch(`${baseURL}/classes/${i}`)
+                .then((res) => res.json()).then((resp) => {
+                  const prevObj = resp;
+                  prevObj.classes.push({
+                    name: title,
+                    location,
+                    start,
+                    end,
+                  });
+
+                  fetch(`${baseURL}/classes/${i}`, {
+                    method: 'PUT',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify(prevObj),
+                  });
+                  resolve('Added');
 
                 // axios.put(`${baseURL}/classes/${i}`, prevObj);
-              });
+                });
+            }));
           } catch (error) {
             throw new Error(error);
           }
         }
       }
+      Promise.all(promises).then(() => { handleChild(); });
     };
     addNewClass();
   };
@@ -112,12 +117,12 @@ function AddClass({ handleChild }) {
               </label>
 
               <label htmlFor="th">
-                <input type="checkbox" id="th" onChange={(e) => handleDay(e, 4)} />
+                <input type="checkbox" id="th" onChange={(e) => handleDay(e, 3)} />
                 T
               </label>
 
               <label htmlFor="f">
-                <input type="checkbox" id="f" onChange={(e) => handleDay(e, 5)} />
+                <input type="checkbox" id="f" onChange={(e) => handleDay(e, 4)} />
                 F
               </label>
             </div>
