@@ -13,7 +13,7 @@ import userEvent from '@testing-library/user-event';
 
 // test that the UI matches the wireframes
 test('renders userLinks', async () => {
-  const { getByText } = await act( async () => render(<Login />));
+  const { getByText } = await act( async () => render(<Login/>));
   const linkElement = getByText(/Register/);
   expect(linkElement).toBeInTheDocument();
 });
