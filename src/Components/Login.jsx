@@ -52,14 +52,14 @@ function Login() {
         <h1 className="app-title">Frou Frous</h1>
         <form className="login-form" onSubmit={handleSubmit}>
           <label htmlFor="username">
-            <input className="loginInput" value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="username" id="username" name="username" />
             Username
+            <input className="loginInput" value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="username" id="username" name="username" />
 
           </label>
-
+          <br />
           <label htmlFor="password">
-            <input className="loginInput" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" id="password" name="password" />
             Password
+            <input className="loginInput" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" id="password" name="password" />
           </label>
 
           <button data-testid="submitButton" className="loginButton" type="submit">Login</button>
