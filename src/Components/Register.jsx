@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createUser } from '../api/loginRegisterAPI';
 
@@ -10,7 +9,6 @@ function Register() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
 
-  const navigate = useNavigate();
 
   const isValidate = () => {
     let isproceed = true;
@@ -37,14 +35,7 @@ function Register() {
     }
     if (!isproceed) {
       toast.warning(errorMessage);
-    } else {
-      // if (/^[a-zA-Z0-9] + @[a-zA-Z0-9] + \.[A^Za-z]+$/.test(email)) {
-
-      // } else {
-      //     isproceed = false;
-      //     toast.warning('Please enter a valid email');
-      // }
-    }
+    } 
     return isproceed;
   };
 
@@ -90,7 +81,7 @@ function Register() {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
                     // id="lastName"
-              placeholder="John"
+              placeholder="Doe"
             />
           </label>
           <label htmlFor="email">
@@ -130,7 +121,9 @@ function Register() {
           <button className="loginButton" type="submit">Sign Up</button>
 
         </form>
-        <button type="button" className="loginButton link-button" onClick={() => navigate('/')}>Already have an Account? Sign in</button>
+        <a href="/">
+          <button type="button" className="loginButton link-button">Already have an account? Sign in</button>
+        </a>
 
       </div>
     </div>
