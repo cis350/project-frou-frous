@@ -1,0 +1,4 @@
+{
+    "/chat": "/chat",
+    "/chat/user/:user": "/messages"
+}

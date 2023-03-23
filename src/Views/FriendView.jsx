@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 function FriendView() {
   return (
     <div>FriendView</div>
-  )
+  );
 }
 
-export default FriendView
+export default FriendView;

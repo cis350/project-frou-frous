@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test people 1`] = `
+<div
+  id="peopleList"
+>
+  <div
+    id="searchBarWrapper"
+  >
+    <div
+      className="input-group rounded-8"
+      id="searchBar"
+    >
+      <div
+        id="searchIcon"
+      >
+        <p
+          className="bi bi-search"
+          style={
+            {
+              "color": "black",
+            }
+          }
+        />
+      </div>
+      <input
+        className="border-0"
+        id="chatSearch"
+        onChange={[Function]}
+        placeholder="People Search"
+        style={
+          {
+            "textAlign": "right",
+          }
+        }
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <br />
+  <div
+    id="peopleContainers"
+  />
+</div>
+`;
