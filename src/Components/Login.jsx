@@ -62,7 +62,7 @@ function Login() {
             Password
           </label>
 
-          <button className="loginButton" type="submit">Login</button>
+          <button data-testid="submitButton" className="loginButton" type="submit">Login</button>
 
         </form>
 

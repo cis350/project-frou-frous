@@ -5,7 +5,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 // import testing library functions
-import { getByPlaceholderText, render, screen, fireEvent } from '@testing-library/react';
+import { getByPlaceholderText, render, screen, fireEvent, getByTestId } from '@testing-library/react';
 import { act } from 'react-test-renderer';
 import renderer from 'react-test-renderer';
 import Login from "../Components/Login";
@@ -73,3 +73,30 @@ test("passwordInputCheck", () => {
       });
     expect(input.value).toBe("seed");
   });
+
+  test("loginInvalidUserName", async() => {
+    const { getByPlaceholderText, getByTestId, getByText} = render(<Login />);
+    const input = getByPlaceholderText("username");
+    expect(input).toBeInTheDocument();
+    fireEvent.change(input, {
+        target: { value: "seed" }
+      });
+    const submitButton = getByTestId("submitButton");
+    expect(submitButton).toBeInTheDocument();
+    fireEvent.click(submitButton);
+    
+  });
+
+  test("loginInvalidPassword", async() => {
+    const { getByPlaceholderText, getByTestId, getByText} = render(<Login />);
+    const input = getByPlaceholderText("password");
+    expect(input).toBeInTheDocument();
+    fireEvent.change(input, {
+        target: { value: "seed" }
+      });
+    const submitButton = getByTestId("submitButton");
+    expect(submitButton).toBeInTheDocument();
+    fireEvent.click(submitButton);
+    
+  });
+

@@ -84,7 +84,7 @@ test('check home button', ()=> {
     expect(input.value).toBe("seed");
   });
 
-
+  
 
 
 
@@ -123,3 +123,55 @@ test('email textbox present Register', async () => {
 
     expect(inputBox).toBeInTheDocument();
 });
+
+test("registerInvalidUsername", async() => {
+  const { getByPlaceholderText, getByTestId, getByText} = render(<Register />);
+  const input = getByPlaceholderText("username");
+  expect(input).toBeInTheDocument();
+  fireEvent.change(input, {
+      target: { value: "" }
+    });
+  const submitButton = getByTestId("submitButton");
+  expect(submitButton).toBeInTheDocument();
+  fireEvent.click(submitButton);  
+});
+
+test("registerInvalidEmail", async() => {
+  const { getByPlaceholderText, getByTestId, getByText} = render(<Register />);
+  const input = getByPlaceholderText("email");
+  expect(input).toBeInTheDocument();
+  fireEvent.change(input, {
+      target: { value: "" }
+    });
+  const submitButton = getByTestId("submitButton");
+  expect(submitButton).toBeInTheDocument();
+  fireEvent.click(submitButton);
+  
+});
+test("registerInvalidfirstName", async() => {
+  const { getByPlaceholderText, getByTestId, getByText} = render(<Register />);
+  const input = getByPlaceholderText("John");
+  expect(input).toBeInTheDocument();
+  fireEvent.change(input, {
+      target: { value: "" }
+    });
+  const submitButton = getByTestId("submitButton");
+  expect(submitButton).toBeInTheDocument();
+  fireEvent.click(submitButton);
+  
+});
+
+test("registerInvalidlastName", async() => {
+  const { getByPlaceholderText, getByTestId, getByText} = render(<Register />);
+  const input = getByPlaceholderText("Doe");
+  expect(input).toBeInTheDocument();
+  fireEvent.change(input, {
+      target: { value: "" }
+    });
+  const submitButton = getByTestId("submitButton");
+  expect(submitButton).toBeInTheDocument();
+  fireEvent.click(submitButton);
+  
+});
+
+

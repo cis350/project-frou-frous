@@ -118,7 +118,7 @@ function Register() {
             />
           </label>
           <br />
-          <button className="loginButton" type="submit">Sign Up</button>
+          <button data-testid="submitButton" className="loginButton" type="submit">Sign Up</button>
 
         </form>
         <a href="/">
