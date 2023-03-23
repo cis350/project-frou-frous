@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
+import { getFriendReports } from '../api/userPageAPI';
 
 import Report from './Report';
 
 function Timeline(props) {
-  const { reportIds } = props;
+  const { userId, page } = props; //eslint-disable-line
+  const [reportIds, setReportIds] = useState([]);
+
+  useEffect(() => {
+    async function fetchUserData() {
+      try {
+        const response = await getFriendReports();
+        setReportIds(response.reportIds);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchUserData();
+  }, [userId, page]);
 
   return (
     <Grid
@@ -46,6 +60,7 @@ function Timeline(props) {
 }
 
 Timeline.propTypes = {
-  reportIds: PropTypes.arrayOf(PropTypes.number).isRequired,
+  userId: PropTypes.number.isRequired,
+  page: PropTypes.string.isRequired,
 };
 export default Timeline;

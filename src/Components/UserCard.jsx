@@ -4,7 +4,7 @@ import { Card, CardContent, Grid, Avatar, Typography } from '@mui/material';
 import styled from '@mui/system/styled';
 import PropTypes from 'prop-types';
 
-import { getUserHistory } from '../api/userProfileAPI';
+import { getUserHistory } from '../api/userPageAPI';
 
 const LeftItem = styled('div')(() => ({
   margin: 6,
@@ -31,7 +31,7 @@ function UserCard(props) {
   const [profilePhoto, setProfilePhoto] = useState('');
   const [skipHistory, setSkipHistory] = useState(''); //eslint-disable-line
   const [totalClasses, setTotalClasses] = useState(''); //eslint-disable-line
-  const { userId } = props;
+  const { userId, page } = props; //eslint-disable-line
 
   useEffect(() => {
     async function fetchUserData() {
@@ -47,7 +47,7 @@ function UserCard(props) {
     }
 
     fetchUserData();
-  }, [userId]);
+  }, [userId, page]);
 
   return (
     <Card

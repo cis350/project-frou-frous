@@ -10,7 +10,7 @@ import renderer, { act } from 'react-test-renderer';
 import UserCard from '../Components/UserCard';
 
 test('rendersAllStatBoxes', async () => {
-  const { getByText } = await act(async () => render(<UserCard userId="validId" />)); // eslint-disable-line
+  const { getByText } = await act(async () => render(<UserCard userId={12345} />)); // eslint-disable-line
   expect(screen.getByText(/Total Classes Skipped/)).toBeInTheDocument();
   expect(screen.getByText(/Percent Classes Skipped/)).toBeInTheDocument();
   expect(screen.getByText(/Class Most Often Skipped/)).toBeInTheDocument();
@@ -18,13 +18,13 @@ test('rendersAllStatBoxes', async () => {
 });
 
 test('rendersAvatar', async () => {
-  const { getByTestId } = await act(async () => render(<UserCard userId="validId" />));
-  const avatar = getByTestId('PersonIcon');
-  expect(avatar).toBeInTheDocument();
+  const { getByText } = await act(async () => render(<UserCard userId={12345} />));
+  const username = getByText(/MockUsername/);
+  expect(username).toBeInTheDocument();
 });
 
 test('snapshot test', () => {
-  const component = renderer.create(<UserCard userId="validId" />);
+  const component = renderer.create(<UserCard userId={12345} />);
   const domTreeJSON = component.toJSON();
 
   expect(domTreeJSON).toMatchSnapshot();

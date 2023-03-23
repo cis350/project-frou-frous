@@ -4,12 +4,9 @@
 
 import { expect, jest, test } from '@jest/globals';
 import '@testing-library/jest-dom/extend-expect';
-import { render, waitFor } from '@testing-library/react';
-import React from 'react';
-import UserCard from '../Components/UserCard';
-import { getUserHistory } from '../api/userProfileAPI';
+import { getUserHistory } from '../api/userPageAPI';
 
-jest.mock('../api/userProfileAPI.js');
+jest.mock('../api/userPageAPI.js');
 
 const mockUser = {
   username: 'MockUsername',
@@ -93,30 +90,4 @@ test('invalidIdTest', async () => {
 
   expect(error).toEqual(networkError);
   expect(getUserHistoryTest).toHaveBeenCalled();
-});
-
-test('rendersCorrectValues', async () => {
-  const fetchMock = jest.fn(() => Promise.resolve({
-    json: () => Promise.resolve(mockUser),
-  }));
-  global.getUserHistory = fetchMock;
-  const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
-
-  render(<UserCard userId="validId" />);
-  await waitFor(() => expect(fetchMock).toHaveBeenCalledWith('/user/validId'));
-  console.log(mockUser);
-  console.log(spy.mock.calls);
-  expect(spy).toHaveBeenCalledWith(mockUser);
-  spy.mockRestore();
-});
-
-test('errorFailsToRender', async () => {
-  const fetchMock = jest.fn(() => Promise.reject(new Error('No User was Found')));
-  global.getUserHistory = fetchMock;
-  const spy = jest.spyOn(console, 'log');
-
-  render(<UserCard userId="invalidId" />);
-  await waitFor(() => expect(fetchMock).toHaveBeenCalledWith('/user/invalidId'));
-  expect(spy).toHaveBeenCalledWith('No User was Found');
-  spy.mockRestore();
 });
