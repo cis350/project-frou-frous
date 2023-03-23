@@ -31,7 +31,7 @@ function UserCard(props) {
   const [profilePhoto, setProfilePhoto] = useState('');
   const [skipHistory, setSkipHistory] = useState(''); //eslint-disable-line
   const [totalClasses, setTotalClasses] = useState(''); //eslint-disable-line
-  const { userId, page } = props; //eslint-disable-line
+  const { userId } = props;
 
   useEffect(() => {
     async function fetchUserData() {
@@ -47,22 +47,18 @@ function UserCard(props) {
     }
 
     fetchUserData();
-  }, [userId, page]);
+  }, [userId]);
 
   return (
     <Card
       variant="outlined"
       sx={{
-        borderRadius: 7,
-        width: 1 / 2,
-        minWidth: 300,
-        minHeight: 400,
-        margin: 5,
-        padding: 2,
-        boxShadow: 0,
+        borderRadius: '10px',
+        width: '60%',
         backgroundColor: '#0d1b1e',
-        border: '2px solid',
-        borderColor: 'white',
+        border: '3px solid #E5E5E5',
+        margin: 'auto',
+        marginTop: '20px',
       }}
     >
       <Grid container spacing={2}>
