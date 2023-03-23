@@ -92,5 +92,42 @@
         }
       ]
     }
+  ],
+  "user": [
+    {
+      "id": "e",
+      "password": "e",
+      "email": "e",
+      "firstName": "e",
+      "lastName": "e"
+    },
+    {
+      "id": "q",
+      "password": "q",
+      "email": "q",
+      "firstName": "q",
+      "lastName": "q"
+    },
+    {
+      "id": "m",
+      "password": "m",
+      "email": "m",
+      "firstName": "m",
+      "lastName": "m"
+    },
+    {
+      "id": "d",
+      "password": "d",
+      "email": "d",
+      "firstName": "d",
+      "lastName": "d"
+    },
+    {
+      "id": "t",
+      "password": "t",
+      "email": "t",
+      "firstName": "t",
+      "lastName": "t"
+    }
   ]
 }
