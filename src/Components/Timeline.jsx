@@ -12,7 +12,8 @@ function Timeline(props) {
       container
       direction="column"
       alignItems="center"
-      sx={{ width: '80%', height: '100%', border: '3px solid #E5E5E5', borderRadius: '5px', backgroundColor: '#0D1B1E' }}
+      margin={2}
+      sx={{ width: '100%', height: '100%' }}
     >
       <Grid item xs={12} alignItems="center">
         <Grid item xs={12} alignItems="center" md={12}>
@@ -32,6 +33,7 @@ function Timeline(props) {
           <Grid
             item
             alignItems="center"
+            justifyContent="center"
             xs={12}
             key={reportId}
           >

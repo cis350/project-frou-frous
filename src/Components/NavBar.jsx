@@ -41,16 +41,18 @@ function NavBar({ setPage }) {
         container
         direction="column"
         alignItems="center"
-        sx={{ width: '80%', height: '50%', border: '3px solid #E5E5E5', borderRadius: '5px', backgroundColor: '#0D1B1E' }}
+        margin={3}
+        sx={{ width: '90%', height: '32%', border: '3px solid #E5E5E5', borderRadius: '10px', backgroundColor: '#0D1B1E' }}
       >
-        <Grid item xs={12} spacing={1} container direction="row" sx={{ p: 2, flexGrow: 1 }}>
-          <Grid item xs={12} alignItems="center" md={12}>
+        <Grid item xs={12} alignItems="center" justifyContent="center" spacing={1} container direction="row" sx={{ p: 2, flexGrow: 1 }}>
+          <Grid item xs={12} md={12} alignItems="center" justifyContent="center" sx={{ backgroundColor: '#397367', borderRadius: '15px' }}>
             <Typography
-              variant="title"
+              variant="h5"
+              marginBottom={1}
               sx={{
                 color: 'white',
-                fontFamily: 'Open Sans, sans-serif',
-                fontSize: '35x',
+                fontFamily: 'inherit',
+                fontSize: '40x',
                 textAlign: 'center',
               }}
             >
@@ -60,8 +62,9 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
+              size="large"
               variant="contained"
-              sx={{ bgcolor: 'lime.main', color: 'white', fontFamily: 'inherit' }}
+              sx={{ bgcolor: 'lime.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
               startIcon={<Chat />}
               component={Link}
               to="/chat"
@@ -72,8 +75,9 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
+              size="large"
               variant="contained"
-              sx={{ bgcolor: 'pink.main', color: 'white', fontFamily: 'inherit' }}
+              sx={{ bgcolor: 'pink.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
               startIcon={<Timeline />}
               onClick={() => handleNavigation('Timeline')}
             >
@@ -83,8 +87,9 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
+              size="large"
               variant="contained"
-              sx={{ bgcolor: 'yellow.main', color: 'white', fontFamily: 'inherit' }}
+              sx={{ bgcolor: 'yellow.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
               startIcon={<Report />}
               component={Link}
               to="/report"
@@ -95,8 +100,9 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
+              size="large"
               variant="contained"
-              sx={{ bgcolor: 'lime.main', color: 'white', fontFamily: 'inherit' }}
+              sx={{ bgcolor: 'lime.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
               startIcon={<Leaderboard />}
               component={Link}
               to="/leaderboard"
@@ -107,8 +113,9 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
+              size="large"
               variant="contained"
-              sx={{ bgcolor: 'pink.main', color: 'white', fontFamily: 'inherit' }}
+              sx={{ bgcolor: 'pink.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
               startIcon={<AccountCircle />}
               onClick={() => handleNavigation('Profile')}
             >
@@ -118,8 +125,9 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
+              size="large"
               variant="contained"
-              sx={{ bgcolor: 'yellow.main', color: 'white', fontFamily: 'inherit' }}
+              sx={{ bgcolor: 'yellow.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
               startIcon={<Logout />}
               onClick={() => handleNavigation('logout')}
             >
