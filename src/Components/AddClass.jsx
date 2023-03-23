@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import PropTypes from 'prop-types';
 
 function AddClass({ handleChild }) {
@@ -21,19 +21,37 @@ function AddClass({ handleChild }) {
   const [days, setDays] = useState(new Array(5).fill(false));
   const submitClass = () => {
     const addNewClass = async () => {
-      for (let i = 0; i <= 5; i += 1) {
+      for (let i = 0; i < 5; i += 1) {
         if (days[i]) {
           try {
-            axios.get(`${baseURL}/classes/${i}`).then((prev) => {
-              const prevObj = prev.data;
-              prevObj.classes.push({
-                name: title,
-                location,
-                start,
-                end,
+            // axios.get(`${baseURL}/classes/${i}`).then((prev) => {
+            //   const prevObj = prev.data;
+            //   prevObj.classes.push({
+            //     name: title,
+            //     location,
+            //     start,
+            //     end,
+            //   });
+            //   axios.put(`${baseURL}/classes/${i}`, prevObj);
+            // });
+            fetch(`${baseURL}/classes/${i}`)
+              .then((res) => res.json()).then((resp) => {
+                const prevObj = resp;
+                prevObj.classes.push({
+                  name: title,
+                  location,
+                  start,
+                  end,
+                });
+                const data = { day: resp.day, classes: resp.classes };
+                fetch(`${baseURL}/classes/${i}`, {
+                  method: 'PUT',
+                  headers: { 'content-type': 'application/json' },
+                  body: JSON.stringify(data),
+                });
+
+                // axios.put(`${baseURL}/classes/${i}`, prevObj);
               });
-              axios.put(`${baseURL}/classes/${i}`, prevObj);
-            });
           } catch (error) {
             throw new Error(error);
           }
