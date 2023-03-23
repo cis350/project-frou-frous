@@ -1,3 +1,5 @@
+
+
 /**
 * @jest-environment jsdom
 */
@@ -24,14 +26,14 @@ export const renderWithToastify = (component) => {
 };
 
 test('check submit button', ()=> {
-    const { getByText } = render(<Register />);
-    const button = getByText("Sign Up");
+    const { getByTestId } = render(<Register />);
+    const button = getByTestId("submitButton");
     expect(button).toBeTruthy()
 });
 
 test('check home button', ()=> {
-    const { getByText } = render(<Register />);
-    const button = getByText("Already have an account? Sign in");
+    const { getByTestId } = render(<Register />);
+    const button = getByTestId("login");
     expect(button).toBeTruthy()
 });
 

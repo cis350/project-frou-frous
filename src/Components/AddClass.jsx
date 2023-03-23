@@ -8,7 +8,7 @@ function AddClass({ handleChild }) {
     return please;
   }
   AddClass.defaultProps = {
-    handleChild: defaultFunc(),
+    handleChild: defaultFunc,
   };
   AddClass.propTypes = {
     handleChild: PropTypes.func,

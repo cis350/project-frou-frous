@@ -10,7 +10,7 @@ function Register() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
 
-  const navigate = useNavigate();
+
 
   const isValidate = () => {
     let isproceed = true;
@@ -90,7 +90,7 @@ function Register() {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
                     // id="lastName"
-              placeholder="John"
+              placeholder="Doe"
             />
           </label>
           <label htmlFor="email">
@@ -130,7 +130,10 @@ function Register() {
           <button data-testid="submitButton" className="loginButton" type="submit">Sign Up</button>
 
         </form>
-        <button type="button" className="loginButton link-button" onClick={() => navigate('/')}>Already have an Account? Sign in</button>
+        <a href="/">
+          <button data-testid="login" type="button" className="loginButton link-button">Already have an Account? Sign in</button>
+        </a>
+
 
       </div>
     </div>
