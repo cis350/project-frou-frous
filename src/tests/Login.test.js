@@ -71,7 +71,7 @@ test('usernameInputCheck', () => {
 });
 
 test('loginInvalidUserName', async () => {
-  const { getByPlaceholderText, getByTestId, getByText } = render(<Login />);
+  const { getByPlaceholderText, getByTestId } = render(<Login />);
   const input = getByPlaceholderText('username');
   expect(input).toBeInTheDocument();
   fireEvent.change(input, {
@@ -83,7 +83,7 @@ test('loginInvalidUserName', async () => {
 });
 
 test('loginInvalidPassword', async () => {
-  const { getByPlaceholderText, getByTestId, getByText } = render(<Login />);
+  const { getByPlaceholderText, getByTestId } = render(<Login />);
   const input = getByPlaceholderText('password');
   expect(input).toBeInTheDocument();
   fireEvent.change(input, {
