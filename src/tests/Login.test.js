@@ -5,10 +5,10 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 // import testing library functions
-import { getByPlaceholderText, render, screen } from '@testing-library/react';
+import { getByPlaceholderText, render, screen, fireEvent } from '@testing-library/react';
 import { act } from 'react-test-renderer';
 import renderer from 'react-test-renderer';
-import { Login } from "../Components/Login";
+import Login from "../Components/Login";
 import userEvent from '@testing-library/user-event';
 
 // test that the UI matches the wireframes
@@ -24,7 +24,7 @@ test('check login buttonn', ()=> {
     expect(button).toBeTruthy()
 });
 
-test('check register buttonn', ()=> {
+test('check register button', ()=> {
     const { getByText } = render(<Login />);
     const button = getByText("Register");
     expect(button).toBeTruthy()
@@ -53,3 +53,23 @@ test('password textbox present', async () => {
 
     expect(inputBox).toBeInTheDocument();
 });
+
+test("passwordInputCheck", () => {
+    const { getByPlaceholderText} = render(<Login />);
+    const input = getByPlaceholderText("password");
+    expect(input).toBeInTheDocument();
+    fireEvent.change(input, {
+        target: { value: "seed" }
+      });
+    expect(input.value).toBe("seed");
+  });
+
+  test("usernameInputCheck", () => {
+    const { getByPlaceholderText} = render(<Login />);
+    const input = getByPlaceholderText("username");
+    expect(input).toBeInTheDocument();
+    fireEvent.change(input, {
+        target: { value: "seed" }
+      });
+    expect(input.value).toBe("seed");
+  });
