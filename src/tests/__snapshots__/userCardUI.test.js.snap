@@ -2,7 +2,7 @@
 
 exports[`snapshot test 1`] = `
 <div
-  className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-164r53s-MuiPaper-root-MuiCard-root"
+  className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-7ksc0v-MuiPaper-root-MuiCard-root"
 >
   <div
     className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
