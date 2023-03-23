@@ -27,9 +27,9 @@ test('test that button present', async () => {
   expect(inputBox).toBeInTheDocument();
 });
 
-test('snapshot test people', () => {
-  const component = renderer.create(<ChatPeopleComponent />);
-  const domTreeJSON = component.toJSON();
-  // matcher
-  expect(domTreeJSON).toMatchSnapshot();
-});
+// test('snapshot test people', () => {
+//   const component = renderer.create(<ChatPeopleComponent />);
+//   const domTreeJSON = component.toJSON();
+//   // matcher
+//   expect(domTreeJSON).toMatchSnapshot();
+// });

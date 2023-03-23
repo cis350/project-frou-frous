@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios'; // eslint-disable-line
 import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line
 
 // This sets the mock adapter on the default instance
@@ -76,14 +76,14 @@ const mes = [
 ];
 
 const pathRegex = new RegExp('\/chat\/user\/*'); // eslint-disable-line
-mock.onGet(pathRegex).reply(200, { // eslint-disable-line
+mock.onGet(pathRegex).reply(200, {
   messages: mes,
 });
 
 const postRegex = new RegExp('\/chat\/send\/*'); // eslint-disable-line
 mock.onPost(postRegex).reply(200, {});
 
-export const getChatFriends = async () => { // eslint-disable-line
+export const getChatFriends = async () => {
   const res = await axios.get('/chat');
   return res.data;
 };
