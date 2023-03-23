@@ -19,6 +19,9 @@ function UserPageView() {
       </Grid>
       <Grid item xs={6} justifyContent="center">
         <NavBar setPage={setPage} />
+        <a href="/schedule/1234">
+          <button style={{ backgroundColor: 'white', marginTop: '10%' }} type="button">Schedule</button>
+        </a>
       </Grid>
     </Grid>
   );
