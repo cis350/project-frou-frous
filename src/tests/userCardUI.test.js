@@ -10,7 +10,7 @@ import { act } from 'react-test-renderer';
 import UserCard from '../Components/UserCard';
 
 test('rendersAllStatBoxes', async () => {
-    const {getByText} = await act( async () => render(<UserCard userId="MockUsername"/>));
+    const {getByText} = await act( async () => render(<UserCard userId = "MockUsername" />));
     expect(screen.getByText(/Total Classes Skipped/)).toBeInTheDocument();
     expect(screen.getByText(/Percent Classes Skipped/)).toBeInTheDocument();
     expect(screen.getByText(/Class Most Often Skipped/)).toBeInTheDocument();

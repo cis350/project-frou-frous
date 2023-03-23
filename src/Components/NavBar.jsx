@@ -60,7 +60,6 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
-              fullHeight
               variant="contained"
               sx={{ bgcolor: 'lime.main', color: 'white', fontFamily: 'inherit' }}
               startIcon={<Chat />}
@@ -73,7 +72,6 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
-              fullHeight
               variant="contained"
               sx={{ bgcolor: 'pink.main', color: 'white', fontFamily: 'inherit' }}
               startIcon={<Timeline />}
@@ -85,7 +83,6 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
-              fullHeight
               variant="contained"
               sx={{ bgcolor: 'yellow.main', color: 'white', fontFamily: 'inherit' }}
               startIcon={<Report />}
@@ -98,7 +95,6 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
-              fullHeight
               variant="contained"
               sx={{ bgcolor: 'lime.main', color: 'white', fontFamily: 'inherit' }}
               startIcon={<Leaderboard />}
@@ -111,7 +107,6 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
-              fullHeight
               variant="contained"
               sx={{ bgcolor: 'pink.main', color: 'white', fontFamily: 'inherit' }}
               startIcon={<AccountCircle />}
@@ -123,7 +118,6 @@ function NavBar({ setPage }) {
           <Grid item xs={12} md={6}>
             <Button
               fullWidth
-              fullHeight
               variant="contained"
               sx={{ bgcolor: 'yellow.main', color: 'white', fontFamily: 'inherit' }}
               startIcon={<Logout />}
