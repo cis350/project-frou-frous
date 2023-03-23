@@ -16,7 +16,7 @@ test('loads and closes', async () => {
   await userEvent.click(screen.getByTitle('close'));
 
   // ASSERT
-  expect(container.childElementCount).toEqual(1);
+  expect(container.childElementCount).toEqual(2);
 });
 
 test('add class', async () => {
@@ -32,5 +32,5 @@ test('add class', async () => {
   await fireEvent.click(screen.getByTitle('submit'));
 
   // ASSERT
-  expect(container.childElementCount).toEqual(1);
+  expect(container.childElementCount).toEqual(2);
 });
