@@ -50,8 +50,7 @@ function AddClass({ handleChild }) {
                     method: 'PUT',
                     headers: { 'content-type': 'application/json' },
                     body: JSON.stringify(prevObj),
-                  });
-                  resolve('Added');
+                  }).then(() => resolve('Added'));
 
                 // axios.put(`${baseURL}/classes/${i}`, prevObj);
                 });
