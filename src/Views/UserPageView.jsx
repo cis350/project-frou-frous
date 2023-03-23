@@ -11,11 +11,11 @@ function UserPageView() {
     <Grid
       container
       spacing={2}
-      sx={{ width: '100%', height: '100%', backgroundColor: '#0D1B1E' }}
+      sx={{ width: '100vw', height: '100vh', backgroundColor: '#0D1B1E' }}
     >
       <Grid item xs={6} justifyContent="center">
         {page === 'Timeline' && <Timeline userId={12345} page={page} />}
-        {page === 'Profile' && <UserCard userId={12345} page={page} />}
+        {page === 'Profile' && <UserCard userId={12345} />}
       </Grid>
       <Grid item xs={6} justifyContent="center">
         <NavBar setPage={setPage} />
