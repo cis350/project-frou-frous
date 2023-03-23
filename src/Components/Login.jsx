@@ -58,7 +58,7 @@ function Login() {
           </label>
 
           <label htmlFor="password">
-            <input className="passInput" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" id="password" name="password" />
+            <input className="loginInput" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" id="password" name="password" />
             Password
           </label>
 

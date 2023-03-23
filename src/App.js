@@ -5,13 +5,12 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import React from 'react';
-import PostView from './Views/PostView';
 import UserPageView from './Views/UserPageView';
 import SkipHistoryView from './Views/SkipHistoryView';
 import ScheduleView from './Views/ScheduleView';
 import ReportView from './Views/ReportView';
 import LeaderboardView from './Views/LeaderboardView';
-import ChatView from './Views/ChatView';
+import { ChatView, SingleChatView } from './Views/ChatView';
 import Login from './Components/Login';
 import Register from './Components/Register';
 
@@ -24,10 +23,6 @@ function App() {
     {
       path: '/register',
       element: <Register />,
-    },
-    {
-      path: '/post/:postId',
-      element: <PostView />,
     },
     {
       path: '/user/:userId',
@@ -52,6 +47,10 @@ function App() {
     {
       path: '/chat',
       element: <ChatView />,
+    },
+    {
+      path: '/chat/user/:user',
+      element: <SingleChatView />,
     },
 
   ]);

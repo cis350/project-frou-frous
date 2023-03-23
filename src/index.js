@@ -1,3 +1,4 @@
+// eslint-disable
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -7,11 +8,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+/* eslint-disable */
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
 );
+/* eslint-enable no-undef */
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

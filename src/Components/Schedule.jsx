@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import AddClass from './AddClass';
 import DaySchedule from './DaySchedule';
 
@@ -9,9 +9,16 @@ function Schedule() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        axios.get(`${baseURL}/classes`).then((response) => {
-          setClasses(response.data);
-        });
+        fetch(`${baseURL}/classes`)
+          .then((res) => res.json()).then((resp) => {
+            setClasses(resp);
+          }).catch((err) => {
+            console.log(err.message);
+          });
+
+        // axios.get(`${baseURL}/classes`).then((response) => {
+        //   setClasses(response.data);
+        // });
       } catch (error) {
         console.log();
       }
