@@ -25,16 +25,6 @@ function AddClass({ handleChild }) {
       for (let i = 0; i < 5; i += 1) {
         if (days[i]) {
           try {
-            // axios.get(`${baseURL}/classes/${i}`).then((prev) => {
-            //   const prevObj = prev.data;
-            //   prevObj.classes.push({
-            //     name: title,
-            //     location,
-            //     start,
-            //     end,
-            //   });
-            //   axios.put(`${baseURL}/classes/${i}`, prevObj);
-            // });
             promises.push(new Promise((resolve) => {
               fetch(`${baseURL}/classes/${i}`)
                 .then((res) => res.json()).then((resp) => {
@@ -51,8 +41,6 @@ function AddClass({ handleChild }) {
                     headers: { 'content-type': 'application/json' },
                     body: JSON.stringify(prevObj),
                   }).then(() => resolve('Added'));
-
-                // axios.put(`${baseURL}/classes/${i}`, prevObj);
                 });
             }));
           } catch (error) {

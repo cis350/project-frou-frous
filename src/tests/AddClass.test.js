@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import AddClass from '../Components/AddClass';
@@ -20,6 +20,42 @@ test('loads and closes', async () => {
 
   // ASSERT
   expect(container.childElementCount).toEqual(2);
+});
+
+test('Start input', async () => {
+  const { getByText } = await act(async () => render(<AddClass />));
+  const element = getByText(/Start/);
+  expect(element).toBeInTheDocument();
+});
+
+test('End input', async () => {
+  const { getByText } = await act(async () => render(<AddClass />));
+  const element = getByText(/End/);
+  expect(element).toBeInTheDocument();
+});
+
+test('Monday checkbox input', async () => {
+  const { getByText } = await act(async () => render(<AddClass />));
+  const element = getByText(/M/);
+  expect(element).toBeInTheDocument();
+});
+
+test('Wednesday checkbox input', async () => {
+  const { getByText } = await act(async () => render(<AddClass />));
+  const element = getByText(/W/);
+  expect(element).toBeInTheDocument();
+});
+
+test('Friday checkbox input', async () => {
+  const { getByText } = await act(async () => render(<AddClass />));
+  const element = getByText(/F/);
+  expect(element).toBeInTheDocument();
+});
+
+test('Add Class button', async () => {
+  const { getByTitle } = await act(async () => render(<AddClass />));
+  const element = getByTitle('submit');
+  expect(element).toBeInTheDocument();
 });
 
 test('add class', async () => {
