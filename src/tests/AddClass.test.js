@@ -23,12 +23,24 @@ test('loads and closes', async () => {
 });
 
 test('Start input', async () => {
+  const { getByTitle } = await act(async () => render(<AddClass />));
+  const element = getByTitle('start');
+  expect(element).toBeInTheDocument();
+});
+
+test('Start Text', async () => {
   const { getByText } = await act(async () => render(<AddClass />));
   const element = getByText(/Start/);
   expect(element).toBeInTheDocument();
 });
 
 test('End input', async () => {
+  const { getByTitle } = await act(async () => render(<AddClass />));
+  const element = getByTitle('end');
+  expect(element).toBeInTheDocument();
+});
+
+test('End Text', async () => {
   const { getByText } = await act(async () => render(<AddClass />));
   const element = getByText(/End/);
   expect(element).toBeInTheDocument();
@@ -38,6 +50,12 @@ test('Monday checkbox input', async () => {
   const { getByText } = await act(async () => render(<AddClass />));
   const element = getByText(/M/);
   expect(element).toBeInTheDocument();
+});
+
+test('Checkboxes', async () => {
+  const { queryAllByRole } = await act(async () => render(<AddClass />));
+  const element = queryAllByRole('checkbox');
+  expect(element.length).toBeGreaterThan(4);
 });
 
 test('Wednesday checkbox input', async () => {
@@ -72,4 +90,13 @@ test('add class', async () => {
 
   // ASSERT
   expect(container.childElementCount).toEqual(1);
+});
+
+const handleChild = jest.fn();
+
+test('calls setPage when clicking on Timeline button', () => {
+  const { getByTitle } = render(<AddClass handleChild={handleChild} />);
+  const element = getByTitle('close');
+  fireEvent.click(element);
+  expect(handleChild).toHaveBeenCalled();
 });

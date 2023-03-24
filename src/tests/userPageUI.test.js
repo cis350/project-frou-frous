@@ -4,7 +4,7 @@
 
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render, act } from '@testing-library/react';
+import { render, act, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
 import Report from '../Components/Report';
@@ -15,8 +15,42 @@ jest.mock('react-router-dom', () => ({
   useLocation: () => ({ pathname: '/user/:userId' }),
 }));
 
+const setPage = jest.fn();
+
+test('calls setPage when clicking on Timeline button', () => {
+  const { getByText } = render(
+    <Router>
+      <NavBar setPage={setPage} />
+    </Router>,
+  );
+  const element = getByText(/Timeline/);
+  fireEvent.click(element);
+  expect(setPage).toHaveBeenCalledWith('Timeline');
+});
+
+test('calls setPage when clicking on User Profile button', () => {
+  const { getByText } = render(
+    <Router>
+      <NavBar setPage={setPage} />
+    </Router>,
+  );
+  const element = getByText(/User Profile/);
+  fireEvent.click(element);
+  expect(setPage).toHaveBeenCalledWith('Profile');
+});
+
+test('calls setPage when clicking on logout button', () => {
+  const { getByText } = render(
+    <Router>
+      <NavBar setPage={setPage} />
+    </Router>,
+  );
+  const element = getByText(/Log out/);
+  fireEvent.click(element);
+  expect(setPage).toHaveBeenCalledWith('logout');
+});
+
 test('renders Navigation Bar', () => {
-  const setPage = jest.fn();
   const { getByText } = render(
     <Router>
       <NavBar setPage={setPage} />
@@ -27,7 +61,6 @@ test('renders Navigation Bar', () => {
 });
 
 test('renders Navigation Bar', () => {
-  const setPage = jest.fn();
   const { getByText } = render(
     <Router>
       <NavBar setPage={setPage} />
@@ -38,7 +71,6 @@ test('renders Navigation Bar', () => {
 });
 
 test('renders chat button', () => {
-  const setPage = jest.fn();
   const { getByText } = render(
     <Router>
       <NavBar setPage={setPage} />
@@ -49,7 +81,6 @@ test('renders chat button', () => {
 });
 
 test('renders timeline button', () => {
-  const setPage = jest.fn();
   const { getByText } = render(
     <Router>
       <NavBar setPage={setPage} />
@@ -60,7 +91,6 @@ test('renders timeline button', () => {
 });
 
 test('renders report button', () => {
-  const setPage = jest.fn();
   const { getByText } = render(
     <Router>
       <NavBar setPage={setPage} />
@@ -71,7 +101,6 @@ test('renders report button', () => {
 });
 
 test('renders leaderboard button', () => {
-  const setPage = jest.fn();
   const { getByText } = render(
     <Router>
       <NavBar setPage={setPage} />
@@ -82,7 +111,6 @@ test('renders leaderboard button', () => {
 });
 
 test('renders user profile button', () => {
-  const setPage = jest.fn();
   const { getByText } = render(
     <Router>
       <NavBar setPage={setPage} />
@@ -93,7 +121,6 @@ test('renders user profile button', () => {
 });
 
 test('renders logout button', () => {
-  const setPage = jest.fn();
   const { getByText } = render(
     <Router>
       <NavBar setPage={setPage} />
