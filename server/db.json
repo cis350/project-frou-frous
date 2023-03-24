@@ -2,7 +2,7 @@
   "classes": [
     {
       "id": 0,
-      "day": "Tuesday",
+      "day": "Monday",
       "classes": [
         {
           "name": "CIS 320",
@@ -122,6 +122,13 @@
       "email": "t",
       "firstName": "t",
       "lastName": "t"
+    },
+    {
+      "id": "kait",
+      "password": "kait",
+      "email": "kait",
+      "firstName": "kait",
+      "lastName": "kait"
     }
   ]
 }
