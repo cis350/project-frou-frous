@@ -8,15 +8,19 @@ import { getReport, getPfp } from '../api/userPageAPI';
 
 function Report(props) {
   const [name, setName] = useState('');
+  const [reportee, setReportee] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
   const [photo, setPhoto] = useState('');
+  const [cap, setCaption] = useState('');
   const { postId } = props;
 
   async function handleReport(reportResponse) {
     console.log('Res', reportResponse);
-    const { reporterId, img } = reportResponse;
+    const { reporterId, img, reporteeId, caption } = reportResponse;
     setName(reporterId);
     setPhoto(img);
+    setReportee(reporteeId);
+    setCaption(caption);
 
     const profilePhotoResponse = await getPfp(); // Need to add this to swaggerHub API
     const { pfp } = profilePhotoResponse;
@@ -43,10 +47,29 @@ function Report(props) {
             <Avatar src={profilePhoto} alt={name} sx={{ width: 50, height: 50 }} />
           </Grid>
           <Grid item>
-            <div style={{ color: 'white', fontFamily: 'Open Sans, sans-serif' }}>{name}</div>
+            <div style={{ color: 'white', fontFamily: 'Open Sans, sans-serif' }}>
+              <b>
+                {name}
+              </b>
+              {' '}
+              reported
+              {' '}
+              <b>
+                {reportee}
+              </b>
+              {' '}
+              for skipping!
+            </div>
           </Grid>
         </Grid>
         <img src={photo} alt="" style={{ width: '100%', height: '100%', marginTop: 15, borderRadius: '10px' }} />
+        <center style={{ color: 'white' }}>
+          <p>
+            {' '}
+            {cap}
+            {' '}
+          </p>
+        </center>
       </CardContent>
       <CardActions>
         <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black' }}>

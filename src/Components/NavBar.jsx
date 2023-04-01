@@ -42,7 +42,7 @@ function NavBar({ setPage }) {
         direction="column"
         alignItems="center"
         margin={3}
-        sx={{ width: '90%', height: '32vh', border: '3px solid #E5E5E5', borderRadius: '10px', backgroundColor: '#0D1B1E' }}
+        sx={{ width: '90%', border: '3px solid #E5E5E5', borderRadius: '10px', backgroundColor: '#0D1B1E' }}
       >
         <Grid item xs={12} alignItems="center" justifyContent="center" spacing={1} container direction="row" sx={{ p: 2, flexGrow: 1 }}>
           <Grid item xs={12} md={12} alignItems="center" justifyContent="center" sx={{ backgroundColor: '#397367', borderRadius: '15px' }}>

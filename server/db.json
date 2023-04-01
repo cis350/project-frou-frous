@@ -147,7 +147,7 @@
       ],
       "reporterId": "User1",
       "date": 1680294744,
-      "caption": "I skipped!",
+      "caption": "Caught User2 Skipping lol",
       "reporteeId": "User2",
       "img": "https://i1.sndcdn.com/artworks-5fyeRojbMeUUbmbT-qqZ5NQ-t500x500.jpg",
       "likes": []
@@ -160,8 +160,8 @@
       ],
       "reporterId": "User1",
       "date": 1680294744,
-      "caption": "I skipped!",
-      "reporteeId": "User2",
+      "caption": "I skipped :(",
+      "reporteeId": "User1",
       "img": "https://th.bing.com/th/id/OIP.yAO1CqL2WioDGKzB_U66JwHaE8?pid=ImgDet&rs=1",
       "likes": []
     }
