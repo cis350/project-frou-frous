@@ -10,18 +10,22 @@ function Report(props) {
   const [name, setName] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
   const [photo, setPhoto] = useState('');
-  const { reportId } = props;
+  const { postId } = props;
+
+  async function handleReport(reportResponse) {
+    console.log('Res', reportResponse);
+    const { reporterId, img } = reportResponse;
+    setName(reporterId);
+    setPhoto(img);
+
+    const profilePhotoResponse = await getPfp(); // Need to add this to swaggerHub API
+    const { pfp } = profilePhotoResponse;
+    setProfilePhoto(pfp);
+  }
 
   async function fetchData() {
     try {
-      const reportResponse = await getReport(); // Need to add this to swaggerHub API
-      const { username, picture } = reportResponse;
-      setName(username);
-      setPhoto(picture);
-
-      const profilePhotoResponse = await getPfp(); // Need to add this to swaggerHub API
-      const { pfp } = profilePhotoResponse;
-      setProfilePhoto(pfp);
+      getReport(handleReport, postId); // Need to add this to swaggerHub API
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +33,7 @@ function Report(props) {
 
   useEffect(() => {
     fetchData();
-  }, [reportId]);
+  }, [postId]);
 
   return (
     <Card variant="outlined" sx={{ width: '100%', height: '100%', border: '3px solid #E5E5E5', borderRadius: '10px', backgroundColor: '#0D1B1E' }}>
@@ -57,7 +61,7 @@ function Report(props) {
 }
 
 Report.propTypes = {
-  reportId: PropTypes.number.isRequired,
+  postId: PropTypes.number.isRequired,
 };
 
 export default Report;

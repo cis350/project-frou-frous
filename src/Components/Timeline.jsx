@@ -12,8 +12,7 @@ function Timeline(props) {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await getFriendReports();
-        setReportIds(response.reportIds);
+        getFriendReports(setReportIds);
       } catch (error) {
         console.log(error);
       }
