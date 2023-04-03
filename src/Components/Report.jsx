@@ -13,6 +13,7 @@ function Report(props) {
   const [photo, setPhoto] = useState('');
   const [cap, setCaption] = useState('');
   const [likeCount, setLikes] = useState([]);
+  const [like, setLike] = useState(100);
   const [isLiked, setIsLiked] = useState(false);
   const { postId } = props;
   const currentUser = sessionStorage.getItem('username');
@@ -49,17 +50,19 @@ function Report(props) {
     validateUserLike(currentUser);
     if (isLiked) {
       likeCount.remove(currentUser);
+      setLike(like - 1);
     } else {
       likeCount.push(currentUser);
+      setLike(like + 1);
     }
     setLikes(likeCount);
-    setIsLiked(!isLiked);
   }
 
   const handleLike = (e) => {
     e.preventDefault();
     const newObj = { likeCount };
     updateLikes(newObj, controlLike);
+    setIsLiked(!isLiked);
   };
 
   useEffect(() => {
@@ -105,7 +108,8 @@ function Report(props) {
         <Button id="view" size="small" sx={{ backgroundColor: 'white', color: 'black' }}>
           View
         </Button>
-        <Button id="like" size="small" sx={{ backgroundColor: 'white', color: 'black' }} onClick={handleLike}>
+        <Button className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: 'white', color: 'black' }} onClick={handleLike}>
+          <span className="likes-counter">{ `Like | ${like}` }</span>
           Like
         </Button>
       </CardActions>
