@@ -74,10 +74,14 @@ function Comments(props) {
         <div id="retrievedComments" />
         <br />
         <form className="addComment" onSubmit={handleSubmit}>
-          <label htmlFor="comment">
-            <input className="commentInput" type="text" value={commentString} onChange={handleInputChange} />
-          </label>
-          <button className="commentButton" type="submit">Comment</button>
+          <div className="wrapper">
+            <label htmlFor="comment">
+              <input className="commentInput" type="text" value={commentString} onChange={handleInputChange} placeholder="Add a comment" />
+            </label>
+            <button className="commentButton" type="submit">
+              <img src="src/assets/send2.png" alt="Submit" height="35" />
+            </button>
+          </div>
         </form>
       </div>
     </div>
