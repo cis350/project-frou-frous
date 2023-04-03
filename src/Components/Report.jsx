@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
-import { getReport, getPfp } from '../api/userPageAPI';
+import { getReport, getPfp, updateLikes } from '../api/userPageAPI';
 
 function Report(props) {
   const [name, setName] = useState('');
@@ -12,15 +12,19 @@ function Report(props) {
   const [profilePhoto, setProfilePhoto] = useState('');
   const [photo, setPhoto] = useState('');
   const [cap, setCaption] = useState('');
+  const [likeCount, setLikes] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
   const { postId } = props;
+  const currentUser = sessionStorage.getItem('username');
 
   async function handleReport(reportResponse) {
     console.log('Res', reportResponse);
-    const { reporterId, img, reporteeId, caption } = reportResponse;
+    const { reporterId, img, reporteeId, caption, likes } = reportResponse;
     setName(reporterId);
     setPhoto(img);
     setReportee(reporteeId);
     setCaption(caption);
+    setLikes(likes);
 
     const profilePhotoResponse = await getPfp(); // Need to add this to swaggerHub API
     const { pfp } = profilePhotoResponse;
@@ -34,6 +38,29 @@ function Report(props) {
       console.log(error);
     }
   }
+
+  function validateUserLike(userName) {
+    if (likeCount.includes(userName)) {
+      setIsLiked(true);
+    }
+  }
+
+  function controlLike() {
+    validateUserLike(currentUser);
+    if (isLiked) {
+      likeCount.remove(currentUser);
+    } else {
+      likeCount.push(currentUser);
+    }
+    setLikes(likeCount);
+    setIsLiked(!isLiked);
+  }
+
+  const handleLike = (e) => {
+    e.preventDefault();
+    const newObj = { likeCount };
+    updateLikes(newObj, controlLike);
+  };
 
   useEffect(() => {
     fetchData();
@@ -77,6 +104,9 @@ function Report(props) {
         </Button>
         <Button id="view" size="small" sx={{ backgroundColor: 'white', color: 'black' }}>
           View
+        </Button>
+        <Button id="like" size="small" sx={{ backgroundColor: 'white', color: 'black' }} onClick={handleLike}>
+          Like
         </Button>
       </CardActions>
     </Card>
