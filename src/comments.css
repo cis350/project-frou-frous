@@ -1,0 +1,57 @@
+.background{
+  margin: 0;
+  max-width: 800px;
+  height: flex;
+  align-items: center;
+  background: #0D1B1E;
+  background-size: cover;
+}
+
+.commentsBox{
+  margin-left: 20%;
+  margin-right: 20%;
+  max-width: 400px;
+  padding: 2rem;
+  box-shadow: 0 0 40px rgba(0 0 0 0.2);
+  border-radius: 8px;
+  background: #242b2f;
+}
+
+.addComment{
+  align-items: left;
+}
+
+.commentInput{
+  align-items: left;
+  height: 30px;
+  width: 80%;
+  background: #6e7477;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 0 6px rgba(0 0 10 0.5);
+}
+
+.commentButton{
+  height: 30px;
+  width: 20%;
+  border: none;
+  border-radius: 8px;
+}
+
+.commentBox{
+  min-height: 30px;
+  align-content: 90%;
+  background: #6e7477;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+}
+
+.commentHeader{
+}
+
+.commentBody{
+
+}

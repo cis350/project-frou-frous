@@ -14,8 +14,9 @@ function Comments(props) {
   const loadComments = async () => {
     try {
       const res = await getReportData(reportId);
-      const commentsList = Object.values(res)['0'].comments;
-      console.log(commentsList);
+      const commentsList = res.comments;
+      console.log('res');
+      console.log(res.comments);
       console.log(commentsList.length);
       for (let i = 0; i < commentsList.length; i += 1) {
         commstring = commstring.concat(
@@ -68,15 +69,17 @@ function Comments(props) {
   }, []);
 
   return (
-    <div className="commentsBox">
-      <div id="retrievedComments" />
-      <br />
-      <form className="addComment" onSubmit={handleSubmit}>
-        <label htmlFor="comment">
-          <input className="commentInput" type="text" value={commentString} onChange={handleInputChange} />
-        </label>
-        <button className="commentButton" type="submit">Comment</button>
-      </form>
+    <div className="background">
+      <div className="commentsBox">
+        <div id="retrievedComments" />
+        <br />
+        <form className="addComment" onSubmit={handleSubmit}>
+          <label htmlFor="comment">
+            <input className="commentInput" type="text" value={commentString} onChange={handleInputChange} />
+          </label>
+          <button className="commentButton" type="submit">Comment</button>
+        </form>
+      </div>
     </div>
   );
 }

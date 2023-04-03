@@ -140,34 +140,31 @@
   ],
   "report": [
     {
-      "0": {
-        "id": 1,
-        "comments": [
-          {
-            "commenterid": "t",
-            "content": "lol imagine skipping class"
-          },
-          {
-            "commenterid": "e",
-            "content": "catch me at starbucks later"
-          },
-          {
-            "commenterid": "weh",
-            "content": "hey i don't appreciate the callout"
-          }
-        ],
-        "reporterid": "kait",
-        "reporteeid": "weh",
-        "likes": [
-          "kait",
-          "t",
-          "e"
-        ],
-        "date": 101010101,
-        "caption": "weh spotted",
-        "img": "placeholder"
-      },
-      "id": 1
+      "id": 1,
+      "comments": [
+        {
+          "commenterid": "t",
+          "content": "lol imagine skipping class"
+        },
+        {
+          "commenterid": "e",
+          "content": "catch me at starbucks later"
+        },
+        {
+          "commenterid": "weh",
+          "content": "hey i don't appreciate the callout"
+        }
+      ],
+      "reporterid": "kait",
+      "reporteeid": "weh",
+      "likes": [
+        "kait",
+        "t",
+        "e"
+      ],
+      "date": 101010101,
+      "caption": "weh spotted",
+      "img": "placeholder"
     },
     {
       "id": 2,
@@ -202,6 +199,10 @@
         {
           "commenterid": "weh",
           "content": "weh's comment"
+        },
+        {
+          "commenterid": "userId",
+          "content": "test again"
         }
       ],
       "reporterid": "e",
