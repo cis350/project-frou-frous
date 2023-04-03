@@ -1,32 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { getReportComments, sendComment } from '../api/reportAPI'
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
+import { getReportData, sendComment } from '../api/reportAPI';
+import '../comments.css';
 
 function Comments(props) {
   const [commentString, setCommentString] = useState('');
-  const [commentsList, setCommentsList] = useState([]);
+  // add timestamp
 
   let commstring = '';
-  const { reportId } = props;
+  const { reportId, userId } = props;
 
-  function loadComments() {
+  const loadComments = async () => {
+    try {
+      const res = await getReportData(reportId);
+      const commentsList = Object.values(res)['0'].comments;
+      console.log(commentsList);
       console.log(commentsList.length);
       for (let i = 0; i < commentsList.length; i += 1) {
-          commstring = commstring.concat(
-                `<div class="commentBox">
-                    <div class="commentHeader">
-                        <p>${commentsList[i].userId}</p>
-                    </div>
-                    <div class="commentBody">
-                        <p>${commentsList[i].commentString}</p>
-                    </div>
-                </div>`
-            );
-        }
+        commstring = commstring.concat(
+          `<div class="commentBox">
+            <div class="commentHeader">
+                <p>${commentsList[i].commenterid}</p>
+            </div>
+            <div class="commentBody">
+                <p>${commentsList[i].content}</p>
+            </div>
+        </div>`,
+        );
+      }
       document.getElementById('retrievedComments').innerHTML = commstring;
-      console.log(commstring);
       commstring = '';
-  }
+    } catch (err) {
+      toast.error(err);
+    }
+  };
 
   const handleInputChange = (event) => {
     setCommentString(event.target.value);
@@ -34,55 +42,48 @@ function Comments(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // prevent page refresh
-
-    // make an API call to upload the data to the database
-    try {
-        await sendComment(commentString);
-        console.log('comment sent');
-        console.log(commentString);
+    if (commentString === '') {
+      toast.error('Please enter a message!');
+    } else {
+      try {
+        // make an API call to upload the data to the database
+        await sendComment(reportId, {
+          commenterid: userId,
+          content: commentString,
+        });
+        // refresh comments
+        await loadComments();
         // clear input box after upload
         setCommentString('');
-    } catch (err) {
-        alert(err.message);
+      } catch (err) {
+        toast.error('error', err.message);
+      }
     }
   };
 
   useEffect(() => {
-      console.log('USING EFFECT');
+    console.log('USING EFFECT');
 
-      const getComments = async () => {
-          try {
-              const res = await getReportComments(reportId);
-              //console.log(res.comments);
-              setCommentsList([res.comments]);
-              console.log('comments list');
-              console.log(commentsList);
-              console.log('end comments');
-              loadComments(res.comments);
-          } catch (err) {
-              console.error('error', err.message);
-          }
-      };
-
-      getComments();
-  }, [reportId]);
+    loadComments();
+  }, []);
 
   return (
     <div className="commentsBox">
-        <div id="retrievedComments" />
-        <br />
-        <form className="addComment" onSubmit={handleSubmit}>
-            <label htmlFor="comment">
-                <input className="commentInput" type="text" value={commentString} onChange={handleInputChange} />
-            </label>
-            <button className="commentButton" type="submit">Comment</button>
-        </form>
+      <div id="retrievedComments" />
+      <br />
+      <form className="addComment" onSubmit={handleSubmit}>
+        <label htmlFor="comment">
+          <input className="commentInput" type="text" value={commentString} onChange={handleInputChange} />
+        </label>
+        <button className="commentButton" type="submit">Comment</button>
+      </form>
     </div>
   );
 }
 
 Comments.propTypes = {
-    reportId: PropTypes.number.isRequired,
-}
+  reportId: PropTypes.number.isRequired,
+  userId: PropTypes.string.isRequired,
+};
 
 export default Comments;
