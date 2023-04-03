@@ -109,6 +109,16 @@
       "likes": [],
       "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=",
       "id": 1
+    },
+    {
+      "reporterId": "1234",
+      "reporteeId": "friend",
+      "caption": "He skipped this class...",
+      "date": 1680563177219,
+      "comments": [],
+      "likes": [],
+      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=",
+      "id": 2
     }
   ],
   "user": [
