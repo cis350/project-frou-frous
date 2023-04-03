@@ -2,7 +2,7 @@ import React from 'react';
 
 function ReportView() {
   return (
-    <div>ReportView</div>
+    <div>This is where you can make a report.</div>
   );
 }
 
