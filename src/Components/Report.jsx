@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
-import { getReport, getPfp, updateLikes } from '../api/userPageAPI';
+import { getReport, getPfp, updateLikes2 } from '../api/userPageAPI';
 
 function Report(props) {
   const [name, setName] = useState('');
@@ -13,19 +13,20 @@ function Report(props) {
   const [photo, setPhoto] = useState('');
   const [cap, setCaption] = useState('');
   const [likeCount, setLikes] = useState([]);
-  const [like, setLike] = useState(100);
+  const [like, setLike] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const { postId } = props;
   const currentUser = sessionStorage.getItem('username');
 
   async function handleReport(reportResponse) {
     console.log('Res', reportResponse);
-    const { reporterId, img, reporteeId, caption, likes } = reportResponse;
+    const { reporterId, img, reporteeId, caption, likeArray, likeNum } = reportResponse;
     setName(reporterId);
+    setCaption(caption);
     setPhoto(img);
     setReportee(reporteeId);
-    setCaption(caption);
-    setLikes(likes);
+    setLikes(likeArray);
+    setLike(likeNum);
 
     const profilePhotoResponse = await getPfp(); // Need to add this to swaggerHub API
     const { pfp } = profilePhotoResponse;
@@ -35,35 +36,64 @@ function Report(props) {
   async function fetchData() {
     try {
       getReport(handleReport, postId); // Need to add this to swaggerHub API
+      console.log(likeCount);
     } catch (error) {
       console.log(error);
     }
   }
 
   function validateUserLike(userName) {
-    if (likeCount.includes(userName)) {
+    console.log('indexOf');
+    console.log(likeCount);
+    console.log(likeCount.indexOf(userName) > -1);
+    if (likeCount.indexOf(userName) > -1) {
       setIsLiked(true);
     }
   }
 
-  function controlLike() {
+  const controlLike = async (e) => {
+    e.preventDefault();
+    console.log('beginning of controlLike');
+
     validateUserLike(currentUser);
     if (isLiked) {
-      likeCount.remove(currentUser);
+      console.log('isLiked');
+      const index = likeCount.indexOf(currentUser);
+      setLikes(likeCount.splice(index, 1));
+      setLikes(likeCount);
       setLike(like - 1);
+      const obj = {
+        name, reportee, profilePhoto, photo, cap, likeCount, like,
+      };
+      console.log(obj);
+      await updateLikes2(postId, obj);
+      console.log('controlLike array unlike');
+      console.log(likeCount);
     } else {
+      console.log('in here not liked');
       likeCount.push(currentUser);
       setLike(like + 1);
+      setLikes(likeCount);
+      const obj = {
+        name, reportee, profilePhoto, photo, cap, likeCount, like,
+      };
+      console.log(obj);
+      await updateLikes2(postId, obj);
+      console.log('controlLike array like');
+      console.log(likeCount);
     }
-    setLikes(likeCount);
-  }
-
-  const handleLike = (e) => {
-    e.preventDefault();
-    const newObj = { likeCount };
-    updateLikes(newObj, controlLike);
     setIsLiked(!isLiked);
   };
+
+  // const handleLike = async (e) => {
+  //   e.preventDefault();
+  //   const response = await getReportDataLikes(reportId);
+  //   await updateLikes2(postId, controlLike, currentUser);
+  //   setLikes(likeCount);
+  //   console.log('handleLike like count');
+  //   console.log(like);
+  //   setIsLiked(!isLiked);
+  // };
 
   useEffect(() => {
     fetchData();
@@ -108,7 +138,7 @@ function Report(props) {
         <Button id="view" size="small" sx={{ backgroundColor: 'white', color: 'black' }}>
           View
         </Button>
-        <Button className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: 'white', color: 'black' }} onClick={handleLike}>
+        <Button className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: 'white', color: 'black' }} onClick={controlLike}>
           <span className="likes-counter">{ `Like | ${like}` }</span>
           Like
         </Button>

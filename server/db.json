@@ -140,30 +140,22 @@
   ],
   "report": [
     {
-      "id": 0,
-      "comments": [
-        "hello",
-        "goodbyw"
+      "profilePhoto": "https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg",
+      "likeCount": [
+        "e",
+        "e"
       ],
-      "reporterId": "User1",
-      "date": 1680294744,
-      "caption": "Caught User2 Skipping lol",
-      "reporteeId": "User2",
-      "img": "https://i1.sndcdn.com/artworks-5fyeRojbMeUUbmbT-qqZ5NQ-t500x500.jpg",
-      "likes": []
+      "like": 2,
+      "id": 0
     },
     {
-      "id": 1,
-      "comments": [
-        "hello",
-        "goodbyw"
+      "profilePhoto": "https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg",
+      "likeCount": [
+        "f",
+        "e"
       ],
-      "reporterId": "User1",
-      "date": 1680294744,
-      "caption": "I skipped :(",
-      "reporteeId": "User1",
-      "img": "https://th.bing.com/th/id/OIP.yAO1CqL2WioDGKzB_U66JwHaE8?pid=ImgDet&rs=1",
-      "likes": []
+      "like": 1,
+      "id": 1
     }
   ]
 }
