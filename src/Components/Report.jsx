@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
-import { getReport, getPfp, updateLikes2 } from '../api/userPageAPI';
+import { getReport, getPfp, updateLikes2, getReportDataLikes } from '../api/userPageAPI';
 
 function Report(props) {
   const [name, setName] = useState('');
@@ -20,13 +20,11 @@ function Report(props) {
 
   async function handleReport(reportResponse) {
     console.log('Res', reportResponse);
-    const { reporterId, img, reporteeId, caption, likeArray, likeNum } = reportResponse;
+    const { reporterId, img, reporteeId, caption } = reportResponse;
     setName(reporterId);
     setCaption(caption);
     setPhoto(img);
     setReportee(reporteeId);
-    setLikes(likeArray);
-    setLike(likeNum);
 
     const profilePhotoResponse = await getPfp(); // Need to add this to swaggerHub API
     const { pfp } = profilePhotoResponse;
@@ -42,6 +40,12 @@ function Report(props) {
     }
   }
 
+  const retrieveLike = async () => {
+    const response = await getReportDataLikes(postId);
+    const result = response.likeCount;
+    return result;
+  };
+
   function validateUserLike(userName) {
     console.log('indexOf');
     console.log(likeCount);
@@ -54,7 +58,8 @@ function Report(props) {
   const controlLike = async (e) => {
     e.preventDefault();
     console.log('beginning of controlLike');
-
+    const likeResult = retrieveLike();
+    setLikes(likeResult);
     validateUserLike(currentUser);
     if (isLiked) {
       console.log('isLiked');
@@ -138,7 +143,7 @@ function Report(props) {
         <Button id="view" size="small" sx={{ backgroundColor: 'white', color: 'black' }}>
           View
         </Button>
-        <Button className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: 'white', color: 'black' }} onClick={controlLike}>
+        <Button className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: isLiked ? 'red' : 'white', color: 'black' }} onClick={controlLike}>
           <span className="likes-counter">{ `Like | ${like}` }</span>
           Like
         </Button>
