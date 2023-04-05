@@ -51,7 +51,6 @@
       "img": "https://th.bing.com/th/id/R.fd47e887548ec0ad0d0f6ae64e0b8b42?rik=kb%2b8Oy2YTkqLaw&riu=http%3a%2f%2f2.bp.blogspot.com%2f-fw4LtaW0aUQ%2fTn2Kz6aRqXI%2fAAAAAAAACuY%2fg61pEcApT-s%2fs1600%2fOQAAAH5wgovnPzB-SWin2R0BQoMCxHfoS25uO18RJ9FShI3SXv1N5nk2FjUF3eGSVlcFde8PQzJy5q5rfpH6JSNpnPEAm1T1ULrfzcfR8dccOdhNtTnsfyykygcC.jpg&ehk=Rg0QxwYrNYeSs%2bzAPUDYmHvcFO65j4%2f93KSL7ieU1tI%3d&risl=&pid=ImgRaw&r=0"
     }
   ],
-
   "classes": [
     {
       "id": 0,
@@ -152,28 +151,6 @@
       "id": 4
     }
   ],
-  "report": [
-    {
-      "reporterId": "1234",
-      "reporteeId": "friend",
-      "caption": "sda asdjhab sdjhab sjhdbaj hsbdja shbd jashbd jahs djahsb jhabs dja\nsadhbajhs djasb djahsb dajsbd a\ns dajksb dkajsbdjahs d sa\nashjb djahdsb jahsbdjashbddd",
-      "date": 1680562468745,
-      "comments": [],
-      "likes": [],
-      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=",
-      "id": 1
-    },
-    {
-      "reporterId": "1234",
-      "reporteeId": "friend",
-      "caption": "He skipped this class...",
-      "date": 1680563177219,
-      "comments": [],
-      "likes": [],
-      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=",
-      "id": 2
-    }
-  ],
   "user": [
     {
       "id": "e",
@@ -262,41 +239,6 @@
     {
       "id": 0,
       "comments": [
-        "hello",
-        "goodbyw"
-      ],
-      "reporterId": "User1",
-      "date": 1680294744,
-      "caption": "I skipped!",
-      "reporteeId": "User2",
-      "img": "https://i1.sndcdn.com/artworks-5fyeRojbMeUUbmbT-qqZ5NQ-t500x500.jpg",
-      "likes": []
-    },
-    {
-      "id": 1,
-      "comments": [
-        "hello",
-        "goodbyw"
-      ],
-      "reporterId": "User1",
-      "date": 1680294744,
-      "caption": "I skipped!",
-      "reporteeId": "User2",
-      "img": "https://th.bing.com/th/id/OIP.yAO1CqL2WioDGKzB_U66JwHaE8?pid=ImgDet&rs=1",
-      "likes": []
-    },
-    {
-      "id": "weh",
-      "password": "weh",
-      "email": "weh@weh.com",
-      "firstName": "weh",
-      "lastName": "weh"
-    }
-  ],
-  "report": [
-    {
-      "id": 1,
-      "comments": [
         {
           "commenterid": "t",
           "content": "lol imagine skipping class"
@@ -319,7 +261,7 @@
       ],
       "date": 101010101,
       "caption": "weh spotted",
-      "img": "placeholder"
+      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo="
     },
     {
       "id": 2,
@@ -346,7 +288,7 @@
       ],
       "date": 889437129847123,
       "caption": "don't throw stones in glass houses",
-      "img": "placeholder"
+      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo="
     },
     {
       "id": 3,
@@ -368,7 +310,7 @@
       ],
       "date": 8894371293849123,
       "caption": "guilty",
-      "img": "placeholder"
+      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo="
     }
   ]
 }
