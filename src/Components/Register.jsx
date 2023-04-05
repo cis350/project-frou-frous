@@ -9,7 +9,7 @@ function Register() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [friends] = useState([]);
-  const [friendsReq] = useState[[]];
+  const [friendsReq] = useState([]);
 
   const isValidate = () => {
     let isproceed = true;

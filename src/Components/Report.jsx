@@ -4,18 +4,27 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
-import { getReport, getPfp } from '../api/userPageAPI';
+import { getReport, getPfp, updateLikes2, getReportDataLikes } from '../api/userPageAPI';
 
 function Report(props) {
   const [name, setName] = useState('');
+  const [reportee, setReportee] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
   const [photo, setPhoto] = useState('');
+  const [cap, setCaption] = useState('');
+  const [likeCount, setLikes] = useState([]);
+  const [like, setLike] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
   const { postId } = props;
+  const currentUser = sessionStorage.getItem('username');
 
   async function handleReport(reportResponse) {
-    const { reporterId, img } = reportResponse;
+    console.log('Res', reportResponse);
+    const { reporterId, img, reporteeId, caption } = reportResponse;
     setName(reporterId);
+    setCaption(caption);
     setPhoto(img);
+    setReportee(reporteeId);
 
     const profilePhotoResponse = await getPfp(); // Need to add this to swaggerHub API
     const { pfp } = profilePhotoResponse;
@@ -30,6 +39,44 @@ function Report(props) {
     }
   }
 
+  const retrieveLike = async () => {
+    const response = await getReportDataLikes(postId);
+    const result = response.likeCount;
+    return result;
+  };
+
+  function validateUserLike(userName) {
+    if (likeCount.indexOf(userName) > -1) {
+      setIsLiked(true);
+    }
+  }
+
+  const controlLike = async (e) => {
+    e.preventDefault();
+    const likeResult = retrieveLike();
+    setLikes(likeResult);
+    validateUserLike(currentUser);
+    if (isLiked) {
+      const index = likeCount.indexOf(currentUser);
+      setLikes(likeCount.splice(index, 1));
+      setLikes(likeCount);
+      setLike(like - 1);
+      const obj = {
+        name, reportee, profilePhoto, photo, cap, likeCount, like,
+      };
+      await updateLikes2(postId, obj);
+    } else {
+      likeCount.push(currentUser);
+      setLike(like + 1);
+      setLikes(likeCount);
+      const obj = {
+        name, reportee, profilePhoto, photo, cap, likeCount, like,
+      };
+      await updateLikes2(postId, obj);
+    }
+    setIsLiked(!isLiked);
+  };
+
   useEffect(() => {
     fetchData();
   }, [postId]);
@@ -42,10 +89,29 @@ function Report(props) {
             <Avatar src={profilePhoto} alt={name} sx={{ width: 50, height: 50 }} />
           </Grid>
           <Grid item>
-            <div style={{ color: 'white', fontFamily: 'Open Sans, sans-serif' }}>{name}</div>
+            <div style={{ color: 'white', fontFamily: 'Open Sans, sans-serif' }}>
+              <b>
+                {name}
+              </b>
+              {' '}
+              reported
+              {' '}
+              <b>
+                {reportee}
+              </b>
+              {' '}
+              for skipping!
+            </div>
           </Grid>
         </Grid>
         <img src={photo} alt="" style={{ width: '100%', height: '100%', marginTop: 15, borderRadius: '10px' }} />
+        <center style={{ color: 'white' }}>
+          <p>
+            {' '}
+            {cap}
+            {' '}
+          </p>
+        </center>
       </CardContent>
       <CardActions>
         <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black' }}>
@@ -53,6 +119,10 @@ function Report(props) {
         </Button>
         <Button id="view" size="small" sx={{ backgroundColor: 'white', color: 'black' }}>
           View
+        </Button>
+        <Button className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: isLiked ? 'red' : 'white', color: 'black' }} onClick={controlLike}>
+          <span className="likes-counter">{ `Like | ${like}` }</span>
+          Like
         </Button>
       </CardActions>
     </Card>
