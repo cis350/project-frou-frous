@@ -13,7 +13,6 @@ function Report(props) {
   const { postId } = props;
 
   async function handleReport(reportResponse) {
-    console.log('Res', reportResponse);
     const { reporterId, img } = reportResponse;
     setName(reporterId);
     setPhoto(img);

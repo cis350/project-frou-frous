@@ -93,14 +93,30 @@
       "password": "e",
       "email": "e",
       "firstName": "e",
-      "lastName": "e"
+      "lastName": "e",
+      "friendReqs": [
+        "q",
+        "m",
+        "jess"
+      ],
+      "friends": [
+        "kait"
+      ]
     },
     {
       "id": "q",
       "password": "q",
       "email": "q",
       "firstName": "q",
-      "lastName": "q"
+      "lastName": "q",
+      "friendReqs": [
+        "e",
+        "m",
+        "jess"
+      ],
+      "friends": [
+        "kait"
+      ]
     },
     {
       "id": "m",
@@ -128,14 +144,31 @@
       "password": "kait",
       "email": "kait",
       "firstName": "kait",
-      "lastName": "kait"
+      "lastName": "kait",
+      "friendReqs": [
+        "e",
+        "m",
+        "q",
+        "jess"
+      ],
+      "friends": [
+        "liz"
+      ]
     },
     {
       "id": "jess",
       "password": "jess",
       "email": "jess",
       "firstName": "jess",
-      "lastName": "jess"
+      "lastName": "jess",
+      "friendReqs": [
+        "e",
+        "m",
+        "q"
+      ],
+      "friends": [
+        "kait"
+      ]
     }
   ],
   "report": [

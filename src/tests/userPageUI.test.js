@@ -34,7 +34,7 @@ test('calls setPage when clicking on User Profile button', () => {
       <NavBar setPage={setPage} />
     </Router>,
   );
-  const element = getByText(/User Profile/);
+  const element = getByText(/Your Profile/);
   fireEvent.click(element);
   expect(setPage).toHaveBeenCalledWith('Profile');
 });
@@ -116,7 +116,7 @@ test('renders user profile button', () => {
       <NavBar setPage={setPage} />
     </Router>,
   );
-  const element = getByText(/User Profile/);
+  const element = getByText(/Your Profile/);
   expect(element).toBeInTheDocument();
 });
 
@@ -131,13 +131,13 @@ test('renders logout button', () => {
 });
 
 test('renders comments button', async () => {
-  const { getByText } = await act(async () => render(<Report reportId={1} />));
+  const { getByText } = await act(async () => render(<Report postId={1} />));
   const element = getByText(/Comments/);
   expect(element).toBeInTheDocument();
 });
 
 test('renders view button', async () => {
-  const { getByText } = await act(async () => render(<Report reportId={1} />));
+  const { getByText } = await act(async () => render(<Report postId={1} />));
   const element = getByText(/View/);
   expect(element).toBeInTheDocument();
 });
