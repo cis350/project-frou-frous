@@ -2,147 +2,195 @@
 
 exports[`snapshot test 1`] = `
 <div
-  className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-7ksc0v-MuiPaper-root-MuiCard-root"
+  className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-zuo7fl-MuiPaper-root-MuiCard-root"
 >
-  <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
-  >
-    <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 css-gj1fbr-MuiGrid-root"
-    >
-      <div
-        className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1q8s06s-MuiAvatar-root"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
-          data-testid="PersonIcon"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-          />
-        </svg>
-      </div>
-    </div>
-    <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8 css-vok43g-MuiGrid-root"
-    >
-      <span
-        className="MuiTypography-root MuiTypography-title css-hb25av-MuiTypography-root"
-      />
-    </div>
-  </div>
   <div
     className="MuiCardContent-root css-46bh2p-MuiCardContent-root"
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1qlalt0-MuiPaper-root-MuiCard-root"
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1ftwddu-MuiGrid-root"
     >
       <div
-        className="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-4 MuiGrid-grid-md-3 css-uk9mo7-MuiGrid-root"
       >
         <div
-          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+          className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1wnqcao-MuiAvatar-root"
         >
-          <div
-            className="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+            data-testid="PersonIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <h5
-              className="MuiTypography-root MuiTypography-h5 css-jr0pcx-MuiTypography-root"
-            >
-              Your Weekly Report:
-            </h5>
-          </div>
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+            />
+          </svg>
         </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-8 MuiGrid-grid-md-3 css-y1wd51-MuiGrid-root"
+      >
         <div
-          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+          contentEditable={false}
+          style={
+            {
+              "color": "white",
+              "fontSize": "1.5em",
+              "marginTop": "5%",
+              "textAlign": "left",
+            }
+          }
+          suppressContentEditableWarning={true}
         >
-          <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-          >
-            <div
-              className="css-zbvxyy"
-            >
-               Total Classes Skipped: 
-            </div>
-          </div>
-          <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-          >
-            <div
-              className="css-ejmnzv"
-            >
-              5
-            </div>
-          </div>
+          jess
         </div>
-        <div
-          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12 MuiGrid-grid-md-5 css-15go1ru-MuiGrid-root"
+      >
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-vn8m6k-MuiButtonBase-root-MuiButton-root"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onContextMenu={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
         >
-          <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-          >
-            <div
-              className="css-zbvxyy"
-            >
-               Percent Classes Skipped: 
-            </div>
-          </div>
-          <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-          >
-            <div
-              className="css-ejmnzv"
-            >
-              40%
-            </div>
-          </div>
+          Add Friend
+        </button>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1ftwddu-MuiGrid-root"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+      >
+        <h5
+          className="MuiTypography-root MuiTypography-h5 css-jr0pcx-MuiTypography-root"
+        >
+          Your Weekly Report:
+        </h5>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-zbvxyy"
+          style={
+            {
+              "textAlign": "center",
+            }
+          }
+        >
+          Total Classes Skipped:
         </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
         <div
-          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+          className="css-ejmnzv"
         >
-          <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-          >
-            <div
-              className="css-zbvxyy"
-            >
-               Class Most Often Skipped: 
-            </div>
-          </div>
-          <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-          >
-            <div
-              className="css-ejmnzv"
-            >
-              XYZ 101
-            </div>
-          </div>
+          5
         </div>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
         <div
-          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+          className="css-zbvxyy"
+          style={
+            {
+              "textAlign": "center",
+            }
+          }
         >
-          <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-          >
-            <div
-              className="css-zbvxyy"
-            >
-               Class Least Often Skipped: 
-            </div>
-          </div>
-          <div
-            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-          >
-            <div
-              className="css-ejmnzv"
-            >
-               ABC 201
-            </div>
-          </div>
+           Percent Classes Skipped: 
+        </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-ejmnzv"
+        >
+          40%
+        </div>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-zbvxyy"
+          style={
+            {
+              "textAlign": "center",
+            }
+          }
+        >
+           Class Most Often Skipped: 
+        </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-ejmnzv"
+        >
+          XYZ 101
+        </div>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-zbvxyy"
+          style={
+            {
+              "textAlign": "center",
+            }
+          }
+        >
+           Class Least Often Skipped: 
+        </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-ejmnzv"
+        >
+           ABC 201
         </div>
       </div>
     </div>

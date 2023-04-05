@@ -180,14 +180,30 @@
       "password": "e",
       "email": "e",
       "firstName": "e",
-      "lastName": "e"
+      "lastName": "e",
+      "friendReqs": [
+        "q",
+        "m",
+        "jess"
+      ],
+      "friends": [
+        "kait"
+      ]
     },
     {
       "id": "q",
       "password": "q",
       "email": "q",
       "firstName": "q",
-      "lastName": "q"
+      "lastName": "q",
+      "friendReqs": [
+        "e",
+        "m",
+        "jess"
+      ],
+      "friends": [
+        "kait"
+      ]
     },
     {
       "id": "m",
@@ -215,7 +231,59 @@
       "password": "kait",
       "email": "kait",
       "firstName": "kait",
-      "lastName": "kait"
+      "lastName": "kait",
+      "friendReqs": [
+        "e",
+        "m",
+        "q",
+        "jess"
+      ],
+      "friends": [
+        "liz"
+      ]
+    },
+    {
+      "id": "jess",
+      "password": "jess",
+      "email": "jess",
+      "firstName": "jess",
+      "lastName": "jess",
+      "friendReqs": [
+        "e",
+        "m",
+        "q"
+      ],
+      "friends": [
+        "kait"
+      ]
+    }
+  ],
+  "report": [
+    {
+      "id": 0,
+      "comments": [
+        "hello",
+        "goodbyw"
+      ],
+      "reporterId": "User1",
+      "date": 1680294744,
+      "caption": "I skipped!",
+      "reporteeId": "User2",
+      "img": "https://i1.sndcdn.com/artworks-5fyeRojbMeUUbmbT-qqZ5NQ-t500x500.jpg",
+      "likes": []
+    },
+    {
+      "id": 1,
+      "comments": [
+        "hello",
+        "goodbyw"
+      ],
+      "reporterId": "User1",
+      "date": 1680294744,
+      "caption": "I skipped!",
+      "reporteeId": "User2",
+      "img": "https://th.bing.com/th/id/OIP.yAO1CqL2WioDGKzB_U66JwHaE8?pid=ImgDet&rs=1",
+      "likes": []
     },
     {
       "id": "weh",
