@@ -7,15 +7,20 @@ import ScheduleUser from '../Components/ScheduleUser';
 
 function UserPageView() {
   const [page, setPage] = useState('Profile'); // Either Profile or Timeline
+  const [search, setSearch] = useState('');
+
+  function navigate() {
+    window.location.href = `/user/${search}`;
+  }
 
   return (
     <div style={{ backgroundColor: '#0D1B1E' }}>
       <center>
         <div id="searchBar" className="input-group rounded-8" style={{ maxHeight: '50px' }}>
-          <div id="searchIcon">
+          <input id="chatSearch" type="text" className="border-0" style={{ textAlign: 'right' }} onChange={(e) => setSearch(e.target.value)} placeholder="User Search" />
+          <button type="button" id="searchIconRight" onClick={() => navigate()}>
             <img alt="search" src="https://th.bing.com/th/id/R.602ef64bc31a62f9ebd523d97fc9f369?rik=JAPpFrIn7Yon0Q&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_194915.png&ehk=PY%2fOHmWzAr5CQnqxsnvx5nnpZAeNl7OJ5%2fHDzvIuHTo%3d&risl=&pid=ImgRaw&r=0" />
-          </div>
-          <input id="chatSearch" type="text" className="border-0" style={{ textAlign: 'right' }} placeholder="User Search" />
+          </button>
         </div>
       </center>
       <Grid

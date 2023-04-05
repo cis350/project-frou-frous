@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test people 1`] = `
+<div
+  id="leaderBoardWrapper"
+>
+  <div>
+    <center>
+      <h1>
+        Leaderboard
+      </h1>
+      <h3>
+        Total Number of Skipped Classes
+      </h3>
+      <hr
+        style={
+          {
+            "width": "80%",
+          }
+        }
+      />
+      <div
+        id="leaders"
+      />
+    </center>
+  </div>
+</div>
+`;
