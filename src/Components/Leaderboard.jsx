@@ -9,7 +9,7 @@ export default function LeaderboardComponent() {
       leadersHtml += `
         <div class='leaderRow' id='leader${i}' >
           <div class=leaderName>
-            <img class='circle-pic' src="${leaders[i].img}" />
+            <img alt='leader ${i} pfp' class='circle-pic' src="${leaders[i].img}" />
             <p> ${leaders[i].user} </p>
           </div>
           <div id='leader${i}Score'>
