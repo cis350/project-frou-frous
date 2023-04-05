@@ -101,20 +101,24 @@ export async function getReportDataLikes(reportId) {
       throw new Error('Network response was not OK');
     }
     const report = await response.json();
-    console.log(report);
     return report;
   } catch (error) {
     return error;
   }
 }
-
 export async function updateLikes2(reportId, obj) {
   try {
-    const result = await fetch(`http://localhost:8000/report/${reportId}`, {
+    const response = await fetch(`http://localhost:8000/report/${reportId}`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(obj),
-    }).json();
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not OK');
+    }
+
+    const result = await response.json();
     return result;
   } catch (error) {
     return error;

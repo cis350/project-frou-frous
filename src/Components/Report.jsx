@@ -34,7 +34,6 @@ function Report(props) {
   async function fetchData() {
     try {
       getReport(handleReport, postId); // Need to add this to swaggerHub API
-      console.log(likeCount);
     } catch (error) {
       console.log(error);
     }
@@ -47,9 +46,6 @@ function Report(props) {
   };
 
   function validateUserLike(userName) {
-    console.log('indexOf');
-    console.log(likeCount);
-    console.log(likeCount.indexOf(userName) > -1);
     if (likeCount.indexOf(userName) > -1) {
       setIsLiked(true);
     }
@@ -57,12 +53,10 @@ function Report(props) {
 
   const controlLike = async (e) => {
     e.preventDefault();
-    console.log('beginning of controlLike');
     const likeResult = retrieveLike();
     setLikes(likeResult);
     validateUserLike(currentUser);
     if (isLiked) {
-      console.log('isLiked');
       const index = likeCount.indexOf(currentUser);
       setLikes(likeCount.splice(index, 1));
       setLikes(likeCount);
@@ -70,35 +64,18 @@ function Report(props) {
       const obj = {
         name, reportee, profilePhoto, photo, cap, likeCount, like,
       };
-      console.log(obj);
       await updateLikes2(postId, obj);
-      console.log('controlLike array unlike');
-      console.log(likeCount);
     } else {
-      console.log('in here not liked');
       likeCount.push(currentUser);
       setLike(like + 1);
       setLikes(likeCount);
       const obj = {
         name, reportee, profilePhoto, photo, cap, likeCount, like,
       };
-      console.log(obj);
       await updateLikes2(postId, obj);
-      console.log('controlLike array like');
-      console.log(likeCount);
     }
     setIsLiked(!isLiked);
   };
-
-  // const handleLike = async (e) => {
-  //   e.preventDefault();
-  //   const response = await getReportDataLikes(reportId);
-  //   await updateLikes2(postId, controlLike, currentUser);
-  //   setLikes(likeCount);
-  //   console.log('handleLike like count');
-  //   console.log(like);
-  //   setIsLiked(!isLiked);
-  // };
 
   useEffect(() => {
     fetchData();

@@ -140,15 +140,15 @@
   ],
   "report": [
     {
-      "profilePhoto": "https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg",
-      "likeCount": [],
-      "like": 1,
+      "likes": 10,
       "id": 0
     },
     {
       "profilePhoto": "https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg",
-      "likeCount": [],
-      "like": 1,
+      "likeCount": [
+        "e"
+      ],
+      "like": 0,
       "id": 1
     }
   ]
