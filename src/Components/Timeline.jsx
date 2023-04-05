@@ -6,7 +6,7 @@ import { getFriendReports } from '../api/userPageAPI';
 import Report from './Report';
 
 function Timeline(props) {
-  const { userId, page } = props; //eslint-disable-line
+  const { userId, page, name } = props; //eslint-disable-line
   const [reportIds, setReportIds] = useState([]);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function Timeline(props) {
               textAlign: 'center',
             }}
           >
-            Timeline
+            {name}
           </Typography>
         </Grid>
         {reportIds.map((reportId) => (
@@ -59,7 +59,7 @@ function Timeline(props) {
 }
 
 Timeline.propTypes = {
-  userId: PropTypes.number.isRequired,
+  userId: PropTypes.string.isRequired,
   page: PropTypes.string.isRequired,
 };
 export default Timeline;

@@ -119,7 +119,7 @@ function NavBar({ setPage }) {
               startIcon={<AccountCircle />}
               onClick={() => handleNavigation('Profile')}
             >
-              User Profile
+              Your Profile
             </Button>
           </Grid>
           <Grid item xs={12} md={6}>

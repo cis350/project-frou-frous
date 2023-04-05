@@ -8,6 +8,8 @@ function Register() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [friends] = useState([]);
+  const [friendsReq] = useState([]);
 
   const isValidate = () => {
     let isproceed = true;
@@ -57,7 +59,7 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const obj = {
-      id, password, email, firstName, lastName,
+      id, password, email, firstName, lastName, friends, friendsReq,
     };
     if (isValidate()) {
       createUser(obj, displayRegister);

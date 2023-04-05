@@ -78,10 +78,167 @@ export function getReport(callback, postId) {
     });
 }
 
+export async function getUserData(userId) {
+  try {
+    const response = await fetch(`http://localhost:8000/user/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return { success: false, error };
+  }
+}
+
+export async function removeFriend(userId, friendId) {
+  try {
+    const response = await fetch(`http://localhost:8000/user/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    const { friends } = data;
+    if (friends.includes(friendId)) {
+      const index = friends.indexOf(friendId);
+      if (index !== -1) {
+        friends.splice(index, 1);
+      }
+    }
+
+    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const data2 = await response2.json();
+    return data2;
+  } catch (error) {
+    return { error };
+  }
+}
+
+export async function changeUsername(userId, newId) {
+  try {
+    const response = await fetch(`http://localhost:8000/user/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    data.id = newId;
+
+    await fetch(`http://localhost:8000/user/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    await fetch('http://localhost:8000/user/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    return data;
+  } catch (error) {
+    return { error };
+  }
+}
+
+export async function removeFriendReq(userId, friendId) {
+  try {
+    const response = await fetch(`http://localhost:8000/user/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    const { friendReqs } = data;
+    if (friendReqs.includes(friendId)) {
+      const index = friendReqs.indexOf(friendId);
+      if (index !== -1) {
+        friendReqs.splice(index, 1);
+      }
+    }
+
+    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const data2 = await response2.json();
+    return data2;
+  } catch (error) {
+    return { error };
+  }
+}
+
+export async function sendFriendRequest(userId, friendId) {
+  try {
+    const response = await fetch(`http://localhost:8000/user/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    if (!data.friendReqs.includes(friendId)) {
+      data.friendReqs.push(friendId);
+    }
+
+    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const data2 = await response2.json();
+    return data2;
+  } catch (error) {
+    return { error };
+  }
+}
+
+/*
+export async function addFriend(userId, friendId) {
+  try {
+    const response = await fetch(`http://localhost:8000/user/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    if (!data.friends.includes(friendId)) {
+      data.friends.push(friendId);
+    }
+
+    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const data2 = await response2.json();
+    return data2;
+  } catch (error) {
+    return { error };
+  }
+}
+*/
+
 export async function getFriendReports(callback) { // eslint-disable-line
   fetch('http://localhost:8000/report')
     .then((res) => res.json()).then((resp) => {
-      console.log('GetFriends', resp);
       const ids = [];
       for (let i = 0; i < resp.length; i += 1) {
         ids.push(resp[i].id);
