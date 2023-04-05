@@ -1,8 +1,11 @@
 import React from 'react';
+import ReportModal from '../Components/ReportModal';
 
 function ReportView() {
   return (
-    <div>This is where you can make a report.</div>
+    <div>
+      <ReportModal userId="friend" />
+    </div>
   );
 }
 
