@@ -248,6 +248,39 @@ export async function getFriendReports(callback) { // eslint-disable-line
       callback({ error: err });
     });
 }
+export async function getReportDataLikes(reportId) {
+  try {
+    const response = await fetch(`http://localhost:8000/report/${reportId}`, {
+      method: 'GET',
+      headers: { 'content-type': 'application/json' },
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not OK');
+    }
+    const report = await response.json();
+    return report;
+  } catch (error) {
+    return error;
+  }
+}
+export async function updateLikes2(reportId, obj) {
+  try {
+    const response = await fetch(`http://localhost:8000/report/${reportId}`, {
+      method: 'PUT',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(obj),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not OK');
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    return error;
+  }
+}
 
 export async function getUserHistory(userId) { // eslint-disable-line
   const res = await axios.get('/user/userId');

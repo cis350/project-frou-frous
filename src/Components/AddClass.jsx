@@ -69,7 +69,7 @@ function AddClass({ handleChild }) {
   return (
     <>
       <form>
-        <button type="button" title="close" aria-label="close" id="close" className="w-screen h-screen absolute bg-white top-0 opacity-50 m-0 p-0" onClick={handleChild} />
+        <button style={{ backgroundColor: 'white' }} type="button" title="close" aria-label="close" id="close" className="w-screen h-screen absolute bg-white top-0 opacity-50 m-0 p-0" onClick={handleChild} />
       </form>
       <div className="flex justify-center align-middle items-center absolute top-0 w-screen h-screen m-0 p-0 pointer-events-none">
 

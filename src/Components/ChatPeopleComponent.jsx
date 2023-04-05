@@ -77,7 +77,7 @@ export default function ChatPeopleComponent() {
       <div id="searchBarWrapper">
         <div id="searchBar" className="input-group rounded-8">
           <div id="searchIcon">
-            <p style={{ color: 'black' }} className="bi bi-search" />
+            <img alt="search" src="https://th.bing.com/th/id/R.602ef64bc31a62f9ebd523d97fc9f369?rik=JAPpFrIn7Yon0Q&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_194915.png&ehk=PY%2fOHmWzAr5CQnqxsnvx5nnpZAeNl7OJ5%2fHDzvIuHTo%3d&risl=&pid=ImgRaw&r=0" />
           </div>
           <input id="chatSearch" value={search} onChange={(e) => searchFriends(e.target.value)} type="text" className="border-0" style={{ textAlign: 'right' }} placeholder="People Search" />
         </div>
