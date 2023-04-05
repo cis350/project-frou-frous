@@ -1,8 +1,9 @@
 import React from 'react';
+import LeaderboardComponent from '../Components/Leaderboard';
 
 function LeaderboardView() {
   return (
-    <div>LeaderboardView</div>
+    <LeaderboardComponent />
   );
 }
 
