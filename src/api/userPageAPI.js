@@ -253,6 +253,20 @@ export async function getFriendReports(callback) { // eslint-disable-line
     });
 }
 
+export async function updateLikes(obj, callback) {
+  try {
+    fetch('http://localhost:8000/report/id', {
+      method: 'PUT',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(obj),
+    }).then((res) => res.json()).then((resp) => {
+      callback(resp);
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 export async function getUserHistory(userId) { // eslint-disable-line
   const res = await axios.get('/user/userId');
   return res.data;

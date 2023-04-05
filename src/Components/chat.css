@@ -44,7 +44,11 @@ html {
     color: black;
     flex-grow: 100;
     margin-right: 5px;
+    border-radius: 25px;
 }
+
+a { text-decoration: none !important; }
+
 
 #chatSend {
     color: black;
@@ -87,7 +91,19 @@ html {
 #searchIcon {
     align-self: center;
     translate: 0 10%; 
-    font-size: 180%;
+    font-size: 150%;
+    width: 20px;
+    height: 20px;
+    margin-left: 2px
+}
+
+#searchIconRight {
+    align-self: center;
+    translate: 0 0%; 
+    font-size: 150%;
+    width: 20px;
+    height: 20px;
+    margin-right: 2px
 }
 
 #messages {
@@ -104,9 +120,10 @@ html {
     border-radius: 25px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     max-width: 80%;
     background-color: white;
+    height: 30px;
 }
 
 *:focus {

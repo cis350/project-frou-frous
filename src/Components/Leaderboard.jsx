@@ -24,7 +24,7 @@ export default function LeaderboardComponent() {
   useEffect(() => {
     console.log('USE EFFECT');
     getLeaders(setLeaders);
-  }, 1000);
+  }, [1000]);
 
   return (
     <div id="leaderBoardWrapper">
