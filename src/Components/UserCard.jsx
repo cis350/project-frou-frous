@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
-import { Card, CardContent, Grid, Avatar, Typography } from '@mui/material';
+import { Card, CardContent, Grid, Avatar, Typography, Button } from '@mui/material';
 import styled from '@mui/system/styled';
 import PropTypes from 'prop-types';
 
-import { getUserHistory } from '../api/userPageAPI';
+import { getUserHistory, getUserData, removeFriendReq, removeFriend, sendFriendRequest, changeUsername } from '../api/userPageAPI';
 
 const LeftItem = styled('div')(() => ({
   margin: 6,
@@ -27,134 +27,203 @@ const RightItem = styled('div')(() => ({
 }));
 
 function UserCard(props) {
-  const [username, setUsername] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
   const [skipHistory, setSkipHistory] = useState(''); //eslint-disable-line
-  const [totalClasses, setTotalClasses] = useState(''); //eslint-disable-line
-  const { userId } = props;
+  const [totalClasses, setTotalClasses] = useState(''); //  eslint-disable-line
+  const [friendStatus, setFriendStatus] = useState('none'); //eslint-disable-line
+  const [editingMode, setEditingMode] = useState(false);
+  const { userId, currentUser } = props;
+
+  const getFriendStatus = async () => {
+    if (currentUser === userId) {
+      setFriendStatus('currentUser');
+      return;
+    }
+
+    try {
+      const userData = await getUserData(userId);
+      const friendData = userData.friends;
+      const friendReqData = userData.friendReqs;
+      if (friendData.includes(currentUser)) {
+        setFriendStatus('friends');
+      } else if (friendReqData.includes(currentUser)) {
+        setFriendStatus('requested');
+      } else {
+        setFriendStatus('none');
+      }
+    } catch (error) {
+      console.log('error', error); //eslint-disable-line    
+    }
+  };
 
   useEffect(() => {
     async function fetchUserData() {
       try {
         const reportResponse = await getUserHistory(userId);
-        setUsername(reportResponse.username);
         setSkipHistory(reportResponse.skipHistory);
         setTotalClasses(reportResponse.classes);
         setProfilePhoto(reportResponse.pfp);
       } catch (error) {
-        console.log(error);
+        console.log('error', error); //eslint-disable-line
       }
     }
 
     fetchUserData();
+    getFriendStatus();
   }, [userId]);
+
+  const backgroundColor = '#9ebd6e';
 
   return (
     <Card
       variant="outlined"
       sx={{
         borderRadius: '10px',
-        width: '60%',
+        width: '80%',
         backgroundColor: '#0d1b1e',
         border: '3px solid #E5E5E5',
         margin: 'auto',
         marginTop: '20px',
       }}
     >
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <Avatar
-            src={profilePhoto}
-            alt={username}
-            sx={{
-              width: 60,
-              height: 60,
-              variant: 'circular',
-            }}
-          />
-        </Grid>
-        <Grid item xs={8}>
-          <Typography
-            variant="title"
-            sx={{
-              color: 'white',
-              fontFamily: 'Open Sans, sans-serif',
-              fontSize: '35x',
-              textAlign: 'left',
-            }}
-          >
-            {username}
-          </Typography>
-        </Grid>
-      </Grid>
       <CardContent>
-        <Card sx={{
-          borderRadius: 2,
-          padding: 0,
-          boxShadow: 0,
-          backgroundColor: '#0d1b1e',
-        }}
-        >
-          <CardContent>
-            <Grid container spacing={2}>
-              <Grid item>
-                <Typography
-                  variant="h5"
-                  sx={{
-                    color: 'white',
-                    fontFamily: 'Open Sans, sans-serif',
-                    fontSize: '12x',
-                    textAlign: 'center',
-                  }}
-                >
-                  Your Weekly Report:
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <LeftItem> Total Classes Skipped: </LeftItem>
-              </Grid>
-              <Grid item xs={6}>
-                <RightItem>5</RightItem>
-              </Grid>
-            </Grid>
+        <Grid container spacing={2} sx={{ margin: 'auto' }}>
+          <Grid item sm={4} md={3}>
+            <Avatar
+              src={profilePhoto}
+              alt={userId}
+              sx={{
+                width: 60,
+                height: 60,
+                margin: 'auto',
+              }}
+            />
+          </Grid>
+          <Grid item sm={8} md={3}>
+            <div
+              style={{ textAlign: 'left', marginTop: '5%', color: 'white', fontSize: '1.5em' }}
+              contentEditable={friendStatus === 'currentUser' && editingMode}
+              suppressContentEditableWarning
+            >
+              {userId}
+            </div>
+          </Grid>
+          <Grid item sm={12} md={5}>
+            {friendStatus === 'currentUser' && (
+            <Button
+              variant="contained"
+              sx={{ backgroundColor, color: 'white', marginTop: '5%', borderRadius: '15px' }}
+              onClick={async () => {
+                setEditingMode((prevEditingMode) => !prevEditingMode);
+                const divElement = document.querySelector('[contentEditable]');
+                const newName = divElement.innerText;
+                await changeUsername(currentUser, newName);
+              }}
+            >
+              {editingMode ? 'Save' : 'Edit Profile'}
+            </Button>
+            )}
 
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <LeftItem> Percent Classes Skipped: </LeftItem>
-              </Grid>
-              <Grid item xs={6}>
-                <RightItem>40%</RightItem>
-              </Grid>
-            </Grid>
+            {friendStatus === 'friends' && (
+            <Button
+              variant="contained"
+              sx={{ backgroundColor, color: 'white', marginTop: '5%', borderRadius: '15px' }}
+              onClick={() => {
+                removeFriend(userId, currentUser);
+                setFriendStatus('none');
+              }}
+            >
+              Remove Friend
+            </Button>
+            )}
 
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <LeftItem> Class Most Often Skipped: </LeftItem>
-              </Grid>
-              <Grid item xs={6}>
-                <RightItem>XYZ 101</RightItem>
-              </Grid>
-            </Grid>
+            {friendStatus === 'requested' && (
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: '#97B96B', color: 'white', marginTop: '5%', borderRadius: '15px' }}
+              onClick={() => {
+                removeFriendReq(userId, currentUser);
+                setFriendStatus('none');
+              }}
+            >
+              Requested
+            </Button>
+            )}
+            {friendStatus === 'none' && (
+            <Button
+              variant="contained"
+              sx={{ backgroundColor, color: 'white', marginTop: '5%', borderRadius: '15px' }}
+              onClick={() => {
+                sendFriendRequest(userId, currentUser);
+                setFriendStatus('requested');
+              }}
+            >
+              Add Friend
+            </Button>
+            )}
 
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <LeftItem> Class Least Often Skipped: </LeftItem>
-              </Grid>
-              <Grid item xs={6}>
-                <RightItem> ABC 201</RightItem>
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} sx={{ margin: 'auto' }}>
+          <Grid item>
+            <Typography
+              variant="h5"
+              sx={{
+                color: 'white',
+                fontFamily: 'Open Sans, sans-serif',
+                fontSize: '12x',
+                textAlign: 'center',
+              }}
+            >
+              Your Weekly Report:
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <LeftItem style={{ textAlign: 'center' }}>
+              Total Classes Skipped:
+            </LeftItem>
+          </Grid>
+          <Grid item xs={6}>
+            <RightItem>5</RightItem>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <LeftItem style={{ textAlign: 'center' }}> Percent Classes Skipped: </LeftItem>
+          </Grid>
+          <Grid item xs={6}>
+            <RightItem>40%</RightItem>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <LeftItem style={{ textAlign: 'center' }}> Class Most Often Skipped: </LeftItem>
+          </Grid>
+          <Grid item xs={6}>
+            <RightItem>XYZ 101</RightItem>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <LeftItem style={{ textAlign: 'center' }}> Class Least Often Skipped: </LeftItem>
+          </Grid>
+          <Grid item xs={6}>
+            <RightItem> ABC 201</RightItem>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
 }
 
 UserCard.propTypes = {
-  userId: PropTypes.number.isRequired,
+  userId: PropTypes.string.isRequired,
+  currentUser: PropTypes.string.isRequired,
 };
 
 export default UserCard;

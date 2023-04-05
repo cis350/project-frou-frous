@@ -9,6 +9,7 @@ import UserPageView from './Views/UserPageView';
 import SkipHistoryView from './Views/SkipHistoryView';
 import ScheduleView from './Views/ScheduleView';
 import ReportView from './Views/ReportView';
+import PostView from './Views/PostView';
 import LeaderboardView from './Views/LeaderboardView';
 import { ChatView, SingleChatView } from './Views/ChatView';
 import Login from './Components/Login';
@@ -39,6 +40,10 @@ function App() {
     {
       path: '/report',
       element: <ReportView />,
+    },
+    {
+      path: '/report/:reportId',
+      element: <PostView />,
     },
     {
       path: '/leaderboard',
