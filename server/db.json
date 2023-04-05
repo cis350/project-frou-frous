@@ -1,5 +1,5 @@
 {
-  "leaderboard" : [
+  "leaderboard": [
     {
       "user": "Master Skipper",
       "skippedClasses": 50,
@@ -225,12 +225,9 @@
       "email": "jess",
       "firstName": "jess",
       "lastName": "jess",
-      "friendReqs": [
-        "e",
-        "m",
-        "q"
-      ],
+      "friendReqs": ["marcel", "erik"],
       "friends": [
+        "e",
         "kait"
       ]
     }

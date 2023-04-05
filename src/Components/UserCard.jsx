@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
-import { Card, CardContent, Grid, Avatar, Typography, Button } from '@mui/material';
+import { Card, CardContent, Grid, Avatar, Typography, Button, ButtonGroup } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
 import styled from '@mui/system/styled';
 import PropTypes from 'prop-types';
 
-import { getUserHistory, getUserData, removeFriendReq, removeFriend, sendFriendRequest, changeUsername } from '../api/userPageAPI';
+import { getUserHistory, getUserData, removeFriendReq, removeFriend, addFriend, sendFriendRequest, changeUsername } from '../api/userPageAPI';
 
 const LeftItem = styled('div')(() => ({
   margin: 6,
@@ -32,6 +34,7 @@ function UserCard(props) {
   const [totalClasses, setTotalClasses] = useState(''); //  eslint-disable-line
   const [friendStatus, setFriendStatus] = useState('none'); //eslint-disable-line
   const [editingMode, setEditingMode] = useState(false);
+  const [friendRequest, setFriendRequest] = useState(''); //eslint-disable-line
   const { userId, currentUser } = props;
 
   const getFriendStatus = async () => {
@@ -56,6 +59,20 @@ function UserCard(props) {
     }
   };
 
+  const updateFriendReq = async () => {
+    try {
+      const userData = await getUserData(userId);
+      const { friendReqs } = userData;
+      if (friendReqs.length > 0) {
+        setFriendRequest(friendReqs[0]);
+      } else {
+        setFriendRequest('');
+      }
+    } catch (error) {
+      console.log('error', error); //eslint-disable-line
+    }
+  };
+
   useEffect(() => {
     async function fetchUserData() {
       try {
@@ -70,6 +87,7 @@ function UserCard(props) {
 
     fetchUserData();
     getFriendStatus();
+    updateFriendReq();
   }, [userId]);
 
   const backgroundColor = '#9ebd6e';
@@ -108,20 +126,49 @@ function UserCard(props) {
               {userId}
             </div>
           </Grid>
-          <Grid item sm={12} md={5}>
+          <Grid item sm={12} md={6}>
             {friendStatus === 'currentUser' && (
-            <Button
-              variant="contained"
-              sx={{ backgroundColor, color: 'white', marginTop: '5%', borderRadius: '15px' }}
-              onClick={async () => {
-                setEditingMode((prevEditingMode) => !prevEditingMode);
-                const divElement = document.querySelector('[contentEditable]');
-                const newName = divElement.innerText;
-                await changeUsername(currentUser, newName);
-              }}
-            >
-              {editingMode ? 'Save' : 'Edit Profile'}
-            </Button>
+            <div>
+              <Button
+                variant="contained"
+                sx={{ backgroundColor, color: 'white', marginTop: '5%', borderRadius: '15px' }}
+                onClick={async () => {
+                  setEditingMode((prevEditingMode) => !prevEditingMode);
+                  const divElement = document.querySelector('[contentEditable]');
+                  const newName = divElement.innerText;
+                  await changeUsername(currentUser, newName);
+                }}
+              >
+                {editingMode ? 'Save' : 'Edit Profile'}
+              </Button>
+              {friendRequest !== '' && (
+              <ButtonGroup variant="contained" data-testid="fr" size="small" aria-label="friendRequest">
+                <Button
+                  onClick={async () => {
+                    await removeFriendReq(userId, friendRequest);
+                    updateFriendReq();
+                  }}
+                  style={{ backgroundColor: '#904C77', color: 'white' }}
+                >
+                  <CloseIcon />
+                </Button>
+                <Button
+                  onClick={async () => {
+                    await addFriend(userId, friendRequest);
+                    updateFriendReq();
+                  }}
+                  style={{ backgroundColor: '#397367', color: 'white' }}
+                >
+                  <CheckIcon />
+                </Button>
+                <div style={{ color: 'white' }}>
+                  Friend Request from:
+                  {' '}
+                  {friendRequest}
+                </div>
+              </ButtonGroup>
+              )}
+            </div>
             )}
 
             {friendStatus === 'friends' && (

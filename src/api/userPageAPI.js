@@ -208,7 +208,6 @@ export async function sendFriendRequest(userId, friendId) {
   }
 }
 
-/*
 export async function addFriend(userId, friendId) {
   try {
     const response = await fetch(`http://localhost:8000/user/${userId}`, {
@@ -217,6 +216,12 @@ export async function addFriend(userId, friendId) {
       },
     });
     const data = await response.json();
+    if (data.friendReqs.includes(friendId)) {
+      const index = data.friendReqs.indexOf(friendId);
+      if (index !== -1) {
+        data.friendReqs.splice(index, 1);
+      }
+    }
     if (!data.friends.includes(friendId)) {
       data.friends.push(friendId);
     }
@@ -234,7 +239,6 @@ export async function addFriend(userId, friendId) {
     return { error };
   }
 }
-*/
 
 export async function getFriendReports(callback) { // eslint-disable-line
   fetch('http://localhost:8000/report')
