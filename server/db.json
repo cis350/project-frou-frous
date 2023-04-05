@@ -1,0 +1,169 @@
+{
+  "classes": [
+    {
+      "id": 0,
+      "day": "Monday",
+      "classes": [
+        {
+          "name": "CIS 320",
+          "start": 300,
+          "end": 400
+        },
+        {
+          "name": "CIS 300",
+          "start": 600,
+          "end": 700
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "day": "Tuesday",
+      "classes": [
+        {
+          "name": "CIS 320",
+          "start": 300,
+          "end": 400
+        },
+        {
+          "name": "CIS 300",
+          "start": 600,
+          "end": 700
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "classes": [
+        {
+          "name": "CIS 320",
+          "start": 915,
+          "end": 1020
+        },
+        {
+          "name": "CIS 300",
+          "start": 600,
+          "end": 700
+        },
+        {
+          "name": "rwrw",
+          "location": "rewr",
+          "start": 613,
+          "end": 613
+        }
+      ],
+      "id": 2
+    },
+    {
+      "id": 3,
+      "day": "Thursday",
+      "classes": [
+        {
+          "name": "CIS 320",
+          "start": 300,
+          "end": 400
+        },
+        {
+          "name": "CIS 300",
+          "start": 600,
+          "end": 700
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "classes": [
+        {
+          "name": "CIS 320",
+          "start": 300,
+          "end": 400
+        },
+        {
+          "name": "CIS 300",
+          "start": 600,
+          "end": 700
+        }
+      ],
+      "id": 4
+    }
+  ],
+  "user": [
+    {
+      "id": "e",
+      "password": "e",
+      "email": "e",
+      "firstName": "e",
+      "lastName": "e"
+    },
+    {
+      "id": "q",
+      "password": "q",
+      "email": "q",
+      "firstName": "q",
+      "lastName": "q"
+    },
+    {
+      "id": "m",
+      "password": "m",
+      "email": "m",
+      "firstName": "m",
+      "lastName": "m"
+    },
+    {
+      "id": "d",
+      "password": "d",
+      "email": "d",
+      "firstName": "d",
+      "lastName": "d"
+    },
+    {
+      "id": "t",
+      "password": "t",
+      "email": "t",
+      "firstName": "t",
+      "lastName": "t"
+    },
+    {
+      "id": "kait",
+      "password": "kait",
+      "email": "kait",
+      "firstName": "kait",
+      "lastName": "kait"
+    },
+    {
+      "id": "jess",
+      "password": "jess",
+      "email": "jess",
+      "firstName": "jess",
+      "lastName": "jess"
+    }
+  ],
+  "report": [
+    {
+      "id": 0,
+      "comments": [
+        "hello",
+        "goodbyw"
+      ],
+      "reporterId": "User1",
+      "date": 1680294744,
+      "caption": "Caught User2 Skipping lol",
+      "reporteeId": "User2",
+      "img": "https://i1.sndcdn.com/artworks-5fyeRojbMeUUbmbT-qqZ5NQ-t500x500.jpg",
+      "likes": []
+    },
+    {
+      "id": 1,
+      "comments": [
+        "hello",
+        "goodbyw"
+      ],
+      "reporterId": "User1",
+      "date": 1680294744,
+      "caption": "I skipped :(",
+      "reporteeId": "User1",
+      "img": "https://th.bing.com/th/id/OIP.yAO1CqL2WioDGKzB_U66JwHaE8?pid=ImgDet&rs=1",
+      "likes": []
+    }
+  ]
+}

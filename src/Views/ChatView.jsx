@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import ChatPeopleComponent from '../Components/ChatPeopleComponent';
+import ChatUserComponent from '../Components/ChatUserComponent';
 
-function ChatView() {
+export function ChatView() {
   return (
-    <div>ChatView</div>
-  )
+    <ChatPeopleComponent />
+  );
 }
 
-export default ChatView
+export function SingleChatView() {
+  return (
+    <ChatUserComponent />
+  );
+}

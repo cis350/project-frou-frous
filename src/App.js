@@ -1,66 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import './Login.css';
+import { ToastContainer } from 'react-toastify';
 import {
   createBrowserRouter,
   RouterProvider,
-} from "react-router-dom";
+} from 'react-router-dom';
 import React from 'react';
-import SignupView from './Views/SignupView';
-import PostView from './Views/PostView';
 import UserPageView from './Views/UserPageView';
 import SkipHistoryView from './Views/SkipHistoryView';
 import ScheduleView from './Views/ScheduleView';
 import ReportView from './Views/ReportView';
 import LeaderboardView from './Views/LeaderboardView';
-import ChatView from './Views/ChatView';
-
-
-
-
+import { ChatView, SingleChatView } from './Views/ChatView';
+import Login from './Components/Login';
+import Register from './Components/Register';
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
-      element: <SignupView/>,
+      path: '/',
+      element: <Login />,
     },
     {
-      path: "/post/:postId",
-      element: <PostView/>,
+      path: '/register',
+      element: <Register />,
     },
     {
-      path: "/user/:userId",
-      element: <UserPageView/>,
+      path: '/user/:userId',
+      element: <UserPageView />,
     },
     {
-      path: "/history/:userId",
-      element: <SkipHistoryView/>,
+      path: '/history/:userId',
+      element: <SkipHistoryView />,
     },
     {
-      path: "/schedule/:userId",
-      element: <ScheduleView/>,
+      path: '/schedule/:userId',
+      element: <ScheduleView />,
     },
     {
-      path: "/report",
-      element: <ReportView/>,
+      path: '/report',
+      element: <ReportView />,
     },
     {
-      path: "/leaderboard",
-      element: <LeaderboardView/>,
+      path: '/leaderboard',
+      element: <LeaderboardView />,
     },
     {
-      path: "/chat",
-      element: <ChatView/>,
+      path: '/chat',
+      element: <ChatView />,
     },
-    
-  ])
-    
+    {
+      path: '/chat/user/:user',
+      element: <SingleChatView />,
+    },
 
+  ]);
 
   return (
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
+    <div className="App">
+      <ToastContainer />
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </div>
   );
 }
 
