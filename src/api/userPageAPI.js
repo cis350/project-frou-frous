@@ -234,6 +234,7 @@ export async function addFriend(userId, friendId) {
       body: JSON.stringify(data),
     });
     const data2 = await response2.json();
+    console.log('test', data2);
     return data2;
   } catch (error) {
     return { error };
@@ -269,7 +270,6 @@ export async function getReportDataLikes(reportId) {
 }
 export async function updateLikes2(reportId, obj) {
   try {
-    console.log('testing');
     const response = await fetch(`http://localhost:8000/report/${reportId}`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
@@ -281,8 +281,6 @@ export async function updateLikes2(reportId, obj) {
     }
 
     const result = await response.json();
-    console.log('result');
-    console.log(result);
     return result;
   } catch (error) {
     return error;

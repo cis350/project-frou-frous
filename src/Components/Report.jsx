@@ -143,7 +143,7 @@ function Report(props) {
         </center>
       </CardContent>
       <CardActions>
-        <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black' }} href="/report/:postId">
+        <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black' }} href={`/report/${postId}`}>
           Comments
         </Button>
         <Button id="view" size="small" sx={{ backgroundColor: 'white', color: 'black' }}>

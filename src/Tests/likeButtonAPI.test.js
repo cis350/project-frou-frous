@@ -5,7 +5,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Report from '../Components/Report';
-import { updateLikes2, getReportDataLikes } from '../api/userPageAPI';
+import { updateLikes2, getReportDataLikes, getUserData } from '../api/userPageAPI';
 
 global.fetch = jest.fn(() => Promise.resolve({
   ok: true,
@@ -26,7 +26,6 @@ beforeEach(() => {
 
 describe('updateLikes2', () => {
   it('should update the likes count for a post', async () => {
-    console.log('first line of updateLikes');
     const postId = 1;
     const post = {
       name: 'John',
@@ -61,10 +60,9 @@ describe('getReportDataLikes', () => {
     // Mock the API call and return the expected response
 
     const result = await getReportDataLikes(postId);
+    const userData = await getUserData(postId);
 
-    // Expect the API call to have been made with the correct parameters
-
-    // Expect the API call to have returned the expected likes count
+    expect(userData.likes).toEqual(expectedLikesCount);
     expect(result.likes).toEqual(expectedLikesCount);
   });
 });
@@ -77,37 +75,3 @@ describe('<Report />', () => {
     fireEvent.click(likeButton);
   });
 });
-
-// describe('<Report />', () => {
-//   const report = {
-//     id: '1',
-//     likes: 0,
-//   };
-
-//   const props = {
-//     match: { params: { id: report.id } },
-//   };
-
-//   beforeEach(() => {
-//     updateLikes2.mockClear();
-//   });
-//   test('increments and decrements like count when like button is clicked1', async () => {
-//     updateLikes2.mockResolvedValueOnce({ likes: 1, cap: 'b', like: 0,
-// likeCount: [], name: '', photo: '', profilePhoto: '', reportee: '' });
-//     render(<Report {...props} />); //eslint-disable-line
-//     const likeButton = screen.getByRole('button', { name: /Like/i });
-
-//     fireEvent.click(likeButton);
-
-//     const likesCounter = await screen.findByText(/Like \| 1/i);
-//     expect(likesCounter).toBeInTheDocument();
-
-//     updateLikes2.mockResolvedValueOnce({ likes: 0 });
-//     fireEvent.click(likeButton);
-
-//     const likesCounterAfterClick = await screen.findByText(/Like \| 0/i);
-//     expect(likesCounterAfterClick).toBeInTheDocument();
-
-//     expect(updateLikes2).toHaveBeenCalledTimes(2);
-//   });
-// });
