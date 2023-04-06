@@ -22,9 +22,18 @@ function Report(props) {
     console.log('Res', reportResponse);
     const { reporterId, img, reporteeId, caption } = reportResponse;
     setName(reporterId);
+    console.log('name');
+    console.log(reporterId);
+    console.log(name);
     setCaption(caption);
+    console.log('caption');
+    console.log(cap);
     setPhoto(img);
+    console.log('img');
+    console.log(photo);
     setReportee(reporteeId);
+    console.log('reporteeId');
+    console.log(reportee);
 
     const profilePhotoResponse = await getPfp(); // Need to add this to swaggerHub API
     const { pfp } = profilePhotoResponse;
@@ -64,6 +73,8 @@ function Report(props) {
       const obj = {
         name, reportee, profilePhoto, photo, cap, likeCount, like,
       };
+      console.log('obj when unlike');
+      console.log(obj);
       await updateLikes2(postId, obj);
     } else {
       likeCount.push(currentUser);
@@ -72,6 +83,8 @@ function Report(props) {
       const obj = {
         name, reportee, profilePhoto, photo, cap, likeCount, like,
       };
+      console.log('obj when liked');
+      console.log(obj);
       await updateLikes2(postId, obj);
     }
     setIsLiked(!isLiked);
