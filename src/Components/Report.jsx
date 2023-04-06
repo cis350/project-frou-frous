@@ -13,19 +13,24 @@ function Report(props) {
   const [photo, setPhoto] = useState('');
   const [cap, setCaption] = useState('');
   const [likeCount, setLikes] = useState([]);
-  const [like, setLike] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [commentList, setCommentsList] = useState([]);
+  const [dateTime, setDateTime] = useState(0);
   const { postId } = props;
-  const currentUser = sessionStorage.getItem('username');
+  const currentUser = 'jess';
 
   async function handleReport(reportResponse) {
-    console.log('Res', reportResponse);
-    const { reporterId, img, reporteeId, caption } = reportResponse;
+    const { reporterId, img, reporteeId, caption, likes, comments, date } = reportResponse;
     setName(reporterId);
     setCaption(caption);
     setPhoto(img);
     setReportee(reporteeId);
-
+    setLikes(likes);
+    setCommentsList(comments);
+    setDateTime(date);
+    if (likes.indexOf(currentUser) > -1) {
+      setIsLiked(true);
+    }
     const profilePhotoResponse = await getPfp(); // Need to add this to swaggerHub API
     const { pfp } = profilePhotoResponse;
     setProfilePhoto(pfp);
@@ -60,17 +65,29 @@ function Report(props) {
       const index = likeCount.indexOf(currentUser);
       setLikes(likeCount.splice(index, 1));
       setLikes(likeCount);
-      setLike(like - 1);
       const obj = {
-        name, reportee, profilePhoto, photo, cap, likeCount, like,
+        reporterId: name,
+        reporteeId: reportee,
+        profilePhoto,
+        img: photo,
+        cap,
+        likes: likeCount,
+        comments: commentList,
+        date: dateTime,
       };
       await updateLikes2(postId, obj);
     } else {
       likeCount.push(currentUser);
-      setLike(like + 1);
       setLikes(likeCount);
       const obj = {
-        name, reportee, profilePhoto, photo, cap, likeCount, like,
+        reporterId: name,
+        reporteeId: reportee,
+        profilePhoto,
+        img: photo,
+        cap,
+        likes: likeCount,
+        comments: commentList,
+        date: dateTime,
       };
       await updateLikes2(postId, obj);
     }
@@ -121,7 +138,7 @@ function Report(props) {
           View
         </Button>
         <Button className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: isLiked ? 'red' : 'white', color: 'black' }} onClick={controlLike}>
-          <span className="likes-counter">{ `Like | ${like}` }</span>
+          <span className="likes-counter">{ `Like | ${likeCount.length}` }</span>
           Like
         </Button>
       </CardActions>

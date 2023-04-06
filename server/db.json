@@ -225,7 +225,10 @@
       "email": "jess",
       "firstName": "jess",
       "lastName": "jess",
-      "friendReqs": ["marcel", "erik"],
+      "friendReqs": [
+        "marcel",
+        "erik"
+      ],
       "friends": [
         "e",
         "kait"
@@ -234,58 +237,46 @@
   ],
   "report": [
     {
-      "id": 1,
-      "comments": [
-        {
-          "commenterid": "t",
-          "content": "lol imagine skipping class"
-        },
-        {
-          "commenterid": "e",
-          "content": "catch me at starbucks later"
-        },
-        {
-          "commenterid": "weh",
-          "content": "hey i don't appreciate the callout"
-        }
-      ],
-      "reporterid": "kait",
-      "reporteeid": "weh",
+      "profilePhoto": "https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg",
+      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=",
+      "cap": "haha",
       "likes": [
-        "kait",
-        "t",
-        "e"
-      ],
-      "date": 101010101,
-      "caption": "weh spotted",
-      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo="
-    },
-    {
-      "id": 2,
-      "comments": [
-        {
-          "commenterid": "t",
-          "content": "t's comment"
-        },
-        {
-          "commenterid": "e",
-          "content": "e's comment"
-        },
-        {
-          "commenterid": "kait",
-          "content": "sorry not sorry"
-        }
-      ],
-      "reporterid": "e",
-      "reporteeid": "kait",
-      "likes": [
-        "kait",
         "t",
         "weh"
       ],
-      "date": 889437129847123,
-      "caption": "don't throw stones in glass houses",
-      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo="
+      "comments": [
+        {
+          "commenterid": "weh",
+          "content": "weh's comment"
+        },
+        {
+          "commenterid": "userId",
+          "content": "test again"
+        }
+      ],
+      "date": 8894371293849123,
+      "id": 1
+    },
+    {
+      "profilePhoto": "https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg",
+      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=",
+      "cap": "hshahahawefwefawef",
+      "likes": [
+        "t",
+        "weh"
+      ],
+      "comments": [
+        {
+          "commenterid": "weh",
+          "content": "weh's comment"
+        },
+        {
+          "commenterid": "userId",
+          "content": "test again"
+        }
+      ],
+      "date": 8894371293849123,
+      "id": 2
     },
     {
       "id": 3,
@@ -299,8 +290,8 @@
           "content": "test again"
         }
       ],
-      "reporterid": "e",
-      "reporteeid": "e",
+      "reporterid": "kait",
+      "reporteeid": "erik",
       "likes": [
         "t",
         "weh"

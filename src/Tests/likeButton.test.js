@@ -3,7 +3,6 @@
 */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import fetchMock from 'jest-fetch-mock';
 import '@testing-library/jest-dom';
 import Report from '../Components/Report';
 import { getReport, getPfp, updateLikes2, getReportDataLikes } from '../api/userPageAPI';
@@ -36,7 +35,7 @@ describe('Report component', () => {
   });
 
   test('renders report details and like button', async () => {
-    render(<Report {...props} />);
+    render(<Report {...props} />); // eslint-disable-line 
     const likeButton = screen.getByRole('button', { name: /Like/i });
 
     expect(likeButton).toBeInTheDocument();
@@ -107,7 +106,7 @@ describe('<Report />', () => {
   });
   test('increments and decrements like count when like button is clicked1', async () => {
     updateLikes2.mockResolvedValueOnce({ likes: 1, cap: 'b', like: 0, likeCount: [], name: '', photo: '', profilePhoto: '', reportee: '' });
-    render(<Report {...props} />);
+    render(<Report {...props} />); //eslint-disable-line
     const likeButton = screen.getByRole('button', { name: /Like/i });
 
     fireEvent.click(likeButton);

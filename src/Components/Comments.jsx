@@ -15,9 +15,6 @@ function Comments(props) {
     try {
       const res = await getReportData(reportId);
       const commentsList = res.comments;
-      console.log('res');
-      console.log(res.comments);
-      console.log(commentsList.length);
       for (let i = 0; i < commentsList.length; i += 1) {
         commstring = commstring.concat(
           `<div class="commentBox">
@@ -63,8 +60,6 @@ function Comments(props) {
   };
 
   useEffect(() => {
-    console.log('USING EFFECT');
-
     loadComments();
   }, []);
 
