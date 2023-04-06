@@ -99,7 +99,7 @@ function Report(props) {
   }, [postId]);
 
   return (
-    <Card variant="outlined" sx={{ width: '100%', height: '100%', border: '3px solid #E5E5E5', borderRadius: '10px', backgroundColor: '#0D1B1E' }}>
+    <Card variant="outlined" sx={{ width: '100%', height: '100%', border: '3px solid #E5E5E5', borderRadius: '10px', backgroundColor: '#0D1B1E', maxWidth: '800px' }}>
       <CardContent>
         <Grid container spacing={2} alignItems="center">
           <Grid item>
@@ -131,11 +131,8 @@ function Report(props) {
         </center>
       </CardContent>
       <CardActions>
-        <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black' }}>
+        <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black' }} href="/report/:postId">
           Comments
-        </Button>
-        <Button id="view" size="small" sx={{ backgroundColor: 'white', color: 'black' }}>
-          View
         </Button>
         <Button className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: isLiked ? 'red' : 'white', color: 'black' }} onClick={controlLike}>
           <span className="likes-counter">{ `Like | ${likeCount.length}` }</span>
