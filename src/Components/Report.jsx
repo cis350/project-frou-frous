@@ -22,15 +22,8 @@ function Report(props) {
   async function handleReport(reportResponse) {
     const { reporterId, img, reporteeId, caption, likes, comments, date } = reportResponse;
     setName(reporterId);
-    console.log('name');
-    console.log(reporterId);
-    console.log(name);
     setCaption(caption);
-    console.log('caption');
-    console.log(cap);
     setPhoto(img);
-    console.log('img');
-    console.log(photo);
     setReportee(reporteeId);
     setLikes(likes);
     setCommentsList(comments);
@@ -53,7 +46,6 @@ function Report(props) {
 
   const retrieveLike = async () => {
     const response = await getReportDataLikes(postId);
-    console.log(response);
     const result = response.likeCount;
     return result;
   };
@@ -83,8 +75,6 @@ function Report(props) {
         comments: commentList,
         date: dateTime,
       };
-      console.log('obj when unlike');
-      console.log(obj);
       await updateLikes2(postId, obj);
     } else {
       likeCount.push(currentUser);
@@ -99,8 +89,6 @@ function Report(props) {
         comments: commentList,
         date: dateTime,
       };
-      console.log('obj when liked');
-      console.log(obj);
       await updateLikes2(postId, obj);
     }
     setIsLiked(!isLiked);
