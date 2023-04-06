@@ -2,7 +2,7 @@
 * @jest-environment jsdom
 */
 import React from 'react';
-import { render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Report from '../Components/Report';
 import { getReport, getPfp, updateLikes2, getReportDataLikes } from '../api/userPageAPI';
