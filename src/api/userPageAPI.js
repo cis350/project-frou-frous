@@ -269,6 +269,7 @@ export async function getReportDataLikes(reportId) {
 }
 export async function updateLikes2(reportId, obj) {
   try {
+    console.log('testing');
     const response = await fetch(`http://localhost:8000/report/${reportId}`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
@@ -280,23 +281,11 @@ export async function updateLikes2(reportId, obj) {
     }
 
     const result = await response.json();
+    console.log('result');
+    console.log(result);
     return result;
   } catch (error) {
     return error;
-  }
-}
-
-export async function updateLikes(obj, callback) {
-  try {
-    fetch('http://localhost:8000/report/id', {
-      method: 'PUT',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(obj),
-    }).then((res) => res.json()).then((resp) => {
-      callback(resp);
-    });
-  } catch (error) {
-    throw new Error(error);
   }
 }
 
