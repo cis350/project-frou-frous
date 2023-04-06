@@ -243,12 +243,13 @@
       "email": "jess",
       "firstName": "jess",
       "lastName": "jess",
-      "friendReqs": [],
-      "friends": [
-        "e",
+      "friendReqs": [
         "kait",
         "marcel",
         "erik"
+      ],
+      "friends": [
+        "e"
       ]
     }
   ],
@@ -404,6 +405,19 @@
       "likes": [],
       "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=",
       "id": 11
+    },
+    {
+      "reporterid": "1234",
+      "reporteeid": "Marcel",
+      "profilePhoto": "https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg",
+      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=",
+      "cap": "Marcel Skipped",
+      "likes": [
+        "jess"
+      ],
+      "comments": [],
+      "date": 1680817300040,
+      "id": 12
     }
   ]
 }
