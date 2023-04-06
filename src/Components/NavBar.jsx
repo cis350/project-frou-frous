@@ -117,7 +117,8 @@ function NavBar({ setPage }) {
               variant="contained"
               sx={{ bgcolor: 'pink.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
               startIcon={<AccountCircle />}
-              onClick={() => handleNavigation('Profile')}
+              component={Link}
+              to="/user/jess" // change to currentUser
             >
               Your Profile
             </Button>

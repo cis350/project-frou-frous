@@ -45,7 +45,11 @@ html {
     flex-grow: 100;
     margin-right: 5px;
     border-radius: 25px;
+    border-radius: 25px;
 }
+
+a { text-decoration: none !important; }
+
 
 a { text-decoration: none !important; }
 

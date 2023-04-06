@@ -3,10 +3,10 @@ import { Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { getFriendReports } from '../api/userPageAPI';
 
-import Report from './Report';
+import Report from './Report'; // esline-disable-line
 
 function Timeline(props) {
-  const { userId, page, name } = props; //eslint-disable-line
+  const { userId, page, name } = props; // eslint-disable-line
   const [reportIds, setReportIds] = useState([]);
 
   useEffect(() => {
