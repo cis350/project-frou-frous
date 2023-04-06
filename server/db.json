@@ -225,14 +225,31 @@
       "email": "jess",
       "firstName": "jess",
       "lastName": "jess",
-      "friendReqs": [
-        "marcel",
-        "erik"
-      ],
+      "friendReqs": [],
       "friends": [
         "e",
-        "kait"
+        "kait",
+        "marcel",
+        "erik"
       ]
+    },
+    {
+      "id": "phone",
+      "password": "phone",
+      "email": "phone",
+      "firstName": "phone",
+      "lastName": "phone",
+      "friends": [],
+      "friendsReq": []
+    },
+    {
+      "id": "x",
+      "password": "x",
+      "email": "x",
+      "firstName": "x",
+      "lastName": "x",
+      "friends": [],
+      "friendsReq": []
     }
   ],
   "report": [
@@ -258,6 +275,8 @@
           "content": "testsetestset"
         }
       ],
+      "reporterid": "kait",
+      "reporteeid": "erik",
       "date": 8894371293849123,
       "id": 1
     },
@@ -280,10 +299,19 @@
         }
       ],
       "date": 8894371293849123,
-      "id": 2
+      "id": 2,
+      "reporterid": "kait",
+      "reporteeid": "erik"
     },
     {
-      "id": 3,
+      "reporterid": "kait",
+      "reporteeid": "erik",
+      "profilePhoto": "https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg",
+      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=",
+      "likes": [
+        "t",
+        "weh"
+      ],
       "comments": [
         {
           "commenterid": "weh",
@@ -294,15 +322,28 @@
           "content": "test again"
         }
       ],
-      "reporterid": "kait",
-      "reporteeid": "erik",
-      "likes": [
-        "t",
-        "weh"
-      ],
       "date": 8894371293849123,
-      "caption": "guilty",
-      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo="
+      "id": 3
+    },
+    {
+      "reporterid": "1234",
+      "reporteeid": "friend",
+      "caption": "Erik skipped lol",
+      "date": 1680814796474,
+      "comments": [],
+      "likes": [],
+      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=",
+      "id": 4
+    },
+    {
+      "reporterid": "1234",
+      "reporteeid": "friend",
+      "caption": "Ria skipped ",
+      "date": 1680814917253,
+      "comments": [],
+      "likes": [],
+      "img": "https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=",
+      "id": 5
     }
   ]
 }

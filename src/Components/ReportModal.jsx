@@ -23,8 +23,8 @@ function ReportModal({ userId }) {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(
-            { reporterId: reporter,
-              reporteeId: userId,
+            { reporterid: reporter,
+              reporteeid: userId,
               caption,
               date: dateAsInt,
               comments: [],

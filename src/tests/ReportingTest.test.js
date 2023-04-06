@@ -6,6 +6,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ReportModal from '../Components/ReportModal';
+import { getReportData, sendComment } from '../api/reportAPI';
 
 test('Opens and checks that class is displayed', async () => {
   // ARRANGE
@@ -15,3 +16,68 @@ test('Opens and checks that class is displayed', async () => {
   // ASSERT
   expect(screen.getByText('Reporting reportee')).toBeInTheDocument();
 });
+
+const report = {
+  profilePhoto: 'https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg',
+  img: 'https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=',
+  likes: [
+    't',
+    'weh',
+    'jess',
+  ],
+  comments: [
+    {
+      commenterid: 'weh',
+      content: "weh's comment",
+    },
+    {
+      commenterid: 'userId',
+      content: 'test again',
+    },
+    {
+      commenterid: 'yourUserId',
+      content: 'testsetestset',
+    },
+  ],
+  date: 8894371293849123,
+  id: 1,
+};
+
+global.fetch = jest.fn(() => Promise.resolve({
+  ok: true,
+  json: () => Promise.resolve(report),
+}));
+
+beforeEach(() => {
+  fetch.mockClear();
+});
+
+describe('getReportDataLikes', () => {
+  it('should return the report', async () => {
+    const result = await getReportData(1);
+
+    expect(result).toEqual(report);
+  });
+});
+
+// describe('sendComment', () => {
+//   it('should send a comment', async () => {
+//     const result = await sendComment(1, 'testComment');
+//     const newComments = report.comments.push('testComment');
+//     report.comments = newComments;
+//     console.log('RES', result);
+//     expect(result).toEqual({
+//       profilePhoto: 'https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg',
+//       img: 'https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=',
+//       likes: ['t', 'weh', 'jess'],
+//       comments: [
+//         { commenterid: 'weh', content: "weh's comment" },
+//         { commenterid: 'userId', content: 'test again' },
+//         { commenterid: 'yourUserId', content: 'testsetestset' },
+//         'testComment',
+//       ],
+//       date: 8894371293849123,
+//       id: 1,
+//     });
+//   });
+// });

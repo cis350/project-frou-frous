@@ -11,7 +11,8 @@ function Login() {
     sessionStorage.clear();
   }, []);
 
-  function displayLogin(resp) {
+  async function displayLogin() {
+    const resp = await validateLogin(username);
     if (resp.error) {
       toast.error(resp.error.message);
     } else if (Object.keys(resp).length === 0) {
@@ -41,7 +42,7 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      validateLogin(username, displayLogin);
+      displayLogin();
       // console.log("LOGIN RSP", resp);
     }
   };

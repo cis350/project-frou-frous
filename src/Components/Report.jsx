@@ -20,11 +20,11 @@ function Report(props) {
   const currentUser = 'jess';
 
   async function handleReport(reportResponse) {
-    const { reporterId, img, reporteeId, caption, likes, comments, date } = reportResponse;
-    setName(reporterId);
+    const { reporterid, img, reporteeid, caption, likes, comments, date } = reportResponse;
+    setName(reporterid);
     setCaption(caption);
     setPhoto(img);
-    setReportee(reporteeId);
+    setReportee(reporteeid);
     setLikes(likes);
     setCommentsList(comments);
     setDateTime(date);
@@ -66,8 +66,8 @@ function Report(props) {
       setLikes(likeCount.splice(index, 1));
       setLikes(likeCount);
       const obj = {
-        reporterId: name,
-        reporteeId: reportee,
+        reporterid: name,
+        reporteeid: reportee,
         profilePhoto,
         img: photo,
         cap,
@@ -80,8 +80,8 @@ function Report(props) {
       likeCount.push(currentUser);
       setLikes(likeCount);
       const obj = {
-        reporterId: name,
-        reporteeId: reportee,
+        reporterid: name,
+        reporteeid: reportee,
         profilePhoto,
         img: photo,
         cap,
