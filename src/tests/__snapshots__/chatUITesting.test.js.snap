@@ -14,13 +14,9 @@ exports[`snapshot test people 1`] = `
       <div
         id="searchIcon"
       >
-        <p
-          className="bi bi-search"
-          style={
-            {
-              "color": "black",
-            }
-          }
+        <img
+          alt="search"
+          src="https://th.bing.com/th/id/R.602ef64bc31a62f9ebd523d97fc9f369?rik=JAPpFrIn7Yon0Q&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_194915.png&ehk=PY%2fOHmWzAr5CQnqxsnvx5nnpZAeNl7OJ5%2fHDzvIuHTo%3d&risl=&pid=ImgRaw&r=0"
         />
       </div>
       <input

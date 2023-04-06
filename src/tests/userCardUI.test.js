@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import renderer, { act } from 'react-test-renderer';
@@ -19,13 +19,13 @@ test('rendersAllStatBoxes', async () => {
 test('rendersAvatar', async () => {
   const { getByText } = await act(async () => render(<UserCard userId="jess" currentUser="jess" />));
   const username = getByText(/jess/);
+  expect(screen.getByAltText(/jess/)).toBeInTheDocument();
   expect(username).toBeInTheDocument();
 });
 
 test('snapshot test', () => {
   const component = renderer.create(<UserCard userId="jess" currentUser="jess" />);
   const domTreeJSON = component.toJSON();
-
   expect(domTreeJSON).toMatchSnapshot();
 });
 

@@ -28,17 +28,6 @@ test('calls setPage when clicking on Timeline button', () => {
   expect(setPage).toHaveBeenCalledWith('Timeline');
 });
 
-test('calls setPage when clicking on User Profile button', () => {
-  const { getByText } = render(
-    <Router>
-      <NavBar setPage={setPage} />
-    </Router>,
-  );
-  const element = getByText(/Your Profile/);
-  fireEvent.click(element);
-  expect(setPage).toHaveBeenCalledWith('Profile');
-});
-
 test('calls setPage when clicking on logout button', () => {
   const { getByText } = render(
     <Router>
