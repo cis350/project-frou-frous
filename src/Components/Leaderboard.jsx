@@ -3,8 +3,9 @@ import React, { useEffect } from 'react';
 import getLeaders from '../api/leaderboardAPI';
 
 export default function LeaderboardComponent() {
-  function setLeaders(leaders) {
+  async function setLeaders() {
     let leadersHtml = '';
+    const leaders = await getLeaders();
     for (let i = 0; i < leaders.length; i += 1) {
       leadersHtml += `
         <div class='leaderRow' id='leader${i}' >
@@ -23,7 +24,7 @@ export default function LeaderboardComponent() {
 
   useEffect(() => {
     console.log('USE EFFECT');
-    getLeaders(setLeaders);
+    setLeaders();
   }, [1000]);
 
   return (
