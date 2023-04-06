@@ -13,6 +13,7 @@ function ReportModal({ userId }) {
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [caption, setCaption] = useState('');
+  const [reportee, setReportee] = useState('');
 
   const handleSubmit = async () => {
     const date = new Date();
@@ -23,7 +24,7 @@ function ReportModal({ userId }) {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
           reporterid: reporter,
-          reporteeid: userId,
+          reporteeid: reportee,
           caption,
           date: dateAsInt,
           comments: [],
@@ -34,6 +35,8 @@ function ReportModal({ userId }) {
       toast.success('Reported!');
       document.getElementById('reportForm').reset();
       setSelectedImage(null);
+      setCaption('');
+      setReportee('');
     } catch (error) {
       throw new Error(error);
     }
@@ -71,6 +74,7 @@ function ReportModal({ userId }) {
               name="skippedclass"
               aria-label="skipped-class"
             />
+            <input type="text" aria-label="reportee" placeholder="Reportee" onChange={(e) => setReportee(e.target.value)} className="mb-8 p-2 rounded-md" />
             <input
               type="file"
               name="addphoto"
@@ -80,7 +84,7 @@ function ReportModal({ userId }) {
               }}
             />
             <textarea
-              className="h-32 mt-8 w-full break-words"
+              className="h-32 mt-8 w-full break-words p-2 rounded-md"
               placeholder="Caption"
               onChange={(e) => setCaption(e.target.value)}
             />
