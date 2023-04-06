@@ -74,7 +74,7 @@ function Comments(props) {
               <input className="commentInput" type="text" value={commentString} onChange={handleInputChange} placeholder="Add a comment" />
             </label>
             <button className="commentButton" type="submit">
-              <img src="src/assets/send2.png" alt="Submit" height="35" />
+              <img src="../assets/send2.png" alt="Submit" height="35" />
             </button>
           </div>
         </form>

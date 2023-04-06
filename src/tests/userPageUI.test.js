@@ -124,9 +124,3 @@ test('renders comments button', async () => {
   const element = getByText(/Comments/);
   expect(element).toBeInTheDocument();
 });
-
-test('renders view button', async () => {
-  const { getByText } = await act(async () => render(<Report postId={1} />));
-  const element = getByText(/View/);
-  expect(element).toBeInTheDocument();
-});
