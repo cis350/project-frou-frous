@@ -321,71 +321,7 @@ mock.onGet('/chat').reply(200, {
   ],
 });
 
-const mes = [
-  {
-    message: 'hello hello',
-    sent: false,
-  },
-  {
-    message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Nulla tristique diam vel libero lobortis, in faucibus elit
-    vulputate. Maecenas lacinia, sapien sit amet auctor
-    pulvinar,nisl leo tincidunt nibh`,
-    sent: false,
-  },
-  {
-    message: 'Lorem ipsum dolor sit amet',
-    sent: true,
-  },
-  {
-    message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Nulla tristique diam vel libero lobortis`,
-    sent: true,
-  },
-  {
-    message: 'Lorem ipsum',
-    sent: true,
-  },
-  {
-    message: 'Lorem ipsum dolor',
-    sent: false,
-  },
-  {
-    message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Nulla tristique diam vel libero lobortis, in faucibus elit
-    vulputate. Maecenas lacinia, sapien sit amet auctor
-    pulvinar,nisl leo tincidunt nibh`,
-    sent: false,
-  },
-  {
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    sent: true,
-  },
-];
-
-const pathRegex = new RegExp('\/chat\/user\/*'); // eslint-disable-line
-mock.onGet(pathRegex).reply(200, {
-  messages: mes,
-});
-
-const postRegex = new RegExp('\/chat\/send\/*'); // eslint-disable-line
-mock.onPost(postRegex).reply(200, {});
-
 export const getChatFriends = async () => {
   const res = await axios.get('/chat');
   return res.data;
 };
-
-export async function getChatMessages(user) {
-  const res = await axios.get(`/chat/user/${user}`);
-  return res.data;
-}
-
-export async function sendChatMessage(message) {
-  const res = await axios.post(`/chat/send/${message}`);
-  mes.push({
-    message,
-    sent: true,
-  });
-  return res.data;
-}

@@ -1,11 +1,14 @@
 import './chat.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getChatMessages, sendChatMessage } from '../api/userPageAPI';
+import { getChatMessages, sendChatMessage } from '../api/chatAPI';
 import ChatPeopleComponent from './ChatPeopleComponent';
 
 export default function ChatUserComponent() {
   const user = useParams();
+  const curUser = sessionStorage.getItem('username');
+  const [time, setTime] = useState(Date.now());
+  console.log('USER', curUser);
 
   function scrollMessages() {
     const messageDiv = document.getElementById('messages');
@@ -16,7 +19,7 @@ export default function ChatUserComponent() {
   const getChats = async () => {
     try {
       let chats = '';
-      const res = await getChatMessages(user.user);
+      const res = await getChatMessages(user.user, curUser);
       for (let i = 0; i < res.messages.length; i += 1) {
         let leftRight = 'messageLeft';
         const message = res.messages[i];
@@ -38,14 +41,18 @@ export default function ChatUserComponent() {
 
   useEffect(() => {
     getChats();
-  }, [5000]);
+    setInterval(() => {
+      console.log('Setting Interval');
+      setTime(Date.now());
+    }, 1000);
+  }, [time]);
 
   async function sendMessage() {
     const chat = document.getElementById('chatSend');
     if (chat) {
       if (chat.value !== '') {
         try {
-          await sendChatMessage(chat.value);
+          await sendChatMessage(chat.value, curUser, user.user);
           await getChats();
           chat.value = '';
           chat.focus();
