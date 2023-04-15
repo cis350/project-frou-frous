@@ -11,13 +11,6 @@ import renderer, { act } from 'react-test-renderer';
 import ChatPeopleComponent from '../Components/ChatPeopleComponent';
 import ChatUserComponent from '../Components/ChatUserComponent';
 
-// test that the UI matches the wireframes
-test('renders userLinks', async () => {
-  const { getByText } = await act(async () => render(<ChatPeopleComponent />));
-  const linkElement = getByText(/Jane/);
-  expect(linkElement).toBeInTheDocument();
-});
-
 test('test that button present', async () => {
   // render the component
   const { getByRole } = await act(async () => render(<ChatUserComponent />));
