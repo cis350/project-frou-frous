@@ -47,7 +47,9 @@ function Register() {
     return isproceed;
   };
 
-  function displayRegister(res) {
+  async function displayRegister(obj) {
+    const res = await createUser(obj);
+    console.log('RES', res);
     if (res.error) {
       toast.error(`Failed: ${res.err.message}`);
     } else {
@@ -62,7 +64,7 @@ function Register() {
       id, password, email, firstName, lastName, friends, friendsReq,
     };
     if (isValidate()) {
-      createUser(obj, displayRegister);
+      displayRegister(obj);
     }
   };
 
