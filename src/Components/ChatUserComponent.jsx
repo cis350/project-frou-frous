@@ -24,7 +24,7 @@ export default function ChatUserComponent() {
       for (let i = 0; i < res.messages.length; i += 1) {
         let leftRight = 'messageLeft';
         const message = res.messages[i];
-        if (message.sent) {
+        if (message.sender === curUser) {
           leftRight = 'messageRight';
         }
         chats = chats.concat(`
