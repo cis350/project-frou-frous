@@ -7,6 +7,7 @@ import ChatPeopleComponent from './ChatPeopleComponent';
 export default function ChatUserComponent() {
   const user = useParams();
   const curUser = sessionStorage.getItem('username');
+  const home = `/user/${curUser}`;
   const [time, setTime] = useState(Date.now());
   console.log('USER', curUser);
 
@@ -72,7 +73,7 @@ export default function ChatUserComponent() {
       <div id="chatWindow">
         <div id="chatBar" className="flex-row">
           <h3>{user.user}</h3>
-          <a className="chatA" href="/user/1234">
+          <a className="chatA" href={home}>
             <p id="homeIcon" className="bi bi-house-fill" />
           </a>
         </div>

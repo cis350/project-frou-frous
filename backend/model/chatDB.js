@@ -106,7 +106,7 @@ const addMessage = async (newMessage) => {
 
 const getMessages = async (user1, user2, chatId) => {
   const db = await getDB();
-  const results = await db.collection('ChatMessages').find({$and: [
+  const results = await db.collection('ChatMessages').find({ $and: [
     { sender: { $in: [user1, user2] } },
     { chatId },
   ] })
@@ -127,6 +127,78 @@ const getChatId = async (user1, user2) => {
     return resInsert.insertedId;
   }
   return chatId._id; // eslint-disable-line
+};
+
+/* eslint-disable no-unreachable */
+const getFriends = async (user) => {
+  console.log('getting friends');
+  const db = await getDB();
+  console.log('user', user);
+  const userData = await db.collection('User').findOne({ _id: user });
+  console.log('user data', userData);
+  if (!userData) {
+    return { error: 'User does not exist' };
+  }
+  console.log('User Data', userData);
+  const { friends } = userData;
+  if (!friends || friends.length === 0) {
+    return [];
+  }
+  const friendData = await db.collection('User').find({ _id: { $in: friends } }).toArray();
+  console.log('Friend Data', friendData);
+  const chatIdsData = await db.collection('ChatIds').find({ $or: [{ user1: user }, { user2: user }] }).toArray();
+  const chatIds = chatIdsData.map(
+    (val) => (val._id.toHexString()), //eslint-disable-line
+  );
+  console.log('ChatIdsData Data', chatIdsData);
+  console.log('ChatIds', chatIds);
+  const lastMessages = await db.collection('ChatMessages').find({ chatId: { $in: chatIds } }).sort({ timestamp: -1 }).limit(chatIds.length)
+    .toArray();
+  // {
+  //   message: 'hello hello',
+  //   friend: 'John Doe',
+  //   friendImage: 'https://bestprofilepictures.com/wp-content/uploads/2021/08/Amazing-Profile-Picture-for-Facebook.jpg',
+  //   timestamp: 1679326514,
+  // }
+  console.log('lastMessages Data', lastMessages);
+  const data = [];
+  //console.log('friendData.length', friendData.length);
+  for (let i = 0; i < friendData.length; i += 1) {
+    let chatId = chatIdsData.find((idData) => (idData.user1 === user //eslint-disable-line
+      && idData.user2 === friendData[i]._id) //eslint-disable-line
+      || (idData.user2 === user && idData.user1 === friendData[i]._id)); //eslint-disable-line
+    console.log('Chat Id', chatId);
+    if (chatId) {
+      chatId = chatId._id.toHexString(); //eslint-disable-line
+      const lastMessageData = lastMessages.find((message) => (message.chatId
+      === chatId));
+      console.log('lastMessageData', lastMessageData);
+      if (lastMessageData) {
+        data.push({
+          message: lastMessageData.message,
+          friend: friendData[i]._id, //eslint-disable-line
+          friendImage: friendData[i].pfp,
+          timestamp: lastMessageData.timestamp,
+        });
+      } else {
+        data.push({
+          message: '',
+          friend: friendData[i]._id, //eslint-disable-line
+          friendImage: friendData[i].pfp,
+          timestamp: -1,
+        });
+      }
+    } else {
+      data.push({
+        message: '',
+        friend: friendData[i]._id, //eslint-disable-line
+        friendImage: friendData[i].pfp,
+        timestamp: -1,
+      });
+    }
+  }
+  console.log('return Data', data);
+  return data;
 };
 
 /**
@@ -199,6 +271,7 @@ module.exports = {
   addMessage,
   getMessages,
   getChatId,
+  getFriends,
   // getStudents,
   // getStudent,
   // updateStudent,

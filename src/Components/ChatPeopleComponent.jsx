@@ -1,9 +1,14 @@
 import './chat.css';
 import React, { useState, useEffect } from 'react';
-import { getChatFriends } from '../api/userPageAPI';
+import { getChatFriends } from '../api/chatAPI';
 
 function convertTimestamp(timestamp) {
-  const d = new Date(timestamp * 1000);
+  console.log('timestamp', timestamp);
+  if (timestamp < 0) {
+    return '';
+  }
+  const d = new Date(timestamp);
+  console.log('timestamp date', d);
   const yyyy = d.getFullYear();
   const mm = ('0'.concat((d.getMonth() + 1))).slice(-2);
   const dd = ('0'.concat(d.getDate())).slice(-2);
@@ -15,6 +20,7 @@ function convertTimestamp(timestamp) {
 }
 
 export default function ChatPeopleComponent() {
+  const curUser = sessionStorage.getItem('username');
   // add a state to the component
   const [search, setSearch] = useState('');
   const [friends, setFriends] = useState([]);
@@ -60,7 +66,7 @@ export default function ChatPeopleComponent() {
 
     const getFriends = async () => {
       try {
-        const res = await getChatFriends();
+        const res = await getChatFriends(curUser);
         setFriends(res.friends);
         // setFriends(response.friends);
         filterFriends(search, res.friends);

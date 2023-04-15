@@ -66,13 +66,24 @@ webapp.get('/chat/user/:user1/:user2/:chat', async (req, resp) => {
   resp.status(201).json({ data: res });
 });
 
-webapp.get('/chat/:user1/:user2', async (req, resp) => {
+webapp.get('/chat/getChatId/:user1/:user2', async (req, resp) => {
   if (!req.params.user1 || !req.params.user2) {
     resp.status(404).json({ message: 'missing users or message' });
     return;
   }
 
   const res = await dbLib.getChatId(req.params.user1, req.params.user2);
+  resp.status(201).json({ data: res });
+});
+
+webapp.get('/chat/getFriends/:user', async (req, resp) => {
+  console.log('Getting Friends');
+  if (!req.params.user) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+
+  const res = await dbLib.getFriends(req.params.user);
   resp.status(201).json({ data: res });
 });
 
