@@ -87,7 +87,7 @@ webapp.get('/chat/getFriends/:user', async (req, resp) => {
   resp.status(201).json({ data: res });
 });
 
-webapp.get('user/:user', async (req, resp) => {
+webapp.get('/user/:user', async (req, resp) => {
   console.log('Getting User');
   if (!req.params.user) {
     resp.status(404).json({ message: 'missing user' });
@@ -97,7 +97,7 @@ webapp.get('user/:user', async (req, resp) => {
   resp.status(201).json({ data: res });
 });
 
-webapp.put('user/addfriend/:user/:friend', async (req, resp) => {
+webapp.put('/user/addfriend/:user/:friend', async (req, resp) => {
   console.log('Adding Friend');
   if (!req.params.user || !req.params.friend) {
     resp.status(404).json({ message: 'missing user' });
@@ -107,7 +107,7 @@ webapp.put('user/addfriend/:user/:friend', async (req, resp) => {
   resp.status(201).json({ data: res });
 });
 
-webapp.put('user/removefriend/:user/:friend', async (req, resp) => {
+webapp.put('/user/removefriend/:user/:friend', async (req, resp) => {
   console.log('Removing Friend');
   if (!req.params.user || !req.params.friend) {
     resp.status(404).json({ message: 'missing user' });
@@ -117,7 +117,7 @@ webapp.put('user/removefriend/:user/:friend', async (req, resp) => {
   resp.status(201).json({ data: res });
 });
 
-webapp.put('user/sendfriendrequest/:user/:friend', async (req, resp) => {
+webapp.put('/user/sendfriendrequest/:user/:friend', async (req, resp) => {
   console.log('Sending Friend Request');
   if (!req.params.user || !req.params.friend) {
     resp.status(404).json({ message: 'missing user' });
@@ -127,7 +127,7 @@ webapp.put('user/sendfriendrequest/:user/:friend', async (req, resp) => {
   resp.status(201).json({ data: res });
 });
 
-webapp.put('user/removefriendrequest/:user/:friend', async (req, resp) => {
+webapp.put('/user/removefriendrequest/:user/:friend', async (req, resp) => {
   console.log('Removing Friend Request');
   if (!req.params.user || !req.params.friend) {
     resp.status(404).json({ message: 'missing user' });
