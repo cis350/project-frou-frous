@@ -58,6 +58,17 @@ const getReports = async () => {
   }
 };
 
+const getReport = async(userName) => {
+  try {
+    const db = await getDB();
+    const result = await db.collection('reports').findOne({id: newObjectId(userName)});
+    console.log(`User: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log('ERROR: ${err.message}');
+  }
+}
+
 const addReport = async (userName) => {
   // get the db
   const db = await getDB();
@@ -70,6 +81,6 @@ module.exports = {
   closeMongoDBConnection,
   getDB,
   connect,
-  getReports,
+  getReport,
   addReport,
 };
