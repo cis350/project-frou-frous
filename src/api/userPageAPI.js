@@ -80,13 +80,14 @@ export function getReport(callback, postId) {
 
 export async function getUserData(userId) {
   try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const response = await fetch(`http://localhost:5000/user/${userId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
     });
     const data = await response.json();
-    return data;
+    return data[0];
   } catch (error) {
     return { success: false, error };
   }
@@ -94,58 +95,13 @@ export async function getUserData(userId) {
 
 export async function removeFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const data = await response.json();
-    const { friends } = data;
-    if (friends.includes(friendId)) {
-      const index = friends.indexOf(friendId);
-      if (index !== -1) {
-        friends.splice(index, 1);
-      }
-    }
-
-    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
+    const response = await fetch(`http://localhost:5000/user/removefriend/${userId}/${friendId}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const data2 = await response2.json();
-    return data2;
-  } catch (error) {
-    return { error };
-  }
-}
-
-export async function changeUsername(userId, newId) {
-  try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
     });
     const data = await response.json();
-    data.id = newId;
-
-    await fetch(`http://localhost:8000/user/${userId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    await fetch('http://localhost:8000/user/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
     return data;
   } catch (error) {
     return { error };
@@ -154,29 +110,14 @@ export async function changeUsername(userId, newId) {
 
 export async function removeFriendReq(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const response = await fetch(`http://localhost:5000/user/removefriendreq/${userId}/${friendId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
     });
     const data = await response.json();
-    const { friendReqs } = data;
-    if (friendReqs.includes(friendId)) {
-      const index = friendReqs.indexOf(friendId);
-      if (index !== -1) {
-        friendReqs.splice(index, 1);
-      }
-    }
-
-    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const data2 = await response2.json();
-    return data2;
+    return data;
   } catch (error) {
     return { error };
   }
@@ -184,25 +125,14 @@ export async function removeFriendReq(userId, friendId) {
 
 export async function sendFriendRequest(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const response = await fetch(`http://localhost:5000/user/sendfriendreq/${userId}/${friendId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
     });
     const data = await response.json();
-    if (!data.friendReqs.includes(friendId)) {
-      data.friendReqs.push(friendId);
-    }
-
-    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const data2 = await response2.json();
-    return data2;
+    return data;
   } catch (error) {
     return { error };
   }
@@ -210,32 +140,14 @@ export async function sendFriendRequest(userId, friendId) {
 
 export async function addFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const response = await fetch(`http://localhost:5000/user/addfriend/${userId}/${friendId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
     });
     const data = await response.json();
-    if (data.friendReqs.includes(friendId)) {
-      const index = data.friendReqs.indexOf(friendId);
-      if (index !== -1) {
-        data.friendReqs.splice(index, 1);
-      }
-    }
-    if (!data.friends.includes(friendId)) {
-      data.friends.push(friendId);
-    }
-
-    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const data2 = await response2.json();
-    console.log('test', data2);
-    return data2;
+    return data;
   } catch (error) {
     return { error };
   }

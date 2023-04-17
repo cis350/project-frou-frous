@@ -114,6 +114,62 @@ const getMessages = async (user1, user2, chatId) => {
   return results;
 };
 
+const getUserData = async (user) => {
+  const db = await getDB();
+  const results = await db.collection('User').find({ _id: user }).toArray();
+  return results;
+};
+
+const removeFriend = async (user, friend) => {
+  const db = await getDB();
+  const results = await db.collection('User').updateOne(
+    { _id: user },
+    { $pull: { friends: friend } },
+  );
+  return results;
+};
+
+const addFriend = async (user, friend) => {
+  const db = await getDB();
+  const results = await db.collection('User').updateOne(
+    { _id: user },
+    { $push: { friends: friend } },
+  );
+  return results;
+};
+
+const removeFriendReq = async (user, friend) => {
+  const db = await getDB();
+  const results = await db.collection('User').updateOne(
+    { _id: user },
+    { $pull: { friendReqs: friend } },
+  );
+  return results;
+};
+
+const sendFriendRequest = async (user, friend) => {
+  const db = await getDB();
+  const results = await db.collection('User').updateOne(
+    { _id: friend },
+    { $push: { friendReqs: user } },
+  );
+  return results;
+};
+
+// const updateStudent = async (studentID, newMajor) => {
+//   try {
+//     // get the db
+//     const db = await getDB();
+//     const result = await db.collection('students').updateOne(
+//       { _id: ObjectId(studentID) },
+//       { $set: { major: newMajor } },
+//     );
+//     return result;
+//   } catch (err) {
+//     console.log(`error: ${err.message}`);
+//   }
+// };
+
 const getChatId = async (user1, user2) => {
   const db = await getDB();
   const chatId = await db.collection('ChatIds').findOne({
@@ -162,7 +218,7 @@ const getFriends = async (user) => {
   // }
   console.log('lastMessages Data', lastMessages);
   const data = [];
-  //console.log('friendData.length', friendData.length);
+  // console.log('friendData.length', friendData.length);
   for (let i = 0; i < friendData.length; i += 1) {
     let chatId = chatIdsData.find((idData) => (idData.user1 === user //eslint-disable-line
       && idData.user2 === friendData[i]._id) //eslint-disable-line
@@ -272,8 +328,9 @@ module.exports = {
   getMessages,
   getChatId,
   getFriends,
-  // getStudents,
-  // getStudent,
-  // updateStudent,
-  // deleteStudent,
+  getUserData,
+  removeFriend,
+  addFriend,
+  removeFriendReq,
+  sendFriendRequest,
 };

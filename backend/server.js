@@ -87,6 +87,56 @@ webapp.get('/chat/getFriends/:user', async (req, resp) => {
   resp.status(201).json({ data: res });
 });
 
+webapp.get('user/:user', async (req, resp) => {
+  console.log('Getting User');
+  if (!req.params.user) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.getUserData(req.params.user);
+  resp.status(201).json({ data: res });
+});
+
+webapp.put('user/addfriend/:user/:friend', async (req, resp) => {
+  console.log('Adding Friend');
+  if (!req.params.user || !req.params.friend) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.addFriend(req.params.user, req.params.friend);
+  resp.status(201).json({ data: res });
+});
+
+webapp.put('user/removefriend/:user/:friend', async (req, resp) => {
+  console.log('Removing Friend');
+  if (!req.params.user || !req.params.friend) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.removeFriend(req.params.user, req.params.friend);
+  resp.status(201).json({ data: res });
+});
+
+webapp.put('user/sendfriendrequest/:user/:friend', async (req, resp) => {
+  console.log('Sending Friend Request');
+  if (!req.params.user || !req.params.friend) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.sendFriendRequest(req.params.user, req.params.friend);
+  resp.status(201).json({ data: res });
+});
+
+webapp.put('user/removefriendrequest/:user/:friend', async (req, resp) => {
+  console.log('Removing Friend Request');
+  if (!req.params.user || !req.params.friend) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.removeFriendRequest(req.params.user, req.params.friend);
+  resp.status(201).json({ data: res });
+});
+
 /**
  * route implementation DELETE /student/:id
  */
