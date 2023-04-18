@@ -19,7 +19,7 @@ function ReportModal({ userId }) {
     const date = new Date();
     const dateAsInt = date.getTime();
     try {
-      await fetch('http://localhost:8000/report', {
+      await fetch('http://localhost:5000/report', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({

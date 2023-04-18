@@ -87,6 +87,16 @@ webapp.get('/chat/getFriends/:user', async (req, resp) => {
   resp.status(201).json({ data: res });
 });
 
+webapp.post('./report', async (req, resp) => {
+  console.log('Reporting User');
+  if (!req.params.user || !req.params.friend) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.reportUser(req.params.user, req.params.friend);
+  resp.status(201).json({ data: res });
+});
+
 /**
  * route implementation DELETE /student/:id
  */
