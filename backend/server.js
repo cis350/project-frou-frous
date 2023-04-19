@@ -84,57 +84,56 @@ webapp.get('/chat/getFriends/:user', async (req, resp) => {
   }
 
   const res = await dbLib.getFriends(req.params.user);
-  resp.status(201).json({ data: res });
+  resp.status(200).json({ data: res });
 });
 
 webapp.get('/user/:user', async (req, resp) => {
-  console.log('Getting User');
   if (!req.params.user) {
     resp.status(404).json({ message: 'missing user' });
     return;
   }
   const res = await dbLib.getUserData(req.params.user);
-  resp.status(201).json({ data: res });
+  if (res.length === 0) {
+    resp.status(404).json({ message: 'user not found' });
+    return;
+  }
+  resp.status(200).json({ data: res });
 });
 
 webapp.put('/user/addfriend/:user/:friend', async (req, resp) => {
-  console.log('Adding Friend');
   if (!req.params.user || !req.params.friend) {
     resp.status(404).json({ message: 'missing user' });
     return;
   }
   const res = await dbLib.addFriend(req.params.user, req.params.friend);
-  resp.status(201).json({ data: res });
+  resp.status(200).json({ data: res });
 });
 
 webapp.put('/user/removefriend/:user/:friend', async (req, resp) => {
-  console.log('Removing Friend');
   if (!req.params.user || !req.params.friend) {
     resp.status(404).json({ message: 'missing user' });
     return;
   }
   const res = await dbLib.removeFriend(req.params.user, req.params.friend);
-  resp.status(201).json({ data: res });
+  resp.status(200).json({ data: res });
 });
 
-webapp.put('/user/sendfriendrequest/:user/:friend', async (req, resp) => {
-  console.log('Sending Friend Request');
+webapp.put('/user/sendfriendreq/:user/:friend', async (req, resp) => {
   if (!req.params.user || !req.params.friend) {
     resp.status(404).json({ message: 'missing user' });
     return;
   }
-  const res = await dbLib.sendFriendRequest(req.params.user, req.params.friend);
-  resp.status(201).json({ data: res });
+  const res = await dbLib.sendFriendReq(req.params.user, req.params.friend);
+  resp.status(200).json({ data: res });
 });
 
-webapp.put('/user/removefriendrequest/:user/:friend', async (req, resp) => {
-  console.log('Removing Friend Request');
+webapp.put('/user/removefriendreq/:user/:friend', async (req, resp) => {
   if (!req.params.user || !req.params.friend) {
-    resp.status(404).json({ message: 'missing user' });
+    resp.status(404).json({ data: 'missing user' });
     return;
   }
-  const res = await dbLib.removeFriendRequest(req.params.user, req.params.friend);
-  resp.status(201).json({ data: res });
+  const res = await dbLib.removeFriendReq(req.params.user, req.params.friend);
+  resp.status(200).json({ data: res });
 });
 
 /**

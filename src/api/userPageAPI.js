@@ -87,7 +87,8 @@ export async function getUserData(userId) {
       cache: 'default',
     });
     const data = await response.json();
-    return data[0];
+    console.log('data: ', data);
+    return data.data[0];
   } catch (error) {
     return { success: false, error };
   }
@@ -147,6 +148,7 @@ export async function addFriend(userId, friendId) {
       cache: 'default',
     });
     const data = await response.json();
+    console.log('addedfriend: ', data);
     return data;
   } catch (error) {
     return { error };

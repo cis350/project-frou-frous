@@ -13,7 +13,7 @@ const { MongoClient } = require('mongodb');
 const { ObjectId } = require('mongodb');
 
 // the mongodb server URL
-const dbURL = 'mongodb+srv://kait:bvRU17DvKEu38fHb@froufrouscluster.w2cbat4.mongodb.net/?retryWrites=true&w=majority';
+const dbURL = 'mongodb+srv://kait:bvRU17DvKEu38fHb@froufrouscluster.w2cbat4.mongodb.net/';
 
 /**
  * MongoDB database connection
@@ -122,20 +122,40 @@ const getUserData = async (user) => {
 
 const removeFriend = async (user, friend) => {
   const db = await getDB();
-  const results = await db.collection('User').updateOne(
+  const userUpdateResult = await db.collection('User').updateOne(
     { _id: user },
     { $pull: { friends: friend } },
   );
-  return results;
+  const friendUpdateResult = await db.collection('User').updateOne(
+    { _id: friend },
+    { $pull: { friends: user } },
+  );
+  return {
+    userUpdateResult,
+    friendUpdateResult,
+  };
 };
 
 const addFriend = async (user, friend) => {
   const db = await getDB();
-  const results = await db.collection('User').updateOne(
+  const userUpdateResult = await db.collection('User').updateOne(
     { _id: user },
-    { $push: { friends: friend } },
+    {
+      $pull: { friendReqs: friend },
+      $addToSet: { friends: friend },
+    },
   );
-  return results;
+  const friendUpdateResult = await db.collection('User').updateOne(
+    { _id: friend },
+    {
+      $pull: { friendReqs: user },
+      $addToSet: { friends: user },
+    },
+  );
+  return {
+    userUpdateResult,
+    friendUpdateResult,
+  };
 };
 
 const removeFriendReq = async (user, friend) => {
@@ -147,11 +167,11 @@ const removeFriendReq = async (user, friend) => {
   return results;
 };
 
-const sendFriendRequest = async (user, friend) => {
+const sendFriendReq = async (user, friend) => {
   const db = await getDB();
   const results = await db.collection('User').updateOne(
     { _id: friend },
-    { $push: { friendReqs: user } },
+    { $addToSet: { friendReqs: user } },
   );
   return results;
 };
@@ -332,5 +352,5 @@ module.exports = {
   removeFriend,
   addFriend,
   removeFriendReq,
-  sendFriendRequest,
+  sendFriendReq,
 };
