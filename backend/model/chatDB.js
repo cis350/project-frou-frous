@@ -119,6 +119,20 @@ const getUserData = async (user) => {
   const results = await db.collection('User').find({ _id: user }).toArray();
   return results;
 };
+const addUser = async (userName) => {
+  // get the db
+  const db = await getDB();
+  const result = await db.collection('User').insertOne({ _id: userName.id,
+    password: userName.password,
+    firstName: userName.firstName,
+    lastName: userName.lastName,
+    friends: userName.friends,
+    friendsReq: userName.friendsReq });
+  console.log('userName', userName);
+  console.log('result', result);
+  console.log('result.insertedId', result.insertedId);
+  return userName;
+};
 
 const removeFriend = async (user, friend) => {
   const db = await getDB();
@@ -353,4 +367,5 @@ module.exports = {
   addFriend,
   removeFriendReq,
   sendFriendReq,
+  addUser,
 };

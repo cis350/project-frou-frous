@@ -17,7 +17,7 @@ function Login() {
       toast.error(resp.error.message);
     } else if (Object.keys(resp).length === 0) {
       toast.error('Invalid username');
-    } else if (resp.password === password) {
+    } else if (resp.data[0].password === password) {
       toast.success('login successful');
       sessionStorage.setItem('username', username);
       window.location.href = `/user/${username}`;
