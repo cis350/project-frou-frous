@@ -9,7 +9,7 @@ function ReportModal({ userId }) {
   ReportModal.propTypes = {
     userId: PropTypes.string,
   };
-  const reporter = '1234';
+  const reporter = sessionStorage.getItem('username');
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [caption, setCaption] = useState('');
