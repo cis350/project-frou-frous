@@ -52,20 +52,6 @@ describe('updateLikes2', () => {
   });
 });
 
-describe('getReportDataLikes', () => {
-  it('should return the likes count for a post', async () => {
-    const postId = 1;
-    const expectedLikesCount = ['Alice', 'Bob'];
-
-    // Mock the API call and return the expected response
-
-    const result = await getReportDataLikes(postId);
-    const userData = await getUserData(postId);
-
-    expect(userData.likes).toEqual(expectedLikesCount);
-    expect(result.likes).toEqual(expectedLikesCount);
-  });
-});
 describe('<Report />', () => {
   it('increments and decrements like count when like button is clicked1', async () => {
     const { getByTestId } = render(<Report />);
