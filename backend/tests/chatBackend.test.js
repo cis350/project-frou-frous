@@ -72,7 +72,7 @@ describe('GET/PUT userfriends endpoint integration test', () => {
 
   test('200 get messages', async () => {
     const resp = await request(app).get(`/chat/user/testUser2/testUser1/${chatId}`);
-    expect(resp.status).toEqual(201);
+    expect(resp.status).toEqual(200);
     const { data } = JSON.parse(resp.text);
     expect(data.length).toEqual(1);
     const respAdd = await request(app).post('/chat/sendMessage').send(`sender=testUser1&message=hello&chatId=${chatId}`);
@@ -85,7 +85,7 @@ describe('GET/PUT userfriends endpoint integration test', () => {
   test('200 get chat ID', async () => {
     const resp = await request(app).get('/chat/getChatId/testUser1/testUser2');
     const { data } = JSON.parse(resp.text);
-    expect(resp.status).toEqual(201);
+    expect(resp.status).toEqual(200);
     console.log('RESP DATA', data);
     expect(data).toEqual(chatId);
   });
@@ -93,7 +93,7 @@ describe('GET/PUT userfriends endpoint integration test', () => {
   test('200 get chat ID', async () => {
     const resp = await request(app).get('/chat/getFriends/testUser1');
     const { data } = JSON.parse(resp.text);
-    expect(resp.status).toEqual(201);
+    expect(resp.status).toEqual(200);
     expect(data.length).toEqual(1);
   });
 });

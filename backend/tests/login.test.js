@@ -25,7 +25,7 @@ describe('POST /user enpoint tests', () => {
 
     // send the request to the API and collect the response
     response = await request(app).post('/user')
-      .send('id=testuser&firstName=Sam&email=a@upenn.edu&lastName=Smith&password=sam&friends=[]&friendsReq=[]');
+      .send('id=testuser&firstName=Sam&email=a@upenn.edu&lastName=Smith&password=sam&friends=[]&friendReqs=[]&pfp="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg"');
   });
 
   /**

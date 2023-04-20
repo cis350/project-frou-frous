@@ -52,12 +52,12 @@ webapp.post('/chat/sendMessage', async (req, resp) => {
 
 webapp.get('/chat/user/:user1/:user2/:chat', async (req, resp) => {
   const res = await dbLib.getMessages(req.params.user1, req.params.user2, req.params.chat);
-  resp.status(201).json({ data: res });
+  resp.status(200).json({ data: res });
 });
 
 webapp.get('/chat/getChatId/:user1/:user2', async (req, resp) => {
   const res = await dbLib.getChatId(req.params.user1, req.params.user2);
-  resp.status(201).json({ data: res });
+  resp.status(200).json({ data: res });
 });
 
 webapp.get('/chat/getFriends/:user', async (req, resp) => {
