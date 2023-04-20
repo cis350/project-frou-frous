@@ -14,12 +14,23 @@ function ReportModal({ userId }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [caption, setCaption] = useState('');
   const [reportee, setReportee] = useState('');
+  const toBase64 = (file) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
 
   const handleSubmit = async () => {
     const date = new Date();
     const dateAsInt = date.getTime();
+
     try {
-      await fetch('http://localhost:5000/report', {
+      const imageBase = await toBase64(selectedImage);
+      console.log(imageBase, 'here');
+      const form = new FormData();
+      form.append('image', selectedImage, selectedImage.name);
+      await fetch('http://localhost:5001/report', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -29,7 +40,7 @@ function ReportModal({ userId }) {
           date: dateAsInt,
           comments: [],
           likes: [],
-          img: 'https://media.istockphoto.com/id/1207224564/photo/happy-cute-boy-having-picnic-in-the-park.jpg?s=1024x1024&w=is&k=20&c=JKrcNb7iTO4oHyci_IWsGrZCFbdtmdJR7cW3ZI_ilPo=',
+          img: imageBase,
         }),
       });
       toast.success('Reported!');
@@ -82,6 +93,7 @@ function ReportModal({ userId }) {
               onChange={(event) => {
                 setSelectedImage(event.target.files[0]);
               }}
+              accept="image/*"
             />
             <textarea
               className="h-32 mt-8 w-full break-words p-2 rounded-md"

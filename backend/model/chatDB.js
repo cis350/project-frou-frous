@@ -263,6 +263,13 @@ const getFriends = async (user) => {
 //   }
 // };
 
+const reportUser = async (newReport) => {
+  // get the db
+  const db = await getDB();
+  const result = await db.collection('Reports').insertOne(newReport);
+  return result.insertedId;
+};
+
 // export the functions
 module.exports = {
   closeMongoDBConnection,
@@ -272,6 +279,7 @@ module.exports = {
   getMessages,
   getChatId,
   getFriends,
+  reportUser,
   // getStudents,
   // getStudent,
   // updateStudent,

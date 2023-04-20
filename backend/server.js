@@ -7,6 +7,13 @@ const express = require('express'); // eslint-disable-line
 
 // import the cors -cross origin resource sharing- module
 const cors = require('cors'); // eslint-disable-line 
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: 'dgyhizrvt',
+  api_key: '665667247954395',
+  api_secret: 'SLHkQi0yP4V4V9C5dzOHdBpgPus',
+});
 
 const bodyParser = require('body-parser') // eslint-disable-line 
 
@@ -87,14 +94,28 @@ webapp.get('/chat/getFriends/:user', async (req, resp) => {
   resp.status(201).json({ data: res });
 });
 
-webapp.post('./report', async (req, resp) => {
-  console.log('Reporting User');
-  if (!req.params.user || !req.params.friend) {
-    resp.status(404).json({ message: 'missing user' });
-    return;
+webapp.post('/report', async (req, resp) => {
+  console.log('Reporting User', req.body.img);
+  try {
+    const imageResp = cloudinary.uploader.upload(req.body.img, {public_id: req.body.reporteeid})
+
+    console.log('Image Response', imageResp);
+    // create the new student object
+    const newReport = {
+      reporterid: req.body.reporterid,
+      reporteeid: req.body.reporteeid,
+      caption: req.body.caption,
+      date: req.body.date,
+      comments: [],
+      likes: [],
+      img: (await imageResp).secure_url,
+    };
+    console.log('hey');
+    const result = await dbLib.reportUser(newReport);
+    resp.status(201).json({ data: { id: result } });
+  } catch (err) {
+    resp.status(400).json({ message: 'There was an error' });
   }
-  const res = await dbLib.reportUser(req.params.user, req.params.friend);
-  resp.status(201).json({ data: res });
 });
 
 /**
