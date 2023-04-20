@@ -9,7 +9,7 @@ function Register() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [friends] = useState([]);
-  const [friendsReq] = useState([]);
+  const [friendReqs] = useState([]);
 
   const isValidate = () => {
     let isproceed = true;
@@ -59,9 +59,10 @@ function Register() {
   }
 
   const handleSubmit = (e) => {
+    debugger; // eslint-disable-line 
     e.preventDefault();
     const obj = {
-      id, password, email, firstName, lastName, friends, friendsReq,
+      id, password, email, firstName, lastName, friends, friendReqs,
     };
     if (isValidate()) {
       displayRegister(obj);

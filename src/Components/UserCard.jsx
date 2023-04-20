@@ -187,7 +187,7 @@ function UserCard(props) {
               variant="contained"
               sx={{ backgroundColor: '#97B96B', color: 'white', marginTop: '5%', borderRadius: '15px' }}
               onClick={() => {
-                removeFriendReq(userId, currentUser);
+                removeFriendReq(currentUser, userId);
                 setFriendStatus('none');
               }}
             >
@@ -199,7 +199,7 @@ function UserCard(props) {
               variant="contained"
               sx={{ backgroundColor, color: 'white', marginTop: '5%', borderRadius: '15px' }}
               onClick={() => {
-                sendFriendRequest(userId, currentUser);
+                sendFriendRequest(currentUser, userId);
                 setFriendStatus('requested');
               }}
             >

@@ -127,7 +127,10 @@ const addUser = async (userName) => {
     firstName: userName.firstName,
     lastName: userName.lastName,
     friends: userName.friends,
-    friendsReq: userName.friendsReq });
+    friendReqs: userName.friendReqs,
+    email: userName.email,
+    pfp: userName.pfp,
+  });
   return result;
 };
 

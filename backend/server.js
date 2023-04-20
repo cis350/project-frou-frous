@@ -82,7 +82,7 @@ webapp.post('/user/', async (req, resp) => {
   console.log('Creating User REQUEST BODY', req.body);
   if (!req.body.id || !req.body.password || !req.body.email
          || !req.body.firstName || !req.body.lastName || !req.body.friends
-         || !req.body.friendsReq) {
+         || !req.body.friendReqs) {
     console.log('here');
     resp.status(404).json({ message: 'missing data' });
     return;
@@ -94,7 +94,9 @@ webapp.post('/user/', async (req, resp) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       friends: req.body.friends,
-      friendsReq: req.body.friendsReq,
+      friendReqs: req.body.friendReqs,
+      email: req.body.email,
+      pfp: 'https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg',
     };
     console.log('newUser', newUser);
     const result = await dbLib.addUser(newUser);
