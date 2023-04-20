@@ -31,12 +31,6 @@ webapp.use(express.urlencoded({ extended: true }));
 // import the db function
 const dbLib = require('./model/chatDB');
 
-// root endpoint route
-webapp.get('/', (req, resp) => {
-  console.log('Test', req.body);
-  resp.json({ messge: 'hello CIS3500 friends!!! You have dreamy eyes' });
-});
-
 /**
  * route implementation POST / chat/sendMessage
  */
@@ -64,34 +58,96 @@ webapp.post('/chat/sendMessage', async (req, resp) => {
 });
 
 webapp.get('/chat/user/:user1/:user2/:chat', async (req, resp) => {
-  if (!req.params.user1 || !req.params.user2 || !req.params.chat) {
-    resp.status(404).json({ message: 'missing users or message' });
-    return;
-  }
-
   const res = await dbLib.getMessages(req.params.user1, req.params.user2, req.params.chat);
   resp.status(201).json({ data: res });
 });
 
 webapp.get('/chat/getChatId/:user1/:user2', async (req, resp) => {
-  if (!req.params.user1 || !req.params.user2) {
-    resp.status(404).json({ message: 'missing users or message' });
-    return;
-  }
-
   const res = await dbLib.getChatId(req.params.user1, req.params.user2);
   resp.status(201).json({ data: res });
 });
 
 webapp.get('/chat/getFriends/:user', async (req, resp) => {
-  console.log('Getting Friends');
+  const res = await dbLib.getFriends(req.params.user);
+  resp.status(200).json({ data: res });
+});
+
+webapp.get('/user/:user', async (req, resp) => {
   if (!req.params.user) {
     resp.status(404).json({ message: 'missing user' });
     return;
   }
+  const res = await dbLib.getUserData(req.params.user);
+  if (res.length === 0) {
+    resp.status(404).json({ message: 'user not found' });
+    return;
+  }
+  resp.status(200).json({ data: res });
+});
 
-  const res = await dbLib.getFriends(req.params.user);
-  resp.status(201).json({ data: res });
+webapp.post('/user/', async (req, resp) => {
+  console.log('Creating User REQUEST BODY', req.body);
+  if (!req.body.id || !req.body.password || !req.body.email
+         || !req.body.firstName || !req.body.lastName || !req.body.friends
+         || !req.body.friendReqs) {
+    console.log('here');
+    resp.status(404).json({ message: 'missing data' });
+    return;
+  }
+  try {
+    const newUser = {
+      id: req.body.id,
+      password: req.body.password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      friends: req.body.friends,
+      friendReqs: req.body.friendReqs,
+      email: req.body.email,
+      pfp: 'https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg',
+    };
+    console.log('newUser', newUser);
+    const result = await dbLib.addUser(newUser);
+    console.log('result after post: ', result);
+    resp.status(201).json({ data: { id: result } });
+  } catch (err) {
+    resp.status(400).json({ message: 'There was an error' });
+  }
+});
+
+webapp.put('/user/addfriend/:user/:friend', async (req, resp) => {
+  if (!req.params.user || !req.params.friend) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.addFriend(req.params.user, req.params.friend);
+  resp.status(200).json({ data: res });
+});
+
+webapp.put('/user/removefriend/:user/:friend', async (req, resp) => {
+  if (!req.params.user || !req.params.friend) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.removeFriend(req.params.user, req.params.friend);
+  resp.status(200).json({ data: res });
+});
+
+webapp.put('/user/sendfriendreq/:user/:friend', async (req, resp) => {
+  if (!req.params.user || !req.params.friend) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.sendFriendReq(req.params.user, req.params.friend);
+  resp.status(200).json({ data: res });
+});
+
+webapp.put('/user/removefriendreq/:user/:friend', async (req, resp) => {
+  if (!req.params.user || !req.params.friend) {
+    resp.status(404).json({ data: 'missing user' });
+    return;
+  }
+  const res = await dbLib.removeFriendReq(req.params.user, req.params.friend);
+  resp.status(200).json({ data: res });
 });
 
 webapp.post('/report', async (req, resp) => {

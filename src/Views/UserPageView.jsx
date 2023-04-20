@@ -56,7 +56,7 @@ function UserPageView() {
           {validUser && page === 'Timeline' && <Timeline userId={userId} page={page} name="Timeline" />}
           {validUser && page === 'Profile' && (
           <div>
-            <UserCard userId={userId} currentUser="jess" />
+            <UserCard userId={userId} currentUser={sessionStorage.getItem('username')} />
             <Timeline userId={userId} page={page} name="Skip History" />
           </div>
           )}

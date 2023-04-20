@@ -10,7 +10,6 @@ async function getChatId(user, reciever) {
 }
 
 export async function sendChatMessage(message, user, reciever) {
-  debugger; //eslint-disable-line
   const chat = await getChatId(user, reciever);
   console.log('CHAT', chat);
   const response = await fetch('http://localhost:5000/chat/sendMessage', {
@@ -45,7 +44,6 @@ export async function getChatMessages(user, reciever) { //eslint-disable-line
 }
 
 export const getChatFriends = async (user) => {
-  debugger; // eslint-disable-line
   console.log('CHAT API MAKING FETCH CALL TO GET FRIENDS');
   let response = await fetch(`http://localhost:5000/chat/getFriends/${user}`, {
     method: 'GET',
