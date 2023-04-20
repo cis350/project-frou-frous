@@ -120,6 +120,7 @@ webapp.post('/user/', async (req, resp) => {
     };
     console.log('newUser', newUser);
     const result = await dbLib.addUser(newUser);
+    console.log('result after post: ', result);
     resp.status(201).json({ data: { id: result } });
   } catch (err) {
     resp.status(400).json({ message: 'There was an error' });

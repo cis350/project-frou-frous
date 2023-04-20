@@ -128,10 +128,7 @@ const addUser = async (userName) => {
     lastName: userName.lastName,
     friends: userName.friends,
     friendsReq: userName.friendsReq });
-  console.log('userName', userName);
-  console.log('result', result);
-  console.log('result.insertedId', result.insertedId);
-  return userName;
+  return result;
 };
 
 const removeFriend = async (user, friend) => {
