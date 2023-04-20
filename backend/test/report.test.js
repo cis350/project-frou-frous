@@ -29,9 +29,8 @@ describe('POST report endpoint integration test', () => {
  */
   afterAll(async () => {
     try {
-      await db.collection('User').updateOne(
+      await db.collection('Reports').updateOne(
         { caption: 'qwerty' },
-        { $pull: { friendReqs: 'e' } },
       );
       await mongo.close();
       await closeMongoDBConnection(); // mongo client that started server.
