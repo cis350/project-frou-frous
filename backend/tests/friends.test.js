@@ -4,7 +4,7 @@ const { closeMongoDBConnection, connect } = require('../model/chatDB');
 
 const app = require('../server'); // or wherever your server file is located
 
-let mongo; 
+let mongo;
 
 describe('GET/PUT userfriends endpoint integration test', () => {
   /**

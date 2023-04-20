@@ -78,6 +78,33 @@ webapp.get('/user/:user', async (req, resp) => {
   resp.status(200).json({ data: res });
 });
 
+webapp.post('/user/', async (req, resp) => {
+  console.log('Creating User REQUEST BODY', req.body);
+  if (!req.body.id || !req.body.password || !req.body.email
+         || !req.body.firstName || !req.body.lastName || !req.body.friends
+         || !req.body.friendsReq) {
+    console.log('here');
+    resp.status(404).json({ message: 'missing data' });
+    return;
+  }
+  try {
+    const newUser = {
+      id: req.body.id,
+      password: req.body.password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      friends: req.body.friends,
+      friendsReq: req.body.friendsReq,
+    };
+    console.log('newUser', newUser);
+    const result = await dbLib.addUser(newUser);
+    console.log('result after post: ', result);
+    resp.status(201).json({ data: { id: result } });
+  } catch (err) {
+    resp.status(400).json({ message: 'There was an error' });
+  }
+});
+
 webapp.put('/user/addfriend/:user/:friend', async (req, resp) => {
   if (!req.params.user || !req.params.friend) {
     resp.status(404).json({ message: 'missing user' });

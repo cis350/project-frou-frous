@@ -80,7 +80,7 @@ export function getReport(callback, postId) {
 
 export async function getUserData(userId) {
   try {
-    const response = await fetch(`http://localhost:5000/user/${userId}`, {
+    const response = await fetch(`http://localhost:5002/user/${userId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -96,7 +96,7 @@ export async function getUserData(userId) {
 
 export async function removeFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5000/user/removefriend/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5002/user/removefriend/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -111,7 +111,7 @@ export async function removeFriend(userId, friendId) {
 
 export async function removeFriendReq(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5000/user/removefriendreq/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5002/user/removefriendreq/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -126,7 +126,7 @@ export async function removeFriendReq(userId, friendId) {
 
 export async function sendFriendRequest(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5000/user/sendfriendreq/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5002/user/sendfriendreq/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -141,7 +141,7 @@ export async function sendFriendRequest(userId, friendId) {
 
 export async function addFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5000/user/addfriend/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5002/user/addfriend/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
