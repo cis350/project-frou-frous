@@ -6,7 +6,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import styled from '@mui/system/styled';
 import PropTypes from 'prop-types';
 
-import { getUserHistory, getUserData, removeFriendReq, removeFriend, addFriend, sendFriendRequest, changeUsername } from '../api/userPageAPI';
+import { getUserHistory, getUserData, removeFriendReq, removeFriend, addFriend, sendFriendRequest } from '../api/userPageAPI';
 
 const LeftItem = styled('div')(() => ({
   margin: 6,
@@ -134,9 +134,7 @@ function UserCard(props) {
                 sx={{ backgroundColor, color: 'white', marginTop: '5%', borderRadius: '15px' }}
                 onClick={async () => {
                   setEditingMode((prevEditingMode) => !prevEditingMode);
-                  const divElement = document.querySelector('[contentEditable]');
-                  const newName = divElement.innerText;
-                  await changeUsername(currentUser, newName);
+                  // Change profile picture
                 }}
               >
                 {editingMode ? 'Save' : 'Edit Profile'}

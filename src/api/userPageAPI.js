@@ -80,13 +80,15 @@ export function getReport(callback, postId) {
 
 export async function getUserData(userId) {
   try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const response = await fetch(`http://localhost:5000/user/${userId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
     });
     const data = await response.json();
-    return data;
+    console.log('data: ', data);
+    return data.data[0];
   } catch (error) {
     return { success: false, error };
   }
@@ -94,58 +96,13 @@ export async function getUserData(userId) {
 
 export async function removeFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const data = await response.json();
-    const { friends } = data;
-    if (friends.includes(friendId)) {
-      const index = friends.indexOf(friendId);
-      if (index !== -1) {
-        friends.splice(index, 1);
-      }
-    }
-
-    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
+    const response = await fetch(`http://localhost:5000/user/removefriend/${userId}/${friendId}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const data2 = await response2.json();
-    return data2;
-  } catch (error) {
-    return { error };
-  }
-}
-
-export async function changeUsername(userId, newId) {
-  try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
     });
     const data = await response.json();
-    data.id = newId;
-
-    await fetch(`http://localhost:8000/user/${userId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    await fetch('http://localhost:8000/user/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
     return data;
   } catch (error) {
     return { error };
@@ -154,29 +111,14 @@ export async function changeUsername(userId, newId) {
 
 export async function removeFriendReq(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const response = await fetch(`http://localhost:5000/user/removefriendreq/${userId}/${friendId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
     });
     const data = await response.json();
-    const { friendReqs } = data;
-    if (friendReqs.includes(friendId)) {
-      const index = friendReqs.indexOf(friendId);
-      if (index !== -1) {
-        friendReqs.splice(index, 1);
-      }
-    }
-
-    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const data2 = await response2.json();
-    return data2;
+    return data;
   } catch (error) {
     return { error };
   }
@@ -184,25 +126,14 @@ export async function removeFriendReq(userId, friendId) {
 
 export async function sendFriendRequest(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const response = await fetch(`http://localhost:5000/user/sendfriendreq/${userId}/${friendId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
     });
     const data = await response.json();
-    if (!data.friendReqs.includes(friendId)) {
-      data.friendReqs.push(friendId);
-    }
-
-    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const data2 = await response2.json();
-    return data2;
+    return data;
   } catch (error) {
     return { error };
   }
@@ -210,32 +141,15 @@ export async function sendFriendRequest(userId, friendId) {
 
 export async function addFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:8000/user/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const response = await fetch(`http://localhost:5000/user/addfriend/${userId}/${friendId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
     });
     const data = await response.json();
-    if (data.friendReqs.includes(friendId)) {
-      const index = data.friendReqs.indexOf(friendId);
-      if (index !== -1) {
-        data.friendReqs.splice(index, 1);
-      }
-    }
-    if (!data.friends.includes(friendId)) {
-      data.friends.push(friendId);
-    }
-
-    const response2 = await fetch(`http://localhost:8000/user/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const data2 = await response2.json();
-    console.log('test', data2);
-    return data2;
+    console.log('addedfriend: ', data);
+    return data;
   } catch (error) {
     return { error };
   }
@@ -289,103 +203,5 @@ export async function updateLikes2(reportId, obj) {
 
 export async function getUserHistory(userId) { // eslint-disable-line
   const res = await axios.get('/user/userId');
-  return res.data;
-}
-
-mock.onGet('/chat').reply(200, {
-  friends: [
-    {
-      message: 'hello hello',
-      friend: 'John Doe',
-      friendImage: 'https://bestprofilepictures.com/wp-content/uploads/2021/08/Amazing-Profile-Picture-for-Facebook.jpg',
-      timestamp: 1679326514,
-    },
-    {
-      message: "Can't believe you skipped",
-      friend: 'John Smith',
-      friendImage: 'https://keepthetech.com/wp-content/uploads/2020/12/picture-36.jpg.webp',
-      timestamp: 1679240114,
-    },
-    {
-      message: 'Heyyyyy',
-      friend: 'Frous Frous',
-      friendImage: 'https://s-i.huffpost.com/gen/1224269/images/o-ANGRY-STOCK-PHOTOS-facebook.jpg',
-      timestamp: 1679229314,
-    },
-    {
-      message: ':)',
-      friend: 'Jane',
-      friendImage: 'https://th.bing.com/th/id/R.10e03b02b07e1574ee9733956feeebc2?rik=xUUSxf26ZbQZ0w&riu=http%3a%2f%2fwww.newsshare.in%2fwp-content%2fuploads%2f2%2fProfile-WhatsApp-DP-27.jpg&ehk=JuGiHHA%2fSBHcKVqqCJBOSsrT2m44V9%2f%2bTfJzFKtSGF0%3d&risl=&pid=ImgRaw&r=0',
-      timestamp: 1679142914,
-    },
-  ],
-});
-
-const mes = [
-  {
-    message: 'hello hello',
-    sent: false,
-  },
-  {
-    message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Nulla tristique diam vel libero lobortis, in faucibus elit
-    vulputate. Maecenas lacinia, sapien sit amet auctor
-    pulvinar,nisl leo tincidunt nibh`,
-    sent: false,
-  },
-  {
-    message: 'Lorem ipsum dolor sit amet',
-    sent: true,
-  },
-  {
-    message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Nulla tristique diam vel libero lobortis`,
-    sent: true,
-  },
-  {
-    message: 'Lorem ipsum',
-    sent: true,
-  },
-  {
-    message: 'Lorem ipsum dolor',
-    sent: false,
-  },
-  {
-    message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Nulla tristique diam vel libero lobortis, in faucibus elit
-    vulputate. Maecenas lacinia, sapien sit amet auctor
-    pulvinar,nisl leo tincidunt nibh`,
-    sent: false,
-  },
-  {
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    sent: true,
-  },
-];
-
-const pathRegex = new RegExp('\/chat\/user\/*'); // eslint-disable-line
-mock.onGet(pathRegex).reply(200, {
-  messages: mes,
-});
-
-const postRegex = new RegExp('\/chat\/send\/*'); // eslint-disable-line
-mock.onPost(postRegex).reply(200, {});
-
-export const getChatFriends = async () => {
-  const res = await axios.get('/chat');
-  return res.data;
-};
-
-export async function getChatMessages(user) {
-  const res = await axios.get(`/chat/user/${user}`);
-  return res.data;
-}
-
-export async function sendChatMessage(message) {
-  const res = await axios.post(`/chat/send/${message}`);
-  mes.push({
-    message,
-    sent: true,
-  });
   return res.data;
 }
