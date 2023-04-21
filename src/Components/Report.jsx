@@ -5,6 +5,7 @@ import {
 import PropTypes from 'prop-types';
 
 import { getReport, getPfp, updateLikes2, getReportDataLikes } from '../api/userPageAPI';
+// import { getReportData, updateLikes, getReportLikes } from '../api/reportAPI';
 
 function Report(props) {
   const [name, setName] = useState('');
