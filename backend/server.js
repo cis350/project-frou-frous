@@ -58,7 +58,7 @@ webapp.put('reports/:reportId/updateLikes', async (req, resp) => {
   }
   try {
     const result = await dbLib.updateLikes(req.params.reportId, req.body.userId);
-    resp.status(201).json({ data: { id: result }});
+    resp.status(201).json({ data: { id: result } });
   } catch (error) {
     resp.status(400).json({ message: 'There was an error' });
   }

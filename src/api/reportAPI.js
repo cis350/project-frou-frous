@@ -54,7 +54,7 @@ export async function getReportLikes(reportId) {
 }
 
 export async function sendComment(reportId, newComment) {
-  const response = await fetch(`http://localhost:500/Reports/${reportId}/sendComment`, {
+  const response = await fetch(`http://localhost:5000/Reports/${reportId}/sendComment`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     mode: 'cors',
@@ -66,7 +66,7 @@ export async function sendComment(reportId, newComment) {
 }
 
 export async function updateLikes(reportId, userId) {
-  const result = await fetch(`http://localhost:500/Reports/${reportId}/updateLikes`, {
+  const result = await fetch(`http://localhost:5000/Reports/${reportId}/updateLikes`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     mode: 'cors',
