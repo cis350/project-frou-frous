@@ -36,6 +36,7 @@
     "react-test-renderer": "^18.2.0",
     "react-toastify": "^9.1.2",
     "supertest": "^6.3.3",
+    "supertest": "^6.3.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

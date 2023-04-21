@@ -30,6 +30,47 @@ webapp.use(express.urlencoded({ extended: true }));
 
 // import the db function
 const dbLib = require('./model/chatDB');
+const dbLib2 = require('./model/reportsDB');
+
+webapp.get('/Reports/:reportId/getReportData', async (req, resp) => {
+  const res = await dbLib2.getReportData(req.params.reportId);
+  resp.status(200).json({ data: res });
+});
+
+webapp.put('/Reports/:reportId/sendComment', async (req, resp) => {
+  console.log('Sending Comment REQUEST BODY', req.body);
+  if (!req.body.userId || !req.body.message) {
+    console.log('Send Comment BAD BODY DATA');
+    resp.status(404).json({ message: 'missing input fields' });
+    return;
+  }
+  try {
+    // create the new student object
+    const newComment = {
+      commenterId: req.body.userId,
+      content: req.body.message,
+      timestamp: Date.now(),
+    };
+    const result = await dbLib2.sendComment(req.params.reportId, newComment);
+    resp.status(201).json({ data: { id: result } });
+  } catch (err) {
+    resp.status(400).json({ message: 'There was an error' });
+  }
+});
+
+webapp.put('/Reports/:reportId/updateLikes', async (req, resp) => {
+  if (!req.body.userId) {
+    console.log('Update Likes BAD BODY DATA');
+    resp.status(404).json({ message: 'missing input fields' });
+    return;
+  }
+  try {
+    const result = await dbLib2.updateLikes(req.params.reportId, req.body.userId);
+    resp.status(201).json({ data: { id: result } });
+  } catch (error) {
+    resp.status(400).json({ message: 'There was an error' });
+  }
+});
 
 /**
  * route implementation POST / chat/sendMessage
