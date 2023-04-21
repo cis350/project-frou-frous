@@ -7,6 +7,7 @@ const express = require('express'); // eslint-disable-line
 
 // import the cors -cross origin resource sharing- module
 const cors = require('cors'); // eslint-disable-line 
+// eslint-disable-next-line import/no-extraneous-dependencies
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
@@ -194,7 +195,7 @@ webapp.put('/user/removefriendreq/:user/:friend', async (req, resp) => {
 webapp.post('/report', async (req, resp) => {
   console.log('Reporting User', req.body.img);
   try {
-    const imageResp = cloudinary.uploader.upload(req.body.img, {public_id: req.body.reporteeid})
+    const imageResp = cloudinary.uploader.upload(req.body.img, { public_id: req.body.reporteeid });
 
     console.log('Image Response', imageResp);
     // create the new student object
