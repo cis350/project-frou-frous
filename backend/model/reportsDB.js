@@ -32,7 +32,7 @@ const connect = async () => {
     // check that we are connected to the db
     return MongoConnection;
   } catch (err) {
-    console.log(err.message);
+    // console.log(err.message);
     return err;
   }
 };
@@ -63,8 +63,11 @@ const closeMongoDBConnection = async () => {
  */
 const getReportData = async (reportId) => {
   const db = await getDB();
-  const result = await db.collection('Reports').find({ reportId });
-  return result;
+  const result = await db.collection('Reports').find({ _id: reportId }).toArray();
+  if (result.length === 0) {
+    throw new Error(`No report found with reportId: ${reportId}`);
+  }
+  return result[0];
 };
 
 /**
@@ -103,7 +106,7 @@ const sendComment = async (reportId, newComment) => {
  */
 const updateLikes = async (reportId, userId) => {
   const db = await getDB();
-  if (!db.collection('Reports').find({ _id: reportId, likes: { $in: [userId] } })) {
+  if (db.collection('Reports').find({ _id: reportId, likes: { $in: [userId] } }).length() === 0) {
     await db.collection('Reports').updateOne(
       { _id: reportId },
       { $push: { likes: userId } },
@@ -124,4 +127,5 @@ module.exports = {
   getLikes,
   sendComment,
   updateLikes,
+  getReportData,
 };

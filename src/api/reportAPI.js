@@ -37,7 +37,8 @@
 //   }
 // }
 export async function getReportData(reportId) {
-  let response = await fetch(`http://localhost:5000/Reports/${reportId}`, {
+  debugger; //eslint-disable-line
+  let response = await fetch(`http://localhost:5000/Reports/${reportId}/getReportData`, {
     method: 'GET',
     headers: { 'Content-type': 'application/json' },
     mode: 'cors',

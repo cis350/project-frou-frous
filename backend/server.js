@@ -24,12 +24,12 @@ webapp.use(express.urlencoded({ extended: true }));
 // import the db function
 const dbLib = require('./model/reportsDB');
 
-webapp.get('reports/:reportId', async (req, resp) => {
+webapp.get('/Reports/:reportId/getReportData', async (req, resp) => {
   const res = await dbLib.getReportData(req.params.reportId);
-  resp.status(201).json({ data: res });
+  resp.status(200).json({ data: res });
 });
 
-webapp.put('reports/:reportId/sendComment', async (req, resp) => {
+webapp.put('/Reports/:reportId/sendComment', async (req, resp) => {
   console.log('Sending Comment REQUEST BODY', req.body);
   if (!req.body.userId || !req.body.message) {
     console.log('Send Comment BAD BODY DATA');
@@ -50,7 +50,7 @@ webapp.put('reports/:reportId/sendComment', async (req, resp) => {
   }
 });
 
-webapp.put('reports/:reportId/updateLikes', async (req, resp) => {
+webapp.put('/Reports/:reportId/updateLikes', async (req, resp) => {
   if (!req.body.userId) {
     console.log('Update Likes BAD BODY DATA');
     resp.status(404).json({ message: 'missing input fields' });
@@ -63,3 +63,5 @@ webapp.put('reports/:reportId/updateLikes', async (req, resp) => {
     resp.status(400).json({ message: 'There was an error' });
   }
 });
+
+module.exports = webapp;
