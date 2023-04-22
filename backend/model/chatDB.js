@@ -9,9 +9,6 @@
 // import the mongodb driver
 const { MongoClient } = require('mongodb');
 
-// import ObjectID
-const { ObjectId } = require('mongodb');
-
 // the mongodb server URL
 const dbURL = 'mongodb+srv://kait:bvRU17DvKEu38fHb@froufrouscluster.w2cbat4.mongodb.net/';
 
