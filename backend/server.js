@@ -192,12 +192,21 @@ webapp.put('/user/removefriendreq/:user/:friend', async (req, resp) => {
   resp.status(200).json({ data: res });
 });
 
+webapp.put('/user/changePfp', async (req, resp) => {
+  try {
+    const imageResp = cloudinary.uploader.upload(req.body.pfp);
+    const imgUrl = (await imageResp).secure_url;
+    const result = await dbLib.changePfp(req.body.user, imgUrl);
+    resp.status(201).json({ data: result });
+  } catch (err) {
+    resp.status(400).json({ message: 'There was an error' });
+  }
+});
+
 webapp.post('/report', async (req, resp) => {
   console.log('Reporting User', req.body.img);
   try {
     const imageResp = cloudinary.uploader.upload(req.body.img, { public_id: req.body.reporteeid });
-
-    console.log('Image Response', imageResp);
     // create the new student object
     const newReport = {
       reporterid: req.body.reporterid,
@@ -208,7 +217,6 @@ webapp.post('/report', async (req, resp) => {
       likes: [],
       img: (await imageResp).secure_url,
     };
-    console.log('hey');
     const result = await dbLib.reportUser(newReport);
     resp.status(201).json({ data: { id: result } });
   } catch (err) {
@@ -216,41 +224,4 @@ webapp.post('/report', async (req, resp) => {
   }
 });
 
-/**
- * route implementation DELETE /student/:id
- */
-// webapp.delete('/student/:id', async (req, res) => {
-//   try {
-//     const result = await dbLib.deleteStudent(req.params.id);
-//     if (result.deletedCount === 0) {
-//       res.status(404).json({ error: 'student not in the system' });
-//       return;
-//     }
-//     // send the response with the appropriate status code
-//     res.status(200).json({ message: result });
-//   } catch (err) {
-//     res.status(400).json({ message: 'there was error' });
-//   }
-// });
-
-/**
- * route implementation PUT /student/:id
- */
-// webapp.put('/student/:id', async (req, res) => {
-//   console.log('UPDATE a student');
-//   // parse the body of the request
-//   if (!req.body.major) {
-//     res.status(404).json({ message: 'missing major' });
-//     return;
-//   }
-//   try {
-//     const result = await dbLib.updateStudent(req.params.id, req.body.major);
-//     // send the response with the appropriate status code
-//     res.status(200).json({ message: result });
-//   } catch (err) {
-//     res.status(404).json({ message: 'there was error' });
-//   }
-// });
-
-// export the webapp
 module.exports = webapp;

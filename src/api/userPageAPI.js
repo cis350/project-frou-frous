@@ -87,7 +87,6 @@ export async function getUserData(userId) {
       cache: 'default',
     });
     const data = await response.json();
-    console.log('data: ', data);
     return data.data[0];
   } catch (error) {
     return { success: false, error };
@@ -194,6 +193,24 @@ export async function updateLikes2(reportId, obj) {
       throw new Error('Network response was not OK');
     }
 
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function changePfp(user, pfp) {
+  try {
+    const response = await fetch('http://localhost:5000/user/changePfp', {
+      method: 'PUT',
+      headers: { 'content-type': 'application/json' },
+      mode: 'cors',
+      body: JSON.stringify({
+        user,
+        pfp,
+      }),
+    });
     const result = await response.json();
     return result;
   } catch (error) {
