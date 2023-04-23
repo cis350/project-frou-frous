@@ -116,6 +116,7 @@ const getUserData = async (user) => {
   const results = await db.collection('User').find({ _id: user }).toArray();
   return results;
 };
+
 const addUser = async (userName) => {
   // get the db
   const db = await getDB();
@@ -171,11 +172,18 @@ const addFriend = async (user, friend) => {
 
 const removeFriendReq = async (user, friend) => {
   const db = await getDB();
-  const results = await db.collection('User').updateOne(
+  const userUpdateResult = await db.collection('User').updateOne(
     { _id: user },
     { $pull: { friendReqs: friend } },
   );
-  return results;
+  const friendUpdateResult = await db.collection('User').updateOne(
+    { _id: friend },
+    { $pull: { friendReqs: user } },
+  );
+  return {
+    userUpdateResult,
+    friendUpdateResult,
+  };
 };
 
 const sendFriendReq = async (user, friend) => {
@@ -288,73 +296,20 @@ const getFriends = async (user) => {
   return data;
 };
 
-/**
- * READ a student (HTTP GET /student/:id)
- * https://app.swaggerhub.com/apis/ericfouh/StudentsRoster_App/1.0.0#/students/getStudent
- * @param {studentID}  the id of the student
- * @returns the student data
- */
-// const getStudent = async (studentID) => {
-//   try {
-//     // get the db
-//     const db = await getDB();
-//     const result = await db.collection('students').findOne({ _id: new ObjectId(studentID) });
-//     // print the result
-//     console.log(`Student: ${JSON.stringify(result)}`);
-//     return result;
-//   } catch (err) {
-//     console.log(`error: ${err.message}`);
-//   }
-// };
-// getAStudent('641cbbba7307d82e8c2fff67');
-/**
- * UPDATE a student (PUT /student/:id)
- * https://app.swaggerhub.com/apis/ericfouh/StudentsRoster_App/1.0.0#/students/updateStudent
- * @param {studentID}  the id of the student
- * @param {newMajor} the new major of the student
- * @returns
- */
-// const updateStudent = async (studentID, newMajor) => {
-//   try {
-//     // get the db
-//     const db = await getDB();
-//     const result = await db.collection('students').updateOne(
-//       { _id: ObjectId(studentID) },
-//       { $set: { major: newMajor } },
-//     );
-//     return result;
-//   } catch (err) {
-//     console.log(`error: ${err.message}`);
-//   }
-// };
-
-/**
- * DELETE a student (DELETE /student/:id)
- * https://app.swaggerhub.com/apis/ericfouh/StudentsRoster_App/1.0.0#/students/deleteStudent
- * @param {studentID} the id of the student
- * @returns the result/status of the delete operation
- */
-
-// const deleteStudent = async (studentID) => {
-//   try {
-//     // get the db
-//     const db = await getDB();
-//     const result = await db.collection('students').deleteOne(
-//       { _id: ObjectId(studentID) },
-//     );
-//     // print the result
-//     console.log(`Student: ${JSON.stringify(result)}`);
-//     return result;
-//   } catch (err) {
-//     console.log(`error: ${err.message}`);
-//   }
-// };
-
 const reportUser = async (newReport) => {
   // get the db
   const db = await getDB();
   const result = await db.collection('Reports').insertOne(newReport);
   return result.insertedId;
+};
+
+const changePfp = async (user, pfp) => {
+  const db = await getDB();
+  const result = await db.collection('User').updateOne(
+    { _id: user },
+    { $set: { pfp } },
+  );
+  return result;
 };
 
 // export the functions
@@ -373,4 +328,5 @@ module.exports = {
   removeFriendReq,
   sendFriendReq,
   addUser,
+  changePfp,
 };

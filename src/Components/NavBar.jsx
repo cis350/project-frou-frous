@@ -35,8 +35,6 @@ function NavBar({ setPage }) {
     setPage(page);
   };
 
-  const currentUser = sessionStorage.getItem('username');
-
   return (
     <ThemeProvider theme={theme}>
       <Grid
@@ -120,7 +118,8 @@ function NavBar({ setPage }) {
               sx={{ bgcolor: 'pink.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
               startIcon={<AccountCircle />}
               component={Link}
-              to={`/user/${currentUser}`}
+              to={`/user/${sessionStorage.getItem('username')}`}
+              onClick={() => handleNavigation('Profile')}
             >
               Your Profile
             </Button>

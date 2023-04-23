@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
-import { Card, CardContent, Grid, Avatar, Typography, Button, ButtonGroup } from '@mui/material';
+import { Card, CardContent, Grid, Avatar, Typography, Button, ButtonGroup, IconButton } from '@mui/material';
+import { makeStyles } from '@material-ui/core/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import styled from '@mui/system/styled';
 import PropTypes from 'prop-types';
 
-import { getUserHistory, getUserData, removeFriendReq, removeFriend, addFriend, sendFriendRequest } from '../api/userPageAPI';
+import { getUserHistory, getUserData, removeFriendReq, removeFriend, addFriend, sendFriendRequest, changePfp } from '../api/userPageAPI';
 
 const LeftItem = styled('div')(() => ({
   margin: 6,
@@ -28,23 +29,41 @@ const RightItem = styled('div')(() => ({
   minHeight: 34,
 }));
 
+const useStyles = makeStyles({
+  input: {
+    display: 'none',
+  },
+});
+
 function UserCard(props) {
   const [profilePhoto, setProfilePhoto] = useState('');
   const [skipHistory, setSkipHistory] = useState(''); //eslint-disable-line
   const [totalClasses, setTotalClasses] = useState(''); //  eslint-disable-line
-  const [friendStatus, setFriendStatus] = useState('none'); //eslint-disable-line
+  const [friendStatus, setFriendStatus] = useState('none');
   const [editingMode, setEditingMode] = useState(false);
-  const [friendRequest, setFriendRequest] = useState(''); //eslint-disable-line
+  const [friendRequest, setFriendRequest] = useState('');
+  const [newPfp, setNewPfp] = useState(null); //eslint-disable-line
   const { userId, currentUser } = props;
+  const backgroundColor = '#9ebd6e';
+  const classes = useStyles();
 
-  const getFriendStatus = async () => {
+  const toBase64 = (file) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
+  const getUserInfo = async () => {
+    const userData = await getUserData(userId);
+    setProfilePhoto(userData.pfp);
+
     if (currentUser === userId) {
       setFriendStatus('currentUser');
       return;
     }
 
-    try {
-      const userData = await getUserData(userId);
+    try { // Setting friend status
       const friendData = userData.friends;
       const friendReqData = userData.friendReqs;
       if (friendData.includes(currentUser)) {
@@ -79,18 +98,15 @@ function UserCard(props) {
         const reportResponse = await getUserHistory(userId);
         setSkipHistory(reportResponse.skipHistory);
         setTotalClasses(reportResponse.classes);
-        setProfilePhoto(reportResponse.pfp);
       } catch (error) {
         console.log('error', error); //eslint-disable-line
       }
     }
 
     fetchUserData();
-    getFriendStatus();
+    getUserInfo();
     updateFriendReq();
   }, [userId]);
-
-  const backgroundColor = '#9ebd6e';
 
   return (
     <Card
@@ -106,22 +122,35 @@ function UserCard(props) {
     >
       <CardContent>
         <Grid container spacing={2} sx={{ margin: 'auto' }}>
-          <Grid item sm={4} md={3}>
-            <Avatar
-              src={profilePhoto}
-              alt={userId}
-              sx={{
-                width: 60,
-                height: 60,
-                margin: 'auto',
-              }}
-            />
+          <Grid item sm={3} md={3}>
+            <label htmlFor="contained-button-file">
+              <IconButton component="span">
+                <Avatar
+                  src={newPfp ? URL.createObjectURL(newPfp) : profilePhoto}
+                  alt={userId}
+                  sx={{
+                    width: 70,
+                    height: 70,
+                    cursor: editingMode ? 'pointer' : 'default',
+                  }}
+                />
+              </IconButton>
+              {editingMode && (
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="contained-button-file"
+                type="file"
+                onChange={(event) => {
+                  setNewPfp(event.target.files[0]);
+                }}
+              />
+              )}
+            </label>
           </Grid>
-          <Grid item sm={8} md={3}>
+          <Grid item sm={9} md={3}>
             <div
-              style={{ textAlign: 'left', marginTop: '5%', color: 'white', fontSize: '1.5em' }}
-              contentEditable={friendStatus === 'currentUser' && editingMode}
-              suppressContentEditableWarning
+              style={{ textAlign: 'left', marginTop: '15%', color: 'white', fontSize: '1.5em' }}
             >
               {userId}
             </div>
@@ -133,8 +162,12 @@ function UserCard(props) {
                 variant="contained"
                 sx={{ backgroundColor, color: 'white', marginTop: '5%', borderRadius: '15px' }}
                 onClick={async () => {
+                  if (newPfp !== null && editingMode) {
+                    const imageBase = await toBase64(newPfp);
+                    console.log(imageBase, 'here');
+                    console.log(changePfp(currentUser, imageBase));
+                  }
                   setEditingMode((prevEditingMode) => !prevEditingMode);
-                  // Change profile picture
                 }}
               >
                 {editingMode ? 'Save' : 'Edit Profile'}
@@ -237,7 +270,7 @@ function UserCard(props) {
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Percent Classes Skipped: </LeftItem>
+            <LeftItem style={{ textAlign: 'center' }}> Percent Change From Last Week: </LeftItem>
           </Grid>
           <Grid item xs={6}>
             <RightItem>40%</RightItem>
@@ -246,7 +279,7 @@ function UserCard(props) {
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Class Most Often Skipped: </LeftItem>
+            <LeftItem style={{ textAlign: 'center' }}> Your Most Frequent Reporter: </LeftItem>
           </Grid>
           <Grid item xs={6}>
             <RightItem>XYZ 101</RightItem>
@@ -255,10 +288,10 @@ function UserCard(props) {
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Class Least Often Skipped: </LeftItem>
+            <LeftItem style={{ textAlign: 'center' }}> Class Most Often Skipped: </LeftItem>
           </Grid>
           <Grid item xs={6}>
-            <RightItem> ABC 201</RightItem>
+            <RightItem> CIS 240</RightItem>
           </Grid>
         </Grid>
       </CardContent>
