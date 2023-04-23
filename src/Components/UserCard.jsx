@@ -270,7 +270,7 @@ function UserCard(props) {
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Percent Classes Skipped: </LeftItem>
+            <LeftItem style={{ textAlign: 'center' }}> Percent Change From Last Week: </LeftItem>
           </Grid>
           <Grid item xs={6}>
             <RightItem>40%</RightItem>
@@ -279,7 +279,7 @@ function UserCard(props) {
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Class Most Often Skipped: </LeftItem>
+            <LeftItem style={{ textAlign: 'center' }}> Your Most Frequent Reporter: </LeftItem>
           </Grid>
           <Grid item xs={6}>
             <RightItem>XYZ 101</RightItem>
@@ -288,10 +288,10 @@ function UserCard(props) {
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Class Least Often Skipped: </LeftItem>
+            <LeftItem style={{ textAlign: 'center' }}> Class Most Often Skipped: </LeftItem>
           </Grid>
           <Grid item xs={6}>
-            <RightItem> ABC 201</RightItem>
+            <RightItem> CIS 240</RightItem>
           </Grid>
         </Grid>
       </CardContent>
