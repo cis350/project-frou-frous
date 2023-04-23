@@ -116,6 +116,7 @@ const getUserData = async (user) => {
   const results = await db.collection('User').find({ _id: user }).toArray();
   return results;
 };
+
 const addUser = async (userName) => {
   // get the db
   const db = await getDB();
@@ -171,11 +172,18 @@ const addFriend = async (user, friend) => {
 
 const removeFriendReq = async (user, friend) => {
   const db = await getDB();
-  const results = await db.collection('User').updateOne(
+  const userUpdateResult = await db.collection('User').updateOne(
     { _id: user },
     { $pull: { friendReqs: friend } },
   );
-  return results;
+  const friendUpdateResult = await db.collection('User').updateOne(
+    { _id: friend },
+    { $pull: { friendReqs: user } },
+  );
+  return {
+    userUpdateResult,
+    friendUpdateResult,
+  };
 };
 
 const sendFriendReq = async (user, friend) => {

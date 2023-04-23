@@ -55,13 +55,15 @@ function UserCard(props) {
   });
 
   const getUserInfo = async () => {
+    const userData = await getUserData(userId);
+    setProfilePhoto(userData.pfp);
+
     if (currentUser === userId) {
       setFriendStatus('currentUser');
       return;
     }
-    try {
-      const userData = await getUserData(userId);
-      setProfilePhoto(userData.pfp);
+
+    try { // Setting friend status
       const friendData = userData.friends;
       const friendReqData = userData.friendReqs;
       if (friendData.includes(currentUser)) {
