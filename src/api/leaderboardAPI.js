@@ -1,5 +1,5 @@
 async function getLeaders() {
-  const response = await fetch('http://localhost:8000/leaderboard');
+  const response = await fetch('http://localhost:5000/leaderboard');
   if (!response.ok) {
     throw new Error('Network response was not OK');
   }
