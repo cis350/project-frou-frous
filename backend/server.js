@@ -32,6 +32,12 @@ webapp.use(express.urlencoded({ extended: true }));
 // import the db function
 const dbLib = require('./model/chatDB');
 const dbLib2 = require('./model/reportsDB');
+const dbLibLeaderboad = require('./model/leaderboardDB');
+
+webapp.get('/leaderboard', async (req, resp) => {
+  const res = await dbLibLeaderboad.getLeaders();
+  resp.status(200).json(res);
+});
 
 webapp.get('/Reports/:reportId/getReportData', async (req, resp) => {
   const res = await dbLib2.getReportData(req.params.reportId);
