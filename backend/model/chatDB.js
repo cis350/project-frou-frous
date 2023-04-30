@@ -312,6 +312,26 @@ const changePfp = async (user, pfp) => {
   return result;
 };
 
+const getSchedule = async (user) => {
+  const db = await getDB();
+  const result = await db.collection('User').findOne({ _id: user });
+  const res = [{ day: 'Monday', classes: result.d0 },
+    { day: 'Tuesday', classes: result.d1 },
+    { day: 'Wednesday', classes: result.d2 },
+    { day: 'Thursday', classes: result.d3 },
+    { day: 'Friday', classes: result.d4 }];
+  return res;
+};
+
+const addClass = async (user, classData, day) => {
+  const db = await getDB();
+  const result = await db.collection('User').updateOne(
+    { _id: user },
+    { $addToSet: { [`d${day}`]: classData } },
+  );
+  return result;
+};
+
 // export the functions
 module.exports = {
   closeMongoDBConnection,
@@ -329,4 +349,6 @@ module.exports = {
   sendFriendReq,
   addUser,
   changePfp,
+  getSchedule,
+  addClass,
 };
