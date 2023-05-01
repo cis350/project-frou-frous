@@ -128,6 +128,8 @@ const addUser = async (userName) => {
     friendReqs: userName.friendReqs,
     email: userName.email,
     pfp: userName.pfp,
+    skippedClass: userName.skippedClass,
+    reporters: userName.reporters,
   });
   return result;
 };

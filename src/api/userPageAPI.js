@@ -80,7 +80,7 @@ export function getReport(callback, postId) {
 
 export async function getUserData(userId) {
   try {
-    const response = await fetch(`http://localhost:5000/user/${userId}`, {
+    const response = await fetch(`http://localhost:5001/user/${userId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -95,7 +95,7 @@ export async function getUserData(userId) {
 
 export async function removeFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5000/user/removefriend/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5001/user/removefriend/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -110,7 +110,7 @@ export async function removeFriend(userId, friendId) {
 
 export async function removeFriendReq(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5000/user/removefriendreq/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5001/user/removefriendreq/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -125,7 +125,7 @@ export async function removeFriendReq(userId, friendId) {
 
 export async function sendFriendRequest(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5000/user/sendfriendreq/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5001/user/sendfriendreq/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -140,7 +140,7 @@ export async function sendFriendRequest(userId, friendId) {
 
 export async function addFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5000/user/addfriend/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5001/user/addfriend/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -202,7 +202,7 @@ export async function updateLikes2(reportId, obj) {
 
 export async function changePfp(user, pfp) {
   try {
-    const response = await fetch('http://localhost:5000/user/changePfp', {
+    const response = await fetch('http://localhost:5001/user/changePfp', {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       mode: 'cors',
@@ -220,5 +220,6 @@ export async function changePfp(user, pfp) {
 
 export async function getUserHistory(userId) { // eslint-disable-line
   const res = await axios.get('/user/userId');
+  console.log('res.data: ', res.data);
   return res.data;
 }
