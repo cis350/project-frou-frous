@@ -7,7 +7,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import styled from '@mui/system/styled';
 import PropTypes from 'prop-types';
 
-import { getUserHistory, getUserData, removeFriendReq, removeFriend, addFriend, sendFriendRequest, changePfp } from '../api/userPageAPI';
+// import { getTotalSkippedClasses } from 'backend/model/reportsDB';
+import { getUserData, removeFriendReq, removeFriend, addFriend, sendFriendRequest, changePfp, getUserHistory, getUserHistoryReporter } from '../api/userPageAPI';
 
 const LeftItem = styled('div')(() => ({
   margin: 6,
@@ -38,7 +39,7 @@ const useStyles = makeStyles({
 function UserCard(props) {
   const [profilePhoto, setProfilePhoto] = useState('');
   const [skipHistory, setSkipHistory] = useState(''); //eslint-disable-line
-  const [totalClasses, setTotalClasses] = useState(''); //  eslint-disable-line
+  const [frequentReporter, setFrequentReporter] = useState(''); //  eslint-disable-line
   const [friendStatus, setFriendStatus] = useState('none');
   const [editingMode, setEditingMode] = useState(false);
   const [friendRequest, setFriendRequest] = useState('');
@@ -95,9 +96,11 @@ function UserCard(props) {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const reportResponse = await getUserHistory(userId);
-        setSkipHistory(reportResponse.skipHistory);
-        setTotalClasses(reportResponse.classes);
+        const skipHistoryResponse = await getUserHistory(userId);
+        const frequentReporterResponse = await getUserHistoryReporter(userId);
+        setSkipHistory(skipHistoryResponse);
+        console.log(skipHistory);
+        setFrequentReporter(frequentReporterResponse);
       } catch (error) {
         console.log('error', error); //eslint-disable-line
       }
@@ -264,7 +267,9 @@ function UserCard(props) {
             </LeftItem>
           </Grid>
           <Grid item xs={6}>
-            <RightItem>5</RightItem>
+            <RightItem>
+              {skipHistory}
+            </RightItem>
           </Grid>
         </Grid>
 
@@ -282,7 +287,7 @@ function UserCard(props) {
             <LeftItem style={{ textAlign: 'center' }}> Your Most Frequent Reporter: </LeftItem>
           </Grid>
           <Grid item xs={6}>
-            <RightItem>XYZ 101</RightItem>
+            <RightItem>{frequentReporter}</RightItem>
           </Grid>
         </Grid>
 

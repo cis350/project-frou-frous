@@ -60,8 +60,6 @@ const getLeaders = async () => {
     { $limit: 10 },
   ]).toArray();
   const ids = reports.map((value) => value._id); // eslint-disable-line
-  console.log('ids', ids);
-  console.log('Reports:', reports);
   const users = await db.collection('User').find({ _id: { $in: ids } }).toArray();
   const results = [];
   reports.forEach((report) => {

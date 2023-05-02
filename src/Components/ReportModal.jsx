@@ -30,7 +30,7 @@ function ReportModal({ userId }) {
       console.log(imageBase, 'here');
       const form = new FormData();
       form.append('image', selectedImage, selectedImage.name);
-      await fetch('http://localhost:5000/report', {
+      await fetch('http://localhost:5001/report', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({

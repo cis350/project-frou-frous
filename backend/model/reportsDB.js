@@ -119,6 +119,42 @@ const updateLikes = async (reportId, userId) => {
   }
 };
 
+const getTotalSkippedClasses = async (user) => {
+  const db = await getDB();
+  const reports = await db.collection('Reports').aggregate([
+    { $match: { reporteeid: user } },
+    { $group: { _id: '$reporteeid', count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+  ]).toArray();
+  const ids = reports.map((value) => value._id); // eslint-disable-line
+  let count = 0;
+  console.log('ids', ids);
+  console.log('Reports:', reports);
+  reports.forEach((report) => {
+    count = report.count;
+  });
+  console.log('count: ', count);
+  return count;
+};
+const getMostReporter = async (user) => {
+  const db = await getDB();
+  const reports = await db.collection('Reports').aggregate([
+    { $match: { reporteeid: user } },
+    { $group: { _id: '$reporterid', count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: 1 },
+  ]).toArray();
+  const ids = reports.map((value) => value._id); // eslint-disable-line
+  let reporter = '';
+  console.log('ids', ids);
+  console.log('Reports:', reports);
+  reports.forEach((report) => {
+    reporter = report._id; // eslint-disable-line
+  });
+  console.log('reporter: ', reporter);
+  return reporter;
+};
+
 module.exports = {
   closeMongoDBConnection,
   getDB,
@@ -128,4 +164,6 @@ module.exports = {
   sendComment,
   updateLikes,
   getReportData,
+  getTotalSkippedClasses,
+  getMostReporter,
 };

@@ -38,7 +38,7 @@
 // }
 export async function getReportData(reportId) {
   debugger; //eslint-disable-line
-  let response = await fetch(`http://localhost:5000/Reports/${reportId}/getReportData`, {
+  let response = await fetch(`http://localhost:5001/Reports/${reportId}/getReportData`, {
     method: 'GET',
     headers: { 'Content-type': 'application/json' },
     mode: 'cors',
@@ -55,7 +55,7 @@ export async function getReportLikes(reportId) {
 }
 
 export async function sendComment(reportId, newComment) {
-  const response = await fetch(`http://localhost:5000/Reports/${reportId}/sendComment`, {
+  const response = await fetch(`http://localhost:5001/Reports/${reportId}/sendComment`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     mode: 'cors',
@@ -67,7 +67,7 @@ export async function sendComment(reportId, newComment) {
 }
 
 export async function updateLikes(reportId, userId) {
-  const result = await fetch(`http://localhost:5000/Reports/${reportId}/updateLikes`, {
+  const result = await fetch(`http://localhost:5001/Reports/${reportId}/updateLikes`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     mode: 'cors',
