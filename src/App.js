@@ -4,7 +4,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect } from 'react';
 import UserPageView from './Views/UserPageView';
 import SkipHistoryView from './Views/SkipHistoryView';
 import ScheduleView from './Views/ScheduleView';
@@ -16,6 +16,18 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 
 function App() {
+  console.log('Testing APP CONSOLE');
+  useEffect(() => {
+    // Fetches data from the openweathermap API and updates the DOM
+
+    console.log(window.location.pathname);
+    if (window.location.pathname !== '/' && window.location.pathname !== '/register') {
+      const curUser = sessionStorage.getItem('username');
+      if (!curUser) {
+        window.location.pathname = '/';
+      }
+    }
+  }, []);
   const router = createBrowserRouter([
     {
       path: '/',

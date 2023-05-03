@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
+import PropTypes from 'prop-types';
 import DaySchedule from './DaySchedule';
 
-function Schedule() {
-  const baseURL = 'http://localhost:8000';
+function Schedule({ user }) {
   const [classes, setClasses] = useState([]);
+  Schedule.propTypes = {
+    user: PropTypes.string.isRequired,
+  };
   const fetchData = async () => {
     try {
-      fetch(`${baseURL}/classes`)
+      fetch(`http://localhost:5000/schedule/${user}`, {
+        method: 'GET',
+        headers: { 'content-type': 'application/json' },
+      })
         .then((res) => res.json()).then((resp) => {
-          setClasses(resp);
+          setClasses(resp.data);
         }).catch((err) => {
-          console.log(err.message);
+          throw new Error(err);
         });
 
       // axios.get(`${baseURL}/classes`).then((response) => {
       //   setClasses(response.data);
       // });
     } catch (error) {
-      console.log();
+      throw new Error(error);
     }
   };
   useEffect(() => {

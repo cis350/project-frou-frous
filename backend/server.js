@@ -32,6 +32,12 @@ webapp.use(express.urlencoded({ extended: true }));
 // import the db function
 const dbLib = require('./model/chatDB');
 const dbLib2 = require('./model/reportsDB');
+const dbLibLeaderboad = require('./model/leaderboardDB');
+
+webapp.get('/leaderboard', async (req, resp) => {
+  const res = await dbLibLeaderboad.getLeaders();
+  resp.status(200).json(res);
+});
 
 webapp.get('/Reports/:reportId/getReportData', async (req, resp) => {
   const res = await dbLib2.getReportData(req.params.reportId);
@@ -223,6 +229,24 @@ webapp.post('/report', async (req, resp) => {
   } catch (err) {
     resp.status(400).json({ message: 'There was an error' });
   }
+});
+
+webapp.get('/schedule/:user', async (req, resp) => {
+  if (!req.params.user) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.getSchedule(req.params.user);
+  resp.status(200).json({ data: res });
+});
+
+webapp.put('/classes/:user/:day', async (req, resp) => {
+  if (!req.params.user) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.addClass(req.params.user, req.body, req.params.day);
+  resp.status(201).json({ data: res });
 });
 
 module.exports = webapp;
