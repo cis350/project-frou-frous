@@ -66,7 +66,7 @@ function UserPageView() {
           {validUser && (
           <div style={{ border: '3px solid #E5E5E5', maxHeight: '70%', borderRadius: '10px', padding: '3px', marginRight: '3px', marginLeft: '3px' }}>
             <a href="/schedule/1234">
-              <ScheduleUser />
+              <ScheduleUser user={sessionStorage.getItem('username')} />
             </a>
           </div>
           )}

@@ -230,4 +230,22 @@ webapp.post('/report', async (req, resp) => {
   }
 });
 
+webapp.get('/schedule/:user', async (req, resp) => {
+  if (!req.params.user) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.getSchedule(req.params.user);
+  resp.status(200).json({ data: res });
+});
+
+webapp.put('/classes/:user/:day', async (req, resp) => {
+  if (!req.params.user) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  const res = await dbLib.addClass(req.params.user, req.body, req.params.day);
+  resp.status(201).json({ data: res });
+});
+
 module.exports = webapp;

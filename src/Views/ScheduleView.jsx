@@ -4,7 +4,7 @@ import Schedule from '../Components/Schedule';
 function ScheduleView() {
   return (
     <div>
-      <Schedule />
+      <Schedule user={sessionStorage.getItem('username')} />
     </div>
   );
 }

@@ -13,7 +13,7 @@ function AddClass({ handleChild }) {
   AddClass.propTypes = {
     handleChild: PropTypes.func,
   };
-  const baseURL = 'http://localhost:8000';
+  const baseURL = 'http://localhost:5000';
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [start, setStart] = useState('');
@@ -26,22 +26,16 @@ function AddClass({ handleChild }) {
         if (days[i]) {
           try {
             promises.push(new Promise((resolve) => {
-              fetch(`${baseURL}/classes/${i}`)
-                .then((res) => res.json()).then((resp) => {
-                  const prevObj = resp;
-                  prevObj.classes.push({
-                    name: title,
-                    location,
-                    start,
-                    end,
-                  });
-
-                  fetch(`${baseURL}/classes/${i}`, {
-                    method: 'PUT',
-                    headers: { 'content-type': 'application/json' },
-                    body: JSON.stringify(prevObj),
-                  }).then(() => resolve('Added'));
-                });
+              fetch(`${baseURL}/classes/${sessionStorage.getItem('username')}/${i}`, {
+                method: 'PUT',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({
+                  name: title,
+                  location,
+                  start,
+                  end,
+                }),
+              }).then(() => resolve('Added'));
             }));
           } catch (error) {
             throw new Error(error);
