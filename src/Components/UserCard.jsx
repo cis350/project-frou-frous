@@ -164,8 +164,7 @@ function UserCard(props) {
                 onClick={async () => {
                   if (newPfp !== null && editingMode) {
                     const imageBase = await toBase64(newPfp);
-                    console.log(imageBase, 'here');
-                    console.log(changePfp(currentUser, imageBase));
+                    changePfp(currentUser, imageBase);
                   }
                   setEditingMode((prevEditingMode) => !prevEditingMode);
                 }}

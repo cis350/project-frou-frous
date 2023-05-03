@@ -196,6 +196,7 @@ webapp.put('/user/changePfp', async (req, resp) => {
   try {
     const imageResp = cloudinary.uploader.upload(req.body.pfp);
     const imgUrl = (await imageResp).secure_url;
+    console.log('imgUrl', imgUrl);
     const result = await dbLib.changePfp(req.body.user, imgUrl);
     resp.status(201).json({ data: result });
   } catch (err) {
