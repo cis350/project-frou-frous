@@ -41,12 +41,14 @@ webapp.get('/leaderboard', async (req, resp) => {
 
 webapp.get('/skippedclasses/:user', async (req, resp) => {
   const res = await dbLib2.getTotalSkippedClasses(req.params.user);
-  console.log('res:', res);
   resp.status(200).json(res);
 });
 webapp.get('/skippedclasses/reporter/:user', async (req, resp) => {
   const res = await dbLib2.getMostReporter(req.params.user);
-  console.log('res:', res);
+  resp.status(200).json(res);
+});
+webapp.get('/Reports/reports/', async (req, resp) => {
+  const res = await dbLib2.getTotalReports();
   resp.status(200).json(res);
 });
 

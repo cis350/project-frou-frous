@@ -190,3 +190,13 @@ export async function getUserHistoryReporter(user) {
   console.log('get userHistory result', result);
   return result;
 }
+export async function getTotalReportHistory() {
+  const response = await fetch('http://localhost:5001/Reports/reports/');
+  if (!response.ok) {
+    throw new Error('Network response was not OK');
+  }
+
+  const result = await response.json();
+  console.log('get userHistory result', result);
+  return result;
+}

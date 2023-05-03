@@ -128,12 +128,9 @@ const getTotalSkippedClasses = async (user) => {
   ]).toArray();
   const ids = reports.map((value) => value._id); // eslint-disable-line
   let count = 0;
-  console.log('ids', ids);
-  console.log('Reports:', reports);
   reports.forEach((report) => {
     count = report.count;
   });
-  console.log('count: ', count);
   return count;
 };
 const getMostReporter = async (user) => {
@@ -146,13 +143,23 @@ const getMostReporter = async (user) => {
   ]).toArray();
   const ids = reports.map((value) => value._id); // eslint-disable-line
   let reporter = '';
-  console.log('ids', ids);
-  console.log('Reports:', reports);
   reports.forEach((report) => {
     reporter = report._id; // eslint-disable-line
   });
-  console.log('reporter: ', reporter);
   return reporter;
+};
+
+const getTotalReports = async () => {
+  try {
+    const db = await getDB();
+    console.log('db', db);
+    const reports = await db.collection('Reports').estimatedDocumentCount();
+    console.log('total reports', reports);
+    return reports;
+  } catch (error) {
+    console.error('Error while getting total reports:', error);
+    return null;
+  }
 };
 
 module.exports = {
@@ -166,4 +173,5 @@ module.exports = {
   getReportData,
   getTotalSkippedClasses,
   getMostReporter,
+  getTotalReports,
 };
