@@ -33,7 +33,7 @@ export function getReport(callback, postId) {
 
 export async function getUserData(userId) {
   try {
-    const response = await fetch(`http://localhost:5001/user/${userId}`, {
+    const response = await fetch(`http://localhost:5000/user/${userId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
