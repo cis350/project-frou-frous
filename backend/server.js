@@ -39,21 +39,32 @@ webapp.get('/leaderboard', async (req, resp) => {
   resp.status(200).json(res);
 });
 
-webapp.get('/skippedclasses/:user', async (req, resp) => {
-  const res = await dbLib2.getTotalSkippedClasses(req.params.user);
+webapp.get('/Reports/lastreporter/:user', async (req, resp) => {
+  const res = await dbLib2.getLastReporter(req.params.user);
   resp.status(200).json(res);
 });
 webapp.get('/skippedclasses/reporter/:user', async (req, resp) => {
   const res = await dbLib2.getMostReporter(req.params.user);
   resp.status(200).json(res);
 });
-webapp.get('/Reports/reports/', async (req, resp) => {
-  const res = await dbLib2.getTotalReports();
+
+webapp.get('/Reports/reports/:user', async (req, resp) => {
+  const res = await dbLib2.getTotalReports(req.params.user);
+  resp.status(200).json(res);
+});
+
+webapp.get('/Reports/reportsweekly/:user', async (req, resp) => {
+  const res = await dbLib2.getWeeklyReports(req.params.user);
   resp.status(200).json(res);
 });
 
 webapp.get('/Reports/getUserData/:user', async (req, resp) => {
   const res = await dbLib2.getUserHistory(req.params.user);
+  resp.status(200).json({ data: res });
+});
+
+webapp.get('/Schedule/totalclasses/:user', async (req, resp) => {
+  const res = await dbLib2.getTotalClasses(req.params.user);
   resp.status(200).json({ data: res });
 });
 

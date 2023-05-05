@@ -119,20 +119,20 @@ const updateLikes = async (reportId, userId) => {
   }
 };
 
-const getTotalSkippedClasses = async (user) => {
+const getLastReporter = async (user) => {
   const db = await getDB();
-  const reports = await db.collection('Reports').aggregate([
-    { $match: { reporteeid: user } },
-    { $group: { _id: '$reporteeid', count: { $sum: 1 } } },
-    { $sort: { count: -1 } },
-  ]).toArray();
-  const ids = reports.map((value) => value._id); // eslint-disable-line
-  let count = 0;
-  reports.forEach((report) => {
-    count = report.count;
-  });
-  return count;
+  const reports = await db.collection('Reports').find(
+    { reporteeid: user },
+    { _id: 0, reporterid: 1 },
+  ).sort(
+    { date: -1 },
+  ).limit(1)
+    .toArray();
+
+  const reporter = reports[0].reporterid;
+  return reporter;
 };
+
 const getMostReporter = async (user) => {
   const db = await getDB();
   const reports = await db.collection('Reports').aggregate([
@@ -141,25 +141,38 @@ const getMostReporter = async (user) => {
     { $sort: { count: -1 } },
     { $limit: 1 },
   ]).toArray();
-  const ids = reports.map((value) => value._id); // eslint-disable-line
-  let reporter = '';
-  reports.forEach((report) => {
-    reporter = report._id; // eslint-disable-line
-  });
-  return reporter;
+  const id = reports[0]._id; // eslint-disable-line
+  return id;
 };
 
-const getTotalReports = async () => {
-  try {
-    const db = await getDB();
-    console.log('db', db);
-    const reports = await db.collection('Reports').estimatedDocumentCount();
-    console.log('total reports', reports);
-    return reports;
-  } catch (error) {
-    console.error('Error while getting total reports:', error);
-    return null;
-  }
+const getTotalReports = async (user) => {
+  const db = await getDB();
+  const reports = await db.collection('Reports').countDocuments(
+    { reporteeid: user },
+  );
+  return reports;
+};
+
+const getTotalClasses = async (user) => {
+  const db = await getDB();
+  const result = await db.collection('User').findOne({ _id: user });
+  const total = result.d0.length + result.d1.length + result.d2.length
+                + result.d3.length + result.d4.length;
+  return total;
+};
+
+const getWeeklyReports = async (user) => {
+  const db = await getDB();
+  const now = new Date();
+  const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const dateString = weekAgo.toISOString();
+
+  const reports = await db.collection('Reports').countDocuments({
+    reporteeid: user,
+    date: { $gt: dateString },
+  });
+
+  return reports;
 };
 
 module.exports = {
@@ -171,7 +184,9 @@ module.exports = {
   sendComment,
   updateLikes,
   getReportData,
-  getTotalSkippedClasses,
+  getLastReporter,
   getMostReporter,
   getTotalReports,
+  getTotalClasses,
+  getWeeklyReports,
 };

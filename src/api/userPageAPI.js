@@ -48,7 +48,7 @@ export async function getUserData(userId) {
 
 export async function removeFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5001/user/removefriend/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5000/user/removefriend/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -63,7 +63,7 @@ export async function removeFriend(userId, friendId) {
 
 export async function removeFriendReq(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5001/user/removefriendreq/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5000/user/removefriendreq/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -78,7 +78,7 @@ export async function removeFriendReq(userId, friendId) {
 
 export async function sendFriendRequest(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5001/user/sendfriendreq/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5000/user/sendfriendreq/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -93,7 +93,7 @@ export async function sendFriendRequest(userId, friendId) {
 
 export async function addFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5001/user/addfriend/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5000/user/addfriend/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -155,7 +155,7 @@ export async function updateLikes2(reportId, obj) {
 
 export async function changePfp(user, pfp) {
   try {
-    const response = await fetch('http://localhost:5001/user/changePfp', {
+    const response = await fetch('http://localhost:5000/user/changePfp', {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       mode: 'cors',
@@ -171,32 +171,50 @@ export async function changePfp(user, pfp) {
   }
 }
 export async function getUserHistory(user) {
-  const response = await fetch(`http://localhost:5001/skippedclasses/${user}`);
+  const response = await fetch(`http://localhost:5000/Reports/lastreporter/${user}`);
   if (!response.ok) {
     throw new Error('Network response was not OK');
   }
 
   const result = await response.json();
-  console.log('get userHistory result', result);
   return result;
 }
+
 export async function getUserHistoryReporter(user) {
-  const response = await fetch(`http://localhost:5001/skippedclasses/reporter/${user}`);
+  const response = await fetch(`http://localhost:5000/skippedclasses/reporter/${user}`);
   if (!response.ok) {
     throw new Error('Network response was not OK');
   }
 
   const result = await response.json();
-  console.log('get userHistory result', result);
   return result;
 }
-export async function getTotalReportHistory() {
-  const response = await fetch('http://localhost:5001/Reports/reports/');
+
+export async function getTotalReportHistory(user) {
+  const response = await fetch(`http://localhost:5000/Reports/reports/${user}`);
   if (!response.ok) {
     throw new Error('Network response was not OK');
   }
 
   const result = await response.json();
-  console.log('get userHistory result', result);
   return result;
+}
+
+export async function getTotalReportWeek(user) {
+  const response = await fetch(`http://localhost:5000/Reports/reportsweekly/${user}`);
+  if (!response.ok) {
+    throw new Error('Network response was not OK');
+  }
+
+  const result = await response.json();
+  return result;
+}
+
+export async function getTotalClasses(user) {
+  const response = await fetch(`http://localhost:5000/Schedule/totalclasses/${user}`);
+  if (!response.ok) {
+    throw new Error('Network response was not OK');
+  }
+  const result = await response.json();
+  return result.data;
 }

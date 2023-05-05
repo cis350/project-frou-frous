@@ -1,5 +1,4 @@
 const request = require('supertest');
-const { ObjectId } = require('mongodb');
 const { closeMongoDBConnection, connect } = require('../model/chatDB');
 
 const app = require('../server'); // or wherever your server file is located
