@@ -7,7 +7,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import styled from '@mui/system/styled';
 import PropTypes from 'prop-types';
 
-import { getUserHistory, getUserData, removeFriendReq, removeFriend, addFriend, sendFriendRequest, changePfp } from '../api/userPageAPI';
+// import { getTotalSkippedClasses } from 'backend/model/reportsDB';
+import { getUserData, removeFriendReq, removeFriend, addFriend, sendFriendRequest, changePfp, getUserHistory, getUserHistoryReporter, getTotalReportHistory } from '../api/userPageAPI';
 
 const LeftItem = styled('div')(() => ({
   margin: 6,
@@ -38,7 +39,9 @@ const useStyles = makeStyles({
 function UserCard(props) {
   const [profilePhoto, setProfilePhoto] = useState('');
   const [skipHistory, setSkipHistory] = useState(''); //eslint-disable-line
-  const [totalClasses, setTotalClasses] = useState(''); //  eslint-disable-line
+  const [frequentReporter, setFrequentReporter] = useState(''); //  eslint-disable-line
+  const [totalReports, setTotalReports] = useState('');
+  const [percentageUserReports, setPercentageUserReports] = useState('');
   const [friendStatus, setFriendStatus] = useState('none');
   const [editingMode, setEditingMode] = useState(false);
   const [friendRequest, setFriendRequest] = useState('');
@@ -95,9 +98,16 @@ function UserCard(props) {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const reportResponse = await getUserHistory(userId);
-        setSkipHistory(reportResponse.skipHistory);
-        setTotalClasses(reportResponse.classes);
+        const skipHistoryResponse = await getUserHistory(userId);
+        const frequentReporterResponse = await getUserHistoryReporter(userId);
+        const totalSkips = await getTotalReportHistory();
+        console.log('totalSkips', totalSkips);
+        const percentage = skipHistoryResponse / totalSkips;
+        const roundedQuotient = Math.round(percentage * 10) / 10;
+        setPercentageUserReports(roundedQuotient);
+        setTotalReports(totalSkips);
+        setSkipHistory(skipHistoryResponse);
+        setFrequentReporter(frequentReporterResponse);
       } catch (error) {
         console.log('error', error); //eslint-disable-line
       }
@@ -259,38 +269,47 @@ function UserCard(props) {
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <LeftItem style={{ textAlign: 'center' }}>
-              Total Classes Skipped:
+              Total User Classes Skipped:
             </LeftItem>
           </Grid>
           <Grid item xs={6}>
-            <RightItem>5</RightItem>
+            <RightItem>
+              {skipHistory}
+            </RightItem>
           </Grid>
         </Grid>
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Percent Change From Last Week: </LeftItem>
+            <LeftItem style={{ textAlign: 'center' }}> Total Reports of the Week: </LeftItem>
           </Grid>
           <Grid item xs={6}>
-            <RightItem>40%</RightItem>
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Your Most Frequent Reporter: </LeftItem>
-          </Grid>
-          <Grid item xs={6}>
-            <RightItem>XYZ 101</RightItem>
+            <RightItem>
+              {totalReports}
+            </RightItem>
           </Grid>
         </Grid>
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Class Most Often Skipped: </LeftItem>
+            <LeftItem style={{ textAlign: 'center' }}> Percentage of Total User Skips: </LeftItem>
           </Grid>
           <Grid item xs={6}>
-            <RightItem> CIS 240</RightItem>
+            <RightItem>
+              {percentageUserReports}
+              %
+            </RightItem>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <LeftItem style={{ textAlign: 'center' }}> Your Most Freqent Reporter: </LeftItem>
+          </Grid>
+          <Grid item xs={6}>
+            <RightItem>
+              {frequentReporter}
+            </RightItem>
           </Grid>
         </Grid>
       </CardContent>

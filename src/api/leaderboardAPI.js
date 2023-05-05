@@ -5,8 +5,7 @@ async function getLeaders() {
   }
 
   const result = await response.json();
-  console.log('result');
-  console.log(result);
+  console.log('leaderboard result', result);
   return result;
 }
 

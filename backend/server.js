@@ -39,6 +39,24 @@ webapp.get('/leaderboard', async (req, resp) => {
   resp.status(200).json(res);
 });
 
+webapp.get('/skippedclasses/:user', async (req, resp) => {
+  const res = await dbLib2.getTotalSkippedClasses(req.params.user);
+  resp.status(200).json(res);
+});
+webapp.get('/skippedclasses/reporter/:user', async (req, resp) => {
+  const res = await dbLib2.getMostReporter(req.params.user);
+  resp.status(200).json(res);
+});
+webapp.get('/Reports/reports/', async (req, resp) => {
+  const res = await dbLib2.getTotalReports();
+  resp.status(200).json(res);
+});
+
+webapp.get('/Reports/getUserData/:user', async (req, resp) => {
+  const res = await dbLib2.getUserHistory(req.params.user);
+  resp.status(200).json({ data: res });
+});
+
 webapp.get('/Reports/:reportId/getReportData', async (req, resp) => {
   const res = await dbLib2.getReportData(req.params.reportId);
   resp.status(200).json({ data: res });
@@ -216,6 +234,7 @@ webapp.post('/report', async (req, resp) => {
     const imageResp = cloudinary.uploader.upload(req.body.img, { public_id: req.body.reporteeid });
     // create the new student object
     const newReport = {
+      _id: req.body.id,
       reporterid: req.body.reporterid,
       reporteeid: req.body.reporteeid,
       caption: req.body.caption,
