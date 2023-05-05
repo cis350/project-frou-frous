@@ -10,10 +10,13 @@ import UserCard from '../Components/UserCard';
 
 test('rendersAllStatBoxes', async () => {
   const { getByText } = await act(async () => render(<UserCard userId='kait' currentUser='jess' />)); // eslint-disable-line
-  expect(screen.getByText(/Total Classes Skipped/)).toBeInTheDocument();
-  expect(screen.getByText(/Percent Classes Skipped/)).toBeInTheDocument();
-  expect(screen.getByText(/Class Most Often Skipped/)).toBeInTheDocument();
-  expect(screen.getByText(/Class Least Often Skipped/)).toBeInTheDocument();
+  const username = getByText(/kait/);
+  expect(username).toBeInTheDocument();
+  expect(screen.getByText(/Your Last Reporter:/)).toBeInTheDocument();
+  expect(screen.getByText(/Total Reports This Week:/)).toBeInTheDocument();
+  expect(screen.getByText(/Percentage Skipped This Week:/)).toBeInTheDocument();
+  expect(screen.getByText(/Total Reports Overall:/)).toBeInTheDocument();
+  expect(screen.getByText(/Your Most Freqent Reporter:/)).toBeInTheDocument();
 });
 
 test('rendersAvatar', async () => {

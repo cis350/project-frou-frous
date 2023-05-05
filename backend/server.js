@@ -43,7 +43,7 @@ webapp.get('/Reports/lastreporter/:user', async (req, resp) => {
   const res = await dbLib2.getLastReporter(req.params.user);
   resp.status(200).json(res);
 });
-webapp.get('/skippedclasses/reporter/:user', async (req, resp) => {
+webapp.get('/Reports/mostreporter/:user', async (req, resp) => {
   const res = await dbLib2.getMostReporter(req.params.user);
   resp.status(200).json(res);
 });

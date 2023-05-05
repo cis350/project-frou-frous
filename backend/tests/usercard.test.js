@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { closeMongoDBConnection, connect } = require('../model/chatDB');
+const { closeMongoDBConnection, connect } = require('../model/reportsDB');
 
 const app = require('../server'); // or wherever your server file is located
 
@@ -28,10 +28,6 @@ describe('GET/PUT userfriends endpoint integration test', () => {
  */
   afterAll(async () => {
     try {
-      await db.collection('User').updateOne(
-        { _id: 'andrew' },
-        { $set: { pfp: 'https://res.cloudinary.com/dgyhizrvt/image/upload/v1682231514/z10ia8evdilkeqkhmsa9.jpg' } },
-      );
       await mongo.close();
       await closeMongoDBConnection(); // mongo client that started server.
     } catch (err) {
@@ -39,8 +35,31 @@ describe('GET/PUT userfriends endpoint integration test', () => {
     }
   });
 
-  test('400 error user', async () => {
-    const resp = await request(app).put('/user/changePfp');
-    expect(resp.status).toEqual(400);
+  test('last reporter', async () => {
+    const resp = await request(app).get('/Reports/lastreporter/jess');
+    expect(resp.status).toEqual(200);
+    const data = JSON.parse(resp.text);
+    expect(data).toBe('erik');
+  });
+
+  test('total weekly reports', async () => {
+    const resp = await request(app).get('/Reports/reportsweekly/jess');
+    expect(resp.status).toEqual(200);
+    const data = JSON.parse(resp.text);
+    expect(data).toBe(1);
+  });
+
+  test('total reports overall', async () => {
+    const resp = await request(app).get('/Reports/reports/jess');
+    expect(resp.status).toEqual(200);
+    const data = JSON.parse(resp.text);
+    expect(data).toBe(3);
+  });
+
+  test('total reports overall', async () => {
+    const resp = await request(app).get('/Reports/mostreporter/jess');
+    expect(resp.status).toEqual(200);
+    const data = JSON.parse(resp.text);
+    expect(data).toBe('erik');
   });
 });

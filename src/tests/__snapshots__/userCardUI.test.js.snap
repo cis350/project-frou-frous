@@ -11,38 +11,58 @@ exports[`snapshot test 1`] = `
       className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1ftwddu-MuiGrid-root"
     >
       <div
-        className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-4 MuiGrid-grid-md-3 css-uk9mo7-MuiGrid-root"
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-3 MuiGrid-grid-md-3 css-auylq4-MuiGrid-root"
       >
-        <div
-          className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1wnqcao-MuiAvatar-root"
+        <label
+          htmlFor="contained-button-file"
         >
-          <svg
-            aria-hidden={true}
-            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
-            data-testid="PersonIcon"
-            focusable="false"
-            viewBox="0 0 24 24"
+          <span
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+            onBlur={[Function]}
+            onContextMenu={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            role="button"
+            tabIndex={0}
           >
-            <path
-              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-            />
-          </svg>
-        </div>
+            <div
+              className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-b99yxa-MuiAvatar-root"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                data-testid="PersonIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
+              </svg>
+            </div>
+          </span>
+        </label>
       </div>
       <div
-        className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-8 MuiGrid-grid-md-3 css-y1wd51-MuiGrid-root"
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-9 MuiGrid-grid-md-3 css-1w9p5rf-MuiGrid-root"
       >
         <div
-          contentEditable={false}
           style={
             {
               "color": "white",
               "fontSize": "1.5em",
-              "marginTop": "5%",
+              "marginTop": "15%",
               "textAlign": "left",
             }
           }
-          suppressContentEditableWarning={true}
         >
           jess
         </div>
@@ -100,7 +120,57 @@ exports[`snapshot test 1`] = `
             }
           }
         >
-          Total Classes Skipped:
+          Your Last Reporter:
+        </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-ejmnzv"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-zbvxyy"
+          style={
+            {
+              "textAlign": "center",
+            }
+          }
+        >
+           Total Reports This Week: 
+        </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-ejmnzv"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-zbvxyy"
+          style={
+            {
+              "textAlign": "center",
+            }
+          }
+        >
+           Percentage Skipped This Week: 
         </div>
       </div>
       <div
@@ -109,7 +179,7 @@ exports[`snapshot test 1`] = `
         <div
           className="css-ejmnzv"
         >
-          5
+          %
         </div>
       </div>
     </div>
@@ -127,7 +197,7 @@ exports[`snapshot test 1`] = `
             }
           }
         >
-           Percent Classes Skipped: 
+           Total Reports Overall: 
         </div>
       </div>
       <div
@@ -135,9 +205,7 @@ exports[`snapshot test 1`] = `
       >
         <div
           className="css-ejmnzv"
-        >
-          40%
-        </div>
+        />
       </div>
     </div>
     <div
@@ -154,7 +222,7 @@ exports[`snapshot test 1`] = `
             }
           }
         >
-           Class Most Often Skipped: 
+           Your Most Freqent Reporter: 
         </div>
       </div>
       <div
@@ -162,36 +230,7 @@ exports[`snapshot test 1`] = `
       >
         <div
           className="css-ejmnzv"
-        >
-          XYZ 101
-        </div>
-      </div>
-    </div>
-    <div
-      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
-    >
-      <div
-        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-      >
-        <div
-          className="css-zbvxyy"
-          style={
-            {
-              "textAlign": "center",
-            }
-          }
-        >
-           Class Least Often Skipped: 
-        </div>
-      </div>
-      <div
-        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-      >
-        <div
-          className="css-ejmnzv"
-        >
-           ABC 201
-        </div>
+        />
       </div>
     </div>
   </div>
