@@ -105,15 +105,23 @@ function UserCard(props) {
         const totalSkips = await getTotalReportHistory(userId);
         const numClasses = await getTotalClasses(userId);
         const totalSkipsWeek = await getTotalReportWeek(userId);
-        console.log(totalSkipsWeek);
-        console.log(totalSkips);
         const percentage = totalSkipsWeek / numClasses;
         const roundedQuotient = Math.round(percentage * 100);
-        setPercentageUserReports(roundedQuotient);
-        setTotalReportsThisWeek(totalSkipsWeek);
-        setTotalReports(totalSkips);
-        setSkipHistory(skipHistoryResponse);
-        setFrequentReporter(frequentReporterResponse);
+        if (!(skipHistoryResponse instanceof Error)) {
+          setSkipHistory(skipHistoryResponse);
+        }
+        if (!(frequentReporterResponse instanceof Error)) {
+          setFrequentReporter(frequentReporterResponse);
+        }
+        if (!(roundedQuotient instanceof Error)) {
+          setPercentageUserReports(roundedQuotient);
+        }
+        if (!(totalSkipsWeek instanceof Error)) {
+          setTotalReportsThisWeek(totalSkipsWeek);
+        }
+        if (!(totalSkips instanceof Error)) {
+          setTotalReports(totalSkips);
+        }
       } catch (error) {
         console.log('error', error); //eslint-disable-line
       }
@@ -291,7 +299,7 @@ function UserCard(props) {
           </Grid>
           <Grid item xs={6}>
             <RightItem>
-              {totalReportsThisWeek}
+              {totalReportsThisWeek || 0}
             </RightItem>
           </Grid>
         </Grid>
@@ -302,7 +310,7 @@ function UserCard(props) {
           </Grid>
           <Grid item xs={6}>
             <RightItem>
-              {percentageUserReports}
+              {percentageUserReports || 'Unknown'}
               %
             </RightItem>
           </Grid>
@@ -314,7 +322,7 @@ function UserCard(props) {
           </Grid>
           <Grid item xs={6}>
             <RightItem>
-              {totalReports}
+              {totalReports || 0}
             </RightItem>
           </Grid>
         </Grid>
@@ -325,7 +333,7 @@ function UserCard(props) {
           </Grid>
           <Grid item xs={6}>
             <RightItem>
-              {frequentReporter}
+              {frequentReporter || 'Unknown'}
             </RightItem>
           </Grid>
         </Grid>

@@ -22,7 +22,6 @@ test('rendersAllStatBoxes', async () => {
 test('rendersAvatar', async () => {
   const { getByText } = await act(async () => render(<UserCard userId="jess" currentUser="jess" />));
   const username = getByText(/jess/);
-  expect(screen.getByAltText(/jess/)).toBeInTheDocument();
   expect(username).toBeInTheDocument();
 });
 

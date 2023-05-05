@@ -153,7 +153,9 @@ exports[`snapshot test 1`] = `
       >
         <div
           className="css-ejmnzv"
-        />
+        >
+          0
+        </div>
       </div>
     </div>
     <div
@@ -179,6 +181,7 @@ exports[`snapshot test 1`] = `
         <div
           className="css-ejmnzv"
         >
+          Unknown
           %
         </div>
       </div>
@@ -205,7 +208,9 @@ exports[`snapshot test 1`] = `
       >
         <div
           className="css-ejmnzv"
-        />
+        >
+          0
+        </div>
       </div>
     </div>
     <div
@@ -230,7 +235,9 @@ exports[`snapshot test 1`] = `
       >
         <div
           className="css-ejmnzv"
-        />
+        >
+          Unknown
+        </div>
       </div>
     </div>
   </div>
