@@ -287,9 +287,9 @@ webapp.put('/classes/:user/:day', async (req, resp) => {
   resp.status(201).json({ data: res });
 });
 
-// webapp.get('*',(req, resp) =>{
-//   console.log("GLOBAL GET DIRNAME:", __dirname);
-//   resp.send(path.join(__dirname, './frontend/build/index.html'))
-// });
+webapp.get('*',(req, resp) =>{
+  console.log("GLOBAL GET DIRNAME:", __dirname);
+  resp.send(path.join(__dirname, './frontend/build/index.html'));
+});
 
 module.exports = webapp;
