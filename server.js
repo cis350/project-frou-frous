@@ -289,7 +289,22 @@ webapp.put('/classes/:user/:day', async (req, resp) => {
 
 webapp.get('*',(req, resp) =>{
   console.log("GLOBAL GET DIRNAME:", __dirname);
-  resp.sendFile('index.html');
+  resp.sendFile(path.join(__dirname, './frontend/build/index.html'));
+});
+
+webapp.get('/test1',(req, resp) =>{
+  console.log("Test 1", __dirname);
+  resp.sendFile(path.join(__dirname, '/frontend/build/index.html'));
+});
+
+webapp.get('/test2',(req, resp) =>{
+  console.log("Test 2", __dirname);
+  resp.sendFile (path.join (__dirname, './frontend/build', 'index.html'));
+});
+
+webapp.get('/test3',(req, resp) =>{
+  console.log("Test 3", __dirname);
+  resp.sendFile (path.join (__dirname, '/frontend/build', 'index.html'));
 });
 
 module.exports = webapp;
