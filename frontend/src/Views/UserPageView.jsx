@@ -11,12 +11,12 @@ import { getUserData } from '../api/userPageAPI';
 function UserPageView() {
   const [page, setPage] = useState('Profile'); // Either Profile or Timeline
   const [search, setSearch] = useState('');
+  const { userId } = useParams();
   const schedule = `/app/schedule/${userid}`;
 
   function navigate() {
     window.location.href = `/app/user/${search}`;
   }
-  const { userId } = useParams();
   const [validUser, setValidUser] = useState(true);
 
   useEffect(() => {
