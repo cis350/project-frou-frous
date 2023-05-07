@@ -38,6 +38,7 @@ const dbLib = require('./model/chatDB');
 const dbLib2 = require('./model/reportsDB');
 const dbLibLeaderboad = require('./model/leaderboardDB');
 
+console.log("STARTING DIRNAME:", __dirname);
 // tell express where to find static files
 webapp.use(express.static(path.join(__dirname,'./frontend/build')));
 

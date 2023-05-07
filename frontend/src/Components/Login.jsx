@@ -68,7 +68,7 @@ function Login() {
         </form>
 
         <a href="/register">
-          <button type="button" className="loginButton link-button">Register Test</button>
+          <button type="button" className="loginButton link-button">Register</button>
         </a>
 
         <button type="button" className="loginButton password-button">Forgot Password</button>
