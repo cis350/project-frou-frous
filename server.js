@@ -41,10 +41,6 @@ const dbLibLeaderboad = require('./model/leaderboardDB');
 // tell express where to find static files
 webapp.use(express.static(path.join(__dirname,'./frontend/build')));
 
-webapp.get('*',(req, resp) =>{
-  resp.send(path.join(__dirname, './frontend/build/index.html'))
-})
-
 webapp.get('/leaderboard', async (req, resp) => {
   const res = await dbLibLeaderboad.getLeaders();
   resp.status(200).json(res);
@@ -288,6 +284,10 @@ webapp.put('/classes/:user/:day', async (req, resp) => {
   }
   const res = await dbLib.addClass(req.params.user, req.body, req.params.day);
   resp.status(201).json({ data: res });
+});
+
+webapp.get('*',(req, resp) =>{
+  resp.send(path.join(__dirname, './frontend/build/index.html'))
 });
 
 module.exports = webapp;
