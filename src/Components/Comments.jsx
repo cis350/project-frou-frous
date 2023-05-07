@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import { getReportData, sendComment } from '../api/reportAPI';
+import { getComments, sendComment } from '../api/reportAPI';
 import '../comments.css';
 
 function Comments(props) {
@@ -9,12 +9,15 @@ function Comments(props) {
   // add timestamp
 
   let commstring = '';
-  const { reportId, userId } = props;
+  const { reportId } = props;
+  const userId = sessionStorage.getItem('username');
 
   const loadComments = async () => {
     try {
-      const res = await getReportData(reportId);
-      const commentsList = res.comments;
+      const res = await getComments(reportId);
+      const commentsList = res.reportComments;
+      console.log('comments');
+      console.log(commentsList);
       for (let i = 0; i < commentsList.length; i += 1) {
         commstring = commstring.concat(
           `<div class="commentBox">
@@ -84,8 +87,7 @@ function Comments(props) {
 }
 
 Comments.propTypes = {
-  reportId: PropTypes.number.isRequired,
-  userId: PropTypes.string.isRequired,
+  reportId: PropTypes.string.isRequired,
 };
 
 export default Comments;

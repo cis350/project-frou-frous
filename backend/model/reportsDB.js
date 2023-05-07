@@ -7,7 +7,7 @@
  */
 
 // import the mongodb driver
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 
 // import ObjectID
 // const { ObjectId } = require('mongodb');
@@ -63,7 +63,7 @@ const closeMongoDBConnection = async () => {
  */
 const getReportData = async (reportId) => {
   const db = await getDB();
-  const result = await db.collection('Reports').find({ _id: reportId }).toArray();
+  const result = await db.collection('Reports').find({ _id: new ObjectId(reportId) }).toArray();
   if (result.length === 0) {
     throw new Error(`No report found with reportId: ${reportId}`);
   }
@@ -96,7 +96,7 @@ const getLikes = async (reportId) => {
 const sendComment = async (reportId, newComment) => {
   const db = await getDB();
   await db.collection('Reports').updateOne(
-    { _id: reportId },
+    { _id: new ObjectId(reportId) },
     { $push: { comments: newComment } },
   );
 };
@@ -106,14 +106,17 @@ const sendComment = async (reportId, newComment) => {
  */
 const updateLikes = async (reportId, userId) => {
   const db = await getDB();
-  if (db.collection('Reports').find({ _id: reportId, likes: { $in: [userId] } }).length() === 0) {
+  const isLiked = await db.collection('Reports').find(
+    { _id: new ObjectId(reportId), likes: { $in: [userId] } },
+  ).toArray().length;
+  if (isLiked === 0) {
     await db.collection('Reports').updateOne(
-      { _id: reportId },
+      { _id: new ObjectId(reportId) },
       { $push: { likes: userId } },
     );
   } else {
     await db.collection('Reports').updateOne(
-      { _id: reportId },
+      { _id: new ObjectId(reportId) },
       { $pull: { likes: userId } },
     );
   }
@@ -175,6 +178,27 @@ const getWeeklyReports = async (user) => {
   return reports;
 };
 
+const getFriendReports = async (userId) => {
+  const db = await getDB();
+  // retrieve friends
+  const userData = await db.collection('User').findOne({ _id: userId });
+  console.log('user data', userData);
+  if (!userData) {
+    return { error: 'User does not exist' };
+  }
+  console.log('User Data', userData);
+  const { friends } = userData;
+  if (!friends || friends.length === 0) {
+    return [];
+  }
+  // const reportIds = [];
+  const friendReports = await db.collection('Reports').find({ $or: [
+    { reporterid: { $in: friends } },
+    { reporteeid: { $in: friends } },
+  ] }).project({ _id: 1 }).toArray();
+  return friendReports;
+};
+
 module.exports = {
   closeMongoDBConnection,
   getDB,
@@ -189,4 +213,5 @@ module.exports = {
   getTotalReports,
   getTotalClasses,
   getWeeklyReports,
+  getFriendReports,
 };

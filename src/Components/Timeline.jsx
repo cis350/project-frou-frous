@@ -1,20 +1,51 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect } from 'react';
 import { Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import { getFriendReports } from '../api/userPageAPI';
 
 import Report from './Report'; // esline-disable-line
 
 function Timeline(props) {
   const { userId, page, name } = props; // eslint-disable-line
-  const [reportIds, setReportIds] = useState([]);
+  let reports = [];
+
+  const loadPosts = async (array) => {
+    try {
+      for (let i = 0; i < array.length; i += 1) {
+        // const report = <Report postId={array[i]._id} />;
+        reports.push(array[i]._id);
+        // reportString = reportString.concat(
+        //   `<Grid
+        //     item
+        //     alignItems="center"
+        //     justifyContent="center"
+        //     xs={12}
+        //     key=${array[i]._id}
+        //     >
+        //       <Report postId=${array[i]._id} />
+        //     </Grid>`,
+        // );
+      }
+      console.log(reports);
+      console.log(reports.map((reportId) => (
+        <Report postId={reportId} />
+      )));
+      reports = [];
+    } catch (err) {
+      toast.error(err);
+    }
+  };
 
   useEffect(() => {
     async function fetchUserData() {
       try {
-        getFriendReports(setReportIds);
+        const idArr = await getFriendReports(userId);
+        // await setReportIds(idArr);
+        await loadPosts(idArr);
       } catch (error) {
-        console.log(error);
+        toast.error(error);
       }
     }
     fetchUserData();
@@ -42,13 +73,12 @@ function Timeline(props) {
             {name}
           </Typography>
         </Grid>
-        {reportIds.map((reportId) => (
+        {reports.map((reportId) => (
           <Grid
             item
             alignItems="center"
             justifyContent="center"
             xs={12}
-            key={reportId}
           >
             <Report postId={reportId} />
           </Grid>
