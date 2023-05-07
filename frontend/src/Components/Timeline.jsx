@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { getFriendReports } from '../../frontend/src/api/userPageAPI';
+import { getFriendReports } from '../api/userPageAPI';
 
 import Report from './Report'; // esline-disable-line
 

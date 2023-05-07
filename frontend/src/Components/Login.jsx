@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { validateLogin } from '../../frontend/src/api/loginRegisterAPI';
+import { validateLogin } from '../api/loginRegisterAPI';
 import '../Login.css';
 
 function Login() {

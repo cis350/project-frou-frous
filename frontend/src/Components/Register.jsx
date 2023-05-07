@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { createUser } from '../../frontend/src/api/loginRegisterAPI';
+import { createUser } from '../api/loginRegisterAPI';
 
 function Register() {
   const [id, setId] = useState('');

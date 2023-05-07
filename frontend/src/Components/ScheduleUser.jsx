@@ -10,7 +10,7 @@ function Schedule({ user }) {
   };
   const fetchData = async () => {
     try {
-      fetch(`http://localhost:5000/schedule/${user}`, {
+      fetch(`/schedule/${user}`, {
         method: 'GET',
         headers: { 'content-type': 'application/json' },
       })

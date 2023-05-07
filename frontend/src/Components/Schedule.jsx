@@ -9,7 +9,7 @@ function Schedule({ user }) {
   };
   const [classes, setClasses] = useState([]);
   const fetchData = async () => {
-    fetch(`http://localhost:5000/schedule/${user}`, {
+    fetch(`/schedule/${user}`, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
