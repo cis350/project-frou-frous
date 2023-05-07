@@ -67,7 +67,7 @@ function Login() {
 
         </form>
 
-        <a href="app/register">
+        <a href="/app/register">
           <button type="button" className="loginButton link-button">Register</button>
         </a>
 
