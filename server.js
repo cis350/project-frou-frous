@@ -34,9 +34,9 @@ webapp.use(express.urlencoded({ extended: true }));
 const path = require('path');
 
 // import the db function
-const dbLib = require('../model/chatDB');
-const dbLib2 = require('../model/reportsDB');
-const dbLibLeaderboad = require('../model/leaderboardDB');
+const dbLib = require('./model/chatDB');
+const dbLib2 = require('./model/reportsDB');
+const dbLibLeaderboad = require('./model/leaderboardDB');
 
 // tell express where to find static files
 webapp.use(express.static(path.join(__dirname,'./frontend/build')));
