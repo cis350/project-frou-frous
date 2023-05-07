@@ -289,7 +289,7 @@ webapp.put('/classes/:user/:day', async (req, resp) => {
 
 webapp.get('*',(req, resp) =>{
   console.log("GLOBAL GET DIRNAME:", __dirname);
-  resp.send('index.html');
+  resp.sendFile('index.html');
 });
 
 module.exports = webapp;
