@@ -29,10 +29,21 @@ webapp.use(cors());
 // configure express to parse request bodies
 webapp.use(express.urlencoded({ extended: true }));
 
+
+// import path
+const path = require('path');
+
 // import the db function
-const dbLib = require('./model/chatDB');
-const dbLib2 = require('./model/reportsDB');
-const dbLibLeaderboad = require('./model/leaderboardDB');
+const dbLib = require('../model/chatDB');
+const dbLib2 = require('../model/reportsDB');
+const dbLibLeaderboad = require('../model/leaderboardDB');
+
+// tell express where to find static files
+webapp.use(express.static(path.join(__dirname,'./frontend/build')));
+
+webapp.get('*',(req, resp) =>{
+  resp.send(path.join(__dirname, './frontend/build/index.html'))
+})
 
 webapp.get('/leaderboard', async (req, resp) => {
   const res = await dbLibLeaderboad.getLeaders();

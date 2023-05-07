@@ -1,6 +1,6 @@
 import './chat.css';
 import React, { useState, useEffect } from 'react';
-import { getChatFriends } from '../api/chatAPI';
+import { getChatFriends } from '../../frontend/src/api/chatAPI';
 
 function convertTimestamp(timestamp) {
   console.log('timestamp', timestamp);

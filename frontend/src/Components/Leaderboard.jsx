@@ -1,6 +1,6 @@
 import './leaderboard.css';
 import React, { useEffect } from 'react';
-import getLeaders from '../api/leaderboardAPI';
+import getLeaders from '../../frontend/src/api/leaderboardAPI';
 
 export default function LeaderboardComponent() {
   async function setLeaders() {

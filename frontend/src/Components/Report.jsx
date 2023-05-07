@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
-import { getReport, getPfp, updateLikes2, getReportDataLikes } from '../api/userPageAPI';
+import { getReport, getPfp, updateLikes2, getReportDataLikes } from '../../frontend/src/api/userPageAPI';
 // import { getReportData, updateLikes, getReportLikes } from '../api/reportAPI';
 
 function Report(props) {

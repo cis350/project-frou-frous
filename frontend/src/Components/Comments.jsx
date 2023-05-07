@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import { getReportData, sendComment } from '../api/reportAPI';
+import { getReportData, sendComment } from '../../frontend/src/api/reportAPI';
 import '../comments.css';
 
 function Comments(props) {

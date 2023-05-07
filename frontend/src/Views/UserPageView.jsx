@@ -6,7 +6,7 @@ import Timeline from '../Components/Timeline'; //eslint-disable-line
 import UserCard from '../Components/UserCard';
 import ScheduleUser from '../Components/ScheduleUser';
 
-import { getUserData } from '../api/userPageAPI';
+import { getUserData } from '../../../backend/frontend/src/api/userPageAPI';
 
 function UserPageView() {
   const [page, setPage] = useState('Profile'); // Either Profile or Timeline
