@@ -35,7 +35,7 @@ function App() {
       element: <Login />,
     },
     {
-      path: '/app/register',
+      path: '/register',
       element: <Register />,
     },
     {
