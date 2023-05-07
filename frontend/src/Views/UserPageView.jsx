@@ -12,7 +12,7 @@ function UserPageView() {
   const [page, setPage] = useState('Profile'); // Either Profile or Timeline
   const [search, setSearch] = useState('');
   const { userId } = useParams();
-  const schedule = `/app/schedule/${userid}`;
+  const schedule = `/app/schedule/${userId}`;
 
   function navigate() {
     window.location.href = `/app/user/${search}`;
