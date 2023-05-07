@@ -20,7 +20,7 @@ function Login() {
     } else if (resp.data[0].password === password) {
       toast.success('login successful');
       sessionStorage.setItem('username', username);
-      window.location.href = `/user/${username}`;
+      window.location.href = `/app/user/${username}`;
     } else {
       toast.error('Invalid password');
     }
@@ -67,7 +67,7 @@ function Login() {
 
         </form>
 
-        <a href="/register">
+        <a href="app/register">
           <button type="button" className="loginButton link-button">Register</button>
         </a>
 

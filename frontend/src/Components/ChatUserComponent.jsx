@@ -7,7 +7,7 @@ import ChatPeopleComponent from './ChatPeopleComponent';
 export default function ChatUserComponent() {
   const user = useParams();
   const curUser = sessionStorage.getItem('username');
-  const home = `/user/${curUser}`;
+  const home = `/app/user/${curUser}`;
   const [time, setTime] = useState(Date.now());
   console.log('USER', curUser);
 

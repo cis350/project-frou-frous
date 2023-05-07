@@ -67,7 +67,7 @@ function NavBar({ setPage }) {
               sx={{ bgcolor: 'lime.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
               startIcon={<Chat />}
               component={Link}
-              to="/chat"
+              to="/app/chat"
             >
               Chat
             </Button>
@@ -92,7 +92,7 @@ function NavBar({ setPage }) {
               sx={{ bgcolor: 'yellow.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
               startIcon={<Report />}
               component={Link}
-              to="/report"
+              to="/app/report"
             >
               Report
             </Button>
@@ -105,7 +105,7 @@ function NavBar({ setPage }) {
               sx={{ bgcolor: 'lime.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
               startIcon={<Leaderboard />}
               component={Link}
-              to="/leaderboard"
+              to="/app/leaderboard"
             >
               Leaderboard
             </Button>

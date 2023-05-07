@@ -11,9 +11,10 @@ import { getUserData } from '../api/userPageAPI';
 function UserPageView() {
   const [page, setPage] = useState('Profile'); // Either Profile or Timeline
   const [search, setSearch] = useState('');
+  const schedule = `/app/schedule/${userid}`;
 
   function navigate() {
-    window.location.href = `/user/${search}`;
+    window.location.href = `/app/user/${search}`;
   }
   const { userId } = useParams();
   const [validUser, setValidUser] = useState(true);
@@ -65,7 +66,7 @@ function UserPageView() {
           <NavBar setPage={setPage} />
           {validUser && (
           <div style={{ border: '3px solid #E5E5E5', maxHeight: '70%', borderRadius: '10px', padding: '3px', marginRight: '3px', marginLeft: '3px' }}>
-            <a href="/schedule/1234">
+            <a href={schedule}>
               <ScheduleUser user={sessionStorage.getItem('username')} />
             </a>
           </div>

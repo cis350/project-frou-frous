@@ -35,39 +35,39 @@ function App() {
       element: <Login />,
     },
     {
-      path: '/register',
+      path: 'app/register',
       element: <Register />,
     },
     {
-      path: '/user/:userId',
+      path: 'app/user/:userId',
       element: <UserPageView />,
     },
     {
-      path: '/history/:userId',
+      path: 'app/history/:userId',
       element: <SkipHistoryView />,
     },
     {
-      path: '/schedule/:userId',
+      path: 'app/schedule/:userId',
       element: <ScheduleView />,
     },
     {
-      path: '/report',
+      path: 'app/report',
       element: <ReportView />,
     },
     {
-      path: '/report/:reportId',
+      path: 'app/report/:reportId',
       element: <PostView />,
     },
     {
-      path: '/leaderboard',
+      path: 'app/leaderboard',
       element: <LeaderboardView />,
     },
     {
-      path: '/chat',
+      path: 'app/chat',
       element: <ChatView />,
     },
     {
-      path: '/chat/user/:user',
+      path: 'app/chat/user/:user',
       element: <SingleChatView />,
     },
 
