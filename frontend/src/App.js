@@ -21,7 +21,7 @@ function App() {
     // Fetches data from the openweathermap API and updates the DOM
 
     console.log(window.location.pathname);
-    if (window.location.pathname !== '/' && window.location.pathname !== '/register') {
+    if (window.location.pathname !== '/' && window.location.pathname !== '/app/register') {
       const curUser = sessionStorage.getItem('username');
       if (!curUser) {
         window.location.pathname = '/';
