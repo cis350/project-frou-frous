@@ -40,7 +40,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "json-server": " json-server --watch server/db.json --port 8000",
+    "json-server": " json-server --watch server/db.json --port 8001",
     "build": "react-scripts build",
     "test": "jest --coverage",
     "eject": "react-scripts eject",
@@ -71,6 +71,7 @@
     "@babel/preset-react": "^7.18.6",
     "@testing-library/react": "^14.0.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "cypress": "^12.11.0",
     "eslint": "^8.36.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.27.5",
