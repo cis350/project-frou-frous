@@ -35,7 +35,7 @@ describe('POST /user enpoint tests', () => {
   afterAll(async () => {
     // we need to clear the DB
     try {
-      await deleteTestDataFromDB(db, 'testuser');
+      await db.collection('User').deleteOne({ _id: 'testuser' });
       await mongo.close(); // the test  file connection
       await closeMongoDBConnection(); // the express connection
     } catch (err) {

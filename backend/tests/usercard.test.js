@@ -36,28 +36,28 @@ describe('GET/PUT userfriends endpoint integration test', () => {
   });
 
   test('last reporter', async () => {
-    const resp = await request(app).get('/Reports/lastreporter/jess');
+    const resp = await request(app).get('/Reports/lastreporter/andrew');
     expect(resp.status).toEqual(200);
     const data = JSON.parse(resp.text);
     expect(data).toBe('erik');
   });
 
   test('total weekly reports', async () => {
-    const resp = await request(app).get('/Reports/reportsweekly/jess');
+    const resp = await request(app).get('/Reports/reportsweekly/andrew');
+    expect(resp.status).toEqual(200);
+    const data = JSON.parse(resp.text);
+    expect(data).toBe(0);
+  });
+
+  test('total reports', async () => {
+    const resp = await request(app).get('/Reports/reports/andrew');
     expect(resp.status).toEqual(200);
     const data = JSON.parse(resp.text);
     expect(data).toBe(1);
   });
 
-  test('total reports overall', async () => {
-    const resp = await request(app).get('/Reports/reports/jess');
-    expect(resp.status).toEqual(200);
-    const data = JSON.parse(resp.text);
-    expect(data).toBe(3);
-  });
-
-  test('total reports overall', async () => {
-    const resp = await request(app).get('/Reports/mostreporter/jess');
+  test('most frequent reporter', async () => {
+    const resp = await request(app).get('/Reports/mostreporter/andrew');
     expect(resp.status).toEqual(200);
     const data = JSON.parse(resp.text);
     expect(data).toBe('erik');

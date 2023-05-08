@@ -12,11 +12,11 @@ test('rendersAllStatBoxes', async () => {
   const { getByText } = await act(async () => render(<UserCard userId='kait' currentUser='jess' />)); // eslint-disable-line
   const username = getByText(/kait/);
   expect(username).toBeInTheDocument();
-  expect(screen.getByText(/Your Last Reporter:/)).toBeInTheDocument();
+  expect(screen.getByText(/Last Reporter:/)).toBeInTheDocument();
   expect(screen.getByText(/Total Reports This Week:/)).toBeInTheDocument();
   expect(screen.getByText(/Percentage Skipped This Week:/)).toBeInTheDocument();
   expect(screen.getByText(/Total Reports Overall:/)).toBeInTheDocument();
-  expect(screen.getByText(/Your Most Freqent Reporter:/)).toBeInTheDocument();
+  expect(screen.getByText(/Most Freqent Reporter:/)).toBeInTheDocument();
 });
 
 test('rendersAvatar', async () => {

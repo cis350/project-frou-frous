@@ -102,7 +102,7 @@ exports[`snapshot test 1`] = `
         <h5
           className="MuiTypography-root MuiTypography-h5 css-jr0pcx-MuiTypography-root"
         >
-          Your Weekly Report:
+          Weekly Report:
         </h5>
       </div>
     </div>
@@ -120,7 +120,7 @@ exports[`snapshot test 1`] = `
             }
           }
         >
-          Your Last Reporter:
+          Last Reporter:
         </div>
       </div>
       <div
@@ -128,7 +128,36 @@ exports[`snapshot test 1`] = `
       >
         <div
           className="css-ejmnzv"
-        />
+        >
+          No Reports Yet
+        </div>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-zbvxyy"
+          style={
+            {
+              "textAlign": "center",
+            }
+          }
+        >
+           Total Reports Overall: 
+        </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+      >
+        <div
+          className="css-ejmnzv"
+        >
+          0
+        </div>
       </div>
     </div>
     <div
@@ -181,7 +210,7 @@ exports[`snapshot test 1`] = `
         <div
           className="css-ejmnzv"
         >
-          Unknown
+          0
           %
         </div>
       </div>
@@ -200,34 +229,7 @@ exports[`snapshot test 1`] = `
             }
           }
         >
-           Total Reports Overall: 
-        </div>
-      </div>
-      <div
-        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-      >
-        <div
-          className="css-ejmnzv"
-        >
-          0
-        </div>
-      </div>
-    </div>
-    <div
-      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
-    >
-      <div
-        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-      >
-        <div
-          className="css-zbvxyy"
-          style={
-            {
-              "textAlign": "center",
-            }
-          }
-        >
-           Your Most Freqent Reporter: 
+           Most Freqent Reporter: 
         </div>
       </div>
       <div

@@ -189,11 +189,10 @@ const getWeeklyReports = async (user) => {
   const db = await getDB();
   const now = new Date();
   const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-  const dateString = weekAgo.toISOString();
-
+  const weekAgoTime = weekAgo.getTime();
   const reports = await db.collection('Reports').countDocuments({
     reporteeid: user,
-    date: { $gt: dateString },
+    date: { $gt: weekAgoTime },
   });
 
   return reports;

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 // import { getTotalSkippedClasses } from 'backend/model/reportsDB';
 import { getUserData, removeFriendReq, removeFriend, addFriend, sendFriendRequest, changePfp,
-  getUserHistory, getUserHistoryReporter, getTotalReportHistory } from '../api/userPageAPI';
+  getUserHistory, getUserHistoryReporter, getTotalReportHistory, getTotalClasses, getTotalReportWeek } from '../api/userPageAPI';
 
 const LeftItem = styled('div')(() => ({
   margin: 6,
@@ -42,6 +42,8 @@ function UserCard(props) {
   const [skipHistory, setSkipHistory] = useState(''); //eslint-disable-line
   const [frequentReporter, setFrequentReporter] = useState(''); //  eslint-disable-line
   const [totalReports, setTotalReports] = useState('');
+  const [totalReportsWeek, setTotalReportsWeek] = useState('');
+  const [totalReportsPercent, setTotalReportsPercent] = useState(''); //eslint-disable-line
   const [friendStatus, setFriendStatus] = useState('none');
   const [editingMode, setEditingMode] = useState(false);
   const [friendRequest, setFriendRequest] = useState('');
@@ -101,8 +103,15 @@ function UserCard(props) {
         const skipHistoryResponse = await getUserHistory(userId);
         const frequentReporterResponse = await getUserHistoryReporter(userId);
         const totalSkips = await getTotalReportHistory(userId);
+        const numClasses = await getTotalClasses(userId);
+        const totalSkipsWeek = await getTotalReportWeek(userId);
+        setTotalReportsPercent(typeof numClasses === 'number' ? Math.round((totalSkipsWeek / numClasses) * 100) : 'Unknown');
+
         if (!(skipHistoryResponse instanceof Error)) {
           setSkipHistory(skipHistoryResponse);
+        }
+        if (!(totalSkipsWeek instanceof Error)) {
+          setTotalReportsWeek(totalSkipsWeek);
         }
         if (!(frequentReporterResponse instanceof Error)) {
           setFrequentReporter(frequentReporterResponse);
@@ -264,22 +273,24 @@ function UserCard(props) {
                 textAlign: 'center',
               }}
             >
-              Your Weekly Report:
+              Weekly Report:
             </Typography>
           </Grid>
         </Grid>
+
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <LeftItem style={{ textAlign: 'center' }}>
-              Your Last Reporter:
+              Last Reporter:
             </LeftItem>
           </Grid>
           <Grid item xs={6}>
             <RightItem>
-              {skipHistory}
+              {skipHistory || 'No Reports Yet'}
             </RightItem>
           </Grid>
         </Grid>
+
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -294,7 +305,30 @@ function UserCard(props) {
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Your Most Freqent Reporter: </LeftItem>
+            <LeftItem style={{ textAlign: 'center' }}> Total Reports This Week: </LeftItem>
+          </Grid>
+          <Grid item xs={6}>
+            <RightItem>
+              {totalReportsWeek || 0}
+            </RightItem>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <LeftItem style={{ textAlign: 'center' }}> Percentage Skipped This Week: </LeftItem>
+          </Grid>
+          <Grid item xs={6}>
+            <RightItem>
+              {totalReportsPercent || 0}
+              %
+            </RightItem>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <LeftItem style={{ textAlign: 'center' }}> Most Freqent Reporter: </LeftItem>
           </Grid>
           <Grid item xs={6}>
             <RightItem>
@@ -302,6 +336,7 @@ function UserCard(props) {
             </RightItem>
           </Grid>
         </Grid>
+
       </CardContent>
     </Card>
   );
