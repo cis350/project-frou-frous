@@ -129,7 +129,12 @@ const getLastReporter = async (user) => {
   ).limit(1)
     .toArray();
 
-  const reporter = reports[0].reporterid;
+  let reporter;
+  if (reports[0]) {
+    reporter = reports[0].reporterid;
+  } else {
+    reporter = 'NA';
+  }
   return reporter;
 };
 
@@ -141,7 +146,12 @@ const getMostReporter = async (user) => {
     { $sort: { count: -1 } },
     { $limit: 1 },
   ]).toArray();
-  const id = reports[0]._id; // eslint-disable-line
+  let id;
+  if (reports[0]) {
+    id = reports[0]._id; // eslint-disable-line
+  } else {
+    id = 'NA';
+  }
   return id;
 };
 
@@ -156,8 +166,22 @@ const getTotalReports = async (user) => {
 const getTotalClasses = async (user) => {
   const db = await getDB();
   const result = await db.collection('User').findOne({ _id: user });
-  const total = result.d0.length + result.d1.length + result.d2.length
-                + result.d3.length + result.d4.length;
+  let total = 0;
+  if (result.d0) {
+    total += result.d0.length;
+  }
+  if (result.d1) {
+    total += result.d1.length;
+  }
+  if (result.d2) {
+    total += result.d2.length;
+  }
+  if (result.d3) {
+    total += result.d3.length;
+  }
+  if (result.d4) {
+    total += result.d4.length;
+  }
   return total;
 };
 

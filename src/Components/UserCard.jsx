@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 // import { getTotalSkippedClasses } from 'backend/model/reportsDB';
 import { getUserData, removeFriendReq, removeFriend, addFriend, sendFriendRequest, changePfp,
-  getUserHistory, getUserHistoryReporter, getTotalReportHistory, getTotalClasses, getTotalReportWeek } from '../api/userPageAPI';
+  getUserHistory, getUserHistoryReporter, getTotalReportHistory } from '../api/userPageAPI';
 
 const LeftItem = styled('div')(() => ({
   margin: 6,
@@ -42,8 +42,6 @@ function UserCard(props) {
   const [skipHistory, setSkipHistory] = useState(''); //eslint-disable-line
   const [frequentReporter, setFrequentReporter] = useState(''); //  eslint-disable-line
   const [totalReports, setTotalReports] = useState('');
-  const [totalReportsThisWeek, setTotalReportsThisWeek] = useState('');
-  const [percentageUserReports, setPercentageUserReports] = useState('');
   const [friendStatus, setFriendStatus] = useState('none');
   const [editingMode, setEditingMode] = useState(false);
   const [friendRequest, setFriendRequest] = useState('');
@@ -103,21 +101,11 @@ function UserCard(props) {
         const skipHistoryResponse = await getUserHistory(userId);
         const frequentReporterResponse = await getUserHistoryReporter(userId);
         const totalSkips = await getTotalReportHistory(userId);
-        const numClasses = await getTotalClasses(userId);
-        const totalSkipsWeek = await getTotalReportWeek(userId);
-        const percentage = totalSkipsWeek / numClasses;
-        const roundedQuotient = Math.round(percentage * 100);
         if (!(skipHistoryResponse instanceof Error)) {
           setSkipHistory(skipHistoryResponse);
         }
         if (!(frequentReporterResponse instanceof Error)) {
           setFrequentReporter(frequentReporterResponse);
-        }
-        if (!(roundedQuotient instanceof Error)) {
-          setPercentageUserReports(roundedQuotient);
-        }
-        if (!(totalSkipsWeek instanceof Error)) {
-          setTotalReportsThisWeek(totalSkipsWeek);
         }
         if (!(totalSkips instanceof Error)) {
           setTotalReports(totalSkips);
@@ -289,29 +277,6 @@ function UserCard(props) {
           <Grid item xs={6}>
             <RightItem>
               {skipHistory}
-            </RightItem>
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Total Reports This Week: </LeftItem>
-          </Grid>
-          <Grid item xs={6}>
-            <RightItem>
-              {totalReportsThisWeek || 0}
-            </RightItem>
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Percentage Skipped This Week: </LeftItem>
-          </Grid>
-          <Grid item xs={6}>
-            <RightItem>
-              {percentageUserReports || 'Unknown'}
-              %
             </RightItem>
           </Grid>
         </Grid>
