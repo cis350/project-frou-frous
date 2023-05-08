@@ -6,8 +6,7 @@
         "jest": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "airbnb"
+        "plugin:react/recommended"
     ],
     "overrides": [
     ],
