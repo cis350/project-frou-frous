@@ -77,6 +77,7 @@ function Register() {
             First Name
             <input
               className="loginInput"
+              name="firstName"
               required
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
@@ -88,6 +89,7 @@ function Register() {
             Last Name
             <input
               className="loginInput"
+              name="lastName"
               required
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -99,6 +101,7 @@ function Register() {
             Email
             <input
               className="loginInput"
+              name="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -111,6 +114,7 @@ function Register() {
             Username
             <input
               className="loginInput"
+              name="username1"
               required
               value={id}
               onChange={(e) => setId(e.target.value)}
@@ -121,6 +125,7 @@ function Register() {
             Password
             <input
               className="loginInput"
+              name="password1"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}

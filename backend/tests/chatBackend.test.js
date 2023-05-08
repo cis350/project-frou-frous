@@ -33,7 +33,7 @@ describe('GET/PUT userfriends endpoint integration test', () => {
     db.collection('User').insertMany(users);
     const resp = await request(app).get('/chat/getChatId/testUser1/testUser2');
     chatId = JSON.parse(resp.text).data;
-  });
+  }, 10000);
 
   /**
  * Delete all test data from the DB
@@ -45,7 +45,7 @@ describe('GET/PUT userfriends endpoint integration test', () => {
       await db.collection('User').deleteMany({ $or: [{ _id: 'testUser1' }, { _id: 'testUser2' }] });
       await db.collection('ChatIds').deleteOne({ _id: new ObjectId(chatId) });
       await mongo.close();
-      await closeMongoDBConnection(); // mongo client that started server.
+      return closeMongoDBConnection(); // mongo client that started server.
     } catch (err) {
       return err;
     }

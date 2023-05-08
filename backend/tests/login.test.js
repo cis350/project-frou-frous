@@ -1,4 +1,6 @@
+/* eslint-disable consistent-return */
 const request = require('supertest');
+// eslint-disable-next-line no-unused-vars
 const { ObjectId } = require('mongodb');
 const { closeMongoDBConnection, connect } = require('../model/chatDB');
 
@@ -41,7 +43,7 @@ describe('POST /user enpoint tests', () => {
     } catch (err) {
       return err;
     }
-  });
+  }, 10000);
 
   /**
  * Status code and response type

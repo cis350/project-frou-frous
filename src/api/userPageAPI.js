@@ -23,7 +23,7 @@ export async function getPfp() {
 }
 
 export function getReport(callback, postId) {
-  fetch(`http://localhost:8000/report/${postId}`)
+  fetch(`http://localhost:5000/report/${postId}`)
     .then((res) => res.json()).then((resp) => {
       callback(resp);
     }).catch((err) => {
@@ -107,22 +107,57 @@ export async function addFriend(userId, friendId) {
   }
 }
 
-export async function getFriendReports(callback) { // eslint-disable-line
-  fetch('http://localhost:8000/report')
-    .then((res) => res.json()).then((resp) => {
-      const ids = [];
-      for (let i = 0; i < resp.length; i += 1) {
-        ids.push(resp[i].id);
-      }
-      callback(ids);
-    }).catch((err) => {
-      callback({ error: err });
+// export async function getFriendReports(callback) { // eslint-disable-line
+//   fetch('http://localhost:5000/report')
+//     .then((res) => res.json()).then((resp) => {
+//       const ids = [];
+//       for (let i = 0; i < resp.length; i += 1) {
+//         ids.push(resp[i].id);
+//       }
+//       callback(ids);
+//     }).catch((err) => {
+//       callback({ error: err });
+//     });
+// }
+export async function getFriendReports(userId) {
+  try {
+    const response = await fetch(`http://localhost:5000/user/${userId}/getFriendReports`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
     });
+    const data = await response.json();
+    if (data.error) {
+      throw new Error(data.error);
+    }
+    return data.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function getPersonalReports(userId) {
+  try {
+    const response = await fetch(`http://localhost:5000/user/${userId}/getPersonalReports`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
+    });
+    const data = await response.json();
+    if (data.error) {
+      throw new Error(data.error);
+    }
+    return data.data;
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 export async function getReportDataLikes(reportId) {
   try {
-    const response = await fetch(`http://localhost:8000/report/${reportId}`, {
+    const response = await fetch(`http://localhost:5000/report/${reportId}`, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     });
@@ -137,7 +172,7 @@ export async function getReportDataLikes(reportId) {
 }
 export async function updateLikes2(reportId, obj) {
   try {
-    const response = await fetch(`http://localhost:8000/report/${reportId}`, {
+    const response = await fetch(`http://localhost:5000/report/${reportId}`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(obj),

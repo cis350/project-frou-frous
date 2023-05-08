@@ -5,7 +5,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Report from '../Components/Report';
-import { updateLikes2, getReportDataLikes, getUserData } from '../api/userPageAPI';
+import { updateLikes } from '../api/reportAPI';
 
 global.fetch = jest.fn(() => Promise.resolve({
   ok: true,
@@ -28,8 +28,8 @@ describe('updateLikes2', () => {
   it('should update the likes count for a post', async () => {
     const postId = 1;
     const post = {
-      name: 'John',
-      reportee: 'Jane',
+      reporterid: 'John',
+      reporteeid: 'Jane',
       profilePhoto: 'http://example.com/profile.jpg',
       photo: 'http://example.com/photo.jpg',
       cap: 'Test caption',
@@ -37,7 +37,7 @@ describe('updateLikes2', () => {
     };
 
     // Mock the API call and return a successful response
-    const result = await updateLikes2(postId, post);
+    const result = await updateLikes(postId, post, false);
     console.log('result test', result);
 
     // Expect the API call to have been made with the correct parameters
