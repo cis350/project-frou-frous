@@ -137,6 +137,24 @@ export async function getFriendReports(userId) {
   }
 }
 
+export async function getPersonalReports(userId) {
+  try {
+    const response = await fetch(`http://localhost:5000/user/${userId}/getPersonalReports`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      cache: 'default',
+    });
+    const data = await response.json();
+    if (data.error) {
+      throw new Error(data.error);
+    }
+    return data.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 export async function getReportDataLikes(reportId) {
   try {
     const response = await fetch(`http://localhost:5000/report/${reportId}`, {

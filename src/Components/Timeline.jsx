@@ -4,12 +4,12 @@ import { createRoot } from 'react-dom/client';
 import { Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import { getFriendReports } from '../api/userPageAPI';
+import { getFriendReports, getPersonalReports } from '../api/userPageAPI';
 
 import Report from './Report'; // esline-disable-line
 
 function Timeline(props) {
-  const { userId, page, name } = props; // eslint-disable-line
+  const { userId, page, name, personal } = props; // eslint-disable-line
   // let reports = [];
   const loadPosts = async (array) => {
     try {
@@ -32,9 +32,15 @@ function Timeline(props) {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const idArr = await getFriendReports(userId);
-        // await setReportIds(idArr);
-        await loadPosts(idArr);
+        if (!personal) {
+          const idArr = await getFriendReports(userId);
+          // await setReportIds(idArr);
+          await loadPosts(idArr);
+        } else {
+          console.log('personal timeline');
+          const idArr = await getPersonalReports(userId);
+          await loadPosts(idArr);
+        }
       } catch (error) {
         toast.error(error);
       }
@@ -73,5 +79,6 @@ function Timeline(props) {
 Timeline.propTypes = {
   userId: PropTypes.string.isRequired,
   page: PropTypes.string.isRequired,
+  personal: PropTypes.bool.isRequired,
 };
 export default Timeline;

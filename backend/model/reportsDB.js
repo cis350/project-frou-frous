@@ -195,6 +195,15 @@ const getFriendReports = async (userId) => {
   return friendReports;
 };
 
+const getPersonalReports = async (userId) => {
+  const db = await getDB();
+  const userReports = await db.collection('Reports').find({ $or: [
+    { reporterid: { $in: [userId] } },
+    { reporteeid: { $in: [userId] } },
+  ] }).project({ _id: 1 }).toArray();
+  return userReports;
+};
+
 module.exports = {
   closeMongoDBConnection,
   getDB,
@@ -210,4 +219,5 @@ module.exports = {
   getTotalClasses,
   getWeeklyReports,
   getFriendReports,
+  getPersonalReports,
 };

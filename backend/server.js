@@ -211,6 +211,20 @@ webapp.get('/user/:userId/getFriendReports', async (req, resp) => {
   }
 });
 
+webapp.get('/user/:userId/getPersonalReports', async (req, resp) => {
+  if (!req.params.userId) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  console.log(req.params);
+  try {
+    const res = await dbLib2.getPersonalReports(req.params.userId);
+    resp.status(200).json({ data: res });
+  } catch (error) {
+    resp.status(400).json({ message: 'There was an error' });
+  }
+});
+
 webapp.post('/user/', async (req, resp) => {
   console.log('Creating User REQUEST BODY', req.body);
   if (!req.body.id || !req.body.password || !req.body.email

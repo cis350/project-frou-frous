@@ -1,4 +1,5 @@
 const request = require('supertest');
+// eslint-disable-next-line no-unused-vars
 const { ObjectId } = require('mongodb');
 const { closeMongoDBConnection, connect } = require('../model/chatDB');
 
@@ -21,12 +22,13 @@ describe('PUT GET schedule endpoint integration test', () => {
   beforeAll(async () => {
     mongo = await connect();
     db = mongo.db();
-  });
+  }, 10000);
 
   /**
  * Delete all test data from the DB
  * Close all open connections
  */
+  // eslint-disable-next-line consistent-return
   afterAll(async () => {
     try {
       await db.collection('Reports').updateOne(

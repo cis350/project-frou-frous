@@ -57,7 +57,7 @@ function UserPageView() {
           {validUser && page === 'Profile' && (
           <div>
             <UserCard userId={userId} currentUser={sessionStorage.getItem('username')} />
-            <Timeline userId={userId} page={page} name="Skip History" />
+            <Timeline userId={userId} page={page} name="Skip History" personal />
           </div>
           )}
         </Grid>
