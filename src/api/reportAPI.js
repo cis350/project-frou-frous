@@ -72,13 +72,13 @@ export async function sendComment(reportId, newComment) {
 //   return response;
 // }
 
-export async function updateLikes(reportId, userId) {
+export async function updateLikes(reportId, userId, isLiked) {
   try {
     const result = await fetch(`http://localhost:5000/Reports/${reportId}/updateLikes`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       // cache: 'default',
-      body: JSON.stringify({ userId, reportId }),
+      body: JSON.stringify({ userId, reportId, isLiked }),
       mode: 'cors',
     });
     console.log('update likes json');

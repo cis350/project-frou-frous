@@ -78,7 +78,7 @@ webapp.get('/Schedule/totalclasses/:user', async (req, resp) => {
 
 webapp.get('/Reports/:reportId/getReportData', async (req, resp) => {
   const res = await dbLib2.getReportData(req.params.reportId);
-  console.log(res);
+  // console.log(res);
   resp.status(200).json({ data: res });
 });
 
@@ -106,14 +106,14 @@ webapp.put('/Reports/:reportId/sendComment', async (req, resp) => {
 });
 
 webapp.put('/Reports/:reportId/updateLikes', async (req, resp) => {
-  console.log('Updating Likes REQUEST BODY', req.body);
+  console.log('server.js Updating Likes REQUEST BODY', req.body);
   if (!req.body.userId || !req.body.reportId) {
     console.log('Update Likes: BAD BODY DATA');
     resp.status(404).json({ message: 'missing input fields' });
     return;
   }
   try {
-    const result = await dbLib2.updateLikes(req.body.reportId, req.body.userId);
+    const result = await dbLib2.updateLikes(req.body.reportId, req.body.userId, req.body.isLiked);
     resp.status(201).json({ data: { id: result } });
   } catch (error) {
     console.log(error);

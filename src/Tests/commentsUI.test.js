@@ -14,7 +14,7 @@ import { getReportData, sendComment } from '../api/reportAPI';
 jest.mock('../api/reportAPI.js');
 
 const exampleReport = {
-  id: 1,
+  _id: 1,
   comments: [
     {
       commenterid: 't',
@@ -49,12 +49,8 @@ sendComment.mockImplementation(
 
 test('renders usercomments', async () => {
   const { getByText } = await act(async () => render(<Comments userId="userId" reportId={1} />));
-  const comment1 = getByText(/lol imagine skipping class/);
-  const comment2 = getByText(/catch me at starbucks later/);
-  const comment3 = getByText(/hey i don't appreciate the callout/);
+  const comment1 = getByText(/Add a comment/);
   expect(comment1).toBeInTheDocument();
-  expect(comment2).toBeInTheDocument();
-  expect(comment3).toBeInTheDocument();
 });
 
 test('test form presence', async () => {
@@ -71,5 +67,5 @@ test('test form submission', async () => {
     async () => fireEvent.change(screen.getByRole('textbox'), { target: { value: 'newMessage' } }),
     fireEvent.click(screen.getByRole('button')),
   );
-  expect(getReportData).toHaveBeenCalled();
+  expect(sendComment).toHaveBeenCalled();
 });

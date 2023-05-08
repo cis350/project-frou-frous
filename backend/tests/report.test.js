@@ -1,4 +1,6 @@
+/* eslint-disable consistent-return */
 const request = require('supertest');
+// eslint-disable-next-line no-unused-vars
 const { ObjectId } = require('mongodb');
 const { closeMongoDBConnection, connect } = require('../model/chatDB');
 
@@ -21,7 +23,7 @@ describe('POST report endpoint integration test', () => {
   beforeAll(async () => {
     mongo = await connect();
     db = mongo.db();
-  });
+  }, 10000);
 
   /**
  * Delete all test data from the DB

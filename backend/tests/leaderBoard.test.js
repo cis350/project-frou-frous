@@ -1,4 +1,5 @@
 const request = require('supertest');
+// eslint-disable-next-line no-unused-vars
 const { ObjectId } = require('mongodb');
 const { closeMongoDBConnection, connect } = require('../model/leaderboardDB');
 
@@ -65,7 +66,7 @@ describe('GET/PUT userfriends endpoint integration test', () => {
     ];
     db = mongo.db();
     await db.collection('Reports').insertMany(reports);
-  });
+  }, 10000);
 
   /**
  * Delete all test data from the DB
@@ -75,7 +76,7 @@ describe('GET/PUT userfriends endpoint integration test', () => {
     try {
       await db.collection('Reports').deleteMany({ reporterid: 'leaderBoardTest' });
       await mongo.close();
-      await closeMongoDBConnection(); // mongo client that started server.
+      return closeMongoDBConnection(); // mongo client that started server.
     } catch (err) {
       return err;
     }

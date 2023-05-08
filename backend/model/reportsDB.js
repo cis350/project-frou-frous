@@ -80,15 +80,15 @@ const getComments = async (reportId) => {
   return reportData.comments.toArray();
 };
 
-/**
- * GET report likes
- * @param { reportId } id of report
- * @returns likes as an array of userId strings
- */
-const getLikes = async (reportId) => {
-  const reportData = await getReportData(reportId);
-  return reportData.likes.toArray();
-};
+// /**
+//  * GET report likes
+//  * @param { reportId } id of report
+//  * @returns likes as an array of userId strings
+//  */
+// const getLikes = async (reportId) => {
+//   const reportData = await getReportData(reportId);
+//   return reportData.likes.toArray();
+// };
 
 /**
  * PUSH a new comment
@@ -104,22 +104,18 @@ const sendComment = async (reportId, newComment) => {
 /**
  * PUSH a new like
  */
-const updateLikes = async (reportId, userId) => {
+const updateLikes = async (reportId, userId, isLiked) => {
   const db = await getDB();
-  const isLiked = await db.collection('Reports').find(
-    { _id: new ObjectId(reportId), likes: { $in: [userId] } },
-  ).toArray().length;
-  if (isLiked === 0) {
-    await db.collection('Reports').updateOne(
+  if (isLiked === false) {
+    return db.collection('Reports').updateOne(
       { _id: new ObjectId(reportId) },
       { $push: { likes: userId } },
     );
-  } else {
-    await db.collection('Reports').updateOne(
-      { _id: new ObjectId(reportId) },
-      { $pull: { likes: userId } },
-    );
   }
+  return db.collection('Reports').updateOne(
+    { _id: new ObjectId(reportId) },
+    { $pull: { likes: userId } },
+  );
 };
 
 const getLastReporter = async (user) => {
@@ -204,7 +200,7 @@ module.exports = {
   getDB,
   connect,
   getComments,
-  getLikes,
+  // getLikes,
   sendComment,
   updateLikes,
   getReportData,

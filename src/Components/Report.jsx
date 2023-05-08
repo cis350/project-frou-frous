@@ -12,7 +12,8 @@ function Report(props) {
   const [reporteeid, setReporteeId] = useState('');
   const [caption, setCaption] = useState('');
   const [postimg, setImg] = useState('');
-  const [likes, setLikes] = useState([]);
+  // const [likes, setLikes] = useState([]);
+  const [likeCount, setLikeCount] = useState('');
   // const [date, setDate] = useState('');
   const [pfp, setPfp] = useState('');
   const { postId } = props;
@@ -31,7 +32,7 @@ function Report(props) {
       setReporteeId(rr.reporteeid);
       setCaption(rr.caption);
       setImg(rr.img);
-      setLikes(rr.likes);
+      setLikeCount(rr.likes.length);
       // setDate(reportResponse.date);
       const profphoto = await getPfp(reporterid);
       setPfp(profphoto.pfp);
@@ -46,10 +47,12 @@ function Report(props) {
   }
 
   const controlLike = async () => {
-    console.log('likes');
-    console.log(likes);
+    console.log('like count');
+    console.log(likeCount);
+    console.log('isLiked');
+    console.log(isLiked);
     console.log(userId);
-    await updateLikes(postId, userId);
+    await updateLikes(postId, userId, isLiked);
     const newLikes = await getReportLikes(postId);
     console.log('newlikes');
     console.log(newLikes);
@@ -58,7 +61,7 @@ function Report(props) {
     } else {
       setIsLiked(false);
     }
-    setLikes(newLikes.reportLikes);
+    setLikeCount(newLikes.reportLikes.length);
   };
 
   useEffect(() => {
@@ -102,7 +105,7 @@ function Report(props) {
           Comments
         </Button>
         <Button data-testid="like-button" className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: isLiked ? 'red' : 'white', color: 'black' }} onClick={controlLike}>
-          <span className="likes-counter">{ `Like | ${likes.length}` }</span>
+          <span className="likes-counter">{ `Like | ${likeCount}` }</span>
         </Button>
       </CardActions>
     </Card>

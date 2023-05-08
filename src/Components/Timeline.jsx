@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
 import { Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
@@ -9,30 +10,20 @@ import Report from './Report'; // esline-disable-line
 
 function Timeline(props) {
   const { userId, page, name } = props; // eslint-disable-line
-  let reports = [];
-
+  // let reports = [];
   const loadPosts = async (array) => {
     try {
+      const reports = [];
       for (let i = 0; i < array.length; i += 1) {
-        // const report = <Report postId={array[i]._id} />;
-        reports.push(array[i]._id);
-        // reportString = reportString.concat(
-        //   `<Grid
-        //     item
-        //     alignItems="center"
-        //     justifyContent="center"
-        //     xs={12}
-        //     key=${array[i]._id}
-        //     >
-        //       <Report postId=${array[i]._id} />
-        //     </Grid>`,
-        // );
+        const report = array[i]._id;
+        const reportElement = <Report postId={report} />;
+        reports.push(reportElement);
       }
+      const root = createRoot(document.getElementById('reports'));
+      console.log('report ids');
       console.log(reports);
-      console.log(reports.map((reportId) => (
-        <Report postId={reportId} />
-      )));
-      reports = [];
+      console.log('root created');
+      root.render(reports);
     } catch (err) {
       toast.error(err);
     }
@@ -73,16 +64,7 @@ function Timeline(props) {
             {name}
           </Typography>
         </Grid>
-        {reports.map((reportId) => (
-          <Grid
-            item
-            alignItems="center"
-            justifyContent="center"
-            xs={12}
-          >
-            <Report postId={reportId} />
-          </Grid>
-        ))}
+        <div id="reports" />
       </Grid>
     </Grid>
   );
