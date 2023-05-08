@@ -10,8 +10,8 @@ function PostView() {
   return (
     <div className="appBackground">
       <div>
-        <Report postId={1} />
-        <Comments reportId={reportId} userId="yourUserId" />
+        <Report postId={reportId} />
+        <Comments reportId={reportId} />
       </div>
     </div>
   );

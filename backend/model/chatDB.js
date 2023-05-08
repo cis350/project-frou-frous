@@ -30,6 +30,7 @@ const connect = async () => {
     return MongoConnection;
   } catch (err) {
     console.log(err.message);
+    return err;
   }
 };
 /**

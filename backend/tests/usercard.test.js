@@ -20,12 +20,13 @@ describe('GET/PUT userfriends endpoint integration test', () => {
   beforeAll(async () => {
     mongo = await connect();
     db = mongo.db();
-  });
+  }, 10000);
 
   /**
  * Delete all test data from the DB
  * Close all open connections
  */
+  // eslint-disable-next-line consistent-return
   afterAll(async () => {
     try {
       await mongo.close();

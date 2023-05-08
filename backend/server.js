@@ -26,6 +26,14 @@ webapp.use(bodyParser.json());
 // enable cors
 webapp.use(cors());
 
+// webapp.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET, PUT');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   res.header('Access-Control-Allow-Credentials', 'true');
+//   next();
+// });
+
 // configure express to parse request bodies
 webapp.use(express.urlencoded({ extended: true }));
 
@@ -70,43 +78,71 @@ webapp.get('/Schedule/totalclasses/:user', async (req, resp) => {
 
 webapp.get('/Reports/:reportId/getReportData', async (req, resp) => {
   const res = await dbLib2.getReportData(req.params.reportId);
+  // console.log(res);
   resp.status(200).json({ data: res });
 });
 
 webapp.put('/Reports/:reportId/sendComment', async (req, resp) => {
   console.log('Sending Comment REQUEST BODY', req.body);
-  if (!req.body.userId || !req.body.message) {
-    console.log('Send Comment BAD BODY DATA');
+  if (!req.body.commenterid || !req.body.content) {
+    console.log(!req.body.commenterid);
+    console.log('Send Comment: BAD BODY DATA');
     resp.status(404).json({ message: 'missing input fields' });
     return;
   }
   try {
     // create the new student object
     const newComment = {
-      commenterId: req.body.userId,
-      content: req.body.message,
+      commenterid: req.body.commenterid,
+      content: req.body.content,
       timestamp: Date.now(),
     };
     const result = await dbLib2.sendComment(req.params.reportId, newComment);
     resp.status(201).json({ data: { id: result } });
   } catch (err) {
-    resp.status(400).json({ message: 'There was an error' });
+    resp.status(400).json({ message: 'There was an error in sending comment' });
+    console.log(err);
   }
 });
 
 webapp.put('/Reports/:reportId/updateLikes', async (req, resp) => {
-  if (!req.body.userId) {
-    console.log('Update Likes BAD BODY DATA');
+  console.log('server.js Updating Likes REQUEST BODY', req.body);
+  if (!req.body.userId || !req.body.reportId) {
+    console.log('Update Likes: BAD BODY DATA');
     resp.status(404).json({ message: 'missing input fields' });
     return;
   }
   try {
-    const result = await dbLib2.updateLikes(req.params.reportId, req.body.userId);
+    const result = await dbLib2.updateLikes(req.body.reportId, req.body.userId, req.body.isLiked);
     resp.status(201).json({ data: { id: result } });
   } catch (error) {
-    resp.status(400).json({ message: 'There was an error' });
+    console.log(error);
+    resp.status(400).json({ message: 'There was an error in updating likes.' });
   }
 });
+// webapp.put('/Reports/:reportId/updateLikes', async (req, resp) => {
+//   resp.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+//   resp.set('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
+//   console.log('update likes has been called');
+//   if (!req.body.userId) {
+//     console.log('Update Likes BAD BODY DATA');
+//     resp.status(404).json({ message: 'missing input fields' });
+//     return;
+//   }
+//   try {
+//     console.log('userId');
+//     console.log(req.body.userId);
+//     console.log('webapp route handler successfully called');
+//     const result = await dbLib2.updateLikes(req.params.reportId, req.body.userId);
+//     resp.status(201).json({ data: { id: result } });
+//   } catch (error) {
+//     console.log('userId');
+//     console.log(req.body.userId);
+//     console.log('HERE IS AN ERROR!!!!');
+//     resp.status(400).json({ message: 'There was an error' });
+//   }
+//   console.log('webapp route handler done');
+// });
 
 /**
  * route implementation POST / chat/sendMessage
@@ -160,6 +196,33 @@ webapp.get('/user/:user', async (req, resp) => {
     return;
   }
   resp.status(200).json({ data: res });
+});
+
+webapp.get('/user/:userId/getFriendReports', async (req, resp) => {
+  if (!req.params.userId) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  try {
+    const res = await dbLib2.getFriendReports(req.params.userId);
+    resp.status(200).json({ data: res });
+  } catch (error) {
+    resp.status(400).json({ message: 'There was an error' });
+  }
+});
+
+webapp.get('/user/:userId/getPersonalReports', async (req, resp) => {
+  if (!req.params.userId) {
+    resp.status(404).json({ message: 'missing user' });
+    return;
+  }
+  console.log(req.params);
+  try {
+    const res = await dbLib2.getPersonalReports(req.params.userId);
+    resp.status(200).json({ data: res });
+  } catch (error) {
+    resp.status(400).json({ message: 'There was an error' });
+  }
 });
 
 webapp.post('/user/', async (req, resp) => {

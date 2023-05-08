@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const request = require('supertest');
 const { closeMongoDBConnection, connect } = require('../model/chatDB');
 
@@ -20,7 +21,7 @@ describe('GET/PUT userfriends endpoint integration test', () => {
   beforeAll(async () => {
     mongo = await connect();
     db = mongo.db();
-  });
+  }, 10000);
 
   /**
  * Delete all test data from the DB

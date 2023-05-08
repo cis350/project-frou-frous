@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { ObjectId } = require('mongodb');
+// const { ObjectId } = require('mongodb');
 const { closeMongoDBConnection, connect } = require('../model/chatDB');
 
 const app = require('../server'); // or wherever your server file is located
@@ -21,7 +21,7 @@ describe('GET/PUT userfriends endpoint integration test', () => {
   beforeAll(async () => {
     mongo = await connect();
     db = mongo.db();
-  });
+  }, 10000);
 
   /**
  * Delete all test data from the DB
@@ -46,7 +46,7 @@ describe('GET/PUT userfriends endpoint integration test', () => {
         { $pull: { friends: 'test2' } },
       );
       await mongo.close();
-      await closeMongoDBConnection(); // mongo client that started server.
+      return closeMongoDBConnection(); // mongo client that started server.
     } catch (err) {
       return err;
     }

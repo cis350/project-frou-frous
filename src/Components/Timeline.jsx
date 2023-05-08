@@ -1,20 +1,48 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
 import { Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { getFriendReports } from '../api/userPageAPI';
+import { toast } from 'react-toastify';
+import { getFriendReports, getPersonalReports } from '../api/userPageAPI';
 
 import Report from './Report'; // esline-disable-line
 
 function Timeline(props) {
-  const { userId, page, name } = props; // eslint-disable-line
-  const [reportIds, setReportIds] = useState([]);
+  const { userId, page, name, personal } = props; // eslint-disable-line
+  // let reports = [];
+  const loadPosts = async (array) => {
+    try {
+      const reports = [];
+      for (let i = 0; i < array.length; i += 1) {
+        const report = array[i]._id;
+        const reportElement = <Report postId={report} />;
+        reports.push(reportElement);
+      }
+      const root = createRoot(document.getElementById('reports'));
+      console.log('report ids');
+      console.log(reports);
+      console.log('root created');
+      root.render(reports);
+    } catch (err) {
+      toast.error(err);
+    }
+  };
 
   useEffect(() => {
     async function fetchUserData() {
       try {
-        getFriendReports(setReportIds);
+        if (!personal) {
+          const idArr = await getFriendReports(userId);
+          // await setReportIds(idArr);
+          await loadPosts(idArr);
+        } else {
+          console.log('personal timeline');
+          const idArr = await getPersonalReports(userId);
+          await loadPosts(idArr);
+        }
       } catch (error) {
-        console.log(error);
+        toast.error(error);
       }
     }
     fetchUserData();
@@ -42,17 +70,7 @@ function Timeline(props) {
             {name}
           </Typography>
         </Grid>
-        {reportIds.map((reportId) => (
-          <Grid
-            item
-            alignItems="center"
-            justifyContent="center"
-            xs={12}
-            key={reportId}
-          >
-            <Report postId={reportId} />
-          </Grid>
-        ))}
+        <div id="reports" />
       </Grid>
     </Grid>
   );
@@ -61,5 +79,6 @@ function Timeline(props) {
 Timeline.propTypes = {
   userId: PropTypes.string.isRequired,
   page: PropTypes.string.isRequired,
+  personal: PropTypes.bool.isRequired,
 };
 export default Timeline;
