@@ -1,6 +1,6 @@
 describe('register', () => {
   it('registers', () => {
-    cy.visit('http://localhost:3001/register');
+    cy.visit('http://localhost:3000/register');
     const firstName = 'John3';
     const lastName = 'Doe3';
     const email = 'johndoe@example.com';
@@ -15,7 +15,7 @@ describe('register', () => {
     cy.get('button[data-testid="submitButton"]').click();
   });
   it('should log in a user with valid credentials', () => {
-    cy.visit('http://localhost:3001/');
+    cy.visit('http://localhost:3000/');
     cy.get('input[name="username"]').type('jess');
     cy.get('input[name="password"]').type('jess');
     cy.get('button[type="submit"]').click();
@@ -23,7 +23,7 @@ describe('register', () => {
   });
 
   it('should display an error message with invalid credentials', () => {
-    cy.visit('http://localhost:3001/');
+    cy.visit('http://localhost:3000/');
     cy.get('input[name="username"]').type('jess');
     cy.get('input[name="password"]').type('wrongpassword');
     cy.get('button[type="submit"]').click();

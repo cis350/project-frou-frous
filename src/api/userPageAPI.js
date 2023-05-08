@@ -23,7 +23,7 @@ export async function getPfp() {
 }
 
 export function getReport(callback, postId) {
-  fetch(`http://localhost:8001/report/${postId}`)
+  fetch(`http://localhost:8000/report/${postId}`)
     .then((res) => res.json()).then((resp) => {
       callback(resp);
     }).catch((err) => {
@@ -33,7 +33,7 @@ export function getReport(callback, postId) {
 
 export async function getUserData(userId) {
   try {
-    const response = await fetch(`http://localhost:5002/user/${userId}`, {
+    const response = await fetch(`http://localhost:5000/user/${userId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -48,7 +48,7 @@ export async function getUserData(userId) {
 
 export async function removeFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5002/user/removefriend/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5000/user/removefriend/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -63,7 +63,7 @@ export async function removeFriend(userId, friendId) {
 
 export async function removeFriendReq(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5002/user/removefriendreq/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5000/user/removefriendreq/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -78,7 +78,7 @@ export async function removeFriendReq(userId, friendId) {
 
 export async function sendFriendRequest(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5002/user/sendfriendreq/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5000/user/sendfriendreq/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -93,7 +93,7 @@ export async function sendFriendRequest(userId, friendId) {
 
 export async function addFriend(userId, friendId) {
   try {
-    const response = await fetch(`http://localhost:5002/user/addfriend/${userId}/${friendId}`, {
+    const response = await fetch(`http://localhost:5000/user/addfriend/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -108,7 +108,7 @@ export async function addFriend(userId, friendId) {
 }
 
 export async function getFriendReports(callback) { // eslint-disable-line
-  fetch('http://localhost:8001/report')
+  fetch('http://localhost:8000/report')
     .then((res) => res.json()).then((resp) => {
       const ids = [];
       for (let i = 0; i < resp.length; i += 1) {
@@ -122,7 +122,7 @@ export async function getFriendReports(callback) { // eslint-disable-line
 
 export async function getReportDataLikes(reportId) {
   try {
-    const response = await fetch(`http://localhost:8001/report/${reportId}`, {
+    const response = await fetch(`http://localhost:8000/report/${reportId}`, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     });
@@ -137,7 +137,7 @@ export async function getReportDataLikes(reportId) {
 }
 export async function updateLikes2(reportId, obj) {
   try {
-    const response = await fetch(`http://localhost:8001/report/${reportId}`, {
+    const response = await fetch(`http://localhost:8000/report/${reportId}`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(obj),
@@ -156,7 +156,7 @@ export async function updateLikes2(reportId, obj) {
 
 export async function changePfp(user, pfp) {
   try {
-    const response = await fetch('http://localhost:5002/user/changePfp', {
+    const response = await fetch('http://localhost:5000/user/changePfp', {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       mode: 'cors',
@@ -173,7 +173,7 @@ export async function changePfp(user, pfp) {
 }
 export async function getUserHistory(user) {
   try {
-    const response = await fetch(`http://localhost:5002/Reports/lastreporter/${user}`);
+    const response = await fetch(`http://localhost:5000/Reports/lastreporter/${user}`);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -183,7 +183,7 @@ export async function getUserHistory(user) {
 
 export async function getUserHistoryReporter(user) {
   try {
-    const response = await fetch(`http://localhost:5002/Reports/mostreporter/${user}`);
+    const response = await fetch(`http://localhost:5000/Reports/mostreporter/${user}`);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -193,7 +193,7 @@ export async function getUserHistoryReporter(user) {
 
 export async function getTotalReportHistory(user) {
   try {
-    const response = await fetch(`http://localhost:5002/Reports/reports/${user}`);
+    const response = await fetch(`http://localhost:5000/Reports/reports/${user}`);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -203,7 +203,7 @@ export async function getTotalReportHistory(user) {
 
 export async function getTotalReportWeek(user) {
   try {
-    const response = await fetch(`http://localhost:5002/Reports/reportsweekly/${user}`);
+    const response = await fetch(`http://localhost:5000/Reports/reportsweekly/${user}`);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -213,7 +213,7 @@ export async function getTotalReportWeek(user) {
 
 export async function getTotalClasses(user) {
   try {
-    const response = await fetch(`http://localhost:5002/Schedule/totalclasses/${user}`);
+    const response = await fetch(`http://localhost:5000/Schedule/totalclasses/${user}`);
     const result = await response.json();
     return result.data;
   } catch (error) {
