@@ -35,7 +35,7 @@ describe('PUT GET schedule endpoint integration test', () => {
         { caption: 'qwerty' },
       );
       await mongo.close();
-      await closeMongoDBConnection(); // mongo client that started server.
+      return closeMongoDBConnection(); // mongo client that started server.
     } catch (err) {
       return err;
     }

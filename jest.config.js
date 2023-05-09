@@ -9,4 +9,5 @@ module.exports = {
   jest: {
     testEnvironment: 'jsdom',
   },
+  testPathIgnorePatterns: ["frontend"]
 };

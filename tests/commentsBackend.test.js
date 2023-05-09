@@ -12,7 +12,8 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
  * "env" key add -'jest': true-
 */
   let db; // eslint-disable-line
-  let reportId; // eslint-disable-line
+  let reportId1; // eslint-disable-line
+  let reportId2; // eslint-disable-line
   /**
      * Make sure that the data is in the DB before running
      * any test
@@ -24,7 +25,6 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
     await db.collection('Reports').deleteMany({ _id: { $in: ['testReport1', 'testReport2'] } });
     const reports = [
       {
-        _id: 'testReport1',
         reporterid: 'testUser1',
         reporteeid: 'testUser2',
         img: 'placeholder',
@@ -37,7 +37,6 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
         ],
       },
       {
-        _id: 'testReport2',
         reporterid: 'A',
         reporteeid: 'B',
         img: 'placeholder',
@@ -50,9 +49,13 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
         ],
       },
     ];
-    db.collection('Reports').insertMany(reports);
-    reportId = 'testReport1';
-  }, 10000);
+    const results = await db.collection('Reports').insertMany(reports);
+    console.log(results);
+    reportId1 = results.insertedIds['0'].toHexString();
+    reportId2 = results.insertedIds['1'].toHexString();
+    console.log(reportId1);
+    console.log(reportId2);
+  });
 
   /**
  * Delete all test data from the DB
@@ -60,9 +63,9 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
  */
   afterAll(async () => {
     try {
-      await db.collection('Reports').deleteMany({ $in: ['testReport1', 'testReport2'] });
+      await db.collection('Reports').deleteMany({ $in: [reportId1, reportId2] });
       await mongo.close();
-      return await closeMongoDBConnection(); // mongo client that started server.
+      return closeMongoDBConnection(); // mongo client that started server.
     } catch (err) {
       return err;
     }
@@ -74,28 +77,28 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
   });
 
   test('201 send comment', async () => {
-    const resp = await request(app).put(`/reports/${reportId}/sendComment`).send({ userId: 'testUser1', message: 'hello world' });
+    const resp = await request(app).put(`/Reports/${reportId1}/sendComment`).send({ commenterid: 'testUser1', content: 'hello world' });
     // console.log(resp);
     expect(resp.status).toEqual(201);
   });
 
   test('200 get report data comments', async () => {
-    const resp = await request(app).get(`/Reports/${reportId}/getReportData`);
+    const resp = await request(app).get(`/Reports/${reportId1}/getReportData`);
     expect(resp.status).toEqual(200);
     const { data } = JSON.parse(resp.text);
     console.log(data);
     expect(data.comments.length).toEqual(3);
-    const respAdd = await request(app).put(`/reports/${reportId}/sendComment`).send({ userId: 'testUser2', message: 'hello world 2' });
+    const respAdd = await request(app).put(`/Reports/${reportId1}/sendComment`).send({ commenterid: 'testUser2', content: 'hello world 2' });
     expect(respAdd.status).toEqual(201);
     // console.log(respAdd);
     // const respNew = await request(app).get(`/reports/${reportId}/getReportData`);
     // const { dataSend } = JSON.parse(respNew.text);
     // console.log(dataSend);
     // expect(dataSend.comments.length).toEqual(4);
-  }, 20000);
+  });
 
   test('200 get report data likes', async () => {
-    const resp = await request(app).get(`/reports/${reportId}/getReportData`);
+    const resp = await request(app).get(`/reports/${reportId1}/getReportData`);
     expect(resp.status).toEqual(200);
     const { data } = JSON.parse(resp.text);
     expect(data.likes.length).toEqual(3);
@@ -105,5 +108,5 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
     // const respNew = await request(app).get(`/reports/${reportId}`);
     // const dataSend = JSON.parse(respNew.text).data;
     // expect(dataSend.length).toEqual(2);
-  }, 20000);
+  });
 });

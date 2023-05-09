@@ -1,6 +1,6 @@
 describe('register', () => {
   it('registers', () => {
-    cy.visit('http://localhost:3000/register');
+    cy.visit('http://localhost:3000/app/register');
     const firstName = 'John3';
     const lastName = 'Doe3';
     const email = 'johndoe@example.com';

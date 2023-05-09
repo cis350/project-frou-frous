@@ -316,11 +316,14 @@ const changePfp = async (user, pfp) => {
 const getSchedule = async (user) => {
   const db = await getDB();
   const result = await db.collection('User').findOne({ _id: user });
-  const res = [{ day: 'Monday', classes: result.d0 },
+  let res = [];
+  if (result) {
+    res = [{ day: 'Monday', classes: result.d0 },
     { day: 'Tuesday', classes: result.d1 },
     { day: 'Wednesday', classes: result.d2 },
     { day: 'Thursday', classes: result.d3 },
     { day: 'Friday', classes: result.d4 }];
+  }
   return res;
 };
 

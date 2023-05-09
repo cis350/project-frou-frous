@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "build": "npm install && cd frontend && npm install --legacy-peer-deps && npm run build"
+    "build": "npm install && cd frontend && npm install --legacy-peer-deps && npm run build",
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "",
