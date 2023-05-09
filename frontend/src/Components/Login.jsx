@@ -72,7 +72,7 @@ function Login() {
           <button type="button" className="loginButton link-button">Register</button>
         </a>
 
-        <button type="button" className="loginButton password-button">Forgot Password</button>
+        {/* <button type="button" className="loginButton password-button">Forgot Password</button> */}
 
       </div>
     </div>
