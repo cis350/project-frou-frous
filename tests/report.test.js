@@ -34,6 +34,7 @@ describe('POST report endpoint integration test', () => {
       // await db.collection('Reports').updateOne(
       //   { caption: 'qwerty' },
       // );
+      await db.collection('Reports').deleteMany({ reporterid: 'testreporter' });
       await mongo.close();
       await closeMongoDBConnection(); // mongo client that started server.
     } catch (err) {

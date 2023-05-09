@@ -210,11 +210,12 @@ const getFriendReports = async (userId) => {
   if (!friends || friends.length === 0) {
     return [];
   }
+  friends.push(userId);
   // const reportIds = [];
   const friendReports = await db.collection('Reports').find({ $or: [
     { reporterid: { $in: friends } },
     { reporteeid: { $in: friends } },
-  ] }).project({ _id: 1 }).toArray();
+  ] }).project({ _id: 1 }).sort({ date: -1 }).toArray();
   return friendReports;
 };
 
@@ -223,7 +224,7 @@ const getPersonalReports = async (userId) => {
   const userReports = await db.collection('Reports').find({ $or: [
     { reporterid: { $in: [userId] } },
     { reporteeid: { $in: [userId] } },
-  ] }).project({ _id: 1 }).toArray();
+  ] }).project({ _id: 1 }).sort({ date: -1 }).toArray();
   return userReports;
 };
 
