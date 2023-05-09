@@ -31,9 +31,9 @@ describe('POST report endpoint integration test', () => {
  */
   afterAll(async () => {
     try {
-      await db.collection('Reports').updateOne(
-        { caption: 'qwerty' },
-      );
+      // await db.collection('Reports').updateOne(
+      //   { caption: 'qwerty' },
+      // );
       await mongo.close();
       await closeMongoDBConnection(); // mongo client that started server.
     } catch (err) {

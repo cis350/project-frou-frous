@@ -31,9 +31,9 @@ describe('PUT GET schedule endpoint integration test', () => {
   // eslint-disable-next-line consistent-return
   afterAll(async () => {
     try {
-      await db.collection('Reports').updateOne(
-        { caption: 'qwerty' },
-      );
+      // await db.collection('Reports').updateOne(
+      //   { caption: 'qwerty' },
+      // );
       await mongo.close();
       return closeMongoDBConnection(); // mongo client that started server.
     } catch (err) {

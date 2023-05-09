@@ -22,7 +22,6 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
   beforeAll(async () => {
     mongo = await connect();
     db = mongo.db();
-    await db.collection('Reports').deleteMany({ _id: { $in: ['testReport1', 'testReport2'] } });
     const reports = [
       {
         reporterid: 'testUser1',
@@ -63,8 +62,11 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
  */
   afterAll(async () => {
     try {
-      await db.collection('Reports').deleteMany({ $in: [reportId1, reportId2] });
+      console.log("d1");
+      await db.collection('Reports').deleteMany({ $or: [{ _id: reportId1 }, { _id: reportId2 }] });
+      console.log("d2");
       await mongo.close();
+      console.log("done");
       return closeMongoDBConnection(); // mongo client that started server.
     } catch (err) {
       return err;
