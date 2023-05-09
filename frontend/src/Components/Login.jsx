@@ -12,6 +12,7 @@ function Login() {
   }, []);
 
   async function displayLogin() {
+    debugger; 
     const resp = await validateLogin(username);
     if (resp.error) {
       toast.error(resp.error.message);

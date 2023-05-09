@@ -1,5 +1,6 @@
+import { rootURL } from "../utils/utils";
 async function getLeaders() {
-  const response = await fetch('/leaderboard');
+  const response = await fetch(`${rootURL}/leaderboard`);
   if (!response.ok) {
     throw new Error('Network response was not OK');
   }

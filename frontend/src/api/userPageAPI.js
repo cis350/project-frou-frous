@@ -2,6 +2,8 @@
 * @jest-environment jsdom
 */
 
+import { rootURL } from "../utils/utils";
+
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line
 
@@ -23,7 +25,7 @@ export async function getPfp() {
 }
 
 export function getReport(callback, postId) {
-  fetch(`/report/${postId}`)
+  fetch(`${rootURL}/report/${postId}`)
     .then((res) => res.json()).then((resp) => {
       callback(resp);
     }).catch((err) => {
@@ -33,7 +35,7 @@ export function getReport(callback, postId) {
 
 export async function getUserData(userId) {
   try {
-    const response = await fetch(`/user/${userId}`, {
+    const response = await fetch(`${rootURL}/user/${userId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -48,7 +50,7 @@ export async function getUserData(userId) {
 
 export async function removeFriend(userId, friendId) {
   try {
-    const response = await fetch(`/user/removefriend/${userId}/${friendId}`, {
+    const response = await fetch(`${rootURL}/user/removefriend/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -63,7 +65,7 @@ export async function removeFriend(userId, friendId) {
 
 export async function removeFriendReq(userId, friendId) {
   try {
-    const response = await fetch(`/user/removefriendreq/${userId}/${friendId}`, {
+    const response = await fetch(`${rootURL}/user/removefriendreq/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -78,7 +80,7 @@ export async function removeFriendReq(userId, friendId) {
 
 export async function sendFriendRequest(userId, friendId) {
   try {
-    const response = await fetch(`/user/sendfriendreq/${userId}/${friendId}`, {
+    const response = await fetch(`${rootURL}/user/sendfriendreq/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -93,7 +95,7 @@ export async function sendFriendRequest(userId, friendId) {
 
 export async function addFriend(userId, friendId) {
   try {
-    const response = await fetch(`/user/addfriend/${userId}/${friendId}`, {
+    const response = await fetch(`${rootURL}/user/addfriend/${userId}/${friendId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -108,7 +110,7 @@ export async function addFriend(userId, friendId) {
 }
 
 // export async function getFriendReports(callback) { // eslint-disable-line
-//   fetch('/report')
+//   fetch(`${rootURL}/report`)
 //     .then((res) => res.json()).then((resp) => {
 //       const ids = [];
 //       for (let i = 0; i < resp.length; i += 1) {
@@ -121,7 +123,7 @@ export async function addFriend(userId, friendId) {
 // }
 export async function getFriendReports(userId) {
   try {
-    const response = await fetch(`/user/${userId}/getFriendReports`, {
+    const response = await fetch(`${rootURL}/user/${userId}/getFriendReports`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -139,7 +141,7 @@ export async function getFriendReports(userId) {
 
 export async function getPersonalReports(userId) {
   try {
-    const response = await fetch(`/user/${userId}/getPersonalReports`, {
+    const response = await fetch(`${rootURL}/user/${userId}/getPersonalReports`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
@@ -157,7 +159,7 @@ export async function getPersonalReports(userId) {
 
 export async function getReportDataLikes(reportId) {
   try {
-    const response = await fetch(`/report/${reportId}`, {
+    const response = await fetch(`${rootURL}/report/${reportId}`, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     });
@@ -172,7 +174,7 @@ export async function getReportDataLikes(reportId) {
 }
 export async function updateLikes2(reportId, obj) {
   try {
-    const response = await fetch(`/report/${reportId}`, {
+    const response = await fetch(`${rootURL}/report/${reportId}`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(obj),
@@ -191,7 +193,7 @@ export async function updateLikes2(reportId, obj) {
 
 export async function changePfp(user, pfp) {
   try {
-    const response = await fetch('/user/changePfp', {
+    const response = await fetch(`${rootURL}/user/changePfp`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       mode: 'cors',
@@ -208,7 +210,7 @@ export async function changePfp(user, pfp) {
 }
 export async function getUserHistory(user) {
   try {
-    const response = await fetch(`/Reports/lastreporter/${user}`);
+    const response = await fetch(`${rootURL}/Reports/lastreporter/${user}`);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -218,7 +220,7 @@ export async function getUserHistory(user) {
 
 export async function getUserHistoryReporter(user) {
   try {
-    const response = await fetch(`/Reports/mostreporter/${user}`);
+    const response = await fetch(`${rootURL}/Reports/mostreporter/${user}`);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -228,7 +230,7 @@ export async function getUserHistoryReporter(user) {
 
 export async function getTotalReportHistory(user) {
   try {
-    const response = await fetch(`/Reports/reports/${user}`);
+    const response = await fetch(`${rootURL}/Reports/reports/${user}`);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -238,7 +240,7 @@ export async function getTotalReportHistory(user) {
 
 export async function getTotalReportWeek(user) {
   try {
-    const response = await fetch(`/Reports/reportsweekly/${user}`);
+    const response = await fetch(`${rootURL}/Reports/reportsweekly/${user}`);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -248,7 +250,7 @@ export async function getTotalReportWeek(user) {
 
 export async function getTotalClasses(user) {
   try {
-    const response = await fetch(`/Schedule/totalclasses/${user}`);
+    const response = await fetch(`${rootURL}/Schedule/totalclasses/${user}`);
     const result = await response.json();
     return result.data;
   } catch (error) {

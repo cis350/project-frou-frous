@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
 import PropTypes from 'prop-types';
+import { rootURL } from "../utils/utils";
 
 function AddClass({ handleChild }) {
   function defaultFunc() {
@@ -13,7 +14,7 @@ function AddClass({ handleChild }) {
   AddClass.propTypes = {
     handleChild: PropTypes.func,
   };
-  const baseURL = '';
+  const baseURL = rootURL;
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [start, setStart] = useState('');

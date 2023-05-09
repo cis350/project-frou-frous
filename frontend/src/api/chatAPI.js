@@ -1,5 +1,7 @@
+import { rootURL } from "../utils/utils";
+
 async function getChatId(user, reciever) {
-  let response = await fetch(`/chat/getChatId/${user}/${reciever}`, {
+  let response = await fetch(`${rootURL}/chat/getChatId/${user}/${reciever}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
     mode: 'cors',
@@ -12,7 +14,7 @@ async function getChatId(user, reciever) {
 export async function sendChatMessage(message, user, reciever) {
   const chat = await getChatId(user, reciever);
   console.log('CHAT', chat);
-  const response = await fetch('/chat/sendMessage', {
+  const response = await fetch(`${rootURL}/chat/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     mode: 'cors',
@@ -32,7 +34,7 @@ export async function sendChatMessage(message, user, reciever) {
 
 export async function getChatMessages(user, reciever) { //eslint-disable-line
   const chat = await getChatId(user, reciever);
-  let response = await fetch(`/chat/user/${user}/${reciever}/${chat}`, {
+  let response = await fetch(`${rootURL}/chat/user/${user}/${reciever}/${chat}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
     mode: 'cors',
@@ -45,7 +47,7 @@ export async function getChatMessages(user, reciever) { //eslint-disable-line
 
 export const getChatFriends = async (user) => {
   console.log('CHAT API MAKING FETCH CALL TO GET FRIENDS');
-  let response = await fetch(`/chat/getFriends/${user}`, {
+  let response = await fetch(`${rootURL}/chat/getFriends/${user}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
     mode: 'cors',

@@ -101,7 +101,7 @@ function Report(props) {
         </center>
       </CardContent>
       <CardActions>
-        <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black' }} href={`app/report/${postId}`}>
+        <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black' }} href={`/app/report/${postId}`}>
           Comments
         </Button>
         <Button data-testid="like-button" className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: isLiked ? 'red' : 'white', color: 'black' }} onClick={controlLike}>

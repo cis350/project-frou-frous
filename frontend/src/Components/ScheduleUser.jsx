@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import PropTypes from 'prop-types';
 import DaySchedule from './DaySchedule';
+import { rootURL } from "../utils/utils";
 
 function Schedule({ user }) {
   const [classes, setClasses] = useState([]);
@@ -10,7 +11,7 @@ function Schedule({ user }) {
   };
   const fetchData = async () => {
     try {
-      fetch(`/schedule/${user}`, {
+      fetch(`${rootURL}/schedule/${user}`, {
         method: 'GET',
         headers: { 'content-type': 'application/json' },
       })

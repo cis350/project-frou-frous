@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
+import { rootURL } from "../utils/utils";
 
 function ReportModal({ userId }) {
   ReportModal.defaultProps = {
@@ -30,7 +31,7 @@ function ReportModal({ userId }) {
       console.log(imageBase, 'here');
       const form = new FormData();
       form.append('image', selectedImage, selectedImage.name);
-      await fetch('/report', {
+      await fetch(`${rootURL}/report`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({

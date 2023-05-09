@@ -19,9 +19,11 @@
 //   }
 // }
 
+import { rootURL } from "../utils/utils";
+
 export async function getReportData(reportId) {
   // debugger; //eslint-disable-line
-  let response = await fetch(`/Reports/${reportId}/getReportData`, {
+  let response = await fetch(`${rootURL}/Reports/${reportId}/getReportData`, {
     method: 'GET',
     headers: { 'Content-type': 'application/json' },
     mode: 'cors',
@@ -48,7 +50,7 @@ export async function sendComment(reportId, newComment) {
     // console.log('new comments');
     // console.log(response.comments);
     // console.log(response);
-    const result = await fetch(`/Reports/${reportId}/sendComment`, {
+    const result = await fetch(`${rootURL}/Reports/${reportId}/sendComment`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(newComment),
@@ -61,7 +63,7 @@ export async function sendComment(reportId, newComment) {
 }
 
 // export async function sendComment(reportId, newComment) {
-//   const response = await fetch(`/Reports/${reportId}/sendComment`, {
+//   const response = await fetch(`${rootURL}/Reports/${reportId}/sendComment`, {
 //     method: 'PUT',
 //     headers: { 'Content-Type': 'application/json' },
 //     mode: 'cors',
@@ -74,7 +76,7 @@ export async function sendComment(reportId, newComment) {
 
 export async function updateLikes(reportId, userId, isLiked) {
   try {
-    const result = await fetch(`/Reports/${reportId}/updateLikes`, {
+    const result = await fetch(`${rootURL}/Reports/${reportId}/updateLikes`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       // cache: 'default',

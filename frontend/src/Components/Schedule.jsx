@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import AddClass from './AddClass';
 import DaySchedule from './DaySchedule';
+import { rootURL } from "../utils/utils";
 
 function Schedule({ user }) {
   Schedule.propTypes = {
@@ -9,7 +10,7 @@ function Schedule({ user }) {
   };
   const [classes, setClasses] = useState([]);
   const fetchData = async () => {
-    fetch(`/schedule/${user}`, {
+    fetch(`${rootURL}/schedule/${user}`, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
