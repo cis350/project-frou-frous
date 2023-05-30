@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# FrouFrous - A Lighthearted Class Accountability Social Media App
+Instead of creating normal posts, users generate "report" posts by catching their friends skipping class via photo and caption. This full-stack web application uses the MERN stack (MongoDB, Express, React, Node.js), as well as Github CI. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features include: 
+- login & authentication
+- profile customization
+- report creation
+- likes & commenting
+- class schedule creator
+- friend management
+- user timeline
 
 ## Available Scripts
 
