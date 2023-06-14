@@ -16,9 +16,7 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 
 function App() {
-  console.log('Testing APP CONSOLE');
   useEffect(() => {
-    // Fetches data from the openweathermap API and updates the DOM
 
     console.log(window.location.pathname);
     if (window.location.pathname !== '/' && window.location.pathname !== '/app/register') {

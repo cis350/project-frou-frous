@@ -2,23 +2,6 @@
 // * @jest-environment jsdom
 // */
 
-// export async function getReportData(reportId) {
-//   try {
-//     const response = await fetch(`http://localhost:8000/report/${reportId}`, {
-//       method: 'GET',
-//       headers: { 'content-type': 'application/json' },
-//     });
-//     if (!response.ok) {
-//       throw new Error('Network response was not OK');
-//     }
-//     const report = await response.json();
-//     console.log(report);
-//     return report;
-//   } catch (error) {
-//     return error;
-//   }
-// }
-
 import { rootURL } from "../utils/utils";
 
 export async function getReportData(reportId) {
@@ -45,11 +28,6 @@ export async function getComments(reportId) {
 
 export async function sendComment(reportId, newComment) {
   try {
-    // const response = await getReportData(reportId);
-    // response.comments.push(JSON.stringify(newComment));
-    // console.log('new comments');
-    // console.log(response.comments);
-    // console.log(response);
     const result = await fetch(`${rootURL}/Reports/${reportId}/sendComment`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
@@ -62,18 +40,6 @@ export async function sendComment(reportId, newComment) {
   }
 }
 
-// export async function sendComment(reportId, newComment) {
-//   const response = await fetch(`${rootURL}/Reports/${reportId}/sendComment`, {
-//     method: 'PUT',
-//     headers: { 'Content-Type': 'application/json' },
-//     mode: 'cors',
-//     cache: 'default',
-//     body: JSON.stringify(newComment),
-//   });
-//   console.log(response);
-//   return response;
-// }
-
 export async function updateLikes(reportId, userId, isLiked) {
   try {
     const result = await fetch(`${rootURL}/Reports/${reportId}/updateLikes`, {
@@ -83,12 +49,9 @@ export async function updateLikes(reportId, userId, isLiked) {
       body: JSON.stringify({ userId, reportId, isLiked }),
       mode: 'cors',
     });
-    console.log('update likes json');
     const resultjson = await result.json();
-    console.log(resultjson);
     return resultjson;
   } catch (error) {
-    console.log('wario is scared of weemen');
     console.log(error);
     return error;
   }

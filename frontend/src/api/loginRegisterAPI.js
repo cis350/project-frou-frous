@@ -7,8 +7,6 @@ export async function validateLogin(username) {
   }
 
   const result = await response.json();
-  console.log('result');
-  console.log(result);
   return result;
 }
 
@@ -23,7 +21,5 @@ export async function createUser(obj) {
   }
 
   const result = await response.json();
-  console.log('result');
-  console.log(result);
   return result;
 }

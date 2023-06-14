@@ -24,9 +24,6 @@ function Report(props) {
     try {
       // getReport(handleReport, postId); // Need to add this to swaggerHub API
       const reportResponse = await getReportData(postId);
-      console.log('Report Response');
-      console.log(reportResponse);
-      console.log('end report response');
       const rr = await reportResponse.reportData;
       setReporterId(rr.reporterid);
       setReporteeId(rr.reporteeid);
@@ -47,15 +44,8 @@ function Report(props) {
   }
 
   const controlLike = async () => {
-    console.log('like count');
-    console.log(likeCount);
-    console.log('isLiked');
-    console.log(isLiked);
-    console.log(userId);
     await updateLikes(postId, userId, isLiked);
     const newLikes = await getReportLikes(postId);
-    console.log('newlikes');
-    console.log(newLikes);
     if (newLikes.reportLikes.indexOf(userId) > -1) {
       setIsLiked(true);
     } else {
@@ -116,70 +106,4 @@ Report.propTypes = {
   postId: PropTypes.string.isRequired,
 };
 
-// const retrieveLike = async () => {
-//   const response = await getReportDataLikes(postId);
-//   const result = response.likeCount;
-//   console.log(result);
-//   return result;
-// };
-
-// function validateUserLike(userName) {
-//   if (likeCount.indexOf(userName) > -1) {
-//     setIsLiked(true);
-//   }
-// }
-
-// const controlLike = async (e) => {
-//   e.preventDefault();
-//   const likeResult = retrieveLike();
-//   setLikes(likeResult);
-//   validateUserLike(currentUser);
-//   if (isLiked) {
-//     const index = likeCount.indexOf(currentUser);
-//     setLikes(likeCount.splice(index, 1));
-//     setLikes(likeCount);
-//     const obj = {
-//       reporterid: name,
-//       reporteeid: reportee,
-//       profilePhoto,
-//       img: photo,
-//       cap,
-//       likes: likeCount,
-//       comments: commentList,
-//       date: 101010,
-//     };
-//     await updateLikes2(postId, obj);
-//   } else {
-//     likeCount.push(currentUser);
-//     setLikes(likeCount);
-//     const obj = {
-//       reporterid: name,
-//       reporteeid: reportee,
-//       profilePhoto,
-//       img: photo,
-//       cap,
-//       likes: likeCount,
-//       comments: commentList,
-//       date: 101010,
-//     };
-//     await updateLikes2(postId, obj);
-//   }
-//   setIsLiked(!isLiked);
-// };
-// async function handleReport(reportResponse) {
-//   const { reporterid, img, reporteeid, caption, likes, comments, date } = reportResponse;
-//   setName(reporterid);
-//   setCaption(caption);
-//   setPhoto(img);
-//   setReportee(reporteeid);
-//   setLikes(likes);
-//   setCommentsList(comments);
-//   setDateTime(date);
-//   if (likes.indexOf(currentUser) > -1) {
-//     setIsLiked(true);
-//   }
-//   const profilePhotoResponse = await getPfp(); // Need to add this to swaggerHub API
-//   const { pfp } = profilePhotoResponse;
-//   setProfilePhoto(pfp);
-// }
 export default Report;

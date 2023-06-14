@@ -63,9 +63,7 @@ const getLeaders = async () => {
   const users = await db.collection('User').find({ _id: { $in: ids } }).toArray();
   const results = [];
   reports.forEach((report) => {
-    //console.log('report', report);
     const userId = users.find((user) => user._id == report._id); //eslint-disable-line
-    //console.log('userId', userId);
     if (userId) {
       results.push({
         user: userId._id, //eslint-disable-line

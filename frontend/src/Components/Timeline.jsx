@@ -20,9 +20,6 @@ function Timeline(props) {
         reports.push(reportElement);
       }
       const root = createRoot(document.getElementById('reports'));
-      console.log('report ids');
-      console.log(reports);
-      console.log('root created');
       root.render(reports);
     } catch (err) {
       toast.error(err);

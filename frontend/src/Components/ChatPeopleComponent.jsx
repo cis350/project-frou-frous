@@ -3,12 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { getChatFriends } from '../api/chatAPI';
 
 function convertTimestamp(timestamp) {
-  console.log('timestamp', timestamp);
   if (timestamp < 0) {
     return '';
   }
   const d = new Date(timestamp);
-  console.log('timestamp date', d);
   const yyyy = d.getFullYear();
   const mm = ('0'.concat((d.getMonth() + 1))).slice(-2);
   const dd = ('0'.concat(d.getDate())).slice(-2);
@@ -61,9 +59,6 @@ export default function ChatPeopleComponent() {
   }
 
   useEffect(() => {
-    // Fetches data from the openweathermap API and updates the DOM
-    console.log('USING EFFECT');
-
     const getFriends = async () => {
       try {
         const res = await getChatFriends(curUser);
@@ -77,7 +72,6 @@ export default function ChatPeopleComponent() {
 
     getFriends();
   }, []);
-  console.log('PEOPLE', people);
   return (
     <div id="peopleList">
       <div id="searchBarWrapper">

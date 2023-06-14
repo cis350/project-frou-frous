@@ -84,14 +84,12 @@ webapp.get('/Schedule/totalclasses/:user', async (req, resp) => {
 
 webapp.get('/Reports/:reportId/getReportData', async (req, resp) => {
   const res = await dbLib2.getReportData(req.params.reportId);
-  // console.log(res);
   resp.status(200).json({ data: res });
 });
 
 webapp.put('/Reports/:reportId/sendComment', async (req, resp) => {
   console.log('Sending Comment REQUEST BODY', req.body);
   if (!req.body.commenterid || !req.body.content) {
-    console.log(!req.body.commenterid);
     console.log('Send Comment: BAD BODY DATA');
     resp.status(404).json({ message: 'missing input fields' });
     return;
@@ -126,29 +124,6 @@ webapp.put('/Reports/:reportId/updateLikes', async (req, resp) => {
     resp.status(400).json({ message: 'There was an error in updating likes.' });
   }
 });
-// webapp.put('/Reports/:reportId/updateLikes', async (req, resp) => {
-//   resp.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-//   resp.set('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
-//   console.log('update likes has been called');
-//   if (!req.body.userId) {
-//     console.log('Update Likes BAD BODY DATA');
-//     resp.status(404).json({ message: 'missing input fields' });
-//     return;
-//   }
-//   try {
-//     console.log('userId');
-//     console.log(req.body.userId);
-//     console.log('webapp route handler successfully called');
-//     const result = await dbLib2.updateLikes(req.params.reportId, req.body.userId);
-//     resp.status(201).json({ data: { id: result } });
-//   } catch (error) {
-//     console.log('userId');
-//     console.log(req.body.userId);
-//     console.log('HERE IS AN ERROR!!!!');
-//     resp.status(400).json({ message: 'There was an error' });
-//   }
-//   console.log('webapp route handler done');
-// });
 
 /**
  * route implementation POST / chat/sendMessage
@@ -236,7 +211,6 @@ webapp.post('/user/', async (req, resp) => {
   if (!req.body.id || !req.body.password || !req.body.email
          || !req.body.firstName || !req.body.lastName || !req.body.friends
          || !req.body.friendReqs) {
-    console.log('here');
     resp.status(404).json({ message: 'missing data' });
     return;
   }
@@ -251,9 +225,7 @@ webapp.post('/user/', async (req, resp) => {
       email: req.body.email,
       pfp: 'https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg',
     };
-    console.log('newUser', newUser);
     const result = await dbLib.addUser(newUser);
-    console.log('result after post: ', result);
     resp.status(201).json({ data: { id: result } });
   } catch (err) {
     resp.status(400).json({ message: 'There was an error' });

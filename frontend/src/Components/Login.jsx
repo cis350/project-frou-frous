@@ -12,7 +12,6 @@ function Login() {
   }, []);
 
   async function displayLogin() {
-    debugger; 
     const resp = await validateLogin(username);
     if (resp.error) {
       toast.error(resp.error.message);
@@ -44,14 +43,13 @@ function Login() {
     e.preventDefault();
     if (validate()) {
       displayLogin();
-      // console.log("LOGIN RSP", resp);
     }
   };
 
   return (
     <div className="loginApp">
       <div className="auth-form-container">
-        <h1 className="app-title">Frou Frous</h1>
+        <h1 className="app-title">Welcome to Frou Frous!</h1>
         <form className="login-form" onSubmit={handleSubmit}>
           <label htmlFor="username">
             Username

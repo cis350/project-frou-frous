@@ -16,8 +16,6 @@ function Comments(props) {
     try {
       const res = await getComments(reportId);
       const commentsList = res.reportComments;
-      console.log('comments');
-      console.log(commentsList);
       for (let i = 0; i < commentsList.length; i += 1) {
         commstring = commstring.concat(
           `<div class="commentBox">

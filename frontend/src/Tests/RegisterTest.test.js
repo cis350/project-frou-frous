@@ -71,7 +71,6 @@ describe('validateLogin', () => {
   it('should get the user', async () => {
     // Mock the API call and return a successful response
     const result = await validateLogin('t');
-    console.log('result test', result);
 
     // Expect the API call to have been made with the correct parameters
     // Expect the API call to have returned a successful response

@@ -28,7 +28,6 @@ function ReportModal({ userId }) {
 
     try {
       const imageBase = await toBase64(selectedImage);
-      console.log(imageBase, 'here');
       const form = new FormData();
       form.append('image', selectedImage, selectedImage.name);
       await fetch(`${rootURL}/report`, {

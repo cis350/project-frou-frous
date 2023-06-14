@@ -23,13 +23,6 @@ export async function sendChatMessage(message, user, reciever) {
   });
   console.log(response);
   return response;
-
-  // const res = await axios.post(`/chat/send/${message}`);
-  // mes.push({
-  //   message,
-  //   sent: true,
-  // });
-  // return res.data;
 }
 
 export async function getChatMessages(user, reciever) { //eslint-disable-line

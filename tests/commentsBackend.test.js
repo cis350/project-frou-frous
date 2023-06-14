@@ -49,11 +49,8 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
       },
     ];
     const results = await db.collection('Reports').insertMany(reports);
-    console.log(results);
     reportId1 = results.insertedIds['0'].toHexString();
     reportId2 = results.insertedIds['1'].toHexString();
-    console.log(reportId1);
-    console.log(reportId2);
   });
 
   /**
@@ -62,11 +59,8 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
  */
   afterAll(async () => {
     try {
-      console.log("d1");
       await db.collection('Reports').deleteMany({ $or: [{ _id: reportId1 }, { _id: reportId2 }] });
-      console.log("d2");
       await mongo.close();
-      console.log("done");
       return closeMongoDBConnection(); // mongo client that started server.
     } catch (err) {
       return err;
@@ -92,11 +86,6 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
     expect(data.comments.length).toEqual(3);
     const respAdd = await request(app).put(`/Reports/${reportId1}/sendComment`).send({ commenterid: 'testUser2', content: 'hello world 2' });
     expect(respAdd.status).toEqual(201);
-    // console.log(respAdd);
-    // const respNew = await request(app).get(`/reports/${reportId}/getReportData`);
-    // const { dataSend } = JSON.parse(respNew.text);
-    // console.log(dataSend);
-    // expect(dataSend.comments.length).toEqual(4);
   });
 
   test('200 get report data likes', async () => {
@@ -104,11 +93,5 @@ describe('GET/PUT comments and likes endpoint integration test', () => {
     expect(resp.status).toEqual(200);
     const { data } = JSON.parse(resp.text);
     expect(data.likes.length).toEqual(3);
-    // eslint-disable-next-line max-len
-    // const respRemove = await request(app).put(`/reports/${reportId}/updateLikes`).send({ userId: 'jess' });
-    // expect(respRemove.status).toEqual(201);
-    // const respNew = await request(app).get(`/reports/${reportId}`);
-    // const dataSend = JSON.parse(respNew.text).data;
-    // expect(dataSend.length).toEqual(2);
   });
 });

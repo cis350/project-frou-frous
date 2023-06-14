@@ -86,7 +86,6 @@ describe('GET/PUT userfriends endpoint integration test', () => {
     const resp = await request(app).get('/chat/getChatId/testUser1/testUser2');
     const { data } = JSON.parse(resp.text);
     expect(resp.status).toEqual(200);
-    console.log('RESP DATA', data);
     expect(data).toEqual(chatId);
   });
 

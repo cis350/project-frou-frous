@@ -23,7 +23,6 @@ export default function LeaderboardComponent() {
   }
 
   useEffect(() => {
-    console.log('USE EFFECT');
     setLeaders();
   }, [1000]);
 

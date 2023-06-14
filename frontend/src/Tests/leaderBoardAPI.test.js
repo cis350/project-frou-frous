@@ -73,8 +73,6 @@ describe('getLeaders', () => {
   it('should get the leaders', async () => {
     // Mock the API call and return a successful response
     const result = await getLeaders();
-    console.log('result test', result);
-
     // Expect the API call to have been made with the correct parameters
     // Expect the API call to have returned a successful response
     expect(result).toEqual(leaders);

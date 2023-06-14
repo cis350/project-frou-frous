@@ -43,7 +43,6 @@ export default function ChatUserComponent() {
   useEffect(() => {
     getChats();
     setInterval(() => {
-      console.log('Setting Interval');
       setTime(Date.now());
     }, 1000);
   }, [time]);

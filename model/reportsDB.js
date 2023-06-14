@@ -32,7 +32,6 @@ const connect = async () => {
     // check that we are connected to the db
     return MongoConnection;
   } catch (err) {
-    // console.log(err.message);
     return err;
   }
 };
@@ -201,11 +200,9 @@ const getFriendReports = async (userId) => {
   const db = await getDB();
   // retrieve friends
   const userData = await db.collection('User').findOne({ _id: userId });
-  console.log('user data', userData);
   if (!userData) {
     return { error: 'User does not exist' };
   }
-  console.log('User Data', userData);
   const { friends } = userData;
   if (!friends || friends.length === 0) {
     return [];
