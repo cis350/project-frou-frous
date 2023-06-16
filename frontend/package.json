@@ -40,14 +40,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "json-server": " json-server --watch server/db.json --port 8001",
     "build": "react-scripts build",
     "test": "jest --coverage",
     "eject": "react-scripts eject",
     "client": "npm start --prefix client",
     "clientinstall": "npm install --prefix client",
     "dev": "concurrently \"node backend/index.js\" \"npm start\"",
-    "app": "concurrently \"npm run dev\" \"npm run json-server\""
+    "app": "concurrently \"npm run dev\""
   },
   "eslintConfig": {
     "extends": [

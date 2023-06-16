@@ -73,7 +73,7 @@ function Register() {
     <div className="loginApp">
       <div className="auth-form-container">
         <form className="register-form" onSubmit={handleSubmit}>
-          <label htmlFor="firstName">
+          <label htmlFor="firstName" className="fieldlabel">
             First Name
             <input
               className="loginInput"
@@ -85,7 +85,7 @@ function Register() {
               placeholder="John"
             />
           </label>
-          <label htmlFor="lastName">
+          <label htmlFor="lastName" className="fieldlabel">
             Last Name
             <input
               className="loginInput"
@@ -97,7 +97,7 @@ function Register() {
               placeholder="Doe"
             />
           </label>
-          <label htmlFor="email">
+          <label htmlFor="email" className="fieldlabel">
             Email
             <input
               className="loginInput"
@@ -110,7 +110,7 @@ function Register() {
             />
           </label>
           <br />
-          <label htmlFor="username">
+          <label htmlFor="username" className="fieldlabel">
             Username
             <input
               className="loginInput"
@@ -121,10 +121,10 @@ function Register() {
               placeholder="username"
             />
           </label>
-          <label htmlFor="password">
+          <label htmlFor="password" className="fieldlabel">
             Password
             <input
-              className="loginInput"
+              className="loginInput password"
               name="password1"
               required
               value={password}
@@ -135,11 +135,11 @@ function Register() {
           </label>
           <br />
           <button data-testid="submitButton" className="loginButton" type="submit">Sign Up</button>
-
-        </form>
-        <a href="/">
-          <button data-testid="login" type="button" className="loginButton link-button">Already have an Account? Sign in</button>
+          <a href="/">
+            <button data-testid="login" type="button" className="loginButton link-button">Have an Account? Sign in</button>
         </a>
+        </form>
+        
 
       </div>
     </div>
