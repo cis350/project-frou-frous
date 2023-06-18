@@ -19,9 +19,9 @@ function ClassBlock({
   return (
     <div
       style={{
-        gridRowStart: start, gridRowEnd: end, backgroundColor: color, color: 'black',
+        gridRowStart: start, gridRowEnd: end, backgroundColor: color, color: 'black', width: '100%', maxWidth: '100%'
       }}
-      className="text-xl font-normal border-l-4 border-t-transparent border-slate-300 flex items-center rounded-lg"
+      className="text-lg font-normal border-l-4 border-t-transparent border-slate-300 flex items-center rounded-lg"
     >
       <div className="ml-4">{name}</div>
     </div>

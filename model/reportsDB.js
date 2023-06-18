@@ -208,20 +208,35 @@ const getFriendReports = async (userId) => {
     return [];
   }
   friends.push(userId);
-  // const reportIds = [];
-  const friendReports = await db.collection('Reports').find({ $or: [
-    { reporterid: { $in: friends } },
-    { reporteeid: { $in: friends } },
-  ] }).project({ _id: 1 }).sort({ date: -1 }).toArray();
+  const friendReports = await db
+  .collection('Reports')
+  .find({
+    $or: [
+      { reporterid: { $in: friends } },
+      { reporteeid: { $in: friends } },
+    ],
+  })
+  .project({ _id: 1 })
+  .sort({ date: -1 })
+  .limit(20)
+  .toArray();
   return friendReports;
 };
 
 const getPersonalReports = async (userId) => {
   const db = await getDB();
-  const userReports = await db.collection('Reports').find({ $or: [
-    { reporterid: { $in: [userId] } },
-    { reporteeid: { $in: [userId] } },
-  ] }).project({ _id: 1 }).sort({ date: -1 }).toArray();
+  const userReports = await db
+  .collection('Reports')
+  .find({
+    $or: [
+      { reporterid: { $in: [userId] } },
+      { reporteeid: { $in: [userId] } },
+    ],
+  })
+  .project({ _id: 1 })
+  .sort({ date: -1 })
+  .limit(20)
+  .toArray();
   return userReports;
 };
 

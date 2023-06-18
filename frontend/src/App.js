@@ -67,7 +67,6 @@ function App() {
       path: 'app/chat/user/:user',
       element: <SingleChatView />,
     },
-
   ]);
 
   return (

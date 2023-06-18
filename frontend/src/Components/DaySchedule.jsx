@@ -15,9 +15,9 @@ function DaySchedule({ day, classes }) {
   };
   const colors = ['#397367', '#904c77', '#9ebd6e', '#d4b74c'];
   return (
-    <div className="text-2xl font-bold" style={{ backgroundColor: '#0D1B1E', color: 'white' }}>
+    <div className="text-xl font-bold rounded-md" style={{ backgroundColor: '#0D1B1E', color: 'white', width: '100%', maxWidth: '100%', textAlign: 'center'}}>
       {day}
-      <div style={{ display: 'grid', gridTemplateRows: 'repeat(1440, 1fr)', maxHeight: '100vh' }}>
+      <div style={{ display: 'grid', gridTemplateRows: 'repeat(1440, 1fr)', maxHeight: '100vh', width: '100%', maxWidth: '100%' }}>
         {classes.map((course, index) => (
           <ClassBlock
             key={course.name}

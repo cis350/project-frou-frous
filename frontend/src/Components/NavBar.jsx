@@ -43,16 +43,16 @@ function NavBar({ setPage }) {
         justifyContent="center"
         sx={{
           borderRadius: '10px',
-          width: '80%',
+          width: '100%',
           backgroundColor: '#0d1b1e',
-          border: '4px solid #E5E5E5',
+          border: '5px solid #E5E5E5',
           margin: 'auto',
           marginTop: '20px',
           marginBottom: '10px',
           boxShadow: '0px 0px 0px rgba(255, 255, 255, 0.3)',
           transition: 'box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out',
           '&:hover': {
-            boxShadow: '3px 3px 3px rgba(255, 255, 255, 0.3)', 
+            boxShadow: '4px 4px 4px rgba(255, 255, 255, 0.3)', 
             transform: 'scale(1.005)',
           },
         }}

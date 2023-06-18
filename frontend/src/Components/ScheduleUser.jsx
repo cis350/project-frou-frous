@@ -33,9 +33,9 @@ function Schedule({ user }) {
   }, []);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', borderRadius: '10px', width: '100%', maxWidth: '100%' }}>
       {classes.map((day) => (
-        <DaySchedule day={day.day} classes={day.classes} /> // eslint-disable-line 
+        <DaySchedule key={day} day={day.day} classes={day.classes} /> 
 
       ))}
     </div>

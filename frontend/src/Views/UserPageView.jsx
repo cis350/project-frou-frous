@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 import NavBar from '../Components/NavBar';
-import Timeline from '../Components/Timeline'; //eslint-disable-line
+import Timeline from '../Components/Timeline'; 
 import UserCard from '../Components/UserCard';
 import ScheduleUser from '../Components/ScheduleUser';
+
 
 import { getUserData } from '../api/userPageAPI';
 
@@ -42,7 +44,7 @@ function UserPageView() {
   return (
     <div style={{ backgroundColor: '#0D1B1E' }}>
       <center>
-        <div id="searchBar" className="input-group rounded-8 flex items-center justify-center" style={{ maxHeight: '60px', marginTop: '1%', alignItems: 'center' }}>
+        <div id="searchBar" className="input-group rounded-8 flex items-center justify-center" style={{ maxHeight: '70px', marginTop: '1%', alignItems: 'center' }}>
           <input
             id="chatSearch"
             type="text"
@@ -69,29 +71,50 @@ function UserPageView() {
         spacing={2}
         sx={{ width: '100vw', minHeight: '100vh', backgroundColor: '#0D1B1E' }}
       >
-        <Grid item xs={6} justifyContent="center">
+        <Grid item xs={6} style={{ padding: 0, paddingTop: '16px', display: 'flex', justifyContent: 'flex-end' }}>
           {!validUser && (
           <div style={{ textAlign: 'center', marginTop: '20px', color: 'white' }}>
             No User Found
           </div>
           )}
-          {validUser && page === 'Timeline' && <Timeline userId={userId} page={page} name="Timeline" />}
+          {validUser && page === 'Timeline' && (
+          <div style={{ width: '85%', padding: '8px', paddingTop: '0px' }}>
+            <Timeline userId={userId} page={page} name="Your Timeline" personal='False' />
+          </div>
+          )}
           {validUser && page === 'Profile' && (
-          <div>
+          <div style={{ width: '85%', padding: '24px', paddingTop: '0px'}}>
             <UserCard userId={userId} currentUser={sessionStorage.getItem('username')} />
-            <Timeline userId={userId} page={page} name="Skip History" personal />
+            <Timeline userId={userId} page={page} name="Skip Activity" personal='True' />
           </div>
           )}
         </Grid>
-        <Grid item xs={6} justifyContent="center">
-          <NavBar setPage={setPage} />
-          {validUser && (
-          <div style={{ border: '3px solid #E5E5E5', maxHeight: '70%', borderRadius: '10px', padding: '3px', marginRight: '3px', marginLeft: '3px' }}>
-            <a href="/app/schedule/1234">
-              <ScheduleUser user={sessionStorage.getItem('username')} />
-            </a>
+        <Grid item xs={6} style={{ padding: 0, paddingTop: '16px', display: 'flex', justifyContent: 'flex-start' }}>
+          <div style={{ width: '85%', padding: '24px', paddingTop: '0px'}}>
+            <NavBar setPage={setPage} />
+            {validUser && (
+            <Paper sx={{
+              borderRadius: '10px',
+              width: '100%',
+              backgroundColor: '#0d1b1e',
+              border: '5px solid #E5E5E5',
+              margin: 'auto',
+              marginTop: '20px',
+              marginBottom: '10px',
+              boxShadow: '0px 0px 0px rgba(255, 255, 255, 0.3)',
+              transition: 'box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out',
+              '&:hover': {
+                boxShadow: '4px 4px 4px rgba(255, 255, 255, 0.3)', 
+                transform: 'scale(1.005)',
+              },
+            }}
+            >
+              <a href="/app/schedule/1234" style={{ width: '100%' }}>
+                <ScheduleUser user={sessionStorage.getItem('username')} />
+              </a>
+            </Paper>
+            )}
           </div>
-          )}
         </Grid>
       </Grid>
     </div>

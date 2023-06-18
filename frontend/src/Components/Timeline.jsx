@@ -29,12 +29,10 @@ function Timeline(props) {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        if (!personal) {
+        if (personal == 'False') {
           const idArr = await getFriendReports(userId);
-          // await setReportIds(idArr);
           await loadPosts(idArr);
         } else {
-          console.log('personal timeline');
           const idArr = await getPersonalReports(userId);
           await loadPosts(idArr);
         }
@@ -51,7 +49,21 @@ function Timeline(props) {
       direction="column"
       alignItems="center"
       margin="auto"
-      sx={{ width: '90%', height: '100%' }}
+      sx={{
+        borderRadius: '10px',
+        width: '100%',
+        backgroundColor: '#0d1b1e',
+        border: '5px solid #E5E5E5',
+        margin: 'auto',
+        marginTop: '20px',
+        marginBottom: '10px',
+        boxShadow: '0px 0px 0px rgba(255, 255, 255, 0.3)',
+        transition: 'box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out',
+        '&:hover': {
+          boxShadow: '4px 4px 4px rgba(255, 255, 255, 0.3)',
+          transform: 'scale(1.0003)',
+        },
+      }}
     >
       <Grid item xs={12} alignItems="center">
         <Grid item xs={12} alignItems="center" md={12}>
@@ -62,15 +74,17 @@ function Timeline(props) {
               fontFamily: 'Open Sans, sans-serif',
               fontSize: '35px',
               textAlign: 'center',
+              fontWeight: 'bold',
+              fontStyle: 'italic'
             }}
           >
             {name}
           </Typography>
         </Grid>
-        <div id="reports" />
+        <div id="reports" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '5px', marginLeft: '5px', marginRight: '5px' }} />
       </Grid>
     </Grid>
-  );
+  );  
 }
 
 Timeline.propTypes = {

@@ -3,26 +3,26 @@ import {
   Card, CardContent, CardActions, Grid, Avatar, Button,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import { getPfp } from '../api/userPageAPI';
+import { getPfp, getUserData } from '../api/userPageAPI';
 import { getReportData, updateLikes, getReportLikes } from '../api/reportAPI';
-// , updateLikes, getReportLikes getReport, ,
 
 function Report(props) {
   const [reporterid, setReporterId] = useState('');
   const [reporteeid, setReporteeId] = useState('');
   const [caption, setCaption] = useState('');
   const [postimg, setImg] = useState('');
-  // const [likes, setLikes] = useState([]);
   const [likeCount, setLikeCount] = useState('');
-  // const [date, setDate] = useState('');
   const [pfp, setPfp] = useState('');
+  const [date, setDate] = useState('');
   const { postId } = props;
   const userId = sessionStorage.getItem('username');
   const [isLiked, setIsLiked] = useState([]);
+  const colors = ['#c5de9e', '#e0adcd', '#9edbcf', '#eddb98'];
+
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
   async function fetchData() {
     try {
-      // getReport(handleReport, postId); // Need to add this to swaggerHub API
       const reportResponse = await getReportData(postId);
       const rr = await reportResponse.reportData;
       setReporterId(rr.reporterid);
@@ -30,9 +30,9 @@ function Report(props) {
       setCaption(rr.caption);
       setImg(rr.img);
       setLikeCount(rr.likes.length);
-      // setDate(reportResponse.date);
-      const profphoto = await getPfp(reporterid);
-      setPfp(profphoto.pfp);
+      setDate(new Date(rr.date));
+      const pfpResponse = await getUserData(rr.reporterid);
+      setPfp(pfpResponse.pfp);
       if (rr.likes.indexOf(userId) > -1) {
         setIsLiked(true);
       } else {
@@ -59,14 +59,16 @@ function Report(props) {
   }, [postId]);
 
   return (
-    <Card variant="outlined" sx={{ width: '100%', height: '100%', border: '3px solid #E5E5E5', borderRadius: '10px', backgroundColor: '#0D1B1E', maxWidth: '800px' }}>
+  <Card variant="outlined" sx={{ width: '100%', height: '100%', borderRadius: '10px', backgroundColor: randomColor, maxWidth: '800px', borderWidth: '1px', borderColor: '#E5E5E5' }}>
       <CardContent>
         <Grid container spacing={2} alignItems="center">
-          <Grid item>
-            <Avatar src={pfp} alt={userId} sx={{ width: 50, height: 50 }} />
+          <Grid item style={{ marginRight: 0 }}>
+            <a href={`${reporterid}`}>
+              <Avatar src={pfp} alt={userId} sx={{ width: 50, height: 50, marginRight: 0, paddingRight: 0, outline: '2px solid black' }} />
+            </a>
           </Grid>
-          <Grid item>
-            <div style={{ color: 'white', fontFamily: 'Open Sans, sans-serif' }}>
+          <Grid item style={{ paddingLeft: '8px' }}>
+            <div style={{ color: 'black', fontFamily: 'Open Sans, sans-serif', fontSize: '14px' }}>
               <b>
                 {reporterid}
               </b>
@@ -76,13 +78,19 @@ function Report(props) {
               <b>
                 {reporteeid}
               </b>
-              {' '}
-              for skipping!
+              !
+            </div>
+            <div style={{ color: 'black', fontFamily: 'Open Sans, sans-serif', fontSize: '14px' }}>
+              {date.toLocaleString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+              })}
             </div>
           </Grid>
         </Grid>
         <img src={postimg} alt="" style={{ width: '100%', height: '100%', marginTop: 15, borderRadius: '10px' }} />
-        <center style={{ color: 'white' }}>
+        <center style={{ color: 'black' }}>
           <p>
             {' '}
             {caption}
@@ -91,11 +99,11 @@ function Report(props) {
         </center>
       </CardContent>
       <CardActions>
-        <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black' }} href={`/app/report/${postId}`}>
-          Comments
+        <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black', margin: '4px' }} href={`/app/report/${postId}`}>
+          Comments 💬
         </Button>
-        <Button data-testid="like-button" className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: isLiked ? 'red' : 'white', color: 'black' }} onClick={controlLike}>
-          <span className="likes-counter">{ `Like | ${likeCount}` }</span>
+        <Button data-testid="like-button" className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: isLiked ? 'red' : 'white', color: 'black', margin: '4px' }} onClick={controlLike}>
+          <span className="likes-counter">{`👍 | ${likeCount}`}</span>
         </Button>
       </CardActions>
     </Card>
