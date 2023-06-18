@@ -40,31 +40,61 @@ function NavBar({ setPage }) {
       <Grid
         container
         direction="column"
-        alignItems="center"
-        margin={3}
-        sx={{ width: '90%', border: '3px solid #E5E5E5', borderRadius: '10px', backgroundColor: '#0D1B1E' }}
+        justifyContent="center"
+        sx={{
+          borderRadius: '10px',
+          width: '80%',
+          backgroundColor: '#0d1b1e',
+          border: '4px solid #E5E5E5',
+          margin: 'auto',
+          marginTop: '20px',
+          marginBottom: '10px',
+          boxShadow: '0px 0px 0px rgba(255, 255, 255, 0.3)',
+          transition: 'box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out',
+          '&:hover': {
+            boxShadow: '3px 3px 3px rgba(255, 255, 255, 0.3)', 
+            transform: 'scale(1.005)',
+          },
+        }}
       >
-        <Grid item xs={12} alignItems="center" justifyContent="center" spacing={1} container direction="row" sx={{ p: 2, flexGrow: 1 }}>
-          <Grid item xs={12} md={12} alignItems="center" justifyContent="center" sx={{ backgroundColor: '#397367', borderRadius: '15px' }}>
+        <Grid item xs={12} alignItems="center" justifyContent="center" spacing={1} container direction="row" sx={{ p: 2, flexGrow: 1, }}>
+          <Grid item xs={12} md={12} >
             <Typography
               variant="h5"
-              marginBottom={1}
+              padding="8px"
               sx={{
                 color: 'white',
                 fontFamily: 'inherit',
-                fontSize: '40x',
+                fontSize: '30x',
                 textAlign: 'center',
+                fontWeight: 'bold',
+                fontStyle: 'italic',
+                backgroundColor: '#397367',
+                borderRadius: '16px',
               }}
             >
               Navigation Bar
             </Typography>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} >
             <Button
               fullWidth
               size="large"
               variant="contained"
-              sx={{ bgcolor: 'lime.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
+              sx={{
+                bgcolor: 'lime.main',
+                color: 'white',
+                fontFamily: 'inherit',
+                borderRadius: '10px',
+                height: '100%',
+                '&:hover': {
+                  bgcolor: 'lime.dark',
+                  color: 'white',
+                },
+                '&:active': {
+                  transform: 'scale(0.98)', 
+                },
+              }}
               startIcon={<Chat />}
               component={Link}
               to="/app/chat"
@@ -77,7 +107,20 @@ function NavBar({ setPage }) {
               fullWidth
               size="large"
               variant="contained"
-              sx={{ bgcolor: 'pink.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
+              sx={{
+                bgcolor: 'pink.main',
+                color: 'white',
+                fontFamily: 'inherit',
+                borderRadius: '10px',
+                height: '100%',
+                '&:hover': {
+                  bgcolor: 'pink.dark',
+                  color: 'white',
+                },
+                '&:active': {
+                  transform: 'scale(0.98)',
+                },
+              }}
               startIcon={<Timeline />}
               onClick={() => handleNavigation('Timeline')}
             >
@@ -89,7 +132,20 @@ function NavBar({ setPage }) {
               fullWidth
               size="large"
               variant="contained"
-              sx={{ bgcolor: 'yellow.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
+              sx={{
+                bgcolor: 'yellow.main',
+                color: 'white',
+                fontFamily: 'inherit',
+                borderRadius: '10px',
+                height: '100%',
+                '&:hover': {
+                  bgcolor: 'yellow.dark',
+                  color: 'white',
+                },
+                '&:active': {
+                  transform: 'scale(0.98)',
+                },
+              }}
               startIcon={<Report />}
               component={Link}
               to="/app/report"
@@ -102,7 +158,20 @@ function NavBar({ setPage }) {
               fullWidth
               size="large"
               variant="contained"
-              sx={{ bgcolor: 'lime.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
+              sx={{
+                bgcolor: 'lime.main',
+                color: 'white',
+                fontFamily: 'inherit',
+                borderRadius: '10px',
+                height: '100%',
+                '&:hover': {
+                  bgcolor: 'lime.dark',
+                  color: 'white',
+                },
+                '&:active': {
+                  transform: 'scale(0.98)',
+                },
+              }}
               startIcon={<Leaderboard />}
               component={Link}
               to="/app/leaderboard"
@@ -115,13 +184,26 @@ function NavBar({ setPage }) {
               fullWidth
               size="large"
               variant="contained"
-              sx={{ bgcolor: 'pink.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
+              sx={{
+                bgcolor: 'pink.main',
+                color: 'white',
+                fontFamily: 'inherit',
+                borderRadius: '10px',
+                height: '100%',
+                '&:hover': {
+                  bgcolor: 'pink.dark',
+                  color: 'white',
+                },
+                '&:active': {
+                  transform: 'scale(0.98)',
+                },
+              }}
               startIcon={<AccountCircle />}
               component={Link}
               to={`/app/user/${sessionStorage.getItem('username')}`}
               onClick={() => handleNavigation('Profile')}
             >
-              Your Profile
+              Profile
             </Button>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -130,7 +212,20 @@ function NavBar({ setPage }) {
                 fullWidth
                 size="large"
                 variant="contained"
-                sx={{ bgcolor: 'yellow.main', color: 'white', fontFamily: 'inherit', borderRadius: '10px', height: '100%' }}
+                sx={{
+                  bgcolor: 'yellow.main',
+                  color: 'white',
+                  fontFamily: 'inherit',
+                  borderRadius: '10px',
+                  height: '100%',
+                  '&:hover': {
+                    bgcolor: 'yellow.dark',
+                    color: 'white',
+                  },
+                  '&:active': {
+                    transform: 'scale(0.98)',
+                  },
+                }}
                 startIcon={<Logout />}
                 onClick={() => handleNavigation('logout')}
               >

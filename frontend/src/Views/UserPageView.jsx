@@ -10,11 +10,18 @@ import { getUserData } from '../api/userPageAPI';
 
 function UserPageView() {
   const [page, setPage] = useState('Profile'); // Either Profile or Timeline
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('notfound');
 
   function navigate() {
     window.location.href = `/app/user/${search}`;
   }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      navigate();
+    }
+  };
+
   const { userId } = useParams();
   const [validUser, setValidUser] = useState(true);
 
@@ -35,9 +42,24 @@ function UserPageView() {
   return (
     <div style={{ backgroundColor: '#0D1B1E' }}>
       <center>
-        <div id="searchBar" className="input-group rounded-8" style={{ maxHeight: '50px' }}>
-          <input id="chatSearch" type="text" className="border-0" style={{ textAlign: 'right' }} onChange={(e) => setSearch(e.target.value)} placeholder="User Search" />
-          <button type="button" id="searchIconRight" onClick={() => navigate()}>
+        <div id="searchBar" className="input-group rounded-8 flex items-center justify-center" style={{ maxHeight: '60px', marginTop: '1%', alignItems: 'center' }}>
+          <input
+            id="chatSearch"
+            type="text"
+            className="border-0"
+            style={{
+              marginLeft: '10px',
+              marginRight: '10px',
+              textAlign: 'left',
+              outline: 'none',
+              border: '1px solid #ccc',
+              borderRadius: '8px',
+            }}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="User Search"
+          />
+          <button type="submit" id="searchIconRight" onClick={navigate} style={{ border: 'none', background: 'none', cursor: 'pointer', marginLeft: '0px'}}>
             <img alt="search" src="https://th.bing.com/th/id/R.602ef64bc31a62f9ebd523d97fc9f369?rik=JAPpFrIn7Yon0Q&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_194915.png&ehk=PY%2fOHmWzAr5CQnqxsnvx5nnpZAeNl7OJ5%2fHDzvIuHTo%3d&risl=&pid=ImgRaw&r=0" />
           </button>
         </div>

@@ -13,7 +13,7 @@ import { getUserData, removeFriendReq, removeFriend, addFriend, sendFriendReques
 
 const LeftItem = styled('div')(() => ({
   margin: 6,
-  padding: 8,
+  padding: 6,
   backgroundColor: '#9ebd6e',
   borderRadius: '12px',
   textAlign: 'right',
@@ -22,7 +22,6 @@ const LeftItem = styled('div')(() => ({
 
 const RightItem = styled('div')(() => ({
   margin: 6,
-  padding: 12,
   backgroundColor: '#0d1b1e',
   color: 'white',
   textAlign: 'left',
@@ -136,52 +135,74 @@ function UserCard(props) {
         borderRadius: '10px',
         width: '80%',
         backgroundColor: '#0d1b1e',
-        border: '3px solid #E5E5E5',
+        border: '4px solid #E5E5E5',
         margin: 'auto',
         marginTop: '20px',
+        marginBottom: '10px',
+        boxShadow: '0px 0px 0px rgba(255, 255, 255, 0.3)',
+        transition: 'box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out',
+        '&:hover': {
+          boxShadow: '3px 3px 3px rgba(255, 255, 255, 0.3)', 
+          transform: 'scale(1.005)',
+        },
       }}
     >
-      <CardContent>
-        <Grid container spacing={2} sx={{ margin: 'auto' }}>
-          <Grid item sm={3} md={3}>
+      <CardContent style={{ justifyContent: 'center' }}>
+        <Grid container spacing={1} sx={{ margin: '8px' }}>
+          <Grid item xs={3} sm={2} style={{ padding: '8px', margin: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <label htmlFor="contained-button-file">
-              <IconButton component="span">
+              <IconButton component="span" style={{ outline: '2px solid white', borderRadius: '50%', padding: '4px', transition: 'transform 0.3s ease-in-out' }}>
                 <Avatar
                   src={newPfp ? URL.createObjectURL(newPfp) : profilePhoto}
                   alt={userId}
                   sx={{
-                    width: 70,
-                    height: 70,
+                    width: 80,
+                    height: 80,
                     cursor: editingMode ? 'pointer' : 'default',
+                    transition: 'transform 0.3s ease-in-out',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                    },
                   }}
                 />
               </IconButton>
               {editingMode && (
-              <input
-                accept="image/*"
-                className={classes.input}
-                id="contained-button-file"
-                type="file"
-                onChange={(event) => {
-                  setNewPfp(event.target.files[0]);
-                }}
-              />
+                <input
+                  accept="image/*"
+                  className={classes.input}
+                  id="contained-button-file"
+                  type="file"
+                  onChange={(event) => {
+                    setNewPfp(event.target.files[0]);
+                  }}
+                />
               )}
             </label>
           </Grid>
-          <Grid item sm={9} md={3}>
-            <div
-              style={{ textAlign: 'left', marginTop: '15%', color: 'white', fontSize: '1.5em' }}
-            >
+          <Grid item xs={3} sm={4} style={{ padding: '8px', margin: '8px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+            <div style={{ textAlign: 'left', color: 'white', fontSize: '2em', fontWeight: 'bold' }}>
               {userId}
             </div>
           </Grid>
-          <Grid item sm={12} md={6}>
+
+          <Grid item xs={4} sm={4} style={{ padding: '8px', margin: '8px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
             {friendStatus === 'currentUser' && (
-            <div>
+            <div style={{ justifyContent: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Button
                 variant="contained"
-                sx={{ backgroundColor, color: 'white', marginTop: '5%', borderRadius: '15px' }}
+                sx={{
+                  backgroundColor,
+                  color: 'white',
+                  marginTop: '5%',
+                  borderRadius: '15px',
+                  transition: 'background-color 0.2s ease-in-out, transform 0.2s ease-in-out',
+                  '&:hover': {
+                    backgroundColor: '#397367',
+                  },
+                  '&:active': {
+                    transform: 'scale(0.98)',
+                  },
+                }}
                 onClick={async () => {
                   if (newPfp !== null && editingMode) {
                     const imageBase = await toBase64(newPfp);
@@ -190,34 +211,46 @@ function UserCard(props) {
                   setEditingMode((prevEditingMode) => !prevEditingMode);
                 }}
               >
-                {editingMode ? 'Save' : 'Edit Profile'}
+                {editingMode ? 'Save' : 'Edit Picture'}
               </Button>
               {friendRequest !== '' && (
-              <ButtonGroup variant="contained" data-testid="fr" size="small" aria-label="friendRequest">
-                <Button
-                  onClick={async () => {
-                    await removeFriendReq(userId, friendRequest);
-                    updateFriendReq();
-                  }}
-                  style={{ backgroundColor: '#904C77', color: 'white' }}
-                >
-                  <CloseIcon />
-                </Button>
-                <Button
-                  onClick={async () => {
-                    await addFriend(userId, friendRequest);
-                    updateFriendReq();
-                  }}
-                  style={{ backgroundColor: '#397367', color: 'white' }}
-                >
-                  <CheckIcon />
-                </Button>
-                <div style={{ color: 'white' }}>
-                  Friend Request from:
-                  {' '}
-                  {friendRequest}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <ButtonGroup variant="contained" data-testid="fr" size="small" aria-label="friendRequest" sx={{ margin: '8px', marginBottom: '0px' }}>
+                  <Button
+                    onClick={async () => {
+                      await removeFriendReq(userId, friendRequest);
+                      updateFriendReq();
+                    }}
+                    style={{
+                      backgroundColor: '#904C77',
+                      color: 'white',
+                      '&:active': {
+                        transform: 'scale(0.98)',
+                      },
+                    }}
+                  >
+                    <CloseIcon />
+                  </Button>
+                  <Button
+                    onClick={async () => {
+                      await addFriend(userId, friendRequest);
+                      updateFriendReq();
+                    }}
+                    style={{
+                      backgroundColor: '#397367',
+                      color: 'white',
+                      '&:active': {
+                        transform: 'scale(0.98)',
+                      },
+                    }}
+                  >
+                    <CheckIcon />
+                  </Button>
+                </ButtonGroup>
+                <div style={{ color: 'white', paddingTop: '0px', marginTop: '0px' }}>
+                  Friend Request: {friendRequest}
                 </div>
-              </ButtonGroup>
+              </div>            
               )}
             </div>
             )}
@@ -225,7 +258,19 @@ function UserCard(props) {
             {friendStatus === 'friends' && (
             <Button
               variant="contained"
-              sx={{ backgroundColor, color: 'white', marginTop: '5%', borderRadius: '15px' }}
+              sx={{
+                backgroundColor,
+                color: 'white',
+                marginTop: '5%',
+                borderRadius: '15px',
+                transition: 'background-color 0.2s ease-in-out, transform 0.2s ease-in-out',
+                '&:hover': {
+                  backgroundColor: '#397367',
+                },
+                '&:active': {
+                  transform: 'scale(0.98)',
+                },
+              }}
               onClick={() => {
                 removeFriend(userId, currentUser);
                 setFriendStatus('none');
@@ -238,7 +283,19 @@ function UserCard(props) {
             {friendStatus === 'requested' && (
             <Button
               variant="contained"
-              sx={{ backgroundColor: '#97B96B', color: 'white', marginTop: '5%', borderRadius: '15px' }}
+              sx={{
+                backgroundColor,
+                color: 'white',
+                marginTop: '5%',
+                borderRadius: '15px',
+                transition: 'background-color 0.2s ease-in-out, transform 0.2s ease-in-out',
+                '&:hover': {
+                  backgroundColor: '#397367',
+                },
+                '&:active': {
+                  transform: 'scale(0.98)',
+                },
+              }}
               onClick={() => {
                 removeFriendReq(currentUser, userId);
                 setFriendStatus('none');
@@ -250,7 +307,19 @@ function UserCard(props) {
             {friendStatus === 'none' && (
             <Button
               variant="contained"
-              sx={{ backgroundColor, color: 'white', marginTop: '5%', borderRadius: '15px' }}
+              sx={{
+                backgroundColor,
+                color: 'white',
+                marginTop: '5%',
+                borderRadius: '15px',
+                transition: 'background-color 0.2s ease-in-out, transform 0.2s ease-in-out',
+                '&:hover': {
+                  backgroundColor: '#397367',
+                },
+                '&:active': {
+                  transform: 'scale(0.98)',
+                },
+              }}
               onClick={() => {
                 sendFriendRequest(currentUser, userId);
                 setFriendStatus('requested');
@@ -262,8 +331,8 @@ function UserCard(props) {
 
           </Grid>
         </Grid>
-        <Grid container spacing={2} sx={{ margin: 'auto' }}>
-          <Grid item>
+        <Grid container spacing={2} style={{ padding: 0, margin: 0}}>
+          <Grid item style={{ paddingTop: 0, marginTop: 0}}>
             <Typography
               variant="h5"
               sx={{
@@ -271,20 +340,23 @@ function UserCard(props) {
                 fontFamily: 'Open Sans, sans-serif',
                 fontSize: '12x',
                 textAlign: 'center',
+                fontWeight: '600',
+                fontStyle: 'italic',
+                padding: '0px',
               }}
             >
-              Weekly Report:
+              Your Weekly Report:
             </Typography>
           </Grid>
         </Grid>
 
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={8} >
             <LeftItem style={{ textAlign: 'center' }}>
               Last Reporter:
             </LeftItem>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4} >
             <RightItem>
               {skipHistory || 'No Reports Yet'}
             </RightItem>
@@ -293,10 +365,10 @@ function UserCard(props) {
 
 
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             <LeftItem style={{ textAlign: 'center' }}> Total Reports Overall: </LeftItem>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <RightItem>
               {totalReports || 0}
             </RightItem>
@@ -304,10 +376,10 @@ function UserCard(props) {
         </Grid>
 
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             <LeftItem style={{ textAlign: 'center' }}> Total Reports This Week: </LeftItem>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <RightItem>
               {totalReportsWeek || 0}
             </RightItem>
@@ -315,10 +387,10 @@ function UserCard(props) {
         </Grid>
 
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             <LeftItem style={{ textAlign: 'center' }}> Percentage Skipped This Week: </LeftItem>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <RightItem>
               {totalReportsPercent || 0}
               %
@@ -327,10 +399,10 @@ function UserCard(props) {
         </Grid>
 
         <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <LeftItem style={{ textAlign: 'center' }}> Most Freqent Reporter: </LeftItem>
+          <Grid item xs={8}>
+            <LeftItem style={{ textAlign: 'center' }}> Most Frequent Reporter: </LeftItem>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <RightItem>
               {frequentReporter || 'Unknown'}
             </RightItem>
