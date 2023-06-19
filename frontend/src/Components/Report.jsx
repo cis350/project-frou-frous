@@ -59,8 +59,8 @@ function Report(props) {
   }, [postId]);
 
   return (
-  <Card variant="outlined" sx={{ width: '100%', height: '100%', borderRadius: '10px', backgroundColor: randomColor, maxWidth: '800px', borderWidth: '1px', borderColor: '#E5E5E5' }}>
-      <CardContent>
+    <Card variant="outlined" sx={{ width: '100%', height: '100%', borderRadius: '10px', backgroundColor: randomColor, maxWidth: '800px', borderWidth: '1px', borderColor: 'black' }}>
+      <CardContent >
         <Grid container spacing={2} alignItems="center">
           <Grid item style={{ marginRight: 0 }}>
             <a href={`${reporterid}`}>
@@ -89,9 +89,9 @@ function Report(props) {
             </div>
           </Grid>
         </Grid>
-        <img src={postimg} alt="" style={{ width: '100%', height: '100%', marginTop: 15, borderRadius: '10px' }} />
+        <img src={postimg} alt="" style={{ width: '100%', height: '100%', marginTop: 15, borderRadius: '10px', border: '2px solid black' }} />
         <center style={{ color: 'black' }}>
-          <p>
+          <p style={{ marginBottom: 0 }}>
             {' '}
             {caption}
             {' '}
@@ -99,10 +99,10 @@ function Report(props) {
         </center>
       </CardContent>
       <CardActions>
-        <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black', margin: '4px' }} href={`/app/report/${postId}`}>
+        <Button id="comments" size="small" sx={{ backgroundColor: 'white', color: 'black', margin: '4px', border: '1px solid black' }} href={`/app/report/${postId}`}>
           Comments 💬
         </Button>
-        <Button data-testid="like-button" className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: isLiked ? 'red' : 'white', color: 'black', margin: '4px' }} onClick={controlLike}>
+        <Button data-testid="like-button" className={`like-button ${isLiked && 'liked'}`} id="like" size="small" sx={{ backgroundColor: isLiked ? 'green' : 'white', color: 'black', margin: '4px', border: '1px solid black' }} onClick={controlLike}>
           <span className="likes-counter">{`👍 | ${likeCount}`}</span>
         </Button>
       </CardActions>

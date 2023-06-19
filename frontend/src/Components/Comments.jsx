@@ -6,7 +6,6 @@ import '../comments.css';
 
 function Comments(props) {
   const [commentString, setCommentString] = useState('');
-  // add timestamp
 
   let commstring = '';
   const { reportId } = props;
@@ -19,11 +18,12 @@ function Comments(props) {
       for (let i = 0; i < commentsList.length; i += 1) {
         commstring = commstring.concat(
           `<div class="commentBox">
-            <div class="commentHeader">
-                <p>${commentsList[i].commenterid}</p>
+            <div class="commentHeader"> 
+              ${commentsList[i].commenterid}
+              <p class="commentDate"> ${new Date(commentsList[i].timestamp).toLocaleString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
             </div>
             <div class="commentBody">
-                <p>${commentsList[i].content}</p>
+                <p class="commentContent">${commentsList[i].content}</p>
             </div>
         </div>`,
         );
@@ -71,11 +71,9 @@ function Comments(props) {
         <br />
         <form className="addComment" onSubmit={handleSubmit}>
           <div className="wrapper">
-            <label htmlFor="comment">
-              <input className="commentInput" type="text" value={commentString} onChange={handleInputChange} placeholder="Add a comment" />
-            </label>
-            <button className="commentButton" type="submit">
-              <img src="../assets/send2.png" alt="Submit" height="35" />
+            <input className="commentInput" type="text" value={commentString} onChange={handleInputChange} placeholder="Add a comment" />
+            <button className="commentButton" type="submit"> 
+              Submit
             </button>
           </div>
         </form>

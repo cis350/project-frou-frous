@@ -66,7 +66,9 @@ function Login() {
             <button type="button" className="loginButton link-button">Register</button>
           </a>
         </form>
-
+        <p className="author-names">
+          © Erik Wei, Kaitlyn Lane, Marcel Kida, Jessica Ling, and Ria Kulkarni
+        </p>
         {/* <button type="button" className="loginButton password-button">Forgot Password</button> */}
 
       </div>

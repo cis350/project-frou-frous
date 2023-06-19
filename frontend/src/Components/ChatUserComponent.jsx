@@ -9,7 +9,6 @@ export default function ChatUserComponent() {
   const curUser = sessionStorage.getItem('username');
   const home = `/app/user/${curUser}`;
   const [time, setTime] = useState(Date.now());
-  console.log('USER', curUser);
 
   function scrollMessages() {
     const messageDiv = document.getElementById('messages');

@@ -44,7 +44,7 @@ function UserPageView() {
   return (
     <div style={{ backgroundColor: '#0D1B1E' }}>
       <center>
-        <div id="searchBar" className="input-group rounded-8 flex items-center justify-center" style={{ maxHeight: '70px', marginTop: '1%', alignItems: 'center' }}>
+        <div id="searchBar" className="input-group rounded-8 flex items-center justify-center" style={{ maxHeight: '70px', marginTop: '1%', alignItems: 'center',  paddingRight: '4px', paddingBottom: '2px' }}>
           <input
             id="chatSearch"
             type="text"
@@ -73,7 +73,7 @@ function UserPageView() {
       >
         <Grid item xs={6} style={{ padding: 0, paddingTop: '16px', display: 'flex', justifyContent: 'flex-end' }}>
           {!validUser && (
-          <div style={{ textAlign: 'center', marginTop: '20px', color: 'white' }}>
+          <div style={{ textAlign: 'left', marginTop: '20px', color: 'white' }}>
             No User Found
           </div>
           )}
