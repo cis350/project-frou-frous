@@ -37,7 +37,7 @@ html {
 #searchBarWrapper {
     display: flex;
     justify-content: center;
-    padding-top: 5px;
+    padding-top: 10px;
 }
 
 #chatSearch {
@@ -111,13 +111,39 @@ a { text-decoration: none !important; }
 }
 
 #messages {
-    overflow-y: auto;
-    max-height: 100vh;
     position: absolute;
     bottom: 5%;
     width: 70%;
     max-height: 90%;
+    padding: 12px;
+    padding-right: 4px;
     display: block;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #888888 #C4C4C4;
+}
+
+#messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+#messages::-webkit-scrollbar-track {
+  background: #C4C4C4;
+  border-radius: 4px;
+}
+
+#messages::-webkit-scrollbar-thumb {
+  background-color: #888888;
+  border-radius: 4px;
+}
+
+#messages::-webkit-scrollbar-thumb:hover {
+  background-color: #555555;
+}
+
+#messages::-webkit-scrollbar-thumb:active {
+  background-color: #333333;
 }
 
 #searchBar {
@@ -161,6 +187,7 @@ a { text-decoration: none !important; }
 .nameTime {
     display: flex;
     justify-content: space-between;
+    margin-right: 4px;
 }
 
 .messageLeft {
@@ -169,6 +196,8 @@ a { text-decoration: none !important; }
     min-width: 10px;
     background: #904C77;
     margin-left: 10px;
+    margin-top: 4px;
+    margin-bottom: 4px;
   }
 
 .lastMessage {
@@ -177,7 +206,6 @@ a { text-decoration: none !important; }
 }
 
 .message {
-  margin: 0.5em 0px;
   padding-left: 5px;
   padding-right: 5px;
   clear: both;
@@ -189,11 +217,16 @@ a { text-decoration: none !important; }
   border-radius: 30px;
 }
 
-
-
 .messageRight {
   float: right;
-  margin: 0.5em 1px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   margin-right: 10px;
   background: #397367;
+}
+
+.messageContent {
+  padding: 2px;
+  margin: 4px;
+  margin-top: 2px;
 }

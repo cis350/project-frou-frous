@@ -12,17 +12,21 @@ function Login() {
   }, []);
 
   async function displayLogin() {
-    const resp = await validateLogin(username);
-    if (resp.error) {
-      toast.error(resp.error.message);
-    } else if (Object.keys(resp).length === 0) {
-      toast.error('Invalid username');
-    } else if (resp.data[0].password === password) {
-      toast.success('login successful');
-      sessionStorage.setItem('username', username);
-      window.location.href = `/app/user/${username}`;
-    } else {
-      toast.error('Invalid password');
+    try {
+      const resp = await validateLogin(username);
+      if (resp.error) {
+        toast.error(resp.error.message);
+      } else if (Object.keys(resp).length === 0) {
+        toast.error('Invalid username');
+      } else if (resp.data[0].password === password) {
+        toast.success('login successful');
+        sessionStorage.setItem('username', username);
+        window.location.href = `/app/user/${username}`;
+      } else {
+        toast.error('Invalid password');
+      }
+    } catch (err) {
+      toast.error('Invalid username or password');
     }
   }
 
@@ -67,7 +71,8 @@ function Login() {
           </a>
         </form>
         <p className="author-names">
-          © Erik Wei, Kaitlyn Lane, Marcel Kida, Jessica Ling, and Ria Kulkarni
+          © Erik Wei & Kaitlyn Lane <br />
+          Marcel Kida, Jessica Ling, Ria Kulkarni
         </p>
         {/* <button type="button" className="loginButton password-button">Forgot Password</button> */}
 
