@@ -1,1 +1,1 @@
-export const rootURL = process.env.rootURL || 'http://localhost:5000';
+export const rootURL = process.env.ROOT_URL || 'http://localhost:5000';
