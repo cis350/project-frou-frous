@@ -209,8 +209,7 @@ webapp.get('/user/:userId/getPersonalReports', async (req, resp) => {
 webapp.post('/user/', async (req, resp) => {
   console.log('Creating User REQUEST BODY', req.body);
   if (!req.body.id || !req.body.password || !req.body.email
-         || !req.body.firstName || !req.body.lastName || !req.body.friends
-         || !req.body.friendReqs) {
+         || !req.body.firstName || !req.body.lastName) {
     resp.status(404).json({ message: 'missing data' });
     return;
   }
@@ -220,8 +219,8 @@ webapp.post('/user/', async (req, resp) => {
       password: req.body.password,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      friends: req.body.friends,
-      friendReqs: req.body.friendReqs,
+      friends: req.body.friends || [],
+      friendReqs: req.body.friendReqs || [],
       email: req.body.email,
       pfp: 'https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg',
     };

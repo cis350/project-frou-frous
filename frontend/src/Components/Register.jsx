@@ -59,7 +59,6 @@ function Register() {
   }
 
   const handleSubmit = (e) => {
-    debugger; // eslint-disable-line 
     e.preventDefault();
     const obj = {
       id, password, email, firstName, lastName, friends, friendReqs,
