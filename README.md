@@ -1,4 +1,4 @@
-# FrouFrous - A Lighthearted Class Accountability Social Media App
+# FrouFrous University - A Lighthearted Class Accountability Social Media App
 Instead of creating normal posts, users generate "report" posts by catching their friends skipping class via photo and caption. This full-stack web application uses the MERN stack (MongoDB, Express, React, Node.js), as well as Github CI. 
 
 Features include: 
